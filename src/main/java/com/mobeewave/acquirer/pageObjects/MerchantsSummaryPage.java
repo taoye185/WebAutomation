@@ -4,11 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.mobeewave.acquirer.infastructure.SetUp;
 import com.mobeewave.acquirer.utils.CommonUtils;
-import com.mobeewave.acquirer.utils.DataReader;
-
 
 /// <summary>
-
 /// The Merchant Summary Page class.
 /// Contains Merchant related page pageObjects.
 /// </summary>

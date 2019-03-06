@@ -18,16 +18,16 @@ public class BasePage {
 	// MerchantSummery_Page Identifiers
 	public static String lbl_username_partialxpath = "//div[@ui-view='leftNav']//table[@class='options']//td[contains(text(),'";
 	
-	public static void isElementsveralapped(){
-		CommonUtils.isElementsveralapped();
+	public static void areElementsOveralapped(){
+		CommonUtils.checkOverlap();
 		CommonUtils.makeBothElementListandMapClear();
 	}
 	
-  public static void getAllPageEliments(){
-	  
+  public static void getAllPageElements(){
+	  // To be implement. call elementList or elementListMap
   }
   
- public static String getcurrentPage(){
+ public static String getCurrentPage(){
 	  return pageTitle = CommonUtils.getPageTitle();
   }
  

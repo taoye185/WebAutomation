@@ -159,7 +159,7 @@ public class SetUp {
 	}
 
 	/// <summary>
-	/// This method use to get browser. If browser is not Chrome or Firefix, then
+	/// This method to get browser. If browser is not Chrome or Firefix, then
 	/// it defaults to Chrome.
 	/// </summary>
 	/// <returns>String/returns>
@@ -221,11 +221,10 @@ public class SetUp {
 			}
 			_driver.quit();
 			_driver = null;
-			System.out.println("\n closing browser ..................\n");
-			System.out.println("Quit driver ..................\n");
+			System.out.println("\n closing browser and Quit driver..................\n");			
 		} catch (Exception ex) {
-			System.out.println("Driver quit failed ...... ");
 			System.out.println("====================    " + ex.getMessage() + "   =============================");
+			System.out.println("Driver quit failed ...... ");			
 		}
 	}
 
