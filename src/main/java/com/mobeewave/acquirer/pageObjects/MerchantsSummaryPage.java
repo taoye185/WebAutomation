@@ -1,3 +1,4 @@
+
 package com.mobeewave.acquirer.pageObjects;
 
 import java.util.List;
@@ -56,3 +57,5 @@ public class MerchantsSummaryPage extends BasePage {
 
 	// endregions
 }
+
+

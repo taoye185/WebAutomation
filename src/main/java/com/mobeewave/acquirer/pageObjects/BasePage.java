@@ -1,14 +1,14 @@
+
 package com.mobeewave.acquirer.pageObjects;
 
 import com.mobeewave.acquirer.utils.CommonUtils;
 
 public class BasePage {
 
-	
-	public static String pageTitle="";
-	
-	//currently CBA pages has been taken as the base
-	
+	public static String pageTitle = "";
+
+	// currently CBA pages has been taken as the base
+
 	// Login_Page Identifiers
 	public static String tf_username_xpath = "//input[@placeholder='Username']";
 	public static String tf_password_xpath = "//input[@placeholder='Password']";
@@ -19,29 +19,26 @@ public class BasePage {
 	public static String lbl_username_partialxpath = "//div[@ui-view='leftNav']//table[@class='options']//td[contains(text(),'";
 	public static String lbl_merchantid_xpath = "//select[@id='filterChoice']";
 	public static String tf_merchantfilterchoice_xpath = "//input[@id='filterByFieldValue']";
-	public static String btn_pagecount_xpath ="//button[@id='dropdownMenu1";
-	public static String tf_merchatid_xpath= "//td[contains(text(),'3275555551111203')]";
-	public static String tf_merchantname_xpath= "//td[contains(text(),'Simon Says')]";
+	public static String btn_pagecount_xpath = "//button[@id='dropdownMenu1";
+	public static String tf_merchatid_xpath = "//td[contains(text(),'3275555551111203')]";
+	public static String tf_merchantname_xpath = "//td[contains(text(),'Simon Says')]";
 	public static String merchantrecord_xpath = "//td[contains(text(),'Simon Says')]/..";
-	
-	
+
 	// Transaction_Page Identifiers
-	
+
 	// AuditLog_Page Identifiers
-	
-	public static void isElementsveralapped(){
-		CommonUtils.isElementsveralapped();
+
+	public static void areElementsOveralapped() {
+		CommonUtils.checkOverlap();
 		CommonUtils.makeBothElementListandMapClear();
 	}
-	
-  public static void getAllPageEliments(){
-	  
-  }
-  
- public static String getcurrentPage(){
-	  return pageTitle = CommonUtils.getPageTitle();
-  }
- 
- 
+
+	public static void getAllPageEliments() {
+
+	}
+
+	public static String getcurrentPage() {
+		return pageTitle = CommonUtils.getPageTitle();
+	}
 
 }

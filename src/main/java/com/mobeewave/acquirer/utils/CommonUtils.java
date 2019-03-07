@@ -52,7 +52,6 @@ public class CommonUtils {
 			return element;
 		} catch (NoSuchElementException ex) {
 			System.out.println("====================    " + ex.getMessage() + "   =============================");
-			// throw new NoSuchElementException(by.toString());
 			return null;
 		}
 	}
@@ -138,7 +137,7 @@ public class CommonUtils {
 	/// </summary>
 	/// <returns>WebElement</returns>
 
-	public static void isElementsveralapped() {
+	public static void checkOverlap() {
 		System.out.println(" ..... Verifying possible elements overlap...... ");
 		try {
 			int numElement = elementListMap.size();
@@ -334,7 +333,7 @@ public class CommonUtils {
 	/// </summary>
 	/// <param name="time">time interval in seconds </param>
 	/// <returns></returns>
-	public void setWaitinSeconds(int i) {
+	public void setWaitInSeconds(int i) {
 
 		try {
 			SetUp.getDriver().manage().timeouts().implicitlyWait(i, TimeUnit.SECONDS);

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.rules.ErrorCollector;
 import org.openqa.selenium.WebElement;
 
@@ -14,6 +13,22 @@ public class AssertUtil{
 
 	 private static List<AssertionError> exList = new ArrayList<AssertionError>();
 	
+	 
+
+	 public static void assertEq(Object expected, Object actual, String message ){
+			
+         try
+         {
+             Assert.assertEquals(expected, actual);
+             System.out.println("Assert Passed:  Message= " + message);
+         }
+         catch (AssertionError ex)
+         {
+        	
+             exList.add(ex);
+             System.out.println("Assert failed: " );
+         }
+     }	
 	 
 	 public static void AreEquals(WebElement element, String expectedText)
 	    {
@@ -26,36 +41,11 @@ public class AssertUtil{
 	        }
 	        catch (AssertionError  ex)
 	        {
-	        	 System.out.println("Asserting failed: expected " + expectedText + " not found");
+	        	 System.out.println("Assert failed: expected " + expectedText + " not found");
 	        	exList.add(ex);
 	        }
 	    }
-	 
-	 public static void assertEq(Object expected, Object actual, String message ){
-			
-         try
-         {
-             Assert.assertEquals(expected, actual);
-             System.out.println("Asserting Passed:  Message= " + message);
-         }
-         catch (AssertionError ex)
-         {
-        	
-             exList.add(ex);
-             System.out.println("Asserting failed: " );
-         }
-     }	
-	 
-	    @Test		
-	    public void example() throws Exception{		
-	    	//assertEq(true,false,"my message2");
-	    	//NoExceptions();
-	    	assertEq(true,true,"my message");		
-	    	assertEq(true,true,"my message2");	
-	    	
-	    	AggregatedResult();
-	    }		
-	 
+	 	 
 
 	   public static void AggregatedResult()
        {
@@ -78,7 +68,7 @@ public class AssertUtil{
         	   AssertionError element = iter.next();
                message.append(element.getMessage()+"\n");
             }
-           System.out.println("Asserting Failed due to below erros : \n" + message + " ");
+           System.out.println("Assert Failed due to below erros : \n" + message + " ");
            return new ErrorCollector();
        }
 	   

@@ -3,7 +3,6 @@ package com.mobeewave.acquirer.pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import com.mobeewave.acquirer.infastructure.SetUp;
 import com.mobeewave.acquirer.utils.CommonUtils;
 
 
@@ -15,17 +14,6 @@ import com.mobeewave.acquirer.utils.CommonUtils;
 /// </summary>
 
 public class LoginPage extends BasePage {
-
-	private static String pageObjectsFileURL = SetUp.getpageObjectsPropertyfileURL();
-	private CommonUtils comUitl;
-
-	// region PageElements identifiers
-	private By tf_username = By.xpath(BasePage.tf_username_xpath);
-	private By tf_password = By.xpath(BasePage.tf_password_xpath);
-	private By btn_signIn = By.xpath(BasePage.btn_signIn_xpath);
-	private By lnk_forgetPassword = By.xpath(BasePage.lnk_forgetPassword_xpath);
-	// endregion
-	
 
 	// region PageElements
 
