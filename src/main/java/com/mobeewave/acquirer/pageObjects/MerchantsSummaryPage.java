@@ -1,11 +1,12 @@
 package com.mobeewave.acquirer.pageObjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.mobeewave.acquirer.infastructure.SetUp;
 import com.mobeewave.acquirer.utils.CommonUtils;
 import com.mobeewave.acquirer.utils.DataReader;
-
 
 /// <summary>
 
@@ -13,7 +14,7 @@ import com.mobeewave.acquirer.utils.DataReader;
 /// Contains Merchant related page pageObjects.
 /// </summary>
 
-public class MerchantsSummaryPage {
+public class MerchantsSummaryPage extends BasePage {
 
 	private By lbl_username;
 	private String lbl_username_xpath;
@@ -32,5 +33,26 @@ public class MerchantsSummaryPage {
 
 	}
 
-	// endregion
+	public WebElement temp() {
+
+		
+		By temp = By.xpath(merchantrecord_xpath);
+		return CommonUtils.IsElementAvailable(temp, 20);
+
+	}
+
+	public void childs() {
+
+		List<WebElement> childs = temp().findElements(By.xpath(".//*"));
+		
+		for (int i= 0; i < childs.size(); i++) {
+			WebElement a = (WebElement) childs.get(i);
+			System.out.println(" WebElement " + a.getText());
+	}
+		
+		
+	}
+	
+
+	// endregions
 }
