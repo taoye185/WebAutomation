@@ -38,7 +38,7 @@ public class BasePage {
 
 	public static void areElementsOveralapped() {
 		CommonUtils.checkOverlap();
-		CommonUtils.makeBothElementListandMapClear();
+		CommonUtils.makeBothElementListandMapClear(); 
 	}
 
 	public static void getAllPageEliments() {
