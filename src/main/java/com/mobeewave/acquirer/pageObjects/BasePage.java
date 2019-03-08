@@ -45,7 +45,7 @@ public class BasePage {
 
 	}
 
-	public static String getcurrentPage() {
+	public static String getCurrentPage() {
 		return pageTitle = CommonUtils.getPageTitle();
 	}
 
