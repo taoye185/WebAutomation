@@ -26,7 +26,7 @@ public class BasePage {
 	public static String tf_merchantname_xpath = "//td[contains(text(),'Simon Says')]";
 	public static String merchantrecord_xpath = "//td[contains(text(),'Simon Says')]/.."; //need to implement 
 	public static String btn_span_xpath = "//span[contains(text(),'«')]";
-	
+	//
 	public static String btn_resend_activation_mail_xpath = "//button[contains(text(),'Resend Activation Email')]";
 	public static String btn_lock_xpath ="//button[@class='btn btn-primary btn-sm pull-right']";
 	public static String btn_unlocked_xapth = "//button[contains(text(),'LOCK')]";
