@@ -51,7 +51,7 @@ public class BasePage {
 	
 	public static String lbl_panel_pendingterminaTitle_xpath = "//h3[contains(text(),'Pending Terminals'')]";
 	public static String lbl_panel_activeterminalsTitle_xpath ="[contains(text(),'Active Terminals')]";
-	//*[@id="ppgeneralinfo"]/div[2]/h4
+	
 	
 	// Transaction_Page Identifiers
 
