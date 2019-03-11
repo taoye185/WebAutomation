@@ -19,7 +19,12 @@ public class MerchantsSummaryPage extends BasePage {
 
 	private By lbl_username;
 	private String lbl_username_xpath;
-
+	private String  merchantIdTblcell_xpath;
+	public  WebElement merchantName;
+	public  WebElement merchantRegistrationDate;
+	public  WebElement merchantDiviison;
+	public  WebElement merchantLockStatus;
+	public  WebElement merchantDetails;
 	// region PageElements List
 
 	public String pageTitle() {
@@ -34,25 +39,34 @@ public class MerchantsSummaryPage extends BasePage {
 
 	}
 
-	public WebElement temp() {
-
-		
-		By temp = By.xpath(merchantrecord_xpath);
-		return CommonUtils.IsElementAvailable(temp, 20);
-
+	public WebElement merchantSummuryTabel() {	
+		return CommonUtils.IsElementAvailable(By.xpath(merchantrecord_xpath), 20);
 	}
 
-	public void childs() {
-
-		List<WebElement> childs = temp().findElements(By.xpath(".//*"));
-		
-		for (int i= 0; i < childs.size(); i++) {
-			WebElement a = (WebElement) childs.get(i);
-			System.out.println(" WebElement " + a.getText());
-	}
-		
+	public void getChildElementsfromMerchantSummeryTabel() {
+		CommonUtils.getChildElements(merchantSummuryTabel());	
 		
 	}
+	
+	public WebElement merchantIdTblcell(String merchantID) {
+		merchantIdTblcell_xpath = BasePage.lbl_username_partialxpath + merchantID + "')]";
+		return CommonUtils.IsElementAvailable(By.xpath(merchantIdTblcell_xpath), 20);
+	}
+	
+	public void setMerchantDetailsfromTable(WebElement merchantIdTblcell) {
+		
+		 WebElement merchantIdfromTable = (WebElement) CommonUtils.getChildElements(merchantSummuryTabel()).get(0);
+		  merchantName = (WebElement) CommonUtils.getChildElements(merchantSummuryTabel()).get(1);
+		  merchantRegistrationDate = (WebElement) CommonUtils.getChildElements(merchantSummuryTabel()).get(2);
+		  merchantDiviison = (WebElement) CommonUtils.getChildElements(merchantSummuryTabel()).get(3);
+		  merchantLockStatus = (WebElement) CommonUtils.getChildElements(merchantSummuryTabel()).get(4);
+		  merchantDetails = (WebElement) CommonUtils.getChildElements(merchantSummuryTabel()).get(5);
+		 
+		 
+	}
+	
+	
+	
 	
 
 	// endregions

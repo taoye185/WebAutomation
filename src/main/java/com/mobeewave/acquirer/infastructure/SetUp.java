@@ -164,10 +164,17 @@ public class SetUp {
 	/// </summary>
 	/// <returns>String/returns>
 	public static String getBrowser() {
-		if (!(browser_GBL != "chrome" || browser_GBL != "firefox")) {
-			System.out.println("======browser is   " + browser_GBL + "   =============");
+		System.out.println("======browser is   " + browser_GBL + "   =============");
+		
+		if ((browser_GBL==null)){
 			return browser_GBL = "chrome";
 		}
+		
+		if (!(browser_GBL != "chrome" || browser_GBL != "firefox")) {
+			System.out.println("======browser is   NULL ===========");
+			return browser_GBL = "chrome";
+		}
+		System.out.println("======browser is   " + browser_GBL + "   =============");
 		return browser_GBL;
 	}
 
