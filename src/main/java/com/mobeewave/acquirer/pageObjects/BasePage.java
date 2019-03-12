@@ -44,14 +44,22 @@ public class BasePage {
 	public static String lbl_fullName_xpath = "//h4[contains(text(),'Merchant Full Name')]";
 	public static String lbl_phoneNumber_xpath = "//h4[contains(text(),'Merchant Phone Number')]";
 	public static String lbl_email_xpath = "//h4[contains(text(),'Merchant Email')]";
-	//Processing details dropdown
 	public static String lbl_panel_processingTitle_xpath = "//h3[contains(text(),'Processing Details')]";
 	public static String lbl_merchantID_xpath = "//div[@id='ppinfoCBA']//*[contains(text(),'Merchant ID')]";
 	public static String lbl_currencyDefenition_xpath = "//div[@id='ppinfoCBA']//*[contains(text(),'Currency Definition')]";
-	
 	public static String lbl_panel_pendingterminaTitle_xpath = "//h3[contains(text(),'Pending Terminals'')]";
+	public static String lbl_terminalIdentifier_xpath = "//div[@class='panel panel-default']//div[@id='globalPending']//th[contains(text(),'Terminal Identifier')]";
+	public static String lbl_option_xpath ="//div[@class='panel panel-default']//div[@id='globalPending']//th[contains(text(),'Options')]";
 	public static String lbl_panel_activeterminalsTitle_xpath ="[contains(text(),'Active Terminals')]";
-	
+	public static String lbl_terminalIdentifier_partialXpath = " //div[@id='active']//th[contains(text(),'Terminal Identifier')]";
+	public static String lbl_terminalName = "//div[@class='panel panel-default']//th[contains(text(),'Terminal Name')]";
+	public static String lbl_safetyNetAttestationStatus_partialXpath = " //div[@class='panel panel-default']//th[contains(text(),'SafetyNet Attestation Status')]";
+	public static String lbl_option_partialXpath = " //div[@class='panel panel-default']//div[@id='active']//th[contains(text(),'Options')]";
+	public static String btn_ellipsis_xpath = "//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']"; 
+	public static String btn_editMerchanDetails_xpath = "]"; // need to implement
+	public static String lbl_editGeneralInformation_xpath ="//*[contains(text(),'Edit General Information')]";
+	public static String lbl_businessInformation_xpath ="//*[contains(text(),'Business Information')]";
+
 	
 	// Transaction_Page Identifiers
 
