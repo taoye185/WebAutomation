@@ -23,16 +23,14 @@ public class BasePage {
 	public static String drpdn_perpageCount_xpath = "//div[@class='dropdown open']";
 	public static String lbl_perpageCount_xpath = "//span[@class='dropdown-label']";
 	public static String tf_merchatId_Partialxpath = "//td[contains(text(),'";
-	public static String tf_merchantName_xpath = "//td[contains(text(),'Simon Says')]";
-	public static String merchantRecord_xpath = "//td[contains(text(),'Simon Says')]/.."; // need to implement
 	public static String btn_span_xpath = "//span[contains(text(),'«')]";
+
 	// ======= Details popup
 	public static String btn_resendActivation_mail_xpath = "//button[contains(text(),'Resend Activation Email')]";
 	public static String btn_lock_xpath = "//button[@class='btn btn-primary btn-sm pull-right']";
 	public static String btn_unlocked_xapth = "//button[contains(text(),'LOCK')]";
-	public static String lbl_panel_generalTitle_xpath = "//h3[contains(text(),'General Information')]";// need to
-																										// implement
-																										// table
+	public static String lbl_panel_generalTitle_xpath = "//h3[contains(text(),'General Information')]";
+	// need to implement table
 	public static String lbl_merchantName_xpath = "//h4[contains(text(),'Doing Business As (Merchant Name')]";
 	public static String lbl_registrationDate_xpath = "//h4[contains(text(),'Registration Date')]";
 	public static String lbl_address_xpath = "//h4[contains(text(),'Address (Street and Number)')]";
@@ -60,15 +58,16 @@ public class BasePage {
 	public static String btn_ellipsis_xpath = "//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']";
 	public static String btn_editMerchanDetails_xpath = "]"; // need to implement
 	public static String lbl_editGeneralInformation_xpath = "//*[contains(text(),'Edit General Information')]";
-	public static String lbl_businessInformation_xpath = "//*[contains(text(),'Business Information')]";// need to add feilds
+	public static String lbl_businessInformation_xpath = "//*[contains(text(),'Business Information')]";
+	//need to add fields
 	public static String tf_generalEdit_merchantName_xpath = "//input[@id='name'] ";
-	public static String tf_generalAddresss_StreetAndNumber_xpath = "//label[contains(text(),'Address (Street and Number)')]/following-sibling::*"; //reference -need to complete from grid 
+	public static String tf_generalAddresss_StreetAndNumber_xpath = "//label[contains(text(),'Address (Street and Number)')]/following-sibling::*"; 
+	// reference need to complete from grid
 	public static String btn_deleteMerchant_xpath = "//i[@class='mfb-component__child-icon fa fa-trash']";
 	public static String btn_ok_xpath = "//button[contains(text(),'Ok')]";
 	public static String btn_cancel_xpath = "//button[contains(text(),'Cancel')]";
 	public static String lbl_confermationNeeded_xpath = "//*[contains(text(),'Confirmation Needed')]";
 	public static String lbl_areyouSure_txt_xpath = "//*[contains(text(),'Are you sure?')]";
-	
 
 	// Transaction_Page Identifiers
 

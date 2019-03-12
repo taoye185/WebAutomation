@@ -361,7 +361,7 @@ public class CommonUtils {
 		parentElementList = element.findElements(By.xpath(".//*"));
 		
 		for (int i = 0; i < parentElementList.size(); i++) {			
-			WebElement a = (WebElement) elementList.get(i);
+			WebElement a = (WebElement) parentElementList.get(i);
 				System.out.println("element " + i + a.getText() + a.getLocation());			
 			}
 		return parentElementList;
