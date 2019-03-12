@@ -40,7 +40,7 @@ public class MerchantsSummaryPage extends BasePage {
 	}
 
 	public WebElement merchantSummuryTabel() {	
-		return CommonUtils.IsElementAvailable(By.xpath(merchantrecord_xpath), 20);
+		return CommonUtils.IsElementAvailable(By.xpath(merchantRecord_xpath), 20);
 	}
 
 	public void getChildElementsfromMerchantSummeryTabel() {
