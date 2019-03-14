@@ -3,6 +3,7 @@ package com.mobeewave.acquirer.tests;
 import com.mobeewave.acquirer.tests.BackgroundSteps;
 import com.mobeewave.acquirer.infastructure.SetUp;
 import com.mobeewave.acquirer.pageObjects.BasePage;
+import com.mobeewave.acquirer.pageObjects.LeftNavigation;
 import com.mobeewave.acquirer.pageObjects.LoginPage;
 import com.mobeewave.acquirer.pageObjects.MerchantsSummaryPage;
 import com.mobeewave.acquirer.utils.AssertUtil;
@@ -21,7 +22,8 @@ public class BackgroundSteps {
 	CommonUtils comUtil = new CommonUtils();
 	private LoginPage loginPage = new LoginPage();
 	private MerchantsSummaryPage merchantsSummaryPage = new MerchantsSummaryPage();
-
+	private LeftNavigation leftNav = new LeftNavigation();
+	
 	@Given("^User is successfully navigated to Home Page$")
 	public void user_is_successfully_navigated_to_Home_Page() {
 		try {
@@ -37,18 +39,30 @@ public class BackgroundSteps {
 		}
 	}
 
-	@Given("^User is successfully navigated to Merchant Summary Page$")
-	public void user_is_successfully_navigated_to_Merchant_Summary_Page() {
-		browser_GBL = SetUp.getBrowser();
-		client_GBL = SetUp.getClient();
-		SetUp.setupDriver(client_GBL, browser_GBL);
-		comUtil.waitForPageLoaded(10000);
+
+	// Navigation to Merchant Summary Page
+	@Given("^User \"([^\"]*)\" successfully navigated to Merchant Summary Page$")
+	public void user_successfully_navigated_to_Merchant_Summary_Page(String userName) {
+		login(userName);		
 		AssertUtil.assertEq(merchantsSummaryPage.usernameLabel().getText(), username_LBL_GBL,
 				"Verify user " + username_LBL_GBL + " login to Merchants Summary Page ");
 	}
 
-	@Given("^User \"([^\"]*)\" successfully navigated to Merchant Summary Page$")
-	public void user_successfully_navigated_to_Merchant_Summary_Page(String userName) {
+	// Navigation to Portal User Page
+	@Given("^User \"([^\"]*)\" successfully navigated to Portal Users Page$")
+	public void user_successfully_navigated_to_Portal_Users_Page(String userName) {
+		login(userName);
+		//try {
+		//	Thread.sleep(10000);
+		//} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+		comUtil.setWaitInSeconds(20);
+		leftNav.leftNavigationLink(BasePage.PORTAL_USERS).click();
+	}
+
+	public void login(String userName) {
 		browser_GBL = SetUp.getBrowser();
 		client_GBL = SetUp.getClient();
 		SetUp.setupDriver(client_GBL, browser_GBL);
@@ -61,8 +75,5 @@ public class BackgroundSteps {
 		loginPage.signInBtn().click();
 		comUtil.setWaitInSeconds(3);
 		comUtil.waitForPageLoaded(10000);
-		AssertUtil.assertEq(merchantsSummaryPage.usernameLabel().getText(), username_LBL_GBL,
-				"Verify user " + username_LBL_GBL + " login to Merchants Summary Page ");
 	}
-
 }

@@ -84,6 +84,11 @@ public class BasePage {
 	public static String ibl_descriptionvalueGI_xpath =lbl_descriptionGI_xpath+"/following-sibling::*";
 	public static String lbl_grouppermissions_xpath ="//h3[contains(text(),'Group Permissions')]";
 	public static String lbl_groupmembers_xpath ="//h3[contains(text(),'Group Members')]";
+	public static String tf_filter_portalusers_xpath ="//input[@id='filterByFieldValue']";
+	// Left Navigation
+	public static String lnk_partial_LeftNav_xpath ="//a[contains(text(),'";
+	public static final String PORTAL_USERS="Portal Users";
+
 	
 	// AuditLog_Page Identifiers
 

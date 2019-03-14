@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,15 +44,22 @@ public class CommonUtils {
 	public static WebElement IsElementSelectable(By by, int time, String identifier) {
 
 		_driver = SetUp.getDriver();
+		Wait wait = new FluentWait(_driver).withTimeout(time, TimeUnit.SECONDS).pollingEvery(5, TimeUnit.SECONDS)
+				.ignoring(NoSuchElementException.class);
 		try {
-			Wait wait = new FluentWait(_driver).withTimeout(time, TimeUnit.SECONDS).pollingEvery(5, TimeUnit.SECONDS)
-					.ignoring(NoSuchElementException.class);
+			
 			WebElement element = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(by));
 			System.out.println(" FOUND ELEMENT " + by + "  " + element.getText());
 			System.out.println(" location " + by + "  " + element.getLocation());
 			addElementstoMap(element, identifier);
 			return element;
+		}
+
+		catch (WebDriverException ex) {
+			WebElement element = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(by));
+			return element;
 		} catch (NoSuchElementException ex) {
+
 			System.out.println("====================    " + ex.getMessage() + "   =============================");
 			return null;
 		}
@@ -84,7 +92,6 @@ public class CommonUtils {
 		return IsElementSelectable(by, 10, s);
 	}
 
-	
 	/// <summary>
 	/// This method returns the element by waiting till its Available.
 	/// </summary>
@@ -94,7 +101,7 @@ public class CommonUtils {
 	/// element text is not available</param>
 	/// <returns>WebElement</returns>
 
-	public static WebElement IsElementAvailable(By by, int time, String identifier ) {
+	public static WebElement IsElementAvailable(By by, int time, String identifier) {
 
 		_driver = SetUp.getDriver();
 
@@ -132,9 +139,9 @@ public class CommonUtils {
 		return IsElementAvailable(by, 10, s);
 	}
 
-	
 	/// <summary>
-	/// This method determines if there are any overallping elements in the page.
+	/// This method determines if there are any overallping elements in the
+	/// page.
 	/// </summary>
 	/// <returns>WebElement</returns>
 
@@ -334,15 +341,18 @@ public class CommonUtils {
 	/// </summary>
 	/// <param name="time">time interval in seconds </param>
 	/// <returns></returns>
-	public void setWaitInSeconds(int i) {
+	public void setWaitInSeconds(int time) {
 
 		try {
-			SetUp.getDriver().manage().timeouts().implicitlyWait(i, TimeUnit.SECONDS);
+			System.out.println("waiting " + time + " seconds ... ");
+			SetUp.getDriver().manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
+
 			// SetUp.getDriver().manage().wait(i);
 		} catch (Exception ex) {
 			System.out.println("FAILED" + "==========   " + ex.getMessage() + "   ============");
 		}
 	}
+
 
 	public static String getPageTitle() {
 		try {
@@ -354,16 +364,15 @@ public class CommonUtils {
 		}
 		return SetUp.getDriver().getTitle();
 	}
-	
-	
+
 	@SuppressWarnings("rawtypes")
 	public static List getChildElements(WebElement element) {
 		parentElementList = element.findElements(By.xpath(".//*"));
-		
-		for (int i = 0; i < parentElementList.size(); i++) {			
+
+		for (int i = 0; i < parentElementList.size(); i++) {
 			WebElement a = (WebElement) parentElementList.get(i);
-				System.out.println("element " + i + a.getText() + a.getLocation());			
-			}
+			System.out.println("element " + i + a.getText() + a.getLocation());
+		}
 		return parentElementList;
 	}
 
