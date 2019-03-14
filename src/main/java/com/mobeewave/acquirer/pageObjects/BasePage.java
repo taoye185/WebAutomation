@@ -25,7 +25,21 @@ public class BasePage {
 	public static String merchantrecord_xpath = "//td[contains(text(),'Simon Says')]/..";
 
 	// Transaction_Page Identifiers
-
+	
+	// Portal Users Page
+	public static String lbl_portalusers_xpath = "//h1[contains(text(),'Portal Users')]";
+	public static String lbl_users_xpath ="//h4[contains(text(),'Users')]";
+	public static String lbl_groups_xpath ="//h4[contains(text(),'Groups')]";
+	public static String lnk_summary_xpath ="//span[@ui-sref='app.hive-access.groups']";
+	public static String lbl_groupprofile_xpath ="//h4[contains(text(),'Group Profile')]";
+	public static String collapse_generalinformation_xpath ="//h3[contains(text(),'General Information')]";
+	public static String lbl_nameGI_xpath ="//p[contains(text(),'Name')]";
+	public static String ibl_namevalueGI_xpath =lbl_nameGI_xpath+"/following-sibling::*";
+	public static String lbl_descriptionGI_xpath ="//p[contains(text(),'Description')]";
+	public static String ibl_descriptionvalueGI_xpath =lbl_descriptionGI_xpath+"/following-sibling::*";
+	public static String lbl_grouppermissions_xpath ="//h3[contains(text(),'Group Permissions')]";
+	public static String lbl_groupmembers_xpath ="//h3[contains(text(),'Group Members')]";
+	
 	// AuditLog_Page Identifiers
 
 	public static void areElementsOveralapped() {
