@@ -29,6 +29,7 @@ public class CommonUtils {
 	private static String configPrpoertiesFileURL = "resources/config.properties";
 	public static Map<WebElement, String> elementListMap = new HashMap<WebElement, String>();
 	public static List<WebElement> elementList = new ArrayList();
+	public static List<WebElement> parentElementList = new ArrayList();
 
 	/// <summary>
 	/// This method returns the element by waiting till its visible and enabled.
@@ -352,6 +353,18 @@ public class CommonUtils {
 			System.out.println("FAILED" + "==========   " + ex.getMessage() + "   ============");
 		}
 		return SetUp.getDriver().getTitle();
+	}
+	
+	
+	@SuppressWarnings("rawtypes")
+	public static List getChildElements(WebElement element) {
+		parentElementList = element.findElements(By.xpath(".//*"));
+		
+		for (int i = 0; i < parentElementList.size(); i++) {			
+			WebElement a = (WebElement) parentElementList.get(i);
+				System.out.println("element " + i + a.getText() + a.getLocation());			
+			}
+		return parentElementList;
 	}
 
 }

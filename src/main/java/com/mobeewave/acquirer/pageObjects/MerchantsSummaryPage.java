@@ -1,13 +1,13 @@
 
 package com.mobeewave.acquirer.pageObjects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.mobeewave.acquirer.infastructure.SetUp;
 import com.mobeewave.acquirer.utils.CommonUtils;
-import com.mobeewave.acquirer.utils.DataReader;
 
 /// <summary>
 
@@ -18,8 +18,14 @@ import com.mobeewave.acquirer.utils.DataReader;
 public class MerchantsSummaryPage extends BasePage {
 
 	private By lbl_username;
-	private String lbl_username_xpath;
-
+	private static String lbl_username_xpath;
+	private static String merchantIdTblcell_xpath;
+	private static String merchantRecord_xpath;
+	public WebElement merchantName;
+	public WebElement merchantRegistrationDate;
+	public WebElement merchantDiviison;
+	public WebElement merchantLockStatus;
+	public WebElement merchantDetails;
 	// region PageElements List
 
 	public String pageTitle() {
@@ -34,28 +40,50 @@ public class MerchantsSummaryPage extends BasePage {
 
 	}
 
-	public WebElement temp() {
+	public WebElement searchMerchantText() {
 
-		
-		By temp = By.xpath(merchantrecord_xpath);
-		return CommonUtils.IsElementAvailable(temp, 20);
+		return CommonUtils.IsElementAvailable(By.xpath(tf_merchantfilterchoice_xpath), 20);
 
 	}
 
-	public void childs() {
+	public WebElement merchantIDinMerchantSummuryTabel(String merchantID) {
+		String cell_merchnatID_xpath = BasePage.tf_merchatId_Partialxpath + merchantID + "')]";
+		return CommonUtils.IsElementAvailable(By.xpath(cell_merchnatID_xpath), 20);
+	}
 
-		List<WebElement> childs = temp().findElements(By.xpath(".//*"));
-		
-		for (int i= 0; i < childs.size(); i++) {
-			WebElement a = (WebElement) childs.get(i);
-			System.out.println(" WebElement " + a.getText());
+	public void getChildElementsfromMerchantSummeryTabel() {
+		CommonUtils.getChildElements(merchantRecord());
+
 	}
-		
-		
+
+	public static WebElement merchantRecord() {
+		return CommonUtils.IsElementAvailable(By.xpath(merchantRecord_xpath), 20);
 	}
-	
+
+	public void setElementsinMerchantRecord(String merchantID) {
+
+		merchantIdTblcell_xpath = BasePage.tf_merchatId_Partialxpath + merchantID + "')]";
+		merchantRecord_xpath = merchantIdTblcell_xpath + "/..";
+		WebElement merchantRecord = CommonUtils.IsElementAvailable(By.xpath(merchantRecord_xpath), 20);
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		List<ArrayList> listtemp = CommonUtils.getChildElements(merchantRecord);
+		merchantName = (WebElement) listtemp.get(1);
+		merchantRegistrationDate = (WebElement) listtemp.get(2);
+		merchantDiviison = (WebElement) listtemp.get(3);
+		merchantLockStatus = (WebElement) listtemp.get(4);
+		merchantDetails = (WebElement) listtemp.get(7);
+		/*
+		 * System.out.println(" merchantName " + merchantName.getText());
+		 * System.out.println(" merchantRegistrationDate " +
+		 * merchantRegistrationDate.getText());
+		 * System.out.println(" merchantDiviison " +
+		 * merchantDiviison.getText());
+		 * System.out.println(" merchantLockStatus " +
+		 * merchantLockStatus.getText()); System.out.println(" merchantDetails "
+		 * + merchantDetails.getText());
+		 */
+
+	}
 
 	// endregions
 }
-
-
