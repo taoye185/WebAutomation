@@ -21,11 +21,11 @@ public class MerchantsSummaryPage extends BasePage {
 	private static String lbl_username_xpath;
 	private static String merchantIdTblcell_xpath;
 	private static String merchantRecord_xpath;
-	public WebElement merchantName;
-	public WebElement merchantRegistrationDate;
-	public WebElement merchantDiviison;
-	public WebElement merchantLockStatus;
-	public WebElement merchantDetails;
+	public static WebElement merchantName;
+	public static WebElement merchantRegistrationDate;
+	public static WebElement merchantDiviison;
+	public static WebElement merchantLockStatus;
+	public static WebElement merchantDetails;
 	// region PageElements List
 
 	public String pageTitle() {
@@ -72,16 +72,7 @@ public class MerchantsSummaryPage extends BasePage {
 		merchantDiviison = (WebElement) listtemp.get(3);
 		merchantLockStatus = (WebElement) listtemp.get(4);
 		merchantDetails = (WebElement) listtemp.get(7);
-		/*
-		 * System.out.println(" merchantName " + merchantName.getText());
-		 * System.out.println(" merchantRegistrationDate " +
-		 * merchantRegistrationDate.getText());
-		 * System.out.println(" merchantDiviison " +
-		 * merchantDiviison.getText());
-		 * System.out.println(" merchantLockStatus " +
-		 * merchantLockStatus.getText()); System.out.println(" merchantDetails "
-		 * + merchantDetails.getText());
-		 */
+	
 
 	}
 

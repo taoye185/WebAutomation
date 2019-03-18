@@ -26,6 +26,7 @@ public class CommonUtils {
 	public static String username_GBL = "";
 	public static String password_GBL = "";
 	public static String username_LBL_GBL = "";
+	public static String email_GBL ="";
 	public static WebDriver _driver;
 	private static String configPrpoertiesFileURL = "resources/config.properties";
 	public static Map<WebElement, String> elementListMap = new HashMap<WebElement, String>();
@@ -233,11 +234,13 @@ public class CommonUtils {
 			username_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBAAdmin");
 			username_LBL_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBAAdminLabel");
 			password_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBAAdminpassword");
+			email_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBAAdminEmail");
 			break;
 		case "CBA_Support":
 			username_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBASupport");
 			username_LBL_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBASupportLabel");
 			password_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBASupportpassword");
+			email_GBL = DataReader.readProperty(configPrpoertiesFileURL, "CBASupportEmail");
 			break;
 		}
 

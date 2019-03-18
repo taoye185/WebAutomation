@@ -85,10 +85,36 @@ public class BasePage {
 	public static String lbl_grouppermissions_xpath ="//h3[contains(text(),'Group Permissions')]";
 	public static String lbl_groupmembers_xpath ="//h3[contains(text(),'Group Members')]";
 	public static String tf_filter_portalusers_xpath ="//input[@id='filterByFieldValue']";
+	
+	// portal user - results table
+	public static String tblcell_portaluser_email_xpath="//td[contains(text(),'marco@aeturnum.com')]";
+	public static String tblcell_portaluser_email_partialxpath="//td[contains(text(),'"; // marco@aeturnum.com')]";
+	
+	// Portal user edit
+	public static String icon_portalUuser_edit_Xpath ="//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']";
+	
+	
+	
 	// Left Navigation
+	public static String leftnav_logo_Xpath="//li[@class='company-logo']";	
 	public static String lnk_partial_LeftNav_xpath ="//a[contains(text(),'";
 	public static final String PORTAL_USERS="Portal Users";
-
+	public static final String MERCHANTS="Merchants";
+	public static final String TRANSACTIONS="Transactions";
+	public static final String AUDITLOGS="Audit Logs";	
+	//public static final String parentlefnav_xpath = "//a[contains(text(),'Merchants')]/../../..";
+	public static final String parentlefnav_xpath = leftnav_logo_Xpath+"/../..";
+	/* Lets see we can use these elements
+	element 18Marco(0, 572)
+	element 22(0, 612)
+	element 24(0, 613)
+	element 25(36, 626)---- profile
+	element 26(83, 612)
+	element 27(120, 626)---- pin 
+	element 28(166, 612)
+	element 29(202, 626)---- log off
+	*/
+	
 	
 	// AuditLog_Page Identifiers
 

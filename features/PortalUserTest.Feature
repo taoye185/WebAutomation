@@ -6,8 +6,9 @@ Background:
 @sanity @independentTest 
 Scenario Outline: Search portal user and verify details 
 	Then User enter portal user name "<portaluser>" and search 
+	Then User validate the portal user details from results 
 	
 	
 	Examples: 
 		|portaluser	|
-		|Marco	|
+		|CBA_Admin	|

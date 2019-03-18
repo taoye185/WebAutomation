@@ -52,13 +52,15 @@ public class BackgroundSteps {
 	@Given("^User \"([^\"]*)\" successfully navigated to Portal Users Page$")
 	public void user_successfully_navigated_to_Portal_Users_Page(String userName) {
 		login(userName);
-		//try {
-		//	Thread.sleep(10000);
-		//} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
-		comUtil.setWaitInSeconds(20);
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			 
+			e.printStackTrace();
+		}
+				
+		
 		leftNav.leftNavigationLink(BasePage.PORTAL_USERS).click();
 	}
 
