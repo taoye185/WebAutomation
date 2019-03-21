@@ -3,6 +3,7 @@ package com.mobeewave.acquirer.utils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,10 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mobeewave.acquirer.infastructure.SetUp;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.internal.TouchAction;
+
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +31,7 @@ public class CommonUtils {
 	public static String username_GBL = "";
 	public static String password_GBL = "";
 	public static String username_LBL_GBL = "";
-	public static String email_GBL ="";
+	public static String email_GBL = "";
 	public static WebDriver _driver;
 	private static String configPrpoertiesFileURL = "resources/config.properties";
 	public static Map<WebElement, String> elementListMap = new HashMap<WebElement, String>();
@@ -48,7 +53,7 @@ public class CommonUtils {
 		Wait wait = new FluentWait(_driver).withTimeout(time, TimeUnit.SECONDS).pollingEvery(5, TimeUnit.SECONDS)
 				.ignoring(NoSuchElementException.class);
 		try {
-			
+
 			WebElement element = (WebElement) wait.until(ExpectedConditions.elementToBeClickable(by));
 			System.out.println(" FOUND ELEMENT " + by + "  " + element.getText());
 			System.out.println(" location " + by + "  " + element.getLocation());
@@ -357,6 +362,19 @@ public class CommonUtils {
 	}
 
 
+    /// <summary>
+    /// Click using and element and off set by coordinates
+    /// </summary>
+    /// <param name="x">x-coordinate</param>
+    /// <param name="y">y-coordinate</param>
+    public static void clickPositionAgainstElement(WebElement element, int x, int y)
+    {
+        WebDriver driver = SetUp.getDriver();
+        new Actions(driver).moveToElement(element).moveByOffset(x, y).click().perform();
+        
+    }
+
+	
 	public static String getPageTitle() {
 		try {
 			if (_driver == null) {

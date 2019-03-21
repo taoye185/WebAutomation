@@ -12,3 +12,13 @@ Scenario Outline: Search portal user and verify details
 	Examples: 
 		|portaluser	|
 		|CBA_Admin	|
+		
+		
+@sanity @independentTest 
+Scenario Outline: Create a portal user 
+	Then User click on edit button 
+	And User click on + button to add new "<portaluser>" Portal User 
+		
+	Examples: 
+		|portaluser	|
+		|CBA_Support|

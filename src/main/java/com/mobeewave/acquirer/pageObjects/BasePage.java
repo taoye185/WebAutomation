@@ -91,8 +91,15 @@ public class BasePage {
 	public static String tblcell_portaluser_email_partialxpath="//td[contains(text(),'"; // marco@aeturnum.com')]";
 	
 	// Portal user edit
-	public static String icon_portalUuser_edit_Xpath ="//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']";
-	
+	public static String icon_portaluser_edit_xpath ="//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']";
+	public static String icon_portaluser_moreactions_Xpath ="//li[@class='mfb-component__wrap']";
+	//Portal User Create new
+	public static String new_usernameFull_xpath = "//input[@id='userFullname']";
+	public static String new_userlogin_xpath = "//input[@id='userLogin']";
+	public static String new_useremail_xpath = "//input[@id='userEmail']";
+	public static String new_usergroup_xpath = "//select[@id='groupChoice']";
+	public static String new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
+	public static String new_usersave_xpath = "//span[contains(text(),'Save')]";
 	
 	
 	// Left Navigation
