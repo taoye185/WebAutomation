@@ -39,5 +39,29 @@ private static String email_GBL = "";
 			System.out.println("validate the portal  " + portalUser_GBL + " user details Failed");
 		}
 	}
+	
+	@Then("^User click on edit button$")
+	public void user_click_on_edit_button(){
+		try {
+		Thread.sleep(3000);		
+		PortalUserPage.portalUserEditIcon().click();
+		} catch (InterruptedException ex) {			
+			System.out.println("ERROR : ==================== /n" + ex.getMessage() + "/n====================");
+			System.out.println("... More actions Failed");
+		}
+	}
+
+	@Then("^User click on \\+ button to add new \"([^\"]*)\" Portal User$")
+	public void user_click_on_button_to_add_new_Portal_User(String portalUSer){
+		try {
+			
+		PortalUserPage.clickPortalUserCreateIcon();
+		Thread.sleep(3000);	
+		} catch (InterruptedException ex) {			
+			System.out.println("ERROR : ==================== /n" + ex.getMessage() + "/n====================");
+			System.out.println("... Click on + Failed");
+		}
+	}
+
 
 }

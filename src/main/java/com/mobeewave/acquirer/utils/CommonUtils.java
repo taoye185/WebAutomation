@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mobeewave.acquirer.infastructure.SetUp;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.internal.TouchAction;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -360,19 +361,20 @@ public class CommonUtils {
 		}
 	}
 
-	public void mouseMovewrt(WebElement element, int x, int y ) {
 
-		Point coordinates = element.getLocation();
-		Robot robot=null;
-		try {
-			robot = new Robot();
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		robot.mouseMove(coordinates.getX()+x, coordinates.getY() + y);
-	}
+    /// <summary>
+    /// Click using and element and off set by coordinates
+    /// </summary>
+    /// <param name="x">x-coordinate</param>
+    /// <param name="y">y-coordinate</param>
+    public static void clickPositionAgainstElement(WebElement element, int x, int y)
+    {
+        WebDriver driver = SetUp.getDriver();
+        new Actions(driver).moveToElement(element).moveByOffset(x, y).click().perform();
+        
+    }
 
+	
 	public static String getPageTitle() {
 		try {
 			if (_driver == null) {

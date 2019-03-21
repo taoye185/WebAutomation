@@ -40,7 +40,10 @@ public class PortalUserPage extends BasePage {
 	
 	public static WebElement portalUserEditIcon() {
 
-		return CommonUtils.IsElementSelectable(By.xpath(icon_portalUuser_edit_Xpath), 20);
+		return CommonUtils.IsElementSelectable(By.xpath(icon_portaluser_moreactions_Xpath), 20);
 	}
-
+	
+	public static void clickPortalUserCreateIcon() {
+		CommonUtils.clickPositionAgainstElement(portalUserEditIcon(),0,-60);			
+	}
 }
