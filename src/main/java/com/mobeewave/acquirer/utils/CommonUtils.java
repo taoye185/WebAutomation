@@ -361,20 +361,17 @@ public class CommonUtils {
 		}
 	}
 
+	/// <summary>
+	/// Click using and element and off set by coordinates
+	/// </summary>
+	/// <param name="x">x-coordinate</param>
+	/// <param name="y">y-coordinate</param>
+	public static void clickPositionAgainstElement(WebElement element, int x, int y) {
+		WebDriver driver = SetUp.getDriver();
+		new Actions(driver).moveToElement(element).moveByOffset(x, y).click().perform();
 
-    /// <summary>
-    /// Click using and element and off set by coordinates
-    /// </summary>
-    /// <param name="x">x-coordinate</param>
-    /// <param name="y">y-coordinate</param>
-    public static void clickPositionAgainstElement(WebElement element, int x, int y)
-    {
-        WebDriver driver = SetUp.getDriver();
-        new Actions(driver).moveToElement(element).moveByOffset(x, y).click().perform();
-        
-    }
+	}
 
-	
 	public static String getPageTitle() {
 		try {
 			if (_driver == null) {
@@ -397,4 +394,47 @@ public class CommonUtils {
 		return parentElementList;
 	}
 
+	@SuppressWarnings("rawtypes")
+	public static WebElement getPagination(WebElement element, int index) {
+		parentElementList = element.findElements(By.xpath(".//*"));
+		try {
+
+			if (index > parentElementList.size()) {
+
+				throw new Exception("Given pagination is out of bounds");
+
+			}
+			for (int i = 0; i < parentElementList.size(); i++) {
+				WebElement a = (WebElement) parentElementList.get(i);
+				System.out.println("element " + i + a.getText() + a.getLocation());
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return parentElementList.get(index);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static WebElement getLastPagination(WebElement element, String path) {
+		parentElementList = element.findElements(By.xpath(path+"//*"));
+		int index = parentElementList.size()-1;
+		try {
+			
+		
+			for (int i = 0; i < parentElementList.size(); i++) {
+				WebElement a = (WebElement) parentElementList.get(i);
+				System.out.println("element " + i + a.getText() + a.getLocation());
+			}
+
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+		}
+		return parentElementList.get(index);
+	}
+	
+	
+	
 }

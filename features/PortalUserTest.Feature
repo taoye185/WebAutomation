@@ -3,7 +3,7 @@ Feature: 3_PortalUser
 Background: 
 	Given User "CBA_Admin" successfully navigated to Portal Users Page 
 	
-@sanity @independentTest 
+@sanity1 @independentTest 
 Scenario Outline: Search portal user and verify details 
 	Then User enter portal user name "<portaluser>" and search 
 	Then User validate the portal user details from results 
@@ -13,11 +13,22 @@ Scenario Outline: Search portal user and verify details
 		|portaluser	|
 		|CBA_Admin	|
 		
-		
-@sanity @independentTest 
+	
+@independentTest 
 Scenario Outline: Create a portal user 
 	Then User click on edit button 
 	And User click on + button to add new "<portaluser>" Portal User 
+	Then User click close button on create new Portal User Page
+		
+	Examples: 
+		|portaluser	|
+		|CBA_Support|
+		
+		
+@sanity1 @independentTest 
+Scenario Outline: Verify portal user Pagination	 
+	Then User click Last in pagination of  Portal User Page
+	
 		
 	Examples: 
 		|portaluser	|
