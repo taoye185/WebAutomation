@@ -57,11 +57,27 @@ private static String email_GBL = "";
 			
 		PortalUserPage.clickPortalUserCreateIcon();
 		Thread.sleep(3000);	
+		
 		} catch (InterruptedException ex) {			
 			System.out.println("ERROR : ==================== /n" + ex.getMessage() + "/n====================");
 			System.out.println("... Click on + Failed");
 		}
 	}
+	
+	@Then("^User click close button on create new Portal User Page$")
+	public void user_click_close_button_on_create_new_Portal_User_Page() {
+		PortalUserPage.portalUserCreateUserCloseButton().click();
+	}
 
+	@Then("^User click Last in pagination of  Portal User Page$")
+	public void user_click_Last_in_pagination_of_Portal_User_Page() {
+		try {
+		PortalUserPage.lastinPortalUserPagination().click();
+		Thread.sleep(3000);	
+		} catch (InterruptedException ex) {			
+			System.out.println("ERROR : ==================== /n" + ex.getMessage() + "/n====================");
+			System.out.println("... Click on last pagination Failed");
+		}
+	}
 
 }

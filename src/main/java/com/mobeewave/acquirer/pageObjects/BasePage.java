@@ -90,17 +90,27 @@ public class BasePage {
 	public static String tblcell_portaluser_email_xpath="//td[contains(text(),'marco@aeturnum.com')]";
 	public static String tblcell_portaluser_email_partialxpath="//td[contains(text(),'"; // marco@aeturnum.com')]";
 	
+	//portal user paging
+	public static String pgNav_portaluser_previous_xpath="//span[contains(text(),'«')]";
+	public static String pgNav_portaluser_next_xpath="//span[contains(text(),'»')]";
+	public static String pgNav_portaluser_paging_parentXpath="//a[@aria-label='Previous']/../following-sibling::*";
+	
 	// Portal user edit
 	public static String icon_portaluser_edit_xpath ="//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']";
 	public static String icon_portaluser_moreactions_Xpath ="//li[@class='mfb-component__wrap']";
 	//Portal User Create new
-	public static String new_usernameFull_xpath = "//input[@id='userFullname']";
-	public static String new_userlogin_xpath = "//input[@id='userLogin']";
-	public static String new_useremail_xpath = "//input[@id='userEmail']";
-	public static String new_usergroup_xpath = "//select[@id='groupChoice']";
-	public static String new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
-	public static String new_usersave_xpath = "//span[contains(text(),'Save')]";
-	
+	public static String lbl_new_usernameFull_xpath = "//input[@id='userFullname']";
+	public static String txt_new_usernameFull_xpath = "//input[@id='userFullname']";
+	public static String lbl_new_userlogin_xpath = "//input[@id='userLogin']";
+	public static String txt_new_userlogin_xpath = "//input[@id='userLogin']";
+	public static String lbl_new_useremail_xpath = "//input[@id='userEmail']";
+	public static String txt_new_useremail_xpath = "//input[@id='userEmail']";
+	public static String lbl_new_usergroup_xpath = "//select[@id='groupChoice']";
+	public static String drpdwn_new_usergroup_xpath = "//select[@id='groupChoice']";	
+	public static String lbl_new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
+	public static String drpdwn_new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
+	public static String btn_new_usersave_xpath = "//span[contains(text(),'Save')]";
+	public static String btn_new_userclose_xpath = "//i[@class='fa fa-close']";
 	
 	// Left Navigation
 	public static String leftnav_logo_Xpath="//li[@class='company-logo']";	

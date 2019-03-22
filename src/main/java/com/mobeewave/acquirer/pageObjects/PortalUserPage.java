@@ -38,12 +38,83 @@ public class PortalUserPage extends BasePage {
 		portalUserDetails = (WebElement) listtemp.get(8);
 	}
 	
+	public static WebElement lastinPortalUserPagination() {
+	WebElement portalUserPagination = 	CommonUtils.IsElementSelectable(By.xpath(pgNav_portaluser_paging_parentXpath), 20);
+		return CommonUtils.getLastPagination(portalUserPagination,pgNav_portaluser_paging_parentXpath);
+	}
+	
 	public static WebElement portalUserEditIcon() {
 
 		return CommonUtils.IsElementSelectable(By.xpath(icon_portaluser_moreactions_Xpath), 20);
 	}
 	
+	// The + button is recognized with respect to the edit button.
+	// In this case, + button is appeared approximately 50 pixel ahead to Edit
+	// button and span through another 50 pixel
 	public static void clickPortalUserCreateIcon() {
 		CommonUtils.clickPositionAgainstElement(portalUserEditIcon(),0,-60);			
 	}
+	
+	public static WebElement portalUserCreateFullNameLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_new_usernameFull_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateFullNameText() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(txt_new_usernameFull_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserNameLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_new_userlogin_xpath), 20);
+	}
+	
+	
+	public static WebElement portalUserCreateUserNameText() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(txt_new_userlogin_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserEmailLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_new_useremail_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserEmailText() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(txt_new_useremail_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserGroupLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_new_usergroup_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserGroupDropDown() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(drpdwn_new_usergroup_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserBankLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_new_userbank_xpath), 20);
+	}
+	
+	
+	public static WebElement portalUserCreateUserBankDropDown() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(drpdwn_new_userbank_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserSaveButton() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(btn_new_usersave_xpath), 20);
+	}
+	
+	public static WebElement portalUserCreateUserCloseButton() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(btn_new_userclose_xpath), 20);
+	}
+	
 }
