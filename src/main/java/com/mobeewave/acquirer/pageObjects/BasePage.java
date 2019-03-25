@@ -72,45 +72,47 @@ public class BasePage {
 	// Transaction_Page Identifiers
 	
 	// Portal Users Page
-	public static String lbl_portalusers_xpath = "//h1[contains(text(),'Portal Users')]";
-	public static String lbl_users_xpath ="//h4[contains(text(),'Users')]";
-	public static String lbl_groups_xpath ="//h4[contains(text(),'Groups')]";
-	public static String lnk_summary_xpath ="//span[@ui-sref='app.hive-access.groups']";
-	public static String lbl_groupprofile_xpath ="//h4[contains(text(),'Group Profile')]";
-	public static String collapse_generalinformation_xpath ="//h3[contains(text(),'General Information')]";
-	public static String lbl_nameGI_xpath ="//p[contains(text(),'Name')]";
-	public static String ibl_namevalueGI_xpath =lbl_nameGI_xpath+"/following-sibling::*";
-	public static String lbl_descriptionGI_xpath ="//p[contains(text(),'Description')]";
-	public static String ibl_descriptionvalueGI_xpath =lbl_descriptionGI_xpath+"/following-sibling::*";
-	public static String lbl_grouppermissions_xpath ="//h3[contains(text(),'Group Permissions')]";
-	public static String lbl_groupmembers_xpath ="//h3[contains(text(),'Group Members')]";
-	public static String tf_filter_portalusers_xpath ="//input[@id='filterByFieldValue']";
-	
-	// portal user - results table
-	public static String tblcell_portaluser_email_xpath="//td[contains(text(),'marco@aeturnum.com')]";
-	public static String tblcell_portaluser_email_partialxpath="//td[contains(text(),'"; // marco@aeturnum.com')]";
-	
-	//portal user paging
-	public static String pgNav_portaluser_previous_xpath="//span[contains(text(),'«')]";
-	public static String pgNav_portaluser_next_xpath="//span[contains(text(),'»')]";
-	public static String pgNav_portaluser_paging_parentXpath="//a[@aria-label='Previous']/../following-sibling::*";
-	
-	// Portal user edit
-	public static String icon_portaluser_edit_xpath ="//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']";
-	public static String icon_portaluser_moreactions_Xpath ="//li[@class='mfb-component__wrap']";
-	//Portal User Create new
-	public static String lbl_new_usernameFull_xpath = "//input[@id='userFullname']";
-	public static String txt_new_usernameFull_xpath = "//input[@id='userFullname']";
-	public static String lbl_new_userlogin_xpath = "//input[@id='userLogin']";
-	public static String txt_new_userlogin_xpath = "//input[@id='userLogin']";
-	public static String lbl_new_useremail_xpath = "//input[@id='userEmail']";
-	public static String txt_new_useremail_xpath = "//input[@id='userEmail']";
-	public static String lbl_new_usergroup_xpath = "//select[@id='groupChoice']";
-	public static String drpdwn_new_usergroup_xpath = "//select[@id='groupChoice']";	
-	public static String lbl_new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
-	public static String drpdwn_new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
-	public static String btn_new_usersave_xpath = "//span[contains(text(),'Save')]";
-	public static String btn_new_userclose_xpath = "//i[@class='fa fa-close']";
+		public static String lbl_portalusers_xpath = "//h1[contains(text(),'Portal Users')]";
+		public static String lbl_users_xpath ="//h4[contains(text(),'Users')]";
+		public static String lbl_groups_xpath ="//h4[contains(text(),'Groups')]";
+		public static String lnk_summary_xpath ="//span[@ui-sref='app.hive-access.groups']";
+		public static String lbl_groupprofile_xpath ="//h4[contains(text(),'Group Profile')]";
+		public static String collapse_generalinformation_xpath ="//h3[contains(text(),'General Information')]";
+		public static String lbl_nameGI_xpath ="//p[contains(text(),'Name')]";
+		public static String ibl_namevalueGI_xpath =lbl_nameGI_xpath+"/following-sibling::*";
+		public static String lbl_descriptionGI_xpath ="//p[contains(text(),'Description')]";
+		public static String ibl_descriptionvalueGI_xpath =lbl_descriptionGI_xpath+"/following-sibling::*";
+		public static String lbl_grouppermissions_xpath ="//h3[contains(text(),'Group Permissions')]";
+		public static String lbl_groupmembers_xpath ="//h3[contains(text(),'Group Members')]";
+		public static String tf_filter_portalusers_xpath ="//input[@id='filterByFieldValue']";
+		
+		// portal user - results table
+		public static String tblcell_portaluser_email_xpath="//td[contains(text(),'marco@aeturnum.com')]";
+		public static String tblcell_portaluser_email_partialxpath="//td[contains(text(),'"; // marco@aeturnum.com')]";
+		
+		//portal user paging
+		public static String pgNav_portaluser_previous_xpath="//span[contains(text(),'«')]";
+		public static String pgNav_portaluser_next_xpath="//span[contains(text(),'»')]";
+		public static String pgNav_portaluser_paging_parentXpath="//a[@aria-label='Previous']/../following-sibling::*";
+		
+		// Portal user / user details more actions (... button)
+		public static String icon_portaluser_edit_xpath ="//i[@class='mfb-component__main-icon--active fa fa-ellipsis-v']";
+		public static String icon_portaluser_moreactions_Xpath ="//li[@class='mfb-component__wrap']";
+		//Portal User Create new
+		public static String lbl_new_usernameFull_xpath = "//input[@id='userFullname']";
+		public static String txt_new_usernameFull_xpath = "//input[@id='userFullname']";
+		public static String lbl_new_userlogin_xpath = "//input[@id='userLogin']";
+		public static String txt_new_userlogin_xpath = "//input[@id='userLogin']";
+		public static String lbl_new_useremail_xpath = "//input[@id='userEmail']";
+		public static String txt_new_useremail_xpath = "//input[@id='userEmail']";
+		public static String lbl_new_usergroup_xpath = "//select[@id='groupChoice']";
+		public static String drpdwn_new_usergroup_xpath = "//select[@id='groupChoice']";	
+		public static String lbl_new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
+		public static String drpdwn_new_userbank_xpath = "//select[@id='paymentProcessorChoice']";
+		public static String drpdwn_new_userDivision_xpath ="//select[@id='divisionChoice']";	
+		//save and close buttons
+		public static String btn_new_usersave_xpath = "//span[contains(text(),'Save')]";
+		public static String btn_new_userclose_xpath = "//i[@class='fa fa-close']";	
 	
 	// Left Navigation
 	public static String leftnav_logo_Xpath="//li[@class='company-logo']";	
@@ -121,17 +123,6 @@ public class BasePage {
 	public static final String AUDITLOGS="Audit Logs";	
 	//public static final String parentlefnav_xpath = "//a[contains(text(),'Merchants')]/../../..";
 	public static final String parentlefnav_xpath = leftnav_logo_Xpath+"/../..";
-	/* Lets see we can use these elements
-	element 18Marco(0, 572)
-	element 22(0, 612)
-	element 24(0, 613)
-	element 25(36, 626)---- profile
-	element 26(83, 612)
-	element 27(120, 626)---- pin 
-	element 28(166, 612)
-	element 29(202, 626)---- log off
-	*/
-	
 	
 	// AuditLog_Page Identifiers
 

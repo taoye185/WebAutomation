@@ -43,7 +43,7 @@ public class DataReader {
 		return result;
 	}
 
-	public String readExcel(String FileURL, String sheetName, int row, int col) {
+	public static String readExcel(String FileURL, String sheetName, int row, int col) {
 		XSSFWorkbook excelBook = null;
 		XSSFSheet excelSheet = null;
 		try {
@@ -61,21 +61,24 @@ public class DataReader {
 		return excelSheet.getRow(row).getCell(col).getStringCellValue().toString();
 	}
 
-	public void setExcelFile(String FileURL, String sheetName) {
+	public static void setExcelFile(String FileURL, String sheetName) {
 		excelFilePathGBL = FileURL;
 		excelSheetNameGBL = sheetName;
+		System.out.println(" excelFilePathGBL " + excelFilePathGBL);
+		System.out.println(" excelSheetNameGBL " + excelSheetNameGBL);
 	}
 
-	public void setFilePath(String FileURL) {
+	public static void setFilePath(String FileURL) {
 		filepathGBL = FileURL;
 	}
 
-	public String readExcel(int row, int col) {
+	public static String readExcel(int row, int col) {
 		return readExcel(excelFilePathGBL, excelSheetNameGBL, row, col);
 	}
 	
-	public String readProperty(String property) {
+	public static String readProperty(String property) {
 		return readProperty(filepathGBL, property);
 	}
+
 
 }
