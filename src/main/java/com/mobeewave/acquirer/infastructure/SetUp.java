@@ -2,15 +2,16 @@ package com.mobeewave.acquirer.infastructure;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import com.mobeewave.acquirer.utils.DataReader;
 
 import cucumber.api.java.After;
 
 public class SetUp {
 
-	private static WebDriver driver = null;
+	private static WebDriver driver;
 	private static String configPrpoertiesFileURL = "resources/config.properties";
 	private static String pageObjectsPrpoertiesFileURL;
 	private static String browser_GBL = System.getProperty("browser");
@@ -34,15 +35,27 @@ public class SetUp {
 		case "chrome":
 			driverPath = DataReader.readProperty(configPrpoertiesFileURL, "chrome.driver.path");
 			System.setProperty("webdriver.chrome.driver", driverPath);
-			driver = new ChromeDriver();
+			
+			// Set Chrome Options and set Headless mode as true
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("--start-maximized");
+			//chromeOptions.addArguments("--headless");
+
+			// Instantiate Chrome Web Driver
+			driver = new ChromeDriver(chromeOptions);
 			System.out.println("Chrome Driver setup successfull.. ");
+
+			// driver.get("http://www.google.com");
 			break;
+
 		case "firefox":
 			driverPath = DataReader.readProperty(configPrpoertiesFileURL, "firefox.driver.path");
 			System.setProperty("webdriver.gecko.driver", driverPath);
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability("marionette", true);
-			driver = new FirefoxDriver(capabilities);
+			FirefoxOptions options = new FirefoxOptions();
+			options.setHeadless(true);
+
+			// Instantiate FireFox Web Driver
+			driver = new FirefoxDriver(options);
 			System.out.println("FireFox Driver setup successfull.. ");
 			break;
 		}
@@ -50,14 +63,15 @@ public class SetUp {
 		switch (client) {
 		case "CBA":
 			client_GBL = "CBA";
-			System.out.println("CLIENT IS " + client_GBL + " ...... ");
+
 			baseUrl = DataReader.readProperty(configPrpoertiesFileURL, "CBAbaseURL");
+			System.out.println("CLIENT IS " + client_GBL + " ...... " + baseUrl);
 			break;
 
 		case "":
 			client_GBL = "CBA";
-			System.out.println("CLIENT IS " + client_GBL + " ...... ");
 			baseUrl = DataReader.readProperty(configPrpoertiesFileURL, "CBAbaseURL");
+			System.out.println("CLIENT IS " + client_GBL + " ...... " + baseUrl);
 			break;
 
 		case "ABC":
@@ -69,9 +83,12 @@ public class SetUp {
 			break;
 
 		}
+
 		driver.get(baseUrl);
-		driver.manage().window().maximize();
 		System.out.println("User navigate to URL " + baseUrl + "is successfull.. " + driver.getTitle());
+
+		// driver.manage().window().maximize();
+
 		return driver;
 
 	}
@@ -164,14 +181,14 @@ public class SetUp {
 	/// </summary>
 	/// <returns>String/returns>
 	public static String getBrowser() {
-		System.out.println("======browser is   " + browser_GBL + "   =============");
 		
-		if ((browser_GBL==null)){
+		if ((browser_GBL == null)) {
+			System.out.println(" =====browser is set to chrome ===========");
 			return browser_GBL = "chrome";
 		}
-		
-		if (!(browser_GBL != "chrome" || browser_GBL != "firefox")) {
-			System.out.println("======browser is   NULL ===========");
+
+		if (!(browser_GBL.equalsIgnoreCase("chrome") || browser_GBL.equalsIgnoreCase("firefox"))) {
+			System.out.println("======browser is set to chrome ===========");
 			return browser_GBL = "chrome";
 		}
 		System.out.println("======browser is   " + browser_GBL + "   =============");
@@ -228,10 +245,10 @@ public class SetUp {
 			}
 			_driver.quit();
 			_driver = null;
-			System.out.println("\n closing browser and Quit driver..................\n");			
+			System.out.println("\n closing browser and Quit driver..................\n");
 		} catch (Exception ex) {
 			System.out.println("====================    " + ex.getMessage() + "   =============================");
-			System.out.println("Driver quit failed ...... ");			
+			System.out.println("Driver quit failed ...... ");
 		}
 	}
 
