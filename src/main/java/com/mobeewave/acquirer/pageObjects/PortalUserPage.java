@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import com.mobeewave.acquirer.utils.CommonUtils;
 
@@ -30,12 +31,12 @@ public class PortalUserPage extends BasePage {
 		WebElement portalUserRecord = CommonUtils.IsElementAvailable(By.xpath(portalUserRecord_xpath), 20);
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		List<ArrayList> listtemp = CommonUtils.getChildElements(portalUserRecord);
-		portalUserName = (WebElement) listtemp.get(1);
-		portalUserEmail = (WebElement) listtemp.get(2);
-		portalUserUserName = (WebElement) listtemp.get(3);
-		portalUserDivision = (WebElement) listtemp.get(4);
-		portalUserAccountState = (WebElement) listtemp.get(5);
-		portalUserDetails = (WebElement) listtemp.get(8);
+		portalUserName = (WebElement) listtemp.get(0);
+		portalUserEmail = (WebElement) listtemp.get(1);
+		portalUserUserName = (WebElement) listtemp.get(2);
+		portalUserDivision = (WebElement) listtemp.get(3);
+		portalUserAccountState = (WebElement) listtemp.get(4);
+		portalUserDetails = (WebElement) listtemp.get(7);
 	}
 	
 	public static WebElement lastinPortalUserPagination() {
@@ -43,7 +44,7 @@ public class PortalUserPage extends BasePage {
 		return CommonUtils.getLastPagination(portalUserPagination,pgNav_portaluser_paging_parentXpath);
 	}
 	
-	public static WebElement portalUserEditIcon() {
+	public static WebElement portalUserMoreActionButton() {
 
 		return CommonUtils.IsElementSelectable(By.xpath(icon_portaluser_moreactions_Xpath), 20);
 	}
@@ -52,8 +53,17 @@ public class PortalUserPage extends BasePage {
 	// In this case, + button is appeared approximately 50 pixel ahead to Edit
 	// button and span through another 50 pixel
 	public static void clickPortalUserCreateIcon() {
-		CommonUtils.clickPositionAgainstElement(portalUserEditIcon(),0,-60);			
+		CommonUtils.clickPositionAgainstElement(portalUserMoreActionButton(),0,-60);			
 	}
+	
+	public static void clickPortalUserEditButton() {
+		CommonUtils.clickPositionAgainstElement(portalUserMoreActionButton(), 0, -60);
+	}
+
+	public static void clickPortalUserDeleteButton() {
+		CommonUtils.clickPositionAgainstElement(portalUserMoreActionButton(), 0, -120);
+	}
+	
 	
 	public static WebElement portalUserCreateFullNameLabel() {
 
@@ -91,30 +101,64 @@ public class PortalUserPage extends BasePage {
 		return CommonUtils.IsElementSelectable(By.xpath(lbl_new_usergroup_xpath), 20);
 	}
 	
-	public static WebElement portalUserCreateUserGroupDropDown() {
 
-		return CommonUtils.IsElementSelectable(By.xpath(drpdwn_new_usergroup_xpath), 20);
-	}
 	
+	public static Select portalUserCreateUserGroupDropDown() {
+		Select dropdown = new Select(CommonUtils.IsElementSelectable(By.xpath(drpdwn_new_usergroup_xpath), 20));
+		CommonUtils.getDropdownOptions(dropdown);
+		return dropdown;		
+	}
+
+	
+	public static int selectPortalUserGroupValue(String value){
+		int index=0;
+		portalUserCreateUserGroupDropDown();
+		index = CommonUtils.selectValuefromDropdown(value);
+		return index;		
+	}
 	public static WebElement portalUserCreateUserBankLabel() {
 
 		return CommonUtils.IsElementSelectable(By.xpath(lbl_new_userbank_xpath), 20);
 	}
 	
 	
-	public static WebElement portalUserCreateUserBankDropDown() {
+	public static Select portalUserCreateUserBankDropDown() {
 
-		return CommonUtils.IsElementSelectable(By.xpath(drpdwn_new_userbank_xpath), 20);
+		Select dropdown = new Select(CommonUtils.IsElementSelectable(By.xpath(drpdwn_new_userbank_xpath), 20));
+		CommonUtils.getDropdownOptions(dropdown);
+		return dropdown;
+	}
+
+	public static int selectPortalUserBankValue(String value){
+		int index=0;
+		portalUserCreateUserBankDropDown();
+		index = CommonUtils.selectValuefromDropdown(value);
+		return index;		
+	}
+	
+	public static Select portalUserCreateUserDivisionDropDown() {
+
+		Select dropdown = new Select(CommonUtils.IsElementSelectable(By.xpath(drpdwn_new_userDivision_xpath), 20));
+		CommonUtils.getDropdownOptions(dropdown);
+		return dropdown;
+	}
+	
+	public static int selectPortalUserDivision(String value){
+		int index=0;
+		portalUserCreateUserBankDropDown();
+		index = CommonUtils.selectValuefromDropdown(value);
+		return index;		
 	}
 	
 	public static WebElement portalUserCreateUserSaveButton() {
 
 		return CommonUtils.IsElementSelectable(By.xpath(btn_new_usersave_xpath), 20);
 	}
-	
+
 	public static WebElement portalUserCreateUserCloseButton() {
 
 		return CommonUtils.IsElementSelectable(By.xpath(btn_new_userclose_xpath), 20);
 	}
+
 	
 }
