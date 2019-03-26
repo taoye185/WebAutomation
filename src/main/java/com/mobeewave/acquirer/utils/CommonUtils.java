@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.mobeewave.acquirer.infastructure.SetUp;
@@ -32,12 +33,21 @@ public class CommonUtils {
 	public static String password_GBL = "";
 	public static String username_LBL_GBL = "";
 	public static String email_GBL = "";
+	public static String newUserNameFull_GBL;
+	public static String newUserName_GBL;
+	public static String newUserPassword_GBL;
+	public static String newUserEmail_GBL;
+	public static String newUserGroup;
+	public static String newUserBank;
+	public static String newUserDivision;	
 	public static WebDriver _driver;
 	private static String configPrpoertiesFileURL = "resources/config.properties";
 	public static Map<WebElement, String> elementListMap = new HashMap<WebElement, String>();
 	public static List<WebElement> elementList = new ArrayList();
 	public static List<WebElement> parentElementList = new ArrayList();
-
+	public static List<WebElement> options = new ArrayList();
+	DataReader dataReader = new DataReader();
+	
 	/// <summary>
 	/// This method returns the element by waiting till its visible and enabled.
 	/// </summary>
@@ -251,6 +261,26 @@ public class CommonUtils {
 
 	}
 
+	public static void setUpNewPortalUsers(String username) {
+		String sheetName="Create_" +username;
+		System.out.println("Sheet Name " + sheetName);
+		String filepath = DataReader.readProperty(configPrpoertiesFileURL, "DataDrivenTests");
+		System.out.println("filepath Name " + filepath);
+		switch (username) {	
+		case "CBASupport":
+			DataReader.setExcelFile(filepath, sheetName);
+			newUserNameFull_GBL =  DataReader.readExcel(1, 0);
+			newUserName_GBL =  DataReader.readExcel(1, 1);
+			newUserPassword_GBL =  DataReader.readExcel(1, 2);
+			newUserEmail_GBL =  DataReader.readExcel(1, 3);
+			newUserGroup= DataReader.readExcel(1, 4);
+			newUserBank= DataReader.readExcel(1, 5);
+			newUserDivision = DataReader.readExcel(1, 6);
+			break;
+		}
+
+	}
+	
 	public static boolean coordIsPartiallyContainedIn(WebElement w1, WebElement w2) throws IOException {
 		boolean isContained = false;
 
@@ -415,6 +445,39 @@ public class CommonUtils {
 		}
 		return parentElementList.get(index);
 	}
+	
+	/**
+	 * 
+	 * @param dropdown
+	 * @return List of options in the dropdown
+	 */
+	@SuppressWarnings("rawtypes")
+	public static List getDropdownOptions(Select dropdown) {
+		
+		options = dropdown.getOptions();
+		for (int i = 0; i < options.size(); i++) {
+			WebElement a = (WebElement) options.get(i);
+			System.out.println("Select Option " + i + " "  + a.getText());
+		}
+		return options;
+	}
+
+	public static int selectValuefromDropdown(String value){
+		int index=0;
+		for (int i = 0; i < options.size(); i++) {
+			WebElement a = (WebElement) options.get(i);
+			index=i;
+			if(a.getText().equalsIgnoreCase(value)){
+				break;
+			}
+			
+		}
+		System.out.println("Select Option " + index );
+		return index;
+		
+	}
+	
+	
 	
 	@SuppressWarnings("rawtypes")
 	public static WebElement getLastPagination(WebElement element, String path) {
