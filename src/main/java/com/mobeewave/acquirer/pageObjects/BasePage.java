@@ -124,6 +124,9 @@ public class BasePage {
 	//public static final String parentlefnav_xpath = "//a[contains(text(),'Merchants')]/../../..";
 	public static final String parentlefnav_xpath = leftnav_logo_Xpath+"/../..";
 	
+	//ConirmationBox
+		public static String confirmationMessageBox="//div[@class='brighttheme ui-pnotify-container brighttheme-notice ui-pnotify-shadow']";
+		
 	// AuditLog_Page Identifiers
 
 	public static void areElementsOveralapped() {
