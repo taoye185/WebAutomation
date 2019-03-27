@@ -160,5 +160,18 @@ public class PortalUserPage extends BasePage {
 		return CommonUtils.IsElementSelectable(By.xpath(btn_new_userclose_xpath), 20);
 	}
 
+	// User Profile
+	
+	public static WebElement portalUserProfileFullNameLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_userfullname_xpath), 20);
+	}
+
+	public static WebElement portalUserProfileEmailLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_useremail_xpath), 20);
+	}
+	
+
 	
 }
