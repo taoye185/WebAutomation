@@ -114,6 +114,13 @@ public class BasePage {
 		public static String btn_new_usersave_xpath = "//span[contains(text(),'Save')]";
 		public static String btn_new_userclose_xpath = "//i[@class='fa fa-close']";	
 	
+		//Portal User Profile
+		public static String lbl_userprofile_generalinformation_xpath;
+		public static String lbl_userfullname_xpath;
+		public static String lbl_useremail_xpath;
+		
+		
+		
 	// Left Navigation
 	public static String leftnav_logo_Xpath="//li[@class='company-logo']";	
 	public static String lnk_partial_LeftNav_xpath ="//a[contains(text(),'";
@@ -129,6 +136,11 @@ public class BasePage {
 		
 	// AuditLog_Page Identifiers
 
+
+		
+		
+		
+		
 	public static void areElementsOveralapped() {
 		CommonUtils.checkOverlap();
 		CommonUtils.makeBothElementListandMapClear();

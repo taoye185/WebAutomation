@@ -18,11 +18,13 @@ Scenario Outline: Search portal user and verify details
 Scenario Outline: Create a portal user 
 	Then User click on edit button 
 	And User click on + button to add new "<portaluser>" Portal User 
-	Then User click close button on create new Portal User Page
+	Then User provide details to create a "<Newportaluser>" new Portal user 
+	Then New user "<Newportaluser>" navigate to email and verify email sent by MW
 		
 	Examples: 
 		|portaluser	|
 		|CBA_Support|
+		
 		
 @sanity @independentTest 
 Scenario Outline: Verify portal user Pagination	 

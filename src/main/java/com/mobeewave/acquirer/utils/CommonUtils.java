@@ -37,6 +37,7 @@ public class CommonUtils {
 	public static String newUserName_GBL;
 	public static String newUserPassword_GBL;
 	public static String newUserEmail_GBL;
+	public static String newUserEmailPw_GBL;
 	public static String newUserGroup;
 	public static String newUserBank;
 	public static String newUserDivision;	
@@ -276,6 +277,7 @@ public class CommonUtils {
 			newUserGroup= DataReader.readExcel(1, 4);
 			newUserBank= DataReader.readExcel(1, 5);
 			newUserDivision = DataReader.readExcel(1, 6);
+			newUserEmailPw_GBL = DataReader.readExcel(1, 7);
 			break;
 		}
 
