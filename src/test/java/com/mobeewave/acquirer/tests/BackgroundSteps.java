@@ -54,20 +54,32 @@ public class BackgroundSteps {
 		login(userName);
 		
 		try {
-			Thread.sleep(4000);
+			Thread.sleep(2000);
+			leftNav.leftNavigationLink(BasePage.PORTAL_USERS).click();
 		} catch (InterruptedException e) {
 			 
 			e.printStackTrace();
 		}
 				
 		
-		leftNav.leftNavigationLink(BasePage.PORTAL_USERS).click();
+		
 	}
 
 	public void login(String userName) {
+	
+		
 		browser_GBL = SetUp.getBrowser();
 		client_GBL = SetUp.getClient();
 		SetUp.setupDriver(client_GBL, browser_GBL);
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			 
+			e.printStackTrace();
+		}
+	
+		
 		CommonUtils.setUpUsers(userName);
 		username_GBL = CommonUtils.username_GBL;
 		password_GBL = CommonUtils.password_GBL;

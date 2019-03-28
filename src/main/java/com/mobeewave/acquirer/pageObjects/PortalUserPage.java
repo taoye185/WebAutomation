@@ -172,6 +172,26 @@ public class PortalUserPage extends BasePage {
 		return CommonUtils.IsElementSelectable(By.xpath(lbl_useremail_xpath), 20);
 	}
 	
+	public static WebElement portalUserProfileUsernameLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_username_xpath), 20);
+	}
+	
+	public static WebElement portalUserProfileDivisionLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_userdivision_xpath), 20);
+	}
+	
+	public static WebElement portalUserProfileGroupLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_userhivegroup_xpath), 20);
+	}
+	
+	public static WebElement portalUserProfileBankLabel() {
+
+		return CommonUtils.IsElementSelectable(By.xpath(lbl_userbank_xpath), 20);
+	}
+	
 
 	
 }

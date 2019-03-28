@@ -114,12 +114,15 @@ public class BasePage {
 		public static String btn_new_usersave_xpath = "//span[contains(text(),'Save')]";
 		public static String btn_new_userclose_xpath = "//i[@class='fa fa-close']";	
 	
+	
 		//Portal User Profile
 		public static String lbl_userprofile_generalinformation_xpath;
 		public static String lbl_userfullname_xpath;
 		public static String lbl_useremail_xpath;
-		
-		
+		public static String lbl_username_xpath;
+		public static String lbl_userdivision_xpath;
+		public static String lbl_userhivegroup_xpath;
+		public static String lbl_userbank_xpath;
 		
 	// Left Navigation
 	public static String leftnav_logo_Xpath="//li[@class='company-logo']";	
