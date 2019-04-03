@@ -183,6 +183,7 @@ public class PortalUserSteps {
 			gp.enterEmail(CommonUtils.newUserEmail_GBL);// Replace with your email id
 			gp.enterPassword(CommonUtils.newUserEmailPw_GBL);// Replace with your password
 			gp.clickEmail("User Activation");// Replace with email subject you want to click	
+			gp. passworText();
 			Thread.sleep(3000);
 			
 			

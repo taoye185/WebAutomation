@@ -20,8 +20,8 @@ public class GmailPage extends BasePage{
 	public static final String passwordField_xpath = "//*[@id='password']/div[1]/div/div[1]/input";
 	public static final String emailThreads_xpath= "//span[@class='bog']";
 	public static final String profileLogo_xpath="//span[@class='gb_bb gbii']";
-	
-
+	public static final String passwordText_xpath="//div[contains(text(),'Password:')]";
+	public static WebElement password;
 	
 	public static WebElement emailTextBox(){
 		return CommonUtils.IsElementSelectable(By.xpath(emailField_xpath), 20);
@@ -41,7 +41,16 @@ public class GmailPage extends BasePage{
 
 	//List<WebElement> emailThreads;
 
-	 
+	public static WebElement passworParent(){
+		return CommonUtils.IsElementSelectable(By.xpath(passwordText_xpath), 20);
+			
+		}
+	
+	public static void passworText(){
+			List<ArrayList> listtemp = CommonUtils.getChildElements(passworParent());
+			password=(WebElement) listtemp.get(0);		
+	}
+
 
 	public void enterEmail(String emailID)
 	{
