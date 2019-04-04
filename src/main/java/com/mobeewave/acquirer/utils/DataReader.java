@@ -2,6 +2,8 @@ package com.mobeewave.acquirer.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -80,5 +82,26 @@ public class DataReader {
 		return readProperty(filepathGBL, property);
 	}
 
+	
+	public static void loadPageElements(String FileURL ){
+		Properties obj = new Properties();
+		FileInputStream objfile;
+		try {		
+		
+			objfile = new FileInputStream(FileURL);
+			obj.load(objfile);
+		} 
+		catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+		
+	}
+	
 
 }
