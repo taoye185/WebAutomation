@@ -8,7 +8,7 @@ import com.mobeewave.acquirer.utils.AssertUtil;
 import com.mobeewave.acquirer.utils.CommonUtils;
 import cucumber.api.java.en.Then;
 
-public class LooginSteps {
+public class LoginSteps {
 
 	private LoginPage loginPage = new LoginPage();
 	private MerchantsSummaryPage merchantsSummaryPage = new MerchantsSummaryPage();
