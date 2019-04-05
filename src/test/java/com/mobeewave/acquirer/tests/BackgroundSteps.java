@@ -27,7 +27,6 @@ public class BackgroundSteps {
 	@Given("^User is successfully navigated to Home Page$")
 	public void user_is_successfully_navigated_to_Home_Page() {
 		try {
-
 			browser_GBL = SetUp.getBrowser();
 			client_GBL = SetUp.getClient();
 			SetUp.setupDriver(client_GBL, browser_GBL);
@@ -72,14 +71,15 @@ public class BackgroundSteps {
 		client_GBL = SetUp.getClient();
 		SetUp.setupDriver(client_GBL, browser_GBL);
 		
+		/*
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			 
 			e.printStackTrace();
 		}
-	
-		
+	*/
+		comUtil.setWaitInSeconds(10);
 		CommonUtils.setUpUsers(userName);
 		username_GBL = CommonUtils.username_GBL;
 		password_GBL = CommonUtils.password_GBL;

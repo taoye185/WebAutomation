@@ -62,15 +62,18 @@ public class SetUp {
 
 		switch (client) {
 		case "CBA":
-			client_GBL = "CBA";
-
+			//client_GBL = "CBA";
+			System.out.println("CLIENT IS CBA IN SETUP DRIVER" );
 			baseUrl = DataReader.readProperty(configPrpoertiesFileURL, "CBAbaseURL");
+			pageObjectsPrpoertiesFileURL=DataReader.readProperty(configPrpoertiesFileURL, "CBAPageElements");			
 			System.out.println("CLIENT IS " + client_GBL + " ...... " + baseUrl);
 			break;
 
 		case "":
+			System.out.println("CLIENT WAS NULL AND SETUP TO CBA IN SETUP DRIVER" );
 			client_GBL = "CBA";
 			baseUrl = DataReader.readProperty(configPrpoertiesFileURL, "CBAbaseURL");
+			pageObjectsPrpoertiesFileURL=DataReader.readProperty(configPrpoertiesFileURL, "CBAPageElements");			
 			System.out.println("CLIENT IS " + client_GBL + " ...... " + baseUrl);
 			break;
 
@@ -83,8 +86,9 @@ public class SetUp {
 			break;
 
 		}
-
 		driver.get(baseUrl);
+		DataReader.loadPageElements(pageObjectsPrpoertiesFileURL);
+		System.out.println(DataReader.obj.getProperty("tf_username_xpath"));
 		System.out.println("User navigate to URL " + baseUrl + "is successfull.. " + driver.getTitle());
 
 		// driver.manage().window().maximize();
@@ -201,7 +205,8 @@ public class SetUp {
 	/// <returns>String/returns>
 	public static String getClient() {
 		if (client_GBL == null)
-			return client_GBL = "CBA";
+			client_GBL = "CBA";
+		System.out.println("======Client in get client   " + client_GBL + "   =============");
 		return client_GBL;
 	}
 

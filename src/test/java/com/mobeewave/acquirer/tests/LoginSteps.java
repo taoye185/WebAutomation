@@ -8,7 +8,7 @@ import com.mobeewave.acquirer.utils.AssertUtil;
 import com.mobeewave.acquirer.utils.CommonUtils;
 import cucumber.api.java.en.Then;
 
-public class LooginSteps {
+public class LoginSteps {
 
 	private LoginPage loginPage = new LoginPage();
 	private MerchantsSummaryPage merchantsSummaryPage = new MerchantsSummaryPage();
@@ -21,7 +21,7 @@ public class LooginSteps {
 	public void user_enters_valid_credentials_and_password_in_login_Page(String username) {
 		try {
 
-			comUtil.waitForPageLoaded(10000);
+			comUtil.waitForPageLoaded(10000);		
 			System.out.println("CURRENT PAGE IS " + BasePage.getCurrentPage()+ " ");			
 			CommonUtils.setUpUsers(username);
 			username_GBL = CommonUtils.username_GBL;
@@ -43,7 +43,6 @@ public class LooginSteps {
 	@Then("^User navigates to the Merchants Summary Page and validate user name in left navigation$")
 	public void user_navigates_to_the_Merchants_Summary_Page_and_validate_user_name_in_left_navigation() {
 		try {
-
 			comUtil.waitForPageLoaded(10000);
 			System.out.println("CURRENT PAGE IS " + BasePage.getCurrentPage() + " ");		
 			AssertUtil.assertEq(merchantsSummaryPage.usernameLabel().getText(), username_LBL_GBL, "Verify user " + username_LBL_GBL + " login to Merchants Summary Page ");
