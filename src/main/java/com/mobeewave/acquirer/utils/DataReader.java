@@ -21,7 +21,7 @@ public class DataReader {
 	private static String excelFilePathGBL;
 	private static String excelSheetNameGBL;
 	private static String filepathGBL;
-
+	public static Properties obj = new Properties();
 	public static String readProperty(String FileURL, String property) {
 
 		String result = "";
@@ -84,22 +84,17 @@ public class DataReader {
 
 	
 	public static void loadPageElements(String FileURL ){
-		Properties obj = new Properties();
+		
 		FileInputStream objfile;
 		try {		
-		
 			objfile = new FileInputStream(FileURL);
 			obj.load(objfile);
 		} 
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-		
+		catch (FileNotFoundException ex) {			
+			System.out.println("====================    " + ex.getMessage() + "   =============================");
+		} catch (IOException ex) {			
+			System.out.println("====================    " + ex.getMessage() + "   =============================");
+		}		
 		
 	}
 	
