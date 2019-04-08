@@ -23,7 +23,6 @@ public class SetUp {
 	/// <param name="client">client need to setup </param>
 	/// <param name="browser">browser need to setup</param>
 	/// <returns>WebDriver</returns>
-
 	public static WebDriver setupDriver(String client, String browser) {
 
 		String driverPath = "";
@@ -34,18 +33,14 @@ public class SetUp {
 		switch (browser) {
 		case "chrome":
 			driverPath = DataReader.readProperty(configPrpoertiesFileURL, "chrome.driver.path");
-			System.setProperty("webdriver.chrome.driver", driverPath);
-			
+			System.setProperty("webdriver.chrome.driver", driverPath);			
 			// Set Chrome Options and set Headless mode as true
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--start-maximized");
 			//chromeOptions.addArguments("--headless");
-
 			// Instantiate Chrome Web Driver
 			driver = new ChromeDriver(chromeOptions);
 			System.out.println("Chrome Driver setup successfull.. ");
-
-			// driver.get("http://www.google.com");
 			break;
 
 		case "firefox":
@@ -53,7 +48,6 @@ public class SetUp {
 			System.setProperty("webdriver.gecko.driver", driverPath);
 			FirefoxOptions options = new FirefoxOptions();
 			options.setHeadless(true);
-
 			// Instantiate FireFox Web Driver
 			driver = new FirefoxDriver(options);
 			System.out.println("FireFox Driver setup successfull.. ");
@@ -87,12 +81,8 @@ public class SetUp {
 
 		}
 		driver.get(baseUrl);
-		DataReader.loadPageElements(pageObjectsPrpoertiesFileURL);
-		System.out.println(DataReader.obj.getProperty("tf_username_xpath"));
+		DataReader.loadPageElements(pageObjectsPrpoertiesFileURL);		
 		System.out.println("User navigate to URL " + baseUrl + "is successfull.. " + driver.getTitle());
-
-		// driver.manage().window().maximize();
-
 		return driver;
 
 	}
@@ -103,11 +93,8 @@ public class SetUp {
 	/// <param name="br">browser need to setup </param>
 	/// <returns>String/returns>
 	public static String setupBrowser(String br) {
-
 		try {
-
 			switch (br) {
-
 			case "chrome":
 				// setupDriver("CBA", "chrome");
 				browser_GBL = "chrome";
@@ -133,7 +120,6 @@ public class SetUp {
 	/// <param name="clnt">client need to setup </param>
 	/// <returns>String/returns>
 	public static String setupClient(String clnt) {
-
 		try {
 			switch (clnt) {
 			case "CBA":
@@ -161,7 +147,6 @@ public class SetUp {
 	/// This method set driver null if it found a driver instant.
 	/// </summary>
 	/// <returns></returns>
-
 	public static void init() {
 		WebDriver _driver = getDriver();
 		try {
