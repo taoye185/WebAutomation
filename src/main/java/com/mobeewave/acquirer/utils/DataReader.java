@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.io.SAXReader;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -21,7 +23,9 @@ public class DataReader {
 	private static String excelFilePathGBL;
 	private static String excelSheetNameGBL;
 	private static String filepathGBL;
-	public static Properties obj = new Properties();
+	public static Properties elementsProperty = new Properties();
+	public static Document elementsXML;
+
 	public static String readProperty(String FileURL, String property) {
 
 		String result = "";
@@ -77,26 +81,39 @@ public class DataReader {
 	public static String readExcel(int row, int col) {
 		return readExcel(excelFilePathGBL, excelSheetNameGBL, row, col);
 	}
-	
+
 	public static String readProperty(String property) {
 		return readProperty(filepathGBL, property);
 	}
 
-	
-	public static void loadPageElements(String FileURL ){
-		
+	public static void loadPageElements(String FileURL) {
 		FileInputStream objfile;
-		try {		
+		try {
 			objfile = new FileInputStream(FileURL);
-			obj.load(objfile);
-		} 
-		catch (FileNotFoundException ex) {			
+			elementsProperty.load(objfile);
+		} catch (FileNotFoundException ex) {
 			System.out.println("====================    " + ex.getMessage() + "   =============================");
-		} catch (IOException ex) {			
+		} catch (IOException ex) {
 			System.out.println("====================    " + ex.getMessage() + "   =============================");
-		}		
-		
+		}
+
 	}
-	
+
+	public static void loadPageElementsXML(String FileURL) {
+		File inputFile = new File(FileURL);
+		SAXReader saxReader = new SAXReader();
+		try {
+			elementsXML = saxReader.read(inputFile);
+			/**
+			 * Usage String mobileTesting =
+			 * elementsXML.selectSingleNode("//login/tf_username_xpath").getText();
+			 */
+		} catch (DocumentException ex) {
+			System.out.println("====================    " + ex.getMessage() + "   =============================");
+		} catch (IOException ex) {
+			System.out.println("====================    " + ex.getMessage() + "   =============================");
+		}
+
+	}
 
 }
