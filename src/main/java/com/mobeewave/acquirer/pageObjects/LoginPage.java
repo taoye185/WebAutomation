@@ -20,19 +20,19 @@ public class LoginPage extends BasePage {
 	// region PageElements
 
 	public WebElement usernameTxtBox() {
-		return usernameTxtBox = CommonUtils.IsElementSelectable(By.xpath(DataReader.obj.getProperty("tf_username_xpath")));
+		return usernameTxtBox = CommonUtils.IsElementSelectable(By.xpath(locator("tf_username_xpath")));
 	}
 
 	public WebElement passwordTxtBox() {
-		return passwordTxtBox = CommonUtils.IsElementSelectable(By.xpath(DataReader.obj.getProperty("tf_password_xpath")));
+		return passwordTxtBox = CommonUtils.IsElementSelectable(By.xpath(locator("tf_password_xpath")));
 	}
 
 	public WebElement signInBtn() {
-		return signInBtn = CommonUtils.IsElementSelectable(By.xpath(DataReader.obj.getProperty("btn_signIn_xpath")));
+		return signInBtn = CommonUtils.IsElementSelectable(By.xpath(locator("btn_signIn_xpath")));
 	}
 
 	public WebElement forgetPasswordLink() {
-		return forgetPasswordLink = CommonUtils.IsElementSelectable(By.xpath(DataReader.obj.getProperty("lnk_forgetPassword_xpath")));
+		return forgetPasswordLink = CommonUtils.IsElementSelectable(By.xpath(locator("lnk_forgetPassword_xpath")));
 	}
 
 	// endregion

@@ -16,7 +16,7 @@ public static WebElement confirmationMessageCancel;
 
 
 	public static WebElement confirmationBox(){
-				return CommonUtils.IsElementSelectable(By.xpath(confirmationMessageBox), 20);
+				return CommonUtils.IsElementSelectable(By.xpath(locator("confirmationMessageBox")), 20);
 	}
 	
 	public static void setConfirmationBoxElements(){

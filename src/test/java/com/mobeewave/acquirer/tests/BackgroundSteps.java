@@ -23,7 +23,7 @@ public class BackgroundSteps {
 	private LoginPage loginPage = new LoginPage();
 	private MerchantsSummaryPage merchantsSummaryPage = new MerchantsSummaryPage();
 	private LeftNavigation leftNav = new LeftNavigation();
-	
+
 	@Given("^User is successfully navigated to Home Page$")
 	public void user_is_successfully_navigated_to_Home_Page() {
 		try {
@@ -38,11 +38,10 @@ public class BackgroundSteps {
 		}
 	}
 
-
 	// Navigation to Merchant Summary Page
 	@Given("^User \"([^\"]*)\" successfully navigated to Merchant Summary Page$")
 	public void user_successfully_navigated_to_Merchant_Summary_Page(String userName) {
-		login(userName);		
+		login(userName);
 		AssertUtil.assertEq(merchantsSummaryPage.usernameLabel().getText(), username_LBL_GBL,
 				"Verify user " + username_LBL_GBL + " login to Merchants Summary Page ");
 	}
@@ -51,34 +50,20 @@ public class BackgroundSteps {
 	@Given("^User \"([^\"]*)\" successfully navigated to Portal Users Page$")
 	public void user_successfully_navigated_to_Portal_Users_Page(String userName) {
 		login(userName);
-		
+
 		try {
 			Thread.sleep(2000);
-			leftNav.leftNavigationLink(BasePage.PORTAL_USERS).click();
+			leftNav.leftNavigationLink(BasePage.locator("PORTAL_USERS")).click();
 		} catch (InterruptedException e) {
-			 
 			e.printStackTrace();
 		}
-				
-		
-		
+
 	}
 
 	public void login(String userName) {
-	
-		
 		browser_GBL = SetUp.getBrowser();
 		client_GBL = SetUp.getClient();
 		SetUp.setupDriver(client_GBL, browser_GBL);
-		
-		/*
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			 
-			e.printStackTrace();
-		}
-	*/
 		comUtil.setWaitInSeconds(10);
 		CommonUtils.setUpUsers(userName);
 		username_GBL = CommonUtils.username_GBL;

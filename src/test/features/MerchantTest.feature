@@ -1,8 +1,7 @@
 Feature: 3_MerchantSummary 
 
 Background: 
-	Given User "CBA_Admin" successfully navigated to Merchant Summary Page 
-	
+	Given User "CBA_Admin" successfully navigated to Merchant Summary Page 	
 	
 @sanity @independentTest 
 Scenario Outline: Search Merchant by ID and verify details

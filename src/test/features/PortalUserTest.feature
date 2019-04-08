@@ -4,7 +4,7 @@ Background:
 	Given User "CBA_Admin" successfully navigated to Portal Users Page 
 	
 @independentTest 
-Scenario Outline: Create a portal user 
+Scenario Outline: Create a portal user
 	Then User click on edit button 
 	And User click on + button to add new "<portaluser>" Portal User 
 	Then User provide details to create a "<Newportaluser>" new Portal user 
@@ -14,7 +14,7 @@ Scenario Outline: Create a portal user
 		|portaluser	|Newportaluser|
 		|CBA_Admin  |CBASupport|
 		
-@sanity @independentTest 
+@sanity  @depend-Createportaluser
 Scenario Outline: Search portal user and verify details 
 	Then User enter portal user name "<portaluser>" and search 
 	Then User validate the portal user details from results 

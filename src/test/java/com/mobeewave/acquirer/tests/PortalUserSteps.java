@@ -58,7 +58,7 @@ public class PortalUserSteps {
 
 			AssertUtil.assertEq(PortalUserPage.portalUserName.getText(), portalUser_GBL,
 					"Verify merchant ID " + portalUser_GBL + " displays in the  Portal USer search result table");
-
+			
 			AssertUtil.AggregatedResult();
 		} catch (Exception ex) {
 			System.out.println("ERROR : ==================== /n" + ex.getMessage() + "/n====================");
@@ -185,9 +185,6 @@ public class PortalUserSteps {
 			gp.clickEmail("User Activation");// Replace with email subject you want to click	
 			gp. passworText();
 			Thread.sleep(3000);
-			
-			
-
 		} catch (InterruptedException ex) {
 			System.out.println("ERROR : ==================== /n" + ex.getMessage() + "/n====================");
 			System.out.println("New user email verification failed");

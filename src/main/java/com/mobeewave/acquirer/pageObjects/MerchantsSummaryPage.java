@@ -34,7 +34,7 @@ public class MerchantsSummaryPage extends BasePage {
 
 	public WebElement usernameLabel() {
 
-		lbl_username_xpath = BasePage.lbl_username_partialxpath + CommonUtils.username_LBL_GBL + "')]";
+		lbl_username_xpath = locator("lbl_username_partialxpath") + CommonUtils.username_LBL_GBL + "')]";
 		lbl_username = By.xpath(lbl_username_xpath);
 		return CommonUtils.IsElementAvailable(lbl_username, 20);
 
@@ -42,12 +42,12 @@ public class MerchantsSummaryPage extends BasePage {
 
 	public WebElement searchMerchantText() {
 
-		return CommonUtils.IsElementAvailable(By.xpath(tf_merchantfilterchoice_xpath), 20);
+		return CommonUtils.IsElementAvailable(By.xpath(locator("tf_merchantfilterchoice_xpath")));
 
 	}
 
 	public WebElement merchantIDinMerchantSummuryTabel(String merchantID) {
-		String cell_merchnatID_xpath = BasePage.tf_merchatId_Partialxpath + merchantID + "')]";
+		String cell_merchnatID_xpath = locator("tf_merchatId_Partialxpath") + merchantID + "')]";
 		return CommonUtils.IsElementAvailable(By.xpath(cell_merchnatID_xpath), 20);
 	}
 
@@ -57,14 +57,14 @@ public class MerchantsSummaryPage extends BasePage {
 	}
 
 	public static WebElement merchantRecord() {
-		return CommonUtils.IsElementAvailable(By.xpath(merchantRecord_xpath), 20);
+		return CommonUtils.IsElementAvailable(By.xpath(locator("merchantRecord_xpath")));
 	}
 
 	public void setElementsinMerchantRecord(String merchantID) {
 
-		merchantIdTblcell_xpath = BasePage.tf_merchatId_Partialxpath + merchantID + "')]";
+		merchantIdTblcell_xpath = locator("tf_merchatId_Partialxpath") + merchantID + "')]";
 		merchantRecord_xpath = merchantIdTblcell_xpath + "/..";
-		WebElement merchantRecord = CommonUtils.IsElementAvailable(By.xpath(merchantRecord_xpath), 20);
+		WebElement merchantRecord = CommonUtils.IsElementAvailable(By.xpath(merchantRecord_xpath));
 		@SuppressWarnings({ "rawtypes", "unchecked" })
 		List<ArrayList> listtemp = CommonUtils.getChildElements(merchantRecord);
 		merchantName = (WebElement) listtemp.get(1);
@@ -72,8 +72,6 @@ public class MerchantsSummaryPage extends BasePage {
 		merchantDiviison = (WebElement) listtemp.get(3);
 		merchantLockStatus = (WebElement) listtemp.get(4);
 		merchantDetails = (WebElement) listtemp.get(7);
-	
-
 	}
 
 	// endregions

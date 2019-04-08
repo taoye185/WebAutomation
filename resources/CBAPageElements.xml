@@ -1,0 +1,6 @@
+<ele>
+<tf_username_xpath>//input[@placeholder='Username']</tf_username_xpath>  
+<tf_password_xpath>//input[@placeholder='Password']</tf_password_xpath>
+<btn_signIn_xpath>.//*[@id='login']</btn_signIn_xpath>
+<lnk_forgetPassword_xpath>//span[contains(text(),'Forgot Password')]</lnk_forgetPassword_xpath>
+</ele>
