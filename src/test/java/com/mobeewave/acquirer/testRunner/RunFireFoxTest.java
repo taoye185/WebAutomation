@@ -11,7 +11,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
 		"json:target/cucumber-report.json" }, glue = "com.mobeewave.acquirer.tests", 
-		features = "src/test/features", tags={"@sanity3"})
+		features = "src/test/features", tags={"@sanity"})
 
 public class RunFireFoxTest {
 
