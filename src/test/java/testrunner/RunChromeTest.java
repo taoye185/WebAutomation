@@ -3,15 +3,18 @@ package testrunner;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-import utils.SetUp;
+import utils.Browser;
+import utils.Global;
+
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.java.Before;
 import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
-		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features", tags = {
-				"@sanity3" })
+		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/LoginTest.feature", tags = {
+				"@sanity" })
 
 public class RunChromeTest {
 
@@ -20,8 +23,7 @@ public class RunChromeTest {
 	/// </summary>
 	/// <returns></returns>
 
-	@BeforeClass
 	public static void init() {
-		SetUp.setupBrowser("chrome");
+		
 	}
 }

@@ -3,19 +3,23 @@ package utils;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Browser {
 
+	private static String browserinstance = System.getProperty("GBL_WEB_BROWSER");
 	private static Browser browser;
 	private static WebDriver driver;
 
@@ -43,22 +47,28 @@ public class Browser {
 
 	public static WebDriver getDriver() {
 		if (driver == null) {
-			setBrowser(new Browser(Global.BROWSER));
+			Global gbl = new Global();
+			setBrowser(browser);
 		}
 		return driver;
 	}
 
-	Browser(String browserType) {
+	public Browser(String browserType) {
 
-		Log.info("Creating an instance of a " + browserType + " browser");
+		Log.info("Creating an instance of a " + browserType + " browser");				
+		
 		switch (browserType) {
 		case Global.CHROME: {
 			WebDriverManager.chromedriver().setup();
 			this.setDriver(new ChromeDriver());
 		}
+		break;
+		case Global.FIREFOX: {
+			WebDriverManager.firefoxdriver().setup();
+			this.setDriver(new FirefoxDriver());
+		}
 			break;
 		case Global.INTERNET_EXPLORER:
-
 			WebDriverManager.iedriver().setup();
 			InternetExplorerOptions options = new InternetExplorerOptions();
 			options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
@@ -67,10 +77,29 @@ public class Browser {
 
 		}
 	}
+	
+
 
 	public static void open(String url) {
-		Log.info(String.format("Opening %s url", url));
+		try{
+		Log.info(String.format("Opening %s url", url));		
 		getDriver().get(url);
+		}
+		catch(NoSuchSessionException ex){
+			//browser = new Browser(Global.BROWSER);
+			//getDriver().get(url);
+		}
+	}
+	
+	public static void navigate(String url) {
+		try{		
+		Log.info(String.format("Navigating %s url", url));		
+		getDriver().get(url);
+		}
+		catch(NoSuchSessionException ex){
+			//browser = new Browser(Global.BROWSER);
+			//getDriver().get(url);
+		}
 	}
 
 	public static void setPageLoadTime(int pageLoadWaitTime) {
@@ -93,5 +122,6 @@ public class Browser {
 		Log.info(String.format("Checking if '%s' text exists on the page withing %s seconds", text, seconds));
 		return dynamicElementExists(By.xpath("//*[contains(text(),'" + text + "')]"), seconds);
 	}
-
+	
+	
 }

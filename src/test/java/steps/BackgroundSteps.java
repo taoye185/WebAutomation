@@ -1,88 +1,51 @@
 package steps;
 
-import utils.SetUp;
-import pageobjects.BasePage;
-import pageobjects.LeftNavigation;
+import org.openqa.selenium.WebDriver;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import pageobjects.AcquirerPortalGlobal;
 import pageobjects._login.LoginPage;
-import pageobjects.merchants.MerchantsSummaryPage;
-import utils.AssertUtil;
-import utils.CommonUtils;
-
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
+import pageobjects.merchants.MerchantsPage;
+import utils.Browser;
+import utils.Global;
 
 public class BackgroundSteps {
 
-	private static String client_GBL = "";
-	private static String browser_GBL = "";
-	private static String username_GBL = "";
-	private static String password_GBL = "";
-	private static String username_LBL_GBL = "";
-	CommonUtils comUtil = new CommonUtils();
-	private LoginPage loginPage = new LoginPage();
-	private MerchantsSummaryPage merchantsSummaryPage = new MerchantsSummaryPage();
-	private LeftNavigation leftNav = new LeftNavigation();
+	public static LoginPage loginPage = new LoginPage();
+	public static MerchantsPage merchantsPage = new MerchantsPage();
+	public static Browser browser;
 
-	@Given("^User is successfully navigated to Home Page$")
-	public void user_is_successfully_navigated_to_Home_Page() {
+	@After("@independentTest")
+	public static void teardown() {
 		try {
-
-			browser_GBL = SetUp.getBrowser();
-			client_GBL = SetUp.getClient();
-			SetUp.setupDriver(client_GBL, browser_GBL);
-			comUtil.setWaitInSeconds(10);
-			//loginPage.navigateToLoginPage();
+			WebDriver _driver = Browser.getDriver();
+			if (_driver == null) {
+				return;
+			}
+			_driver.quit();
+			_driver = null;
+			System.out.println("\n closing browser and Quit driver..................\n");
 		} catch (Exception ex) {
-			System.out.println("ERROR : ==================== /n" + ex.getMessage() + "/n====================");
-			System.out.println("Navigation Failed - Login Scenario");
-			SetUp.teardown();
+			System.out.println("====================    " + ex.getMessage() + "   =============================");
+			System.out.println("Driver quit failed ...... ");
 		}
 	}
 
-	// Navigation to Merchant Summary Page
-	@Given("^User \"([^\"]*)\" successfully navigated to Merchant Summary Page$")
-	public void user_successfully_navigated_to_Merchant_Summary_Page(String userName) {
-		login(userName);
-		AssertUtil.assertEq(merchantsSummaryPage.usernameLabel().getText(), username_LBL_GBL,
-				"Verify user " + username_LBL_GBL + " login to Merchants Summary Page ");
-	}
-
-	// Navigation to Portal User Page
-	@Given("^User \"([^\"]*)\" successfully navigated to Portal Users Page$")
-	public void user_successfully_navigated_to_Portal_Users_Page(String userName) {
-		login(userName);
-
+	@Before("@login")
+	public static void login() {
 		try {
-			Thread.sleep(2000);
-			leftNav.leftNavigationLink(BasePage.PORTAL_USERS).click();
-		} catch (InterruptedException e) {
+			browser = new Browser(Global.BROWSER);
+			Browser.open(AcquirerPortalGlobal.URL);
 
+			Thread.sleep(1000);
+
+			loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
+			loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
+			loginPage.signInBtn.click();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
-	public void login(String userName) {
-
-		browser_GBL = SetUp.getBrowser();
-		client_GBL = SetUp.getClient();
-		SetUp.setupDriver(client_GBL, browser_GBL);
-
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-
-			e.printStackTrace();
-		}
-
-		CommonUtils.setUpUsers(userName);
-		username_GBL = CommonUtils.username_GBL;
-		password_GBL = CommonUtils.password_GBL;
-		username_LBL_GBL = CommonUtils.username_LBL_GBL;
-		loginPage.usernameTxtBox.sendKeys(username_GBL);
-		loginPage.passwordTxtBox.sendKeys(password_GBL);
-		loginPage.signInBtn.click();
-		comUtil.setWaitInSeconds(3);
-		comUtil.waitForPageLoaded(10000);
-	}
 }
