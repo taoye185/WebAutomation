@@ -1,6 +1,6 @@
 package utils;
 
-import pageobjects.AcquirerPortalGlobal;
+import pageobjects.global.AcquirerPortalGlobal;
 
 
 public class CommonUtils {

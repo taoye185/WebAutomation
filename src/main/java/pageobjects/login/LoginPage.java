@@ -1,9 +1,9 @@
-package pageobjects._login;
+package pageobjects.login;
 
 import org.openqa.selenium.support.FindBy;
 
-import pageobjects.AcquirerPortalGlobal;
-import pageobjects.GPPageElements;
+import pageobjects.global.AcquirerPortalGlobal;
+import pageobjects.global.GPPageElements;
 import utils.Browser;
 import utils.Global;
 import utils.WebItem;

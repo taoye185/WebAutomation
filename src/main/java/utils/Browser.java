@@ -14,6 +14,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -78,7 +79,10 @@ public class Browser {
 		}
 	}
 	
-
+	public Browser(){
+		//WebDriverManager.chromedriver().setup();
+		//this.setDriver(new ChromeDriver());
+	}
 
 	public static void open(String url) {
 		try{
@@ -123,5 +127,19 @@ public class Browser {
 		return dynamicElementExists(By.xpath("//*[contains(text(),'" + text + "')]"), seconds);
 	}
 	
+	@After("@independentTest")
+	public static void teardown() {
+		try {
+			WebDriver _driver = getDriver();
+			if (_driver == null) {
+				return;
+			}
+			_driver.quit();
+			_driver = null;
+			
+		} catch (Exception ex) {
+			Log.info(ex.getMessage());
+		}
+	}
 	
 }

@@ -6,8 +6,9 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageobjects.AcquirerPortalGlobal;
-import pageobjects._login.LoginPage;
+import pageobjects.global.AcquirerPortalGlobal;
+import pageobjects.global.LeftNavigation;
+import pageobjects.login.LoginPage;
 import pageobjects.merchants.MerchantsPage;
 import utils.Browser;
 import utils.CommonUtils;
@@ -16,8 +17,8 @@ import utils.Log;
 
 public class LoginSteps {
 
-	public static LoginPage loginPage = new LoginPage();
-	public static MerchantsPage merchantsPage = new MerchantsPage();
+	public static LoginPage loginPage = new LoginPage();	
+	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static Browser browser;
 	
 
@@ -39,24 +40,29 @@ public class LoginSteps {
 	
 	@When("^User enter valid \"([^\"]*)\" and \"([^\"]*)\" and hit Login button$")
 	public void user_enter_valid_and_and_hit_Login_button(String username, String password) throws Throwable {
-		CommonUtils.setUpUsers(username);
-	   loginPage.usernameTxtBox.sendKeys(CommonUtils.username_GBL);
+		//CommonUtils.setUpUsers(username);
+		CommonUtils.userLabel_GBL = username;
+		CommonUtils.password_GBL=password;		
+	    loginPage.usernameTxtBox.sendKeys(CommonUtils.username_GBL);
 		loginPage.passwordTxtBox.sendKeys(CommonUtils.password_GBL);
 		loginPage.signInBtn.click();
 	}
 
 	@Then("^User navigates to portal user page$")
-	public void user_navigates_to_portal_user_page() throws Throwable {
-		System.out.println("username_GBL  " + CommonUtils.username_GBL);
-		System.out.println("userLabel_GBL  " + CommonUtils.userLabel_GBL);
+	public void user_navigates_to_portal_user_page() throws Throwable {		
 		Thread.sleep(10000);
-		merchantsPage.inituserLink(CommonUtils.userLabel_GBL);
-		//merchantsPage.inituserLink(Common.username_GBL);
-		System.out.println(" merchantsPage.userLink.  " + merchantsPage.userLink.getText());
-		Assert.assertTrue("User is loged in ", (merchantsPage.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));  
+		System.out.println(Browser.getDriver().getCurrentUrl());
+		Assert.assertEquals("User is navigated to Portal User Page", Browser.getDriver().getCurrentUrl(),AcquirerPortalGlobal.PORTALUSER_URL);
 	
 	}
 	
+	@Given("^Validate user name label from the left navigation is sucessful$")
+	public void Validate_username_label_from_leftNav() throws Throwable {	
+		Thread.sleep(1000);
+		leftNavigation.inituserLink(CommonUtils.userLabel_GBL);		
+		Log.info(" leftNaigation.userLink  " + leftNavigation.userLink.getText());
+		Assert.assertTrue("User is loged in ", (leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));  
+	}
 	
 	public static void setBrowserType(){
 		Log.info(" in before");

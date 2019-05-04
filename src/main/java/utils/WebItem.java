@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -11,12 +12,14 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebItem implements WebElement {
 
     public By locator;
     private WebElement element;
+    private WebItem item;
 
     @Override
     public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
@@ -89,7 +92,8 @@ public class WebItem implements WebElement {
     public WebElement findElement(By by) {
         return this.getActiveItem().findElement(by);
     }
-
+    
+  
     @Override
     public boolean isDisplayed() {
         boolean out = this.getPassiveItem().isDisplayed();
@@ -149,4 +153,29 @@ public class WebItem implements WebElement {
         Log.info("'" + locator.toString() + "' existence verification. Exists = " + result);
         return result;
     }
+    
+    @SuppressWarnings("rawtypes")
+	public static List getDropdownOptions(Select dropdown) {
+    	List<WebElement> options = new ArrayList();
+		options = dropdown.getOptions();
+		for (int i = 0; i < options.size(); i++) {
+			WebElement a = (WebElement) options.get(i);
+			 Log.info("Select Option " + i + " "  + a.getText());
+		}
+		return options;
+	}
+    
+    @SuppressWarnings("rawtypes")
+	public List getChildElementsintoList( ) {
+    	List<WebElement> parentElementList = new ArrayList();
+		parentElementList = findElements(By.xpath(".//*"));
+		for (int i = 0; i < parentElementList.size(); i++) {
+			WebElement a = (WebElement) parentElementList.get(i);
+			 Log.info("element " + i + a.getText() + a.getLocation());
+		}
+		return parentElementList;
+	}
+    
+   
+    
 }
