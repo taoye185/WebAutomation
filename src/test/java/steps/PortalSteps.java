@@ -19,6 +19,7 @@ public class PortalSteps {
 	public static PortalUsersPage portalUsersPage = new PortalUsersPage();
 	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static NewPortalUserRegistrationPage newPortalUserRegistrationPage = new NewPortalUserRegistrationPage();
+
 	@Given("^User \"([^\"]*)\" is successfully navigated to Portal User Page$")
 	public void user_is_successfully_navigated_to_Portal_User_Page(String username) throws Throwable {
 
@@ -58,9 +59,9 @@ public class PortalSteps {
 	@Given("^provide details to create a \"([^\"]*)\" new Portal user$")
 	public void provide_details_to_create_a_new_Portal_user(String arg1) throws Throwable {
 		Log.info("Creating new portal user");
-	//	newPortalUserRegistrationPage.portalGroup.click();
-		newPortalUserRegistrationPage.selectGroupDrpdownValue("GP Admin");
-		Thread.sleep(2000);
+		// newPortalUserRegistrationPage.portalGroup.click();
+		newPortalUserRegistrationPage.portalGroupDropdown.select("tao");
+		Thread.sleep(3000);
 	}
 
 }

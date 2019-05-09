@@ -92,8 +92,7 @@ public class WebItem implements WebElement {
     public WebElement findElement(By by) {
         return this.getActiveItem().findElement(by);
     }
-    
-  
+
     @Override
     public boolean isDisplayed() {
         boolean out = this.getPassiveItem().isDisplayed();
@@ -153,29 +152,45 @@ public class WebItem implements WebElement {
         Log.info("'" + locator.toString() + "' existence verification. Exists = " + result);
         return result;
     }
-    
+
+    public void select(String visibleText) {
+        Log.info("Selecting '" + visibleText + "' in the '" + this.locator.toString() + "' drop down list");
+        Select userTypeDropdown = new Select(this.getActiveItem());
+        userTypeDropdown.selectByVisibleText(visibleText);
+    }
+
+    /*  */
+    public void select(int index) {
+        Log.info("Selecting index-'" + index + "' in the '" + this.locator.toString() + "' drop down list");
+        Select dropDown = new Select(this.getActiveItem());
+        dropDown.selectByIndex(index);
+    }
+
+    public void selectByValue(String value) {
+        Log.info("Selecting value -'" + value + "' in the '" + this.locator.toString() + "' drop down list");
+        Select dropDown = new Select(this.getActiveItem());
+        dropDown.selectByValue(value);
+    }
+
     @SuppressWarnings("rawtypes")
-	public static List getDropdownOptions(Select dropdown) {
-    	List<WebElement> options = new ArrayList();
-		options = dropdown.getOptions();
-		for (int i = 0; i < options.size(); i++) {
-			WebElement a = (WebElement) options.get(i);
-			 Log.info("Select Option " + i + " "  + a.getText());
-		}
-		return options;
-	}
-    
+    public static List getDropdownOptions(Select dropdown) {
+        List<WebElement> options = new ArrayList();
+        options = dropdown.getOptions();
+        for (int i = 0; i < options.size(); i++) {
+            WebElement a = (WebElement) options.get(i);
+            Log.info("Select Option " + i + " " + a.getText());
+        }
+        return options;
+    }
+
     @SuppressWarnings("rawtypes")
-	public List getChildElementsintoList( ) {
-    	List<WebElement> parentElementList = new ArrayList();
-		parentElementList = findElements(By.xpath(".//*"));
-		for (int i = 0; i < parentElementList.size(); i++) {
-			WebElement a = (WebElement) parentElementList.get(i);
-			 Log.info("element " + i + a.getText() + a.getLocation());
-		}
-		return parentElementList;
-	}
-    
-   
-    
+    public List getChildElementsintoList() {
+        List<WebElement> parentElementList = new ArrayList();
+        parentElementList = findElements(By.xpath(".//*"));
+        for (int i = 0; i < parentElementList.size(); i++) {
+            WebElement a = (WebElement) parentElementList.get(i);
+            Log.info("element " + i + a.getText() + a.getLocation());
+        }
+        return parentElementList;
+    }
 }

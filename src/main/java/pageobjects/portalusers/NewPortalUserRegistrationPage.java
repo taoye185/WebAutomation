@@ -16,31 +16,27 @@ public class NewPortalUserRegistrationPage extends WebPageInit {
 
 	@FindBy(xpath = "//h4[contains(text(),'New portal user')]")
 	public WebItem newPortalUserHeading;
-	
+
 	@FindBy(xpath = "//h4[contains(text(),'New portal user')]/../..")
 	public WebItem newPortalUserPopup;
-	
+
 	@FindBy(name = "name")
 	public WebItem portalNameTxtBox;
-	
+
 	@FindBy(name = "login")
 	public WebItem portalUsernameTxtBox;
-	
+
 	@FindBy(name = "email")
 	public WebItem portalEmailTxtBox;
-	
-	@FindBy(xpath = "//input[@id='email']/../following-sibling::*")
-	public WebItem portalGroup;
-	
-	
-	
-	
-	public void selectGroupDrpdownValue(String value){		
-		Select selectPortalGroup = new Select(portalGroup);
-		//List<ArrayList> listtemp = item.getChildElementsintoList();		
-		//selectPortalGroup.selectByIndex(index);
+
+	@FindBy(xpath = "//*[@id='hiveGroupId']/div/div[1]")
+	public WebItem portalGroupDropdown;
+
+	public void selectGroupDrpdownValue(String value) {
+		Select selectPortalGroup = new Select(portalGroupDropdown);
+		// List<ArrayList> listtemp = item.getChildElementsintoList();
+		// selectPortalGroup.selectByIndex(index);
 		selectPortalGroup.selectByValue(value);
 	}
 
 }
-
