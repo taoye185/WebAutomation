@@ -56,12 +56,16 @@ public class PortalSteps {
 		portalUsersPage.newPortalUserButton.click();
 	}
 
-	@Given("^provide details to create a \"([^\"]*)\" new Portal user$")
-	public void provide_details_to_create_a_new_Portal_user(String arg1) throws Throwable {
+	@Given("^provide details to create a new Portal user$")
+	public void provide_details_to_create_a_new_Portal_user() throws Throwable {
 		Log.info("Creating new portal user");
-		// newPortalUserRegistrationPage.portalGroup.click();
-		newPortalUserRegistrationPage.portalGroupDropdown.select("tao");
-		Thread.sleep(3000);
+	//	newPortalUserRegistrationPage.portalGroup.click();
+		newPortalUserRegistrationPage.portalNameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_NAME);
+		newPortalUserRegistrationPage.portalUsernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
+		newPortalUserRegistrationPage.portalEmailTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_EMAIL);
+		newPortalUserRegistrationPage.selectGroupDrpdownValue("GP Admin");
+		Thread.sleep(2000);
 	}
+
 
 }

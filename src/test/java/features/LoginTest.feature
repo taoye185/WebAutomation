@@ -6,6 +6,6 @@ Scenario: Login as Root Admin
 	Then Validate user name label from the left navigation is sucessful 	
 	
 @sanity @loginAsGPAdmin @independentTest 
-Scenario: Login as Root Admin 
+Scenario: Login as GP Admin 
 	Given User navigates to merchants summary page 
 	Then Validate user name label from the left navigation is sucessful 
