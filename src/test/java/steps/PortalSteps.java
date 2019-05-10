@@ -56,10 +56,11 @@ public class PortalSteps {
 		portalUsersPage.newPortalUserButton.click();
 	}
 
-	@Given("^provide details to create a \"([^\"]*)\" new Portal user$")
-	public void provide_details_to_create_a_new_Portal_user(String arg1) throws Throwable {
+	@Given("^provide details to create a new Portal user$")
+	public void provide_details_to_create_a_new_Portal_user() throws Throwable {
 		Log.info("Creating new portal user");
 		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("tao");
 	}
+
 
 }

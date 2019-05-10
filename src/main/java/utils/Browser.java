@@ -110,6 +110,13 @@ public class Browser {
 		Log.info(String.format("Setting page load time to %s seconds", pageLoadWaitTime));
 		driver.manage().timeouts().pageLoadTimeout(pageLoadWaitTime, TimeUnit.SECONDS);
 	}
+	
+	
+	public static void setWaitTime(int waitTime) {
+		Log.info(String.format("Setting implicit wait time to %s seconds", waitTime));
+		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+	}
+	
 
 	public static boolean dynamicElementExists(By by, int seconds) {
 		Log.info(String.format("Checking if '%s' text locator exists on the page withing %s seconds", by.toString(),

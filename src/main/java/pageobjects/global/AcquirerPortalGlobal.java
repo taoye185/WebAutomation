@@ -14,4 +14,18 @@ public class AcquirerPortalGlobal {
 	public static final String GP_ADMIN_USER_NAME = "Madura";
 	public static final String GP_ADMIN_PASSWORD = "Test123$";
 	public static final String GP_ADMIN_LABEL = "Madura";
+	
+	public static final String GP_NEWADMIN_USER_NAME = "GPNewAdmin";
+	public static final String GP_NEWADMIN_NAME = "GP New Admin";
+	public static final String GP_NEWADMIN_PASSWORD = "Test123$";
+	public static final String GP_NEWADMIN_EMAIL = "AetMWTest@gmail.com";
+	public static final String GP_NEWADMIN_LABEL = "GPNewAdmin";
+	
+	public static final String GP_NEWSUPPORT_USER_NAME = "GPNewSupport";
+	public static final String GP_NEWSUPPORT_NAME = "GP New Support";
+	public static final String GP_NEWSUPPORT__PASSWORD = "Test123$";
+	public static final String GP_NEWSUPPORT__LABEL = "GPNewSupport";
+	
+	public static final String MERCHNAT_REGISTRATION_TITLE = "New merchant registration";
+	
 }

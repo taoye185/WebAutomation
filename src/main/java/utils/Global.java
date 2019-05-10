@@ -18,7 +18,7 @@ public class Global {
 
     // Timers
     public static final int DEFAULT_EXPLICIT_WAIT = 5;
-    public static final int DEFAULT_IMPLICIT_WAIT = 10;
+    public static final int DEFAULT_IMPLICIT_WAIT = 15;
     public static final int DEFAULT_AJAX_WAIT = 10;
     public static final int DEFAULT_PAGE_LOAD_TIME = 60;
     

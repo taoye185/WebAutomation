@@ -35,14 +35,13 @@ public class BackgroundSteps {
 	@Before("@loginAsGPAdmin")
 	public static void loginAsGPAdmin() {
 		try {
-			browser = new Browser(Global.BROWSER);
-			Browser.open(AcquirerPortalGlobal.URL);
-			Thread.sleep(3000);
-			CommonUtils.userLabel_GBL=AcquirerPortalGlobal.GP_ADMIN_LABEL;
+			browser = new Browser(Global.BROWSER);			
+			Browser.open(AcquirerPortalGlobal.URL);			
+			CommonUtils.userLabel_GBL=AcquirerPortalGlobal.GP_ADMIN_LABEL;			
 			loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 			loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 			loginPage.signInBtn.click();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
