@@ -169,12 +169,10 @@ public class WebItem implements WebElement {
     /**
      * This method is useful to select one item from drop down list
      * 
-     * @throws InterruptedException
-     * 
      * @para text-select option from drop down list with this associated text
      **/
 
-    public void selectDropDownItem(String text) throws InterruptedException {
+    public void selectDropDownItem(String text) {
         Log.info("Selecting value -'" + text + "' in the '" + this.locator.toString() + "' drop down list");
         String valueOfXpath = "//*[contains(text(),'" + text + "')]";
         getActiveItem().click();// drop down list.
