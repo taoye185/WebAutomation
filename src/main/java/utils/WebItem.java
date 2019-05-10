@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
@@ -153,19 +154,69 @@ public class WebItem implements WebElement {
         return result;
     }
 
+    /**
+     * This method is useful to select one option from drop down list by option text
+     * 
+     * @para visibleText- text that is used select an option
+     **/
+
     public void select(String visibleText) {
         Log.info("Selecting '" + visibleText + "' in the '" + this.locator.toString() + "' drop down list");
         Select userTypeDropdown = new Select(this.getActiveItem());
         userTypeDropdown.selectByVisibleText(visibleText);
     }
 
-    /*  */
+    /**
+     * This method is useful to select one item from drop down list
+     * 
+     * @throws InterruptedException
+     * 
+     * @para text-select option from drop down list with this associated text
+     **/
+
+    public void selectDropDownItem(String text) throws InterruptedException {
+        Log.info("Selecting value -'" + text + "' in the '" + this.locator.toString() + "' drop down list");
+        String valueOfXpath = "//*[contains(text(),'" + text + "')]";
+        getActiveItem().click();// drop down list.
+        WebElement element = getItem(Global.DEFAULT_EXPLICIT_WAIT,
+                ExpectedConditions.presenceOfElementLocated(By.xpath(valueOfXpath)));
+        // JavascriptExecutor javascriptExecutor = (JavascriptExecutor)
+        // Browser.getDriver();
+        // javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
+        // element);
+        element.click(); // element to select from drop down list.
+
+    }
+
+    /**
+     * This method is useful to view the hidden elements
+     * 
+     **/
+
+    public void scrollIntoView() {
+        Log.info(String.format("Scrolling into view %s", locator.toString()));
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Browser.getDriver();
+        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", getPassiveItem());
+    }
+
+    /**
+     * This method is useful to select one option from drop down list by option
+     * index
+     * 
+     * @para index- selecting the drop down option by index
+     **/
     public void select(int index) {
         Log.info("Selecting index-'" + index + "' in the '" + this.locator.toString() + "' drop down list");
         Select dropDown = new Select(this.getActiveItem());
         dropDown.selectByIndex(index);
     }
 
+    /**
+     * This method is useful to select one option from drop down list by option
+     * value
+     * 
+     * @para value- selecting the drop down option by value
+     **/
     public void selectByValue(String value) {
         Log.info("Selecting value -'" + value + "' in the '" + this.locator.toString() + "' drop down list");
         Select dropDown = new Select(this.getActiveItem());
@@ -193,4 +244,5 @@ public class WebItem implements WebElement {
         }
         return parentElementList;
     }
+
 }

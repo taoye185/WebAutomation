@@ -31,12 +31,4 @@ public class NewPortalUserRegistrationPage extends WebPageInit {
 
 	@FindBy(xpath = "//*[@id='hiveGroupId']/div/div[1]")
 	public WebItem portalGroupDropdown;
-
-	public void selectGroupDrpdownValue(String value) {
-		Select selectPortalGroup = new Select(portalGroupDropdown);
-		// List<ArrayList> listtemp = item.getChildElementsintoList();
-		// selectPortalGroup.selectByIndex(index);
-		selectPortalGroup.selectByValue(value);
-	}
-
 }
