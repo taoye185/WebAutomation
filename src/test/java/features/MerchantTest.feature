@@ -5,7 +5,7 @@ Background:
 		
 @sanity @loginAsGPAdmin 
 Scenario Outline: Create a New Merchant, Test lock and Unlock 
-	Given user click on New Merchant button and naivgates to merchants Registration Page
+	Given user click onn New Merchant button and naivgates to merchants Registration Page
 	And provide details to create a new Merchant 
 	And search "<NewMerchant>" merchant record in the Merchant Summary Page 
 	And user lock the Merchant 

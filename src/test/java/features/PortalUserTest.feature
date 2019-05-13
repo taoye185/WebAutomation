@@ -4,10 +4,12 @@ Background:
 	Given User successfully navigated to Portal Users Page 
 
 @sanity @loginAsGPAdmin @independentTest @1
-Scenario: Create an Support Account 
+Scenario Outline: Create an Support Account 
 	Given user click on New Portal User button 
-	And provide details to create a new Portal user 
-
+	And provide details to create a "<Newuser>" new Portal user 	 
+Examples: 
+		|Newuser|
+		|Test   |
 			
 @sanity @loginAsRootAdmin @independentTest @2
 Scenario Outline: Create an Admin Account 

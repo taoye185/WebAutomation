@@ -13,5 +13,9 @@ public class MerchantRegistrationPage extends WebPageInit{
 	
 	@FindBy(id = "divisionId")
 	public WebItem newMerchantRegistrationDivisionDropDown;
+	
+	public void getChilds(){
+		newMerchantRegistrationDivisionDropDown.getChildElementsintoList("//*[@id='divisionId']");
+	}
 
 }

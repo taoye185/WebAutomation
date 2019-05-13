@@ -1,5 +1,7 @@
 package utils;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -232,15 +234,36 @@ public class WebItem implements WebElement {
         return options;
     }
 
-    @SuppressWarnings("rawtypes")
-    public List getChildElementsintoList() {
-        List<WebElement> parentElementList = new ArrayList();
-        parentElementList = findElements(By.xpath(".//*"));
-        for (int i = 0; i < parentElementList.size(); i++) {
-            WebElement a = (WebElement) parentElementList.get(i);
-            Log.info("element " + i + a.getText() + a.getLocation());
-        }
-        return parentElementList;
-    }
+	@SuppressWarnings("rawtypes")
+	public List getChildElementsintoList(String xpath) {
+		List<WebElement> parentElementList = new ArrayList();
+		parentElementList = findElements(By.xpath(xpath + "/.//*"));
+		for (int i = 0; i < parentElementList.size(); i++) {
+			WebElement a = (WebElement) parentElementList.get(i);
+			Log.info("element " + i + a.getText() + a.getLocation());
+		}
+		return parentElementList;
+	}
 
+	@SuppressWarnings("rawtypes")
+	public List getChildElementsintoList() {
+		List<WebElement> parentElementList = new ArrayList();
+		parentElementList = findElements(By.xpath("/.//*"));
+		for (int i = 0; i < parentElementList.size(); i++) {
+			WebElement a = (WebElement) parentElementList.get(i);
+			Log.info("element " + i + a.getText() + a.getLocation());
+		}
+		return parentElementList;
+	}
+	
+    public static void enter() {
+		try {
+		    Robot robot = new Robot();
+		    robot.keyPress(KeyEvent.VK_ENTER);
+		    robot.keyRelease(KeyEvent.VK_ENTER);
+		    robot.delay(200);
+		}catch(Exception e){
+			
+		}
+	}
 }

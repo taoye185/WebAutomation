@@ -6,6 +6,7 @@ import pageobjects.global.AcquirerPortalGlobal;
 import pageobjects.merchants.MerchantRegistrationPage;
 import pageobjects.merchants.MerchantsPage;
 import utils.Browser;
+import utils.WebItem;
 import cucumber.api.java.en.Then;
 
 import org.junit.Assert;
@@ -38,7 +39,9 @@ public class MerchantSteps {
 
   @Given("^provide details to create a new Merchant$")
   public void provide_details_to_create_a_new_Merchant() throws Throwable {
-	  merchantRegistrationPage.newMerchantRegistrationDivisionDropDown.click();  
+	  //merchantRegistrationPage.newMerchantRegistrationDivisionDropDown.click();  
+	  merchantRegistrationPage.getChilds();
+	 
 	  
      
   }

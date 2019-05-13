@@ -4,6 +4,7 @@ public class AcquirerPortalGlobal {
 	public static final String URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/";
 	public static final String PORTALUSER_URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/portalusers";
 	public static final String MERCHANTS_URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/merchants";
+	public static final String GROUP_URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/groups";
 	public static final String CBAADMIN_USER_NAME = "Marco";
 	public static final String CBAADMIN_PASSWORD = "Test123$";
 
@@ -28,4 +29,5 @@ public class AcquirerPortalGlobal {
 	
 	public static final String MERCHNAT_REGISTRATION_TITLE = "New merchant registration";
 	
+	public static String GP_GROUP = "All";
 }
