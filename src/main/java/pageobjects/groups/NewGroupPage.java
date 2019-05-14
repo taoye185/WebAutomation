@@ -6,7 +6,7 @@ import utils.WebPageInit;
 
 public class NewGroupPage extends WebPageInit {
 
-	@FindBy(xpath = "//*[@id='divisionId']/div/div[1]")
+	@FindBy(xpath = "/html/body/div[4]/div/div")
 	public WebItem divisionDropdown;
 	@FindBy(xpath = "//label[contains(text(),'Division')]")
 	public WebItem divisionLabel;
@@ -20,5 +20,9 @@ public class NewGroupPage extends WebPageInit {
 	public void selectGroupOption(){
 		WebItem.enter();
 	}
+	
+	
+	
+	
 	
 }

@@ -31,33 +31,46 @@ public class GroupSteps {
 		Thread.sleep(3000);
 		Browser.open(AcquirerPortalGlobal.GROUP_URL);
 		Thread.sleep(1000);
-		Assert.assertEquals("User is navigated to Groupc Summary Page", Browser.getDriver().getCurrentUrl(),AcquirerPortalGlobal.GROUP_URL);
+		//Assert.assertEquals("User is navigated to Groupc Summary Page", Browser.getDriver().getCurrentUrl(),AcquirerPortalGlobal.GROUP_URL);
 		Thread.sleep(2000);
 	}
 	
 	@And("^user click on New Group button$")
 	public void user_click_on_New_Group_button() throws Throwable {
+		Thread.sleep(2000);
 		groupsSummaryPage.newGroupButton.click();
 	}
 
 	@And("^provide details to create a new Group$")
 	public void provide_details_to_create_a_new_Group() throws Throwable {
 		Log.info("Creating new Group");
-		newGroupPage.divisionDropdown.click();
+		newGroupPage.selectGroupOption();
+		
+		//newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
 		Thread.sleep(1000);
 		//newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GP_GROUP);
 		newGroupPage.selectGroupOption();
 		newGroupPage.groupNameTxtBox.sendKeys("AetTest01");
 		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest01 for Automation");
 		newGroupPage.groupCreateButton.click();		
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		//selectDropDownItem(Ac.quirerPortalGlobal.GP_GROUP);
 	}
 	@And("^filter created Group$")
 	public void filter_created_Group() throws Throwable {
 		Log.info("Filter new Group");
 		groupsSummaryPage.filterButton.click();
-		groupsSummaryPage.nameFilterDropdown.click();
-	}
+		Thread.sleep(2000);		
+		groupsSummaryPage.nameFilterDropdownArrow.click();
+		groupsSummaryPage.selectNameOption("AetTest01");
+		Thread.sleep(2000);
+		//groupsSummaryPage.nameLabel.click();
+		groupsSummaryPage.OkFilterButton.click();
+		
+		Thread.sleep(3000);
+		
+		
+		
+			}
 }
 

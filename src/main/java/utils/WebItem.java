@@ -177,7 +177,7 @@ public class WebItem implements WebElement {
     public void selectDropDownItem(String text) {
         Log.info("Selecting value -'" + text + "' in the '" + this.locator.toString() + "' drop down list");
         String valueOfXpath = "//*[contains(text(),'" + text + "')]";
-        getActiveItem().click();// drop down list.
+       // getActiveItem().click();// drop down list.
         WebElement element = getItem(Global.DEFAULT_EXPLICIT_WAIT,
                 ExpectedConditions.presenceOfElementLocated(By.xpath(valueOfXpath)));
         // JavascriptExecutor javascriptExecutor = (JavascriptExecutor)
@@ -245,22 +245,40 @@ public class WebItem implements WebElement {
 		return parentElementList;
 	}
 
+
+	
 	@SuppressWarnings("rawtypes")
-	public List getChildElementsintoList() {
+	public void selectByValueDynamicDropdown(String xpath, String value) {
 		List<WebElement> parentElementList = new ArrayList();
-		parentElementList = findElements(By.xpath("/.//*"));
+		parentElementList = getChildElementsintoList(xpath);		
 		for (int i = 0; i < parentElementList.size(); i++) {
-			WebElement a = (WebElement) parentElementList.get(i);
-			Log.info("element " + i + a.getText() + a.getLocation());
+			WebElement tempElement = (WebElement) parentElementList.get(i);
+			if(tempElement.getText().equalsIgnoreCase(value)){
+			Log.info("element " + i + tempElement.getText() + tempElement.getLocation());
+			tempElement.click();
+			return;
+			}
 		}
-		return parentElementList;
 	}
+	
+	
 	
     public static void enter() {
 		try {
 		    Robot robot = new Robot();
 		    robot.keyPress(KeyEvent.VK_ENTER);
 		    robot.keyRelease(KeyEvent.VK_ENTER);
+		    robot.delay(200);
+		}catch(Exception e){
+			
+		}
+	}
+    
+    public static void escape() {
+		try {
+		    Robot robot = new Robot();
+		    robot.keyPress(KeyEvent.VK_ESCAPE);
+		    robot.keyRelease(KeyEvent.VK_ESCAPE);
 		    robot.delay(200);
 		}catch(Exception e){
 			
