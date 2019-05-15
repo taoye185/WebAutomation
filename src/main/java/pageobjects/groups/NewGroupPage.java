@@ -6,8 +6,9 @@ import utils.WebPageInit;
 
 public class NewGroupPage extends WebPageInit {
 
-	@FindBy(xpath = "/html/body/div[4]/div/div")
+	@FindBy(xpath = "//*[@id='divisionId']/div/div[1]")
 	public WebItem divisionDropdown;
+	//*[@id="divisionId"]/following::div/following::div/following::div/following::div/following::div
 	@FindBy(xpath = "//label[contains(text(),'Division')]")
 	public WebItem divisionLabel;
 	@FindBy(id = "name")
@@ -17,8 +18,12 @@ public class NewGroupPage extends WebPageInit {
 	@FindBy(xpath = "//button[contains(text(),'Create group')]")
 	public WebItem groupCreateButton;
 	
-	public void selectGroupOption(){
-		WebItem.enter();
+	public String groupOptionsXpath="//label[contains(text(),'Division')]//following::div[contains(text(),'Global Payments')]";
+
+	
+	
+	public void selectGroupOption(String groupName){
+		divisionDropdown.getSiblingElement(groupOptionsXpath, groupName);
 	}
 	
 	

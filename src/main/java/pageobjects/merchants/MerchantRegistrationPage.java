@@ -15,7 +15,7 @@ public class MerchantRegistrationPage extends WebPageInit{
 	public WebItem newMerchantRegistrationDivisionDropDown;
 	
 	public void getChilds(){
-		newMerchantRegistrationDivisionDropDown.getChildElementsintoList("//*[@id='divisionId']");
+		newMerchantRegistrationDivisionDropDown.getSiblingElementsintoList("//*[@id='divisionId']");
 	}
 
 }

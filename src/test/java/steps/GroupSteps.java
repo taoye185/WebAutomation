@@ -8,6 +8,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pageobjects.global.AcquirerPortalGlobal;
 import pageobjects.global.LeftNavigation;
+
+import pageobjects.groups.GroupDetail;
 import pageobjects.groups.GroupsSummaryPage;
 import pageobjects.groups.NewGroupPage;
 import pageobjects.login.LoginPage;
@@ -23,7 +25,7 @@ public class GroupSteps {
 	public static GroupsSummaryPage groupsSummaryPage = new GroupsSummaryPage();
 	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static NewGroupPage newGroupPage = new NewGroupPage();
-	
+	public static  GroupDetail groupDetail = new GroupDetail();
 
 
 	@Given("^User successfully navigated to Groups summary Page$")
@@ -37,19 +39,18 @@ public class GroupSteps {
 	
 	@And("^user click on New Group button$")
 	public void user_click_on_New_Group_button() throws Throwable {
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		groupsSummaryPage.newGroupButton.click();
 	}
 
 	@And("^provide details to create a new Group$")
 	public void provide_details_to_create_a_new_Group() throws Throwable {
-		Log.info("Creating new Group");
-		newGroupPage.selectGroupOption();
-		
+		Log.info("Creating new Group");			
 		//newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
 		Thread.sleep(1000);
 		//newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GP_GROUP);
-		newGroupPage.selectGroupOption();
+		newGroupPage.divisionDropdown.click();
+		newGroupPage.selectGroupOption("Global Payments");
 		newGroupPage.groupNameTxtBox.sendKeys("AetTest01");
 		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest01 for Automation");
 		newGroupPage.groupCreateButton.click();		
@@ -65,12 +66,24 @@ public class GroupSteps {
 		groupsSummaryPage.selectNameOption("AetTest01");
 		Thread.sleep(2000);
 		//groupsSummaryPage.nameLabel.click();
-		groupsSummaryPage.OkFilterButton.click();
-		
-		Thread.sleep(3000);
-		
-		
+		groupsSummaryPage.OkFilterButton.click();		
+		Thread.sleep(1000);
 		
 			}
+	
+	@Then("^verify group is listed down in the results table$")
+	public void verify_group_is_listed_down_in_the_results_table() throws Throwable {
+		Assert.assertTrue("Group is listed",
+				(groupsSummaryPage.groupNameResultsCell.getText().equalsIgnoreCase("AetTest01")));
+	}
+	
+	@Given("^click on details of the Group$")
+	public void click_on_details_of_the_group() throws Throwable {
+		groupsSummaryPage.selectElementintheResultsTabel("Details");
+		Thread.sleep(3000);
+	}
+	
+
+
 }
 

@@ -1,10 +1,13 @@
 Feature: verify user is login
-		
-@sanity @loginAsRootAdmin @independentTest
-Scenario: Login as Root Admin
-Then User navigates to portal user page 
 
+Background: 
+	Given User successfully navigated to Groups summary Page  
+	
 @sanity @loginAsGPAdmin @independentTest
-Scenario: Login as Root Admin
-Then User navigates to portal user page 
+Scenario: Delete a Group 
+	Given filter created Group 
+	And click on details of the Group
+	Then delete the Group
+	
+
 	

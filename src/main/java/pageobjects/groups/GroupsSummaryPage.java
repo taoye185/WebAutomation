@@ -32,22 +32,34 @@ public class GroupsSummaryPage extends WebPageInit {
 	public WebItem nameFilterOption;
 	@FindBy(xpath = "//*[@id='Names']/div[2]")
 	public WebItem nameFilterOptions;
-	public String xpath = "//*[@id='Names']/div[2]";
+	
+	public String namesFilterOptionsXpath = "//*[@id='Names']/div[2]/.//*";
 	
 	@FindBy(xpath = "//button[contains(text(),'Ok')]")
 	public WebItem OkFilterButton;
 	
+	@FindBy(xpath = "//*[.='AetTest01']")
+	public WebItem groupNameResultsCell;
 	
+	public String groupDetailsRowXpath  = "//*[.='AetTest01']/following-sibling::*";
+
 	
 	public void selectNameOption(String groupName){
 		//nameFilterDropdownArrow.selectDropDownItem(groupName);
-		nameFilterDropdownArrow.selectByValueDynamicDropdown(xpath,groupName);
+		nameFilterDropdownArrow.getSiblingElement(namesFilterOptionsXpath,groupName);
 	}
 	
+	public void selectElementintheResultsTabel(String elementText){
+		groupNameResultsCell.getSiblingElement(groupDetailsRowXpath,elementText);
+		
+	}
 	
 	public void setDescriptionOption(String description){
 		nameFilterDropdownOption.selectDropDownItem(description);
 	}
+	
+	
+	
 	
 	// //*[contains(text(),'Select...')]
 }
