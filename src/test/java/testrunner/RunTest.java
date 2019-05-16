@@ -11,7 +11,7 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
 		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {
-				"@1" })
+				"@sanity12" })
 
 public class RunTest {
 
@@ -20,8 +20,8 @@ public class RunTest {
 	/// </summary>
 	/// <returns></returns>
 
-	public static void init() {	
-		
+	public static void init() {
+
 	}
-	
+
 }

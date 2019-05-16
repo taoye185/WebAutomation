@@ -56,12 +56,12 @@ public class LoginSteps {
 	
 	}
 	
-	@Given("^Validate user name label from the left navigation is sucessful$")
+	@Given("^Validate user name label from the left navigation is successful$")
 	public void Validate_username_label_from_leftNav() throws Throwable {	
 		Thread.sleep(1000);
 		leftNavigation.inituserLink(CommonUtils.userLabel_GBL);		
-		Log.info(" leftNaigation.userLink  " + leftNavigation.userLink.getText());
-		Assert.assertTrue("User is loged in ", (leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));  
+		Log.info(" leftNavigation.userLink  " + leftNavigation.userLink.getText());
+		Assert.assertTrue("User is logged in ", (leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));  
 	}
 	
 	public static void setBrowserType(){
