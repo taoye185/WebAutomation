@@ -1,48 +1,59 @@
 package steps;
 
-import pageobjects.merchants.MerchantsSummaryPage;
-import utils.AssertUtil;
-import utils.CommonUtils;
-
-import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import pageobjects.global.AcquirerPortalGlobal;
+import pageobjects.merchants.MerchantRegistrationPage;
+import pageobjects.merchants.MerchantsPage;
+import utils.Browser;
 import cucumber.api.java.en.Then;
 
+import org.junit.Assert;
+
 public class MerchantSteps {
-	private MerchantsSummaryPage merchantsSummaryPage = new MerchantsSummaryPage();
-	CommonUtils comUtil = new CommonUtils();
-	private String merchantID = "";
+  MerchantsPage merchantsPage = new MerchantsPage();
+  MerchantRegistrationPage merchantRegistrationPage = new MerchantRegistrationPage();
 
-	@Then("^User enter merchant ID \"([^\"]*)\" and search$")
-	public void user_enter_merchant_ID_and_search(String merchantID) {
-		merchantsSummaryPage.searchMerchantText().sendKeys(merchantID);
-		this.merchantID = merchantID;
-	}
+  @Given("^User navigates to merchants summary page$")
+  public void User_navigates_to_merchantsSummary() throws Throwable {
 
-	@Then("^User enter merchant Name\"([^\"]*)\" and search$")
-	public void user_enter_merchant_Name_and_search(String merchantName) {
+  }
 
-	}
+  @Given("^User successfully navigated to Merchnat Summary Page$")
+  public void user_successfully_navigated_to_Merchnat_Summary_Page() throws Throwable {
+    merchantsPage.navigateToMerchantSummaryPage();
+    Assert.assertEquals("User is navigated to Merchnats Page", Browser.getDriver().getCurrentUrl(),
+        AcquirerPortalGlobal.MERCHANTS_URL);
 
-	@Then("^User validate the merchant details from results$")
-	public void user_validate_the_merchant_details_from_results() {
+  }
 
-		AssertUtil.assertEq(merchantsSummaryPage.merchantIDinMerchantSummuryTabel(merchantID).getText(), merchantID,
-				"Verify merchant ID " + merchantID + " displays in the  Mrchants Summary result table");
+  @Given("^user click on New Merchant button and naivgates to merchants Registration Page$")
+  public void user_click_on_New_Merchant_button() throws Throwable {
+    merchantsPage.newMerchantButton.click();
+    Assert.assertEquals("User is navigated to Merchnats Registraion Page",
+        merchantRegistrationPage.newMerchantRegistrationLabel.getText(),
+        AcquirerPortalGlobal.MERCHNAT_REGISTRATION_TITLE);
+  }
 
-		merchantsSummaryPage.setElementsinMerchantRecord(this.merchantID);
+  @Given("^provide details to create a new Merchant$")
+  public void provide_details_to_create_a_new_Merchant() throws Throwable {
+    // merchantRegistrationPage.newMerchantRegistrationDivisionDropDown.click();
+    merchantRegistrationPage.getChilds();
 
-	}
+  }
 
-	@And("^user click on details in search Result$")
-	public void user_click_on_details_in_search_Result() {
-		merchantsSummaryPage.merchantDetails.click();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// Allowing tester to see navigation to the details page.
-			// This sleep is subject to remove with future developments
-			e.printStackTrace();
-		}
-	}
+  @Given("^search \"([^\"]*)\" merchant record in the Merchant Summary Page$")
+  public void search_merchant_record_in_the_Merchant_Summary_Page(String arg1) throws Throwable {
+
+  }
+
+  @Given("^user lock the Merchant$")
+  public void user_lock_the_Merchant() throws Throwable {
+
+  }
+
+  @Then("^user unlock the Merchant$")
+  public void user_unlock_the_Merchant() throws Throwable {
+
+  }
 
 }
