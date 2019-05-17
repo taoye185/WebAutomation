@@ -1,20 +1,21 @@
 package pageobjects.merchants;
 
-
 import org.openqa.selenium.support.FindBy;
 
 import utils.WebItem;
 import utils.WebPageInit;
 
-public class MerchantRegistrationPage extends WebPageInit{
+public class MerchantRegistrationPage extends WebPageInit {
 
 	@FindBy(xpath = "//h1[contains(text(),'New merchant registration')]")
-	public WebItem newMerchantRegistrationLabel;	
-	
+	public WebItem newMerchantRegistrationLabel;
+
 	@FindBy(id = "divisionId")
 	public WebItem newMerchantRegistrationDivisionDropDown;
-	
-	public void getChilds(){
+	@FindBy(id = "mposUserEmail")
+	public WebItem userEmail;
+
+	public void getChilds() {
 		newMerchantRegistrationDivisionDropDown.getSiblingElementsintoList("//*[@id='divisionId']");
 	}
 

@@ -8,12 +8,11 @@ import pageobjects.login.LoginPage;
 import pageobjects.merchants.MerchantsPage;
 import utils.Browser;
 import utils.CommonUtils;
-import utils.Global;
 
 public class BackgroundSteps {
 
 	public static LoginPage loginPage = new LoginPage();
-	public static Browser browser;
+	public static MerchantsPage merchantsPage = new MerchantsPage();
 
 	@After("@independentTest")
 	public static void teardown() {
@@ -33,33 +32,22 @@ public class BackgroundSteps {
 
 	@Before("@loginAsGPAdmin")
 	public static void loginAsGPAdmin() {
-		try {
-			browser = new Browser(Global.BROWSER);			
-			Browser.open(AcquirerPortalGlobal.URL);			
-			CommonUtils.userLabel_GBL=AcquirerPortalGlobal.GP_ADMIN_LABEL;			
-			loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
-			loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
-			loginPage.signInBtn.click();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Browser.open(AcquirerPortalGlobal.URL);
+		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.GP_ADMIN_LABEL;
+		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
+		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
+		loginPage.signInBtn.click();
+		merchantsPage.newMerchantButton.exists(3);
 	}
-	
+
 	@Before("@loginAsRootAdmin")
 	public static void loginAsRootAdmin() {
-		try {
-			browser = new Browser(Global.BROWSER);
-			Browser.open(AcquirerPortalGlobal.URL);
-			Thread.sleep(1000);
-			CommonUtils.userLabel_GBL=AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
-			loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
-			loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
-			loginPage.signInBtn.click();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Browser.open(AcquirerPortalGlobal.URL);
+		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
+		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
+		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
+		loginPage.signInBtn.click();
+		merchantsPage.newMerchantButton.exists(3);
 	}
 
 }

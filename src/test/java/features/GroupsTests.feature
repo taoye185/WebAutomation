@@ -4,7 +4,7 @@ Feature: 3_Groups_Tests
 Background: 
 	Given User successfully navigated to Groups summary Page  
 
-@sanity12 @loginAsGPAdmin @independentTest
+@sanity @loginAsGPAdmin @independentTest
 Scenario: Create a Group  
 	When user click on New Group button 
 	And provide details to create a new Group 	

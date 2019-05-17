@@ -14,13 +14,10 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Browser {
 
-	private static String browserinstance = System.getProperty("GBL_WEB_BROWSER");
 	private static Browser browser;
 	private static WebDriver driver;
 
@@ -48,22 +45,21 @@ public class Browser {
 
 	public static WebDriver getDriver() {
 		if (driver == null) {
-			Global gbl = new Global();
-			setBrowser(browser);
+			setBrowser(new Browser(Global.BROWSER));
 		}
 		return driver;
 	}
 
 	public Browser(String browserType) {
 
-		Log.info("Creating an instance of a " + browserType + " browser");				
-		
+		Log.info("Creating an instance of a " + browserType + " browser");
+
 		switch (browserType) {
 		case Global.CHROME: {
 			WebDriverManager.chromedriver().setup();
 			this.setDriver(new ChromeDriver());
 		}
-		break;
+			break;
 		case Global.FIREFOX: {
 			WebDriverManager.firefoxdriver().setup();
 			this.setDriver(new FirefoxDriver());
@@ -78,31 +74,42 @@ public class Browser {
 
 		}
 	}
-	
-	public Browser(){
-		//WebDriverManager.chromedriver().setup();
-		//this.setDriver(new ChromeDriver());
+
+	public Browser() {
+		// WebDriverManager.chromedriver().setup();
+		// this.setDriver(new ChromeDriver());
 	}
 
 	public static void open(String url) {
-		try{
-		Log.info(String.format("Opening %s url", url));		
-		getDriver().get(url);
-		}
-		catch(NoSuchSessionException ex){
-			//browser = new Browser(Global.BROWSER);
-			//getDriver().get(url);
+		try {
+			Log.info(String.format("Opening %s url", url));
+			getDriver().get(url);
+		} catch (NoSuchSessionException ex) {
+			// browser = new Browser(Global.BROWSER);
+			// getDriver().get(url);
 		}
 	}
-	
+
 	public static void navigate(String url) {
-		try{		
-		Log.info(String.format("Navigating %s url", url));		
-		getDriver().get(url);
+		try {
+			Log.info(String.format("Navigating %s url", url));
+			getDriver().get(url);
+		} catch (NoSuchSessionException ex) {
+			// browser = new Browser(Global.BROWSER);
+			// getDriver().get(url);
 		}
-		catch(NoSuchSessionException ex){
-			//browser = new Browser(Global.BROWSER);
-			//getDriver().get(url);
+	}
+
+	/**
+	 * This method is useful to for Browser top sleep
+	 * 
+	 * @para time- time to pause browser in millisecond
+	 **/
+	public static void sleep(int time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -110,13 +117,11 @@ public class Browser {
 		Log.info(String.format("Setting page load time to %s seconds", pageLoadWaitTime));
 		driver.manage().timeouts().pageLoadTimeout(pageLoadWaitTime, TimeUnit.SECONDS);
 	}
-	
-	
+
 	public static void setWaitTime(int waitTime) {
 		Log.info(String.format("Setting implicit wait time to %s seconds", waitTime));
 		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
 	}
-	
 
 	public static boolean dynamicElementExists(By by, int seconds) {
 		Log.info(String.format("Checking if '%s' text locator exists on the page withing %s seconds", by.toString(),
@@ -133,20 +138,4 @@ public class Browser {
 		Log.info(String.format("Checking if '%s' text exists on the page withing %s seconds", text, seconds));
 		return dynamicElementExists(By.xpath("//*[contains(text(),'" + text + "')]"), seconds);
 	}
-	
-	@After("@independentTest")
-	public static void teardown() {
-		try {
-			WebDriver _driver = getDriver();
-			if (_driver == null) {
-				return;
-			}
-			_driver.quit();
-			_driver = null;
-			
-		} catch (Exception ex) {
-			Log.info(ex.getMessage());
-		}
-	}
-	
 }

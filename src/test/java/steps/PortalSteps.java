@@ -33,8 +33,7 @@ public class PortalSteps {
 
 	@Given("^User successfully navigated to Portal Users Page$")
 	public void user_successfully_navigated_to_Portal_Users_Page() throws Throwable {
-		Thread.sleep(3000);
-		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL);
+		portalUsersPage.navigatePortalUserPage();
 		leftNavigation.inituserLink(CommonUtils.userLabel_GBL);
 		Assert.assertTrue("User is loged in ",
 				(leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
