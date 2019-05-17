@@ -9,6 +9,9 @@ import utils.WebPageInit;
 
 public class GroupsSummaryPage extends WebPageInit {
 
+	String[] groupSummaryPageGridHeaders = { "Name", "User name", "Email", "Group", "Division", "Status",
+			"View details" };
+
 	public void navigateToGroupSummaryPage() {
 		Browser.open(AcquirerPortalGlobal.GROUP_URL);
 	}

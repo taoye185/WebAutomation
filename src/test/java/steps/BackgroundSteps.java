@@ -13,7 +13,6 @@ import utils.Global;
 public class BackgroundSteps {
 
 	public static LoginPage loginPage = new LoginPage();
-	public static MerchantsPage merchantsPage = new MerchantsPage();
 	public static Browser browser;
 
 	@After("@independentTest")

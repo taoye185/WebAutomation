@@ -65,7 +65,7 @@ public class GroupSteps {
 				(groupsSummaryPage.groupNameResultsCell.getText().equalsIgnoreCase("AetTest01")));
 	}
 
-	@Given("^click on details of the Group$")
+	@When("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
 		groupsSummaryPage.selectElementintheResultsTabel("Details");
 		Thread.sleep(3000);
