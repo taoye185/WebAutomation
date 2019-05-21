@@ -30,4 +30,9 @@ public class AcquirerPortalGlobal {
 	public static final String MERCHNAT_REGISTRATION_TITLE = "New merchant registration";
 
 	public static String GP_GROUP = "All";
+	
+	public static String PORTALUSER_PERMISSION_1= "Allows user to get the public details of all Portal users";
+	public static String PORTALUSER_PERMISSION_2= "Allows user to create new users";
+	public static String PORTALUSER_PERMISSION_3= "Allows user to modify the accounts of other users";
+	public static String PORTALUSER_PERMISSION_4= "Allows user to delete the accounts of other users";
 }

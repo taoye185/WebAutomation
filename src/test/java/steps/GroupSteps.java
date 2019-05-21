@@ -8,7 +8,8 @@ import cucumber.api.java.en.When;
 import pageobjects.global.AcquirerPortalGlobal;
 import pageobjects.global.LeftNavigation;
 
-import pageobjects.groups.GroupDetail;
+import pageobjects.groups.GroupDetailPage;
+import pageobjects.groups.GroupPermissionsPage;
 import pageobjects.groups.GroupsSummaryPage;
 import pageobjects.groups.NewGroupPage;
 import utils.Browser;
@@ -19,7 +20,8 @@ public class GroupSteps {
 	public static GroupsSummaryPage groupsSummaryPage = new GroupsSummaryPage();
 	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static NewGroupPage newGroupPage = new NewGroupPage();
-	public static GroupDetail groupDetail = new GroupDetail();
+	public static GroupDetailPage groupDetailPage = new GroupDetailPage();
+	public static  GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
 
 	@Given("^User successfully navigated to Groups summary Page$")
 	public void user_successfully_navigated_to_Groups_summary_Page() throws Throwable {
@@ -65,10 +67,38 @@ public class GroupSteps {
 				(groupsSummaryPage.groupNameResultsCell.getText().equalsIgnoreCase("AetTest01")));
 	}
 
-	@When("^click on details of the Group$")
+	@Given("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
 		groupsSummaryPage.selectElementintheResultsTabel("Details");
 		Thread.sleep(3000);
 	}
+	
+
+@Then("^edit group permissions from group details$")
+public void edit_group_permissions_from_group_details() throws Throwable {
+	System.out.println(groupDetailPage.groupPermisionLabel.getText());
+	groupDetailPage.groupPermisionEditButton.click();
+	Thread.sleep(3000);
+}
+
+@When("^assign and rework screen appears$")
+public void assign_and_rework_screen_appears() throws Throwable {
+	groupPermissionsPage.portalUserPermisionLabel.click();
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
+	Thread.sleep(3000);
+}
+
+@Then("^set permissions to create support user group$")
+public void set_permissions_to_create_support_user_group() throws Throwable {
+  
+}
+
+@Then("^set permissions to create admin user group$")
+public void set_permissions_to_create_admin_user_group() throws Throwable {
+
+}
+
+
 
 }
