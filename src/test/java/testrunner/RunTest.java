@@ -8,7 +8,7 @@ import utils.Browser;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
-		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {"@sanity"})
+		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {})
 
 public class RunTest {
 

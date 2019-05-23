@@ -10,7 +10,6 @@ import pageobjects.global.LeftNavigation;
 import pageobjects.login.LoginPage;
 import utils.Browser;
 import utils.CommonUtils;
-import utils.Global;
 import utils.Log;
 
 public class LoginSteps {
@@ -35,7 +34,6 @@ public class LoginSteps {
 
 	@When("^User enter valid \"([^\"]*)\" and \"([^\"]*)\" and hit Login button$")
 	public void user_enter_valid_and_and_hit_Login_button(String username, String password) throws Throwable {
-		// CommonUtils.setUpUsers(username);
 		CommonUtils.userLabel_GBL = username;
 		CommonUtils.password_GBL = password;
 		loginPage.usernameTxtBox.sendKeys(CommonUtils.username_GBL);
@@ -46,9 +44,16 @@ public class LoginSteps {
 	@Then("^User navigates to portal user page$")
 	public void user_navigates_to_portal_user_page() throws Throwable {
 		Browser.sleep(1000);
-		System.out.println(Browser.getDriver().getCurrentUrl());
 		Assert.assertEquals("User is navigated to Portal User Page", Browser.getDriver().getCurrentUrl(),
 				AcquirerPortalGlobal.PORTALUSER_URL);
+
+	}
+
+	@Then("^User navigates to merchants summary page$")
+	public void User_navigates_to_merchants_summary_page() throws Throwable {
+		Browser.sleep(1000);
+		Assert.assertEquals("User is navigated to Portal User Page", Browser.getDriver().getCurrentUrl(),
+				AcquirerPortalGlobal.MERCHANTS_URL);
 
 	}
 
@@ -60,13 +65,12 @@ public class LoginSteps {
 		Assert.assertTrue("User is logged in ",
 				(leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
 	}
-	
+
 	@Then("^click log out to exit$")
 	public void click_log_out_to_exit() throws Throwable {
 		leftNavigation.logoutLabel.click();
 		Browser.sleep(1000);
-		Assert.assertEquals("username text box appeares",loginPage.usernameTxtBox.isDisplayed(),true);
+		Assert.assertEquals("username text box doesn't appear", loginPage.usernameTxtBox.isDisplayed(), true);
 	}
-
 
 }

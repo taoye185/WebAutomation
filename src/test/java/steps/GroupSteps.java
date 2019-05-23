@@ -21,11 +21,10 @@ public class GroupSteps {
 	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static NewGroupPage newGroupPage = new NewGroupPage();
 	public static GroupDetailPage groupDetailPage = new GroupDetailPage();
-	public static  GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
+	public static GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
 
 	@Given("^User successfully navigated to Groups summary Page$")
 	public void user_successfully_navigated_to_Groups_summary_Page() throws Throwable {
-		Thread.sleep(3000);
 		groupsSummaryPage.navigateToGroupSummaryPage();
 		Assert.assertEquals("User is unable to navigate to group summary page", AcquirerPortalGlobal.GROUP_URL,
 				Browser.getDriver().getCurrentUrl());
@@ -38,15 +37,15 @@ public class GroupSteps {
 	}
 
 	@When("^provide details to create a new Group$")
-	public void provide_details_to_create_a_new_Group() throws Throwable {
+	public void provide_details_to_create_a_new_Group() {
 		Log.info("Creating new Group");
 		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
 		newGroupPage.groupNameTxtBox.sendKeys("AetTest01");
 		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest01 Support Group for Automation");
 		newGroupPage.groupCreateButton.click();
-		Thread.sleep(3000);
+		Browser.sleep(3000);
 	}
-	
+
 	@When("^provide details to create a new Admin Group$")
 	public void provide_details_to_create_a_new_Admin_Group() throws Throwable {
 		Log.info("Creating new Group");
@@ -54,19 +53,15 @@ public class GroupSteps {
 		newGroupPage.groupNameTxtBox.sendKeys("AetTest02");
 		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest02 Admin Group for Automation");
 		newGroupPage.groupCreateButton.click();
-		Thread.sleep(3000);
+		Browser.sleep(3000);
 	}
+
 	@When("^filter created Group$")
 	public void filter_created_Group() throws Throwable {
 		Log.info("Filter new Group");
 		groupsSummaryPage.filterButton.click();
-		Thread.sleep(2000);
-		groupsSummaryPage.nameFilterDropdownArrow.click();
-		groupsSummaryPage.selectNameOption("AetTest01");
-		Thread.sleep(2000);
-		// groupsSummaryPage.nameLabel.click();
+		groupsSummaryPage.nameFilterOptions.selectDropDownItem("AetTest01");
 		groupsSummaryPage.OkFilterButton.click();
-		Thread.sleep(1000);
 
 	}
 
@@ -79,45 +74,42 @@ public class GroupSteps {
 	@Given("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
 		groupsSummaryPage.selectElementintheResultsTabel("Details");
-		Thread.sleep(3000);
+		Browser.sleep(3000);
 	}
-	
 
-@Then("^edit group permissions from group details$")
-public void edit_group_permissions_from_group_details() throws Throwable {
-	System.out.println(groupDetailPage.groupPermisionLabel.getText());
-	groupDetailPage.groupPermisionEditButton.click();
-	Thread.sleep(3000);
-}
+	@Then("^edit group permissions from group details$")
+	public void edit_group_permissions_from_group_details() throws Throwable {
+		System.out.println(groupDetailPage.groupPermisionLabel.getText());
+		groupDetailPage.groupPermisionEditButton.click();
+		Browser.sleep(3000);
+	}
 
-@When("^assign and revoke screen appears$")
-public void assign_and_rework_screen_appears() throws Throwable {
-	Assert.assertEquals("Portal user permissions link appeares",groupPermissionsPage.portalUserPermisionLabel.isDisplayed(),true);
-		
-}
+	@When("^assign and revoke screen appears$")
+	public void assign_and_rework_screen_appears() throws Throwable {
+		Assert.assertEquals("Portal user permissions link appears",
+				groupPermissionsPage.portalUserPermisionLabel.isDisplayed(), true);
 
-@Then("^set permissions to create support user group$")
-public void set_permissions_to_create_support_user_group() throws Throwable {
-	groupPermissionsPage.portalUserPermisionLabel.click();
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
-}
+	}
 
-@Then("^set permissions to create admin user group$")
-public void set_permissions_to_create_admin_user_group() throws Throwable {
-	groupPermissionsPage.portalUserPermisionLabel.click();
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_2);
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_3);
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
-	
-	groupPermissionsPage.PortalGroupPermissionsLabel.click();
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
-	
-	
-	Thread.sleep(3000);
-}
+	@Then("^set permissions to create support user group$")
+	public void set_permissions_to_create_support_user_group() throws Throwable {
+		groupPermissionsPage.portalUserPermisionLabel.click();
+		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
+	}
 
+	@Then("^set permissions to create admin user group$")
+	public void set_permissions_to_create_admin_user_group() throws Throwable {
+		groupPermissionsPage.portalUserPermisionLabel.click();
+		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_2);
+		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_3);
+		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
 
+		groupPermissionsPage.PortalGroupPermissionsLabel.click();
+		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+
+		Browser.sleep(3000);
+	}
 
 }

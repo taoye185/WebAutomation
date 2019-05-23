@@ -14,6 +14,7 @@ public class GroupsSummaryPage extends WebPageInit {
 
 	public void navigateToGroupSummaryPage() {
 		Browser.open(AcquirerPortalGlobal.GROUP_URL);
+		newGroupButton.exists(5);
 	}
 
 	@FindBy(xpath = "//button[contains(text(),'New group')]")
@@ -40,7 +41,7 @@ public class GroupsSummaryPage extends WebPageInit {
 
 	@FindBy(xpath = "//*[contains(text(),'AetTest01')]")
 	public WebItem nameFilterOption;
-	@FindBy(xpath = "//*[@id='Names']/div[2]")
+	@FindBy(id = "Names")
 	public WebItem nameFilterOptions;
 
 	public String namesFilterOptionsXpath = "//*[@id='Names']/div[2]/.//*";

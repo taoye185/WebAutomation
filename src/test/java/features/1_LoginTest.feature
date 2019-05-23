@@ -1,14 +1,12 @@
+@loginPage
 Feature: verify user is able do all the actions on login page
 
-	 @sanity @loginAsRootAdmin 
+	@sanity @loginAsRootAdmin @logout
 	Scenario: Login as Root Admin
-		Given User navigates to portal user page
+		Then User navigates to portal user page
 		And Validate user name label from the left navigation is successful
-		Then click log out to exit  
-		
 
-	 @sanity @loginAsGPAdmin 
+	@sanity @loginAsGPAdmin  @logout
 	Scenario: Login as GP Admin
-		Given User navigates to merchants summary page
-		Then Validate user name label from the left navigation is successful
-		Then click log out to exit
+		Then User navigates to merchants summary page
+		And Validate user name label from the left navigation is successful
