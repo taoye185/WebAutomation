@@ -22,10 +22,10 @@ public class AcquirerPortalGlobal {
 	public static final String GP_NEWADMIN_EMAIL = "AetMWTest@gmail.com";
 	public static final String GP_NEWADMIN_LABEL = "GPNewAdmin";
 
-	public static final String GP_NEWSUPPORT_USER_NAME = "GPNewSupport";
-	public static final String GP_NEWSUPPORT_NAME = "GP New Support";
+	
 	public static final String GP_NEWSUPPORT__PASSWORD = "Test123$";
-	public static final String GP_NEWSUPPORT__LABEL = "GPNewSupport";
+	public static final String GP_NEWSUPPORT_EMAIL = "AetMWTest2@gmail.com";
+	public static final String GP_NEWSUPPORT__LABEL = "AetMWTest2";
 
 	public static final String MERCHNAT_REGISTRATION_TITLE = "New merchant registration";
 

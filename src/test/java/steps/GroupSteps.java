@@ -42,11 +42,20 @@ public class GroupSteps {
 		Log.info("Creating new Group");
 		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
 		newGroupPage.groupNameTxtBox.sendKeys("AetTest01");
-		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest01 for Automation");
+		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest01 Support Group for Automation");
 		newGroupPage.groupCreateButton.click();
 		Thread.sleep(3000);
 	}
-
+	
+	@When("^provide details to create a new Admin Group$")
+	public void provide_details_to_create_a_new_Admin_Group() throws Throwable {
+		Log.info("Creating new Group");
+		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
+		newGroupPage.groupNameTxtBox.sendKeys("AetTest02");
+		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest02 Admin Group for Automation");
+		newGroupPage.groupCreateButton.click();
+		Thread.sleep(3000);
+	}
 	@When("^filter created Group$")
 	public void filter_created_Group() throws Throwable {
 		Log.info("Filter new Group");
@@ -81,22 +90,32 @@ public void edit_group_permissions_from_group_details() throws Throwable {
 	Thread.sleep(3000);
 }
 
-@When("^assign and rework screen appears$")
+@When("^assign and revoke screen appears$")
 public void assign_and_rework_screen_appears() throws Throwable {
-	groupPermissionsPage.portalUserPermisionLabel.click();
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
-	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
-	Thread.sleep(3000);
+	Assert.assertEquals("Portal user permissions link appeares",groupPermissionsPage.portalUserPermisionLabel.isDisplayed(),true);
+		
 }
 
 @Then("^set permissions to create support user group$")
 public void set_permissions_to_create_support_user_group() throws Throwable {
-  
+	groupPermissionsPage.portalUserPermisionLabel.click();
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
 }
 
 @Then("^set permissions to create admin user group$")
 public void set_permissions_to_create_admin_user_group() throws Throwable {
-
+	groupPermissionsPage.portalUserPermisionLabel.click();
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_2);
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_3);
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
+	
+	groupPermissionsPage.PortalGroupPermissionsLabel.click();
+	groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+	
+	
+	Thread.sleep(3000);
 }
 
 

@@ -25,4 +25,8 @@ public class NewPortalUserRegistrationPage extends WebPageInit {
 
 	@FindBy(xpath = "//*[@id='hiveGroupId']/div/div[1]")
 	public WebItem portalGroupDropdown;
+	
+	@FindBy(xpath = "//button[contains(text(),'Create user')]")
+	public WebItem createUserButton;
+	
 }

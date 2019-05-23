@@ -16,7 +16,10 @@ public class LeftNavigation extends WebPageInit {
 
 	@FindBy(xpath = "//span[contains(text(),'Portal users')]")
 	public WebItem portalUserLink;
-
+	
+	@FindBy(xpath = "//span[contains(text(),'Log out')]")
+	public WebItem logoutLabel;
+	
 	public WebItem userLink;
 	
 	public void inituserLink(String text){

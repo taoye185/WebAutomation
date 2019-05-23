@@ -3,7 +3,7 @@ Feature: 4_Merchant_Tests
 	Background:
 		Given User successfully navigated to Merchnat Summary Page
 
-	@sanity12 @loginAsGPAdmin
+	@sanity @loginAsGPAdmin
 	Scenario Outline: Create a New Merchant, Test lock and Unlock
 		Given user click on New Merchant button and naivgates to merchants Registration Page
 		And provide details to create a new Merchant

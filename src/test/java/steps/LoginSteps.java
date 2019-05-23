@@ -60,5 +60,13 @@ public class LoginSteps {
 		Assert.assertTrue("User is logged in ",
 				(leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
 	}
+	
+	@Then("^click log out to exit$")
+	public void click_log_out_to_exit() throws Throwable {
+		leftNavigation.logoutLabel.click();
+		Browser.sleep(1000);
+		Assert.assertEquals("username text box appeares",loginPage.usernameTxtBox.isDisplayed(),true);
+	}
+
 
 }

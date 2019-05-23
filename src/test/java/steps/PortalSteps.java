@@ -42,7 +42,7 @@ public class PortalSteps {
 
 	@When("^User enter portal user name \"([^\"]*)\" and search$")
 	public void user_enter_portal_user_name_and_search(String arg1) throws Throwable {
-
+		
 	}
 
 	@Then("^User validate the portal user details from results$")
@@ -58,12 +58,29 @@ public class PortalSteps {
 	@Given("^provide details to create a new Portal user$")
 	public void provide_details_to_create_a_new_Portal_user() throws Throwable {
 		Log.info("Creating new portal user");
-		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("tao");
+		newPortalUserRegistrationPage.portalNameTxtBox.sendKeys("Aet user");
+		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("AetTest01");
 	}
 
 	@Given("^provide details to create a \"([^\"]*)\" new Portal user$")
 	public void provide_details_to_create_a_new_Portal_user(String user) throws Throwable {
+		String userName= user.replaceAll("\\s+","");
 		Log.info("Creating new portal user");
-		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(user);
+		if(user.equalsIgnoreCase("support")){
+		newPortalUserRegistrationPage.portalNameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_NAME);		
+		newPortalUserRegistrationPage.portalUsernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_USER_NAME );
+		newPortalUserRegistrationPage.portalEmailTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWSUPPORT_EMAIL );
+		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("AetTest01");
+		}
+		if(user.equalsIgnoreCase("admin")){
+			newPortalUserRegistrationPage.portalNameTxtBox.sendKeys(user);		
+			newPortalUserRegistrationPage.portalUsernameTxtBox.sendKeys("Aet" + userName );
+			newPortalUserRegistrationPage.portalEmailTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWSUPPORT_EMAIL );
+			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("AetTest02");
+		}
+		
+		
+		newPortalUserRegistrationPage.createUserButton.click();
+		
 	}
 }
