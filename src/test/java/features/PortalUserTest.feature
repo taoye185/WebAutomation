@@ -1,3 +1,4 @@
+@portaluser
 Feature: 2_Portal_Tests
 
 	Background:

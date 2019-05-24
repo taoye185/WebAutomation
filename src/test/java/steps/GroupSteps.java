@@ -96,6 +96,9 @@ public class GroupSteps {
 		groupPermissionsPage.portalUserPermisionLabel.click();
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
+		groupPermissionsPage.DoneBtn.click();
+		Browser.sleep(2000);
+
 	}
 
 	@Then("^set permissions to create admin user group$")

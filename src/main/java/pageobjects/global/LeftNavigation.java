@@ -13,18 +13,18 @@ import utils.WebPageInit;
  */
 public class LeftNavigation extends WebPageInit {
 
-
 	@FindBy(xpath = "//span[contains(text(),'Portal users')]")
 	public WebItem portalUserLink;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Log out')]")
 	public WebItem logoutLabel;
-	
+
+	@FindBy(xpath = "//a[contains(@href,'/portalusers/')]")
 	public WebItem userLink;
-	
-	public void inituserLink(String text){
-	String xpath = "//a[contains(text(),'"+text+"')]";
-	userLink = new WebItem(By.xpath(xpath));
+
+	public void inituserLink(String text) {
+		String xpath = "//a[contains(text(),'" + text + "')]";
+		userLink = new WebItem(By.xpath(xpath));
 	}
-	
+
 }
