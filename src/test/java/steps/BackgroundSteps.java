@@ -11,6 +11,7 @@ import pageobjects.login.LoginPage;
 import pageobjects.merchants.MerchantsPage;
 import pageobjects.portalusers.PortalUsersPage;
 import utils.Browser;
+import utils.CommonUtils;
 import utils.Log;
 
 public class BackgroundSteps {
@@ -20,7 +21,7 @@ public class BackgroundSteps {
 	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static PortalUsersPage PortalUsersPage = new PortalUsersPage();
 
-	@Before("@loginAsGPAdmin")
+	@Before("@loginAsGPAdmin")	
 	public static void login_As_GP_Admin() {
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
@@ -50,6 +51,15 @@ public class BackgroundSteps {
 		}
 	}
 
+	@Before("@navigateToGroupSummaryPage")
+	public static void navigate_To_Group_Summary_Page() {
+		try {		
+			Browser.open(AcquirerPortalGlobal.GROUP_URL);
+		} catch (TimeoutException ex) {
+			
+		}
+	}
+	
 	@After("@logout")
 	public static void logout() {
 		if (leftNavigation.logoutLabel.isDisplayed()) {
@@ -69,6 +79,9 @@ public class BackgroundSteps {
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
 		merchantsPage.newMerchantButton.exists(4);
+		CommonUtils.username_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
+		CommonUtils.password_GBL= AcquirerPortalGlobal.GP_ADMIN_PASSWORD;
+		CommonUtils.userLabel_GBL=AcquirerPortalGlobal.GP_ADMIN_LABEL;
 	}
 
 	/**
@@ -82,6 +95,9 @@ public class BackgroundSteps {
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
 		PortalUsersPage.newPortalUserButton.exists(4);
+		CommonUtils.username_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
+		CommonUtils.password_GBL= AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD;
+		CommonUtils.userLabel_GBL=AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
 	}
 
 }

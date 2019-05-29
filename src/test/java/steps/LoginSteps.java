@@ -61,9 +61,9 @@ public class LoginSteps {
 	public void Validate_username_label_from_leftNav() throws Throwable {
 		Browser.sleep(1000);
 		leftNavigation.inituserLink(CommonUtils.userLabel_GBL);
-		Log.info(" leftNavigation.userLink  " + leftNavigation.userLink.getText());
+		Log.info(" leftNavigation.userLink  " + leftNavigation.userLink.getText());	
 		Assert.assertTrue("User is logged in ",
-				(leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
+				(leftNavigation.userLink.getText().contentEquals(CommonUtils.userLabel_GBL)));
 	}
 
 	@Then("^click log out to exit$")
