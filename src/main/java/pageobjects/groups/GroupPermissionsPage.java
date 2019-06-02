@@ -37,6 +37,14 @@ public class GroupPermissionsPage extends WebPageInit {
 
 	public void selectPortalUserPermisisons(String permission) {
 		portalUserSubPermision1.getSiblingElement(portalUserSubPermisionsXpath, permission);
+
+	}
+
+	public void selectAllPortalUserPermissions() {
+		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_1);
+		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_2);
+		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_3);
+		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_4);
 	}
 
 }

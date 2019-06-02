@@ -60,17 +60,18 @@ public class LoginSteps {
 	@Then("^Validate user name label from the left navigation is successful$")
 	public void Validate_username_label_from_leftNav() throws Throwable {
 		Browser.sleep(1000);
-		leftNavigation.inituserLink(CommonUtils.userLabel_GBL);
-		Log.info(" leftNavigation.userLink  " + leftNavigation.userLink.getText());	
+		leftNavigation.initLeftNavLink(CommonUtils.userLabel_GBL);
+		Log.info(" leftNavigation.userLink  " + leftNavigation.leftNavLink.getText());	
 		Assert.assertTrue("User is logged in ",
-				(leftNavigation.userLink.getText().contentEquals(CommonUtils.userLabel_GBL)));
+				(leftNavigation.leftNavLink.getText().contentEquals(CommonUtils.userLabel_GBL)));
 	}
 
 	@Then("^click log out to exit$")
 	public void click_log_out_to_exit() throws Throwable {
 		leftNavigation.logoutLabel.click();
 		Browser.sleep(1000);
-		Assert.assertEquals("username text box doesn't appear", loginPage.usernameTxtBox.isDisplayed(), true);
+		Assert.assertEquals("username text box appears", loginPage.usernameTxtBox.isDisplayed(), true);
+		CommonUtils.userLabel_GBL="";
 	}
 
 }

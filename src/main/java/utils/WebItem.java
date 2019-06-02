@@ -260,6 +260,24 @@ public class WebItem implements WebElement {
 
     }
 
+   
+    @SuppressWarnings("rawtypes")
+    public WebElement getSiblingElementforDynamicallyGeneratedData(String dynamicalyGeneratedName) {
+        List<WebElement> parentElementList = new ArrayList();
+        String xpath = "//*[.='" + dynamicalyGeneratedName +"']";
+        parentElementList = findElements(By.xpath(xpath));
+        WebElement tempElement=null;
+        for (int i = 0; i < parentElementList.size(); i++) {
+            tempElement = (WebElement) parentElementList.get(i);
+            if (tempElement.getText().equalsIgnoreCase(dynamicalyGeneratedName)) {
+                Log.info("element " + i + tempElement.getText() + tempElement.getLocation());                
+                tempElement.click();
+                // Log.info("element " + i + tempElement.getText() + tempElement.getLocation());               
+            }
+        }
+		return tempElement;
+    }
+    
     public static void enter() {
         try {
             Robot robot = new Robot();
