@@ -22,22 +22,17 @@ public class PortalSteps {
 
 	@Given("^User \"([^\"]*)\" is successfully navigated to Portal User Page$")
 	public void user_is_successfully_navigated_to_Portal_User_Page(String username) throws Throwable {
-
-		try {
-			Thread.sleep(2000);
-			leftNavigation.portalUserLink.click();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Browser.sleep(2000);
+		leftNavigation.portalUserLink.click();
 	}
 
 	@Given("^User successfully navigated to Portal Users Page$")
 	public void user_successfully_navigated_to_Portal_Users_Page() throws Throwable {
 		portalUsersPage.navigatePortalUserPage();
-		leftNavigation.inituserLink(CommonUtils.userLabel_GBL);
-		Assert.assertTrue("User is loged in ",
-				(leftNavigation.userLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
-		Thread.sleep(2000);
+		leftNavigation.initLeftNavLink(CommonUtils.userLabel_GBL);
+		Assert.assertTrue("User is logged in ",
+				(leftNavigation.leftNavLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
+		Browser.sleep(2000);
 	}
 
 	@When("^User enter portal user name \"([^\"]*)\" and search$")
@@ -58,12 +53,28 @@ public class PortalSteps {
 	@Given("^provide details to create a new Portal user$")
 	public void provide_details_to_create_a_new_Portal_user() throws Throwable {
 		Log.info("Creating new portal user");
-		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("tao");
+		newPortalUserRegistrationPage.portalNameTxtBox.sendKeys("Aet user");
+		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("AetTest01");
 	}
 
 	@Given("^provide details to create a \"([^\"]*)\" new Portal user$")
 	public void provide_details_to_create_a_new_Portal_user(String user) throws Throwable {
+		String userName = user.replaceAll("\\s+", "");
 		Log.info("Creating new portal user");
-		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(user);
+		if (user.equalsIgnoreCase("support")) {
+			newPortalUserRegistrationPage.portalNameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_NAME);
+			newPortalUserRegistrationPage.portalUsernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_USER_NAME);
+			newPortalUserRegistrationPage.portalEmailTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWSUPPORT_EMAIL);
+			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("AetTest01");
+		}
+		if (user.equalsIgnoreCase("admin")) {
+			newPortalUserRegistrationPage.portalNameTxtBox.sendKeys(user);
+			newPortalUserRegistrationPage.portalUsernameTxtBox.sendKeys("Aet" + userName);
+			newPortalUserRegistrationPage.portalEmailTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWSUPPORT_EMAIL);
+			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("AetTest02");
+		}
+
+		newPortalUserRegistrationPage.createUserButton.click();
+
 	}
 }

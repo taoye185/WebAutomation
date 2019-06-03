@@ -18,7 +18,7 @@ public class TestDataGenerator {
      * @param text : if you pass -5 you will get back a value between 0-5
      */
     public double getRandomNumber(int maxOffsetValue) {
-        return Math.random() * maxOffsetValue + 1;
+        return (int) (Math.random() * maxOffsetValue + 1);
     }
 
     /**

@@ -13,23 +13,18 @@ public class MerchantSteps {
   MerchantsPage merchantsPage = new MerchantsPage();
   MerchantRegistrationPage merchantRegistrationPage = new MerchantRegistrationPage();
 
-  @Given("^User navigates to merchants summary page$")
-  public void User_navigates_to_merchantsSummary() throws Throwable {
-
-  }
-
-  @Given("^User successfully navigated to Merchnat Summary Page$")
-  public void user_successfully_navigated_to_Merchnat_Summary_Page() throws Throwable {
+  @Given("^User successfully navigated to merchant Summary Page$")
+  public void user_successfully_navigated_to_Merchant_Summary_Page() throws Throwable {
     merchantsPage.navigateToMerchantSummaryPage();
-    Assert.assertEquals("User is navigated to Merchnats Page", Browser.getDriver().getCurrentUrl(),
+    Assert.assertEquals("User is navigated to Merchant's Page", Browser.getDriver().getCurrentUrl(),
         AcquirerPortalGlobal.MERCHANTS_URL);
 
   }
 
-  @Given("^user click on New Merchant button and naivgates to merchants Registration Page$")
+  @Given("^user click on New Merchant button and navigates to merchants Registration Page$")
   public void user_click_on_New_Merchant_button() throws Throwable {
     merchantsPage.newMerchantButton.click();
-    Assert.assertEquals("User is navigated to Merchnats Registraion Page",
+    Assert.assertEquals("User is navigated to Merchant's Registration's Page",
         merchantRegistrationPage.newMerchantRegistrationLabel.getText(),
         AcquirerPortalGlobal.MERCHNAT_REGISTRATION_TITLE);
   }
