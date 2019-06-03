@@ -1,8 +1,14 @@
 package pageobjects.groups;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import pageobjects.global.GroupPermissions;
+import utils.Log;
 import utils.WebItem;
 import utils.WebPageInit;
 
@@ -16,8 +22,8 @@ public class GroupPermissionsPage extends WebPageInit {
 	@FindBy(xpath = "//div[contains(text(),'Allows user to get the public details of all Portal users')]")
 	public WebItem portalUserSubPermision1;
 
-	public String portalUserSubPermisionsXpath = "//div[contains(text(),'Allows user to get the public details of all Portal users')]/.././/*";
-
+	//public String portalUserSubPermisionsXpath2 = "//div[contains(text(),'Allows user to get the public details of all Portal users')]/.././/*";
+	public String portalUserSubPermisionsXpath ="//div[contains(text(),'Allows user to get the public details of all Portal users')]//following::div[contains(text(),'Allows')]";
 	@FindBy(xpath = "//h2[contains(text(),'Portal group permissions')]")
 	public WebItem PortalGroupPermissionsLabel;
 
@@ -25,12 +31,23 @@ public class GroupPermissionsPage extends WebPageInit {
 
 	@FindBy(xpath = "//h2[contains(text(),'Merchant permissions')]")
 	public WebItem mrchantPermisionLabel;
+	
+	public String merchantsSubPermisionsXpath = "//div[contains(text(),'Allows user to get the public details of all merchants')]/../*";
+	
 
 	@FindBy(xpath = "//h2[contains(text(),'Transaction permissions')]")
 	public WebItem transactionPermisionLabel;
+	
+	public String transactionSubPermisionsXpath = "//div[contains(text(),'Allows user to view transactions.')]/../*";
 
-	@FindBy(xpath = "//h2[contains(text(),'Onboarding file permissions")
+	@FindBy(xpath = "//h2[contains(text(),'Onboarding file permissions')]")
 	public WebItem onboardingFilePermisionLabel;
+	public String onboardingSubPermisionsXpath = "//div[contains(text(),'Allows user to upload a onboarding file for merchant registration')]/../*";
+
+	
+	@FindBy(xpath = "//h2[contains(text(),'Audit log permissions')]")
+	public WebItem auditLogPermisionLabel;
+	public String auditLogSubPermisionsXpath = "//div[contains(text(),'Allows user to view the audit logs')]/../*";
 
 	@FindBy(xpath = "//button[contains(text(),'Done')]")
 	public WebItem DoneBtn;
@@ -41,10 +58,28 @@ public class GroupPermissionsPage extends WebPageInit {
 	}
 
 	public void selectAllPortalUserPermissions() {
-		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_1);
-		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_2);
-		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_3);
-		selectPortalUserPermisisons(GroupPermissions.PORTALUSER_PERMISSION_4);
+		portalUserSubPermision1.click();
+		portalUserPermisionLabel.clickAllSiblingElements(portalUserSubPermisionsXpath);		
+	}
+	
+	public void selectAllPortalGroupPermissions() {
+		PortalGroupPermissionsLabel.clickAllSiblingElements(portalUserGroupSubPermisionsXpath);
+	}
+	
+	public void selectAllMerchantPermissions() {
+		mrchantPermisionLabel.clickAllSiblingElements(merchantsSubPermisionsXpath);
 	}
 
+	public void selectAllTransactionPermissions() {
+		transactionPermisionLabel.clickAllSiblingElements(transactionSubPermisionsXpath);
+	}
+	
+	public void selectAllOnboardingFilePermissions() {
+		onboardingFilePermisionLabel.clickAllSiblingElements(onboardingSubPermisionsXpath);
+	}
+	
+	public void selectAllAuditLogPermissions() {
+		transactionPermisionLabel.clickAllSiblingElements(auditLogSubPermisionsXpath);
+	}
+	
 }

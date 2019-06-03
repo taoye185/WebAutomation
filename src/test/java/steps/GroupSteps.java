@@ -124,6 +124,19 @@ public class GroupSteps {
 	public void set_permissions_to_create_admin_user_group() throws Throwable {
 		groupPermissionsPage.portalUserPermisionLabel.click();
 		groupPermissionsPage.selectAllPortalUserPermissions();
+		
+		groupPermissionsPage.PortalGroupPermissionsLabel.click();
+		groupPermissionsPage.selectAllPortalGroupPermissions();
+		
+		groupPermissionsPage.mrchantPermisionLabel.click();
+		groupPermissionsPage.selectAllMerchantPermissions();
+		groupPermissionsPage.transactionPermisionLabel.click();
+		groupPermissionsPage.selectAllTransactionPermissions();
+		groupPermissionsPage.onboardingFilePermisionLabel.click();
+		groupPermissionsPage.selectAllOnboardingFilePermissions();
+		groupPermissionsPage.auditLogPermisionLabel.click();
+		
+		groupPermissionsPage.selectAllAuditLogPermissions();
 		groupPermissionsPage.DoneBtn.click();
 		//groupPermissionsPage.PortalGroupPermissionsLabel.click();
 		//groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
@@ -139,10 +152,6 @@ public class GroupSteps {
 		Thread.sleep(3000);
 	}
 	
-	@Then("^delete all groups$")
-	public void delete_all_groups() throws Throwable {
-		CleanUp.deleteAllGroups();
-	}
-	
+
 	
 }

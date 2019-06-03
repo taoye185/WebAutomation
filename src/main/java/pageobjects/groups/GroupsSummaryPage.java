@@ -43,8 +43,7 @@ public class GroupsSummaryPage extends WebPageInit {
 	
 	@FindBy(id = "Names")
 	public WebItem nameFilterOptions;	
-	
-	public String namesFilterOptionsXpath = "//*[@id='Names']/div[2]/.//*";
+
 
 	@FindBy(xpath = "//button[contains(text(),'Ok')]")
 	public WebItem OkFilterButton;
@@ -60,15 +59,15 @@ public class GroupsSummaryPage extends WebPageInit {
 	
 	public String groupDetailsRowXpath = "";
 
-	public void selectNameOption(String groupName) {
+	/*public void selectNameOption(String groupName) {
 		// nameFilterDropdownArrow.selectDropDownItem(groupName);
 		nameFilterDropdownArrow.getSiblingElement(namesFilterOptionsXpath, groupName);
 	}
-
-	public WebElement  selectGeneratedGroupName(String groupName) {
+*/
+	/*public WebElement  selectGeneratedGroupName(String groupName) {
 		return nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(groupName);
 	}
-	
+	*/
 	public WebElement selectElementintheResultsTabel(String text){
 		return nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(text);
 	}
