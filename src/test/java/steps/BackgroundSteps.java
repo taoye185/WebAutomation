@@ -1,53 +1,104 @@
 package steps;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.TimeoutException;
+
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import pageobjects.global.AcquirerPortalGlobal;
+import pageobjects.global.LeftNavigation;
 import pageobjects.login.LoginPage;
 import pageobjects.merchants.MerchantsPage;
+import pageobjects.portalusers.PortalUsersPage;
 import utils.Browser;
 import utils.CommonUtils;
+import utils.Log;
 
 public class BackgroundSteps {
 
 	public static LoginPage loginPage = new LoginPage();
 	public static MerchantsPage merchantsPage = new MerchantsPage();
+	public static LeftNavigation leftNavigation = new LeftNavigation();
+	public static PortalUsersPage PortalUsersPage = new PortalUsersPage();
 
-	@After("@independentTest")
-	public static void teardown() {
+	@Before("@loginAsGPAdmin")	
+	public static void login_As_GP_Admin() {
 		try {
-			WebDriver _driver = Browser.getDriver();
-			if (_driver == null) {
+			if (leftNavigation.logoutLabel.isDisplayed()) {
+				leftNavigation.initLeftNavLink(CommonUtils.userLabel_GBL);
+				if (leftNavigation.leftNavLink.getText() == AcquirerPortalGlobal.GP_ADMIN_LABEL) {
+					leftNavigation.logoutLabel.click();
+					loginAsGlobalPaymentsAdministrator(); /* login back as global payment admin */
+				}
 				return;
 			}
-			_driver.quit();
-			_driver = null;
-			System.out.println("\n closing browser and Quit driver..................\n");
-		} catch (Exception ex) {
-			System.out.println("====================    " + ex.getMessage() + "   =============================");
-			System.out.println("Driver quit failed ...... ");
+		} catch (TimeoutException ex) {
+			loginAsGlobalPaymentsAdministrator();
 		}
 	}
 
-	@Before("@loginAsGPAdmin")
-	public static void loginAsGPAdmin() {
+	@Before("@loginAsRootAdmin")
+	public static void login_As_Root_Admin() {
+		try {
+			if (leftNavigation.logoutLabel.isDisplayed()) {
+				if (leftNavigation.leftNavLink.getText() != AcquirerPortalGlobal.ROOT_ADMIN_LABEL) {
+					leftNavigation.logoutLabel.click();
+					loginAsRootAdministrator(); /* login back as root admin */
+				}
+				return;
+			}
+		} catch (TimeoutException ex) {
+			loginAsRootAdministrator();
+		}
+	}
+
+	@Before("@navigateToGroupSummaryPage")
+	public static void navigate_To_Group_Summary_Page() {
+		try {		
+			Browser.open(AcquirerPortalGlobal.GROUP_URL);
+		} catch (TimeoutException ex) {
+			
+		}
+	}
+	
+	@After("@logout")
+	public static void logout() {
+		if (leftNavigation.logoutLabel.isDisplayed()) {
+			leftNavigation.logoutLabel.click();
+		}
+		loginPage.usernameTxtBox.exists(3);
+	}
+
+	/**
+	 * login as gp admin
+	 */
+	public static void loginAsGlobalPaymentsAdministrator() {
+
 		Browser.open(AcquirerPortalGlobal.URL);
-		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.GP_ADMIN_LABEL;
+		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_LABEL);
 		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
-		merchantsPage.newMerchantButton.exists(3);
+		merchantsPage.newMerchantButton.exists(4);
+		CommonUtils.username_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
+		CommonUtils.password_GBL= AcquirerPortalGlobal.GP_ADMIN_PASSWORD;
+		CommonUtils.userLabel_GBL=AcquirerPortalGlobal.GP_ADMIN_LABEL;
 	}
 
-	@Before("@loginAsRootAdmin")
-	public static void loginAsRootAdmin() {
+	/**
+	 * login as root admin
+	 */
+	public static void loginAsRootAdministrator() {
+
 		Browser.open(AcquirerPortalGlobal.URL);
-		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
+		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
 		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
-		merchantsPage.newMerchantButton.exists(3);
+		PortalUsersPage.newPortalUserButton.exists(4);
+		CommonUtils.username_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
+		CommonUtils.password_GBL= AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD;
+		CommonUtils.userLabel_GBL=AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
 	}
 
 }
