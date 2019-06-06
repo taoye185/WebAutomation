@@ -11,6 +11,8 @@ public class CommonUtils {
 	public static String password_GBL = "";
 	public static String userLabel_GBL = "";
 	public static List<String> Group_GBL = new ArrayList<String>();
+	public static String supportGroup ="";
+	public static String adminGroup ="";
 	
 	
 	

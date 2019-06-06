@@ -7,12 +7,13 @@ public class CleanUp {
 
 	public static GroupsSummaryPage groupsSummaryPage = new GroupsSummaryPage();
 	public static GroupDetailPage groupDetailPage = new GroupDetailPage();
+	public static boolean testRunCompleted = true;
 	
 	public static void deleteAllGroups(){		
 		for (int i = 0; i < CommonUtils.Group_GBL.size(); i++) {
 			if(groupsSummaryPage.clearFilterButton.exists(2)){
 				groupsSummaryPage.clearFilterButton.click();
-				Browser.sleep(1000);
+				Browser.sleep(500);
 			}
 			String tempGroup =  CommonUtils.Group_GBL.get(i);
 			System.out.println(" delete group "  + tempGroup);

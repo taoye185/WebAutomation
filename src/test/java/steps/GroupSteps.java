@@ -67,7 +67,7 @@ public class GroupSteps {
 		newGroupPage.groupNameTxtBox.sendKeys(groupName);
 		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest02 Admin Group for Automation");
 		newGroupPage.groupCreateButton.click();
-		CommonUtils.Group_GBL.add(groupName);
+		CommonUtils.Group_GBL.add(groupName);		
 		Browser.sleep(3000);
 	}
 
@@ -116,6 +116,7 @@ public class GroupSteps {
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
 		groupPermissionsPage.DoneBtn.click();
+		CommonUtils.supportGroup=groupName;
 		Browser.sleep(2000);
 
 	}
@@ -138,9 +139,8 @@ public class GroupSteps {
 		
 		groupPermissionsPage.selectAllAuditLogPermissions();
 		groupPermissionsPage.DoneBtn.click();
-		//groupPermissionsPage.PortalGroupPermissionsLabel.click();
-		//groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
-
+		
+		CommonUtils.adminGroup=groupName;
 		Browser.sleep(3000);
 	}
 
