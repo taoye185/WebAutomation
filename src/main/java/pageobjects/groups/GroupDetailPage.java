@@ -1,5 +1,7 @@
 package pageobjects.groups;
 
+import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import pageobjects.global.GroupPermissions;
@@ -20,7 +22,5 @@ public class GroupDetailPage extends WebPageInit {
 
 	@FindBy(xpath = "//h2[contains(text(),'Group permissions')]//following::button[1]")
 	public WebItem groupPermisionEditButton;
-
-
 
 }

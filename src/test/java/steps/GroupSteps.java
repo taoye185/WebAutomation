@@ -140,17 +140,14 @@ public class GroupSteps {
 		groupPermissionsPage.selectAllAuditLogPermissions();
 		groupPermissionsPage.DoneBtn.click();
 		
+		
 		CommonUtils.adminGroup=groupName;
 		Browser.sleep(3000);
+		
+		CleanUp.deleteAllGroups();
 	}
 
-	@Then("^Delete the Group$")
-	public void delete_the_group() throws Throwable {
-		groupDetailPage.deleteGroupButton.click();
-		Thread.sleep(3000);
-		groupDetailPage.deleteConfirmationButton.click();
-		Thread.sleep(3000);
-	}
+
 	
 
 	
