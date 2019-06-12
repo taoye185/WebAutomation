@@ -13,10 +13,10 @@ import pageobjects.groups.GroupPermissionsPage;
 import pageobjects.groups.GroupsSummaryPage;
 import pageobjects.groups.NewGroupPage;
 import utils.Browser;
-import utils.CleanUp;
 import utils.CommonUtils;
 import utils.Log;
 import utils.TestDataGenerator;
+
 public class GroupSteps {
 
 	public static GroupsSummaryPage groupsSummaryPage = new GroupsSummaryPage();
@@ -25,17 +25,14 @@ public class GroupSteps {
 	public static GroupDetailPage groupDetailPage = new GroupDetailPage();
 	public static GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
 	static TestDataGenerator testDataGenerator = new TestDataGenerator();
-	public static String groupName="";
-	
-	
-	
+	public static String groupName = "";
 
 	@Given("^User successfully navigated to Groups summary Page$")
 	public void user_successfully_navigated_to_Groups_summary_Page() throws Throwable {
-		
+
 		leftNavigation.initLeftNavLink("Groups").click();
-		//groupsSummaryPage.navigateToGroupSummaryPage();
-		//Browser.sleep(3000);
+		// groupsSummaryPage.navigateToGroupSummaryPage();
+		// Browser.sleep(3000);
 		Assert.assertEquals("User is unable to navigate to group summary page", AcquirerPortalGlobal.GROUP_URL,
 				Browser.getDriver().getCurrentUrl());
 	}
@@ -49,10 +46,10 @@ public class GroupSteps {
 	@When("^provide details to create a new Group$")
 	public void provide_details_to_create_a_new_Group() {
 		Log.info("Creating new Group");
-		groupName="AetTest"+testDataGenerator.getRandomNumber(100);
-		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");		
+		groupName = "AetTest" + testDataGenerator.getRandomNumber(100);
+		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
 		newGroupPage.groupNameTxtBox.sendKeys(groupName);
-		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName +" Support Group for Automation");
+		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Support Group for Automation");
 		newGroupPage.groupCreateButton.click();
 		CommonUtils.Group_GBL.add(groupName);
 		System.out.println(groupName + "is created ");
@@ -62,7 +59,7 @@ public class GroupSteps {
 	@When("^provide details to create a new Admin Group$")
 	public void provide_details_to_create_a_new_Admin_Group() throws Throwable {
 		Log.info("Creating new Group");
-		groupName="AetTest"+testDataGenerator.getRandomNumber(100);
+		groupName = "AetTest" + testDataGenerator.getRandomNumber(100);
 		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
 		newGroupPage.groupNameTxtBox.sendKeys(groupName);
 		newGroupPage.groupDescriptionTxtBox.sendKeys("AetTest02 Admin Group for Automation");
@@ -75,10 +72,10 @@ public class GroupSteps {
 	public void filter_created_Group() throws Throwable {
 		Log.info("Filter new Group");
 		groupsSummaryPage.filterButton.click();
-		//groupsSummaryPage.nameFilterOptions.selectDropDownItem("AetTest01");
-		//groupsSummaryPage.clearFilterButton.click();
-		//groupsSummaryPage.filterButton.click();
-		groupsSummaryPage.nameFilterOptions.selectDropDownItem(groupName);				
+		// groupsSummaryPage.nameFilterOptions.selectDropDownItem("AetTest01");
+		// groupsSummaryPage.clearFilterButton.click();
+		// groupsSummaryPage.filterButton.click();
+		groupsSummaryPage.nameFilterOptions.selectDropDownItem(groupName);
 		groupsSummaryPage.OkFilterButton.click();
 
 	}
@@ -92,7 +89,7 @@ public class GroupSteps {
 
 	@Given("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
-		groupsSummaryPage.selectElementintheResultsTabel2(groupName,"Details");
+		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 		Browser.sleep(3000);
 	}
 
@@ -124,10 +121,10 @@ public class GroupSteps {
 	public void set_permissions_to_create_admin_user_group() throws Throwable {
 		groupPermissionsPage.portalUserPermisionLabel.click();
 		groupPermissionsPage.selectAllPortalUserPermissions();
-		
+
 		groupPermissionsPage.PortalGroupPermissionsLabel.click();
 		groupPermissionsPage.selectAllPortalGroupPermissions();
-		
+
 		groupPermissionsPage.mrchantPermisionLabel.click();
 		groupPermissionsPage.selectAllMerchantPermissions();
 		groupPermissionsPage.transactionPermisionLabel.click();
@@ -135,11 +132,11 @@ public class GroupSteps {
 		groupPermissionsPage.onboardingFilePermisionLabel.click();
 		groupPermissionsPage.selectAllOnboardingFilePermissions();
 		groupPermissionsPage.auditLogPermisionLabel.click();
-		
+
 		groupPermissionsPage.selectAllAuditLogPermissions();
 		groupPermissionsPage.DoneBtn.click();
-		//groupPermissionsPage.PortalGroupPermissionsLabel.click();
-		//groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
+		// groupPermissionsPage.PortalGroupPermissionsLabel.click();
+		// groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
 
 		Browser.sleep(3000);
 	}
@@ -151,7 +148,5 @@ public class GroupSteps {
 		groupDetailPage.deleteConfirmationButton.click();
 		Thread.sleep(3000);
 	}
-	
 
-	
 }
