@@ -21,18 +21,28 @@ public class CleanUp {
 			}
 			
 			String tempGroup =  CommonUtils.Group_GBL.get(i);
-			System.out.println(" delete group "  + tempGroup);
+			Log.info(" delete group "  + tempGroup);
 			groupsSummaryPage.filterButton.click();
 			groupsSummaryPage.nameFilterOptions.selectDropDownItem(tempGroup);	
-			Browser.sleep(1000);
+			groupsSummaryPage.OkFilterButton.exists(2);
 			groupsSummaryPage.OkFilterButton.click();
 			Browser.sleep(1000);
 			groupsSummaryPage.selectElementintheResultsTabel2(tempGroup,"Details");
-			Browser.sleep(3000);
+			groupDetailPage.deleteGroupButton.exists(2);
 			groupDetailPage.deleteGroupButton.click();
-			Browser.sleep(3000);
+			groupDetailPage.deleteConfirmationButton.exists(2);
 			groupDetailPage.deleteConfirmationButton.click();
-			Browser.sleep(3000);
+			
+			if(tempGroup.contentEquals(CommonUtils.adminGroup)){
+				CommonUtils.adminGroup="";
+				Log.info(" Admin group "  + tempGroup + "set to nul" + CommonUtils.adminGroup);
+			}
+			if(tempGroup.contentEquals(CommonUtils.supportGroup)){
+				CommonUtils.supportGroup="";
+				Log.info(" Admin group "  + tempGroup + "set to nul" + CommonUtils.supportGroup);
+			}
+			 CommonUtils.Group_GBL.remove(i);
+			
 		}
 	}
 	

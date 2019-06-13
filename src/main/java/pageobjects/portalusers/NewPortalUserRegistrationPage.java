@@ -29,4 +29,7 @@ public class NewPortalUserRegistrationPage extends WebPageInit {
 	@FindBy(xpath = "//button[contains(text(),'Create user')]")
 	public WebItem createUserButton;
 	
+	@FindBy(xpath = "/html/body/div[3]/div/div/div/div[1]/button")
+	public WebItem cloeButton;
+	
 }

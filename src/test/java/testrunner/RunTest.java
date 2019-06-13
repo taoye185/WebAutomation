@@ -2,6 +2,8 @@ package testrunner;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.ElementClickInterceptedException;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import utils.Browser;
@@ -20,8 +22,15 @@ public class RunTest {
 
 	@AfterClass
 	public static void teardown() {
+		try{
+		System.out.println(" Clean up started ");
 		CleanUp.deleteAllGroups();
 		Browser.quitDriver();
+		}
+		catch(Exception ex){
+			CleanUp.deleteAllGroups();
+			Browser.quitDriver();
+		}
 	}
 
 }

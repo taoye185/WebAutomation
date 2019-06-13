@@ -259,7 +259,6 @@ public class WebItem implements WebElement {
 				return;
 			}
 		}
-
 	}
 
 	public void clickAllSiblingElements(String parentElementXpath) {
@@ -267,9 +266,9 @@ public class WebItem implements WebElement {
 		parentElementList = findElements(By.xpath(parentElementXpath));
 		for (int i = 0; i < parentElementList.size(); i++) {
 			WebElement tempElement = (WebElement) parentElementList.get(i);
-			System.out.println(" tempElement " + tempElement.getText());
-			if(tempElement.getText()!=null){
-			tempElement.click();
+			Log.info(" tempElement " + tempElement.getText());
+			if (tempElement.getText() != null) {
+				tempElement.click();
 			}
 			Browser.sleep(300);
 		}

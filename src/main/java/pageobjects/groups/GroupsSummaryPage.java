@@ -30,8 +30,10 @@ public class GroupsSummaryPage extends WebPageInit {
 	public WebItem nameFilterDropdown;
 	@FindBy(xpath = "//*[@id='Names']/div[1]/div[2]/div")
 	public WebItem nameFilterDropdownArrow;
-	@FindBy(xpath = "//*[contains(text(),'AetTest01')]/..")
-	public WebItem nameFilterDropdownOption;
+	
+	//@FindBy(xpath = "//*[contains(text(),'AetTest01')]/..")
+	//public WebItem nameFilterDropdownOption;
+	
 	@FindBy(xpath = "//*[@id='Descriptions']/div[1]/div[2]/div/")
 	public WebItem descriptionFilterDropdownArrow;	
 
@@ -68,7 +70,7 @@ public class GroupsSummaryPage extends WebPageInit {
 		return nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(groupName);
 	}
 	*/
-	public WebElement selectElementintheResultsTabel(String text){
+	public WebElement selectElementintheResultsTabel(String text){		
 		return nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(text);
 	}
 
@@ -80,7 +82,7 @@ public class GroupsSummaryPage extends WebPageInit {
 	}
 	
 	public void setDescriptionOption(String description) {
-		nameFilterDropdownOption.selectDropDownItem(description);
+		//nameFilterDropdownOption.selectDropDownItem(description);
 	}
 
 

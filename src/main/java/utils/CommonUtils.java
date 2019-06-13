@@ -3,6 +3,8 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import pageobjects.global.AcquirerPortalGlobal;
+
 
 
 public class CommonUtils {
@@ -13,8 +15,8 @@ public class CommonUtils {
 	public static List<String> Group_GBL = new ArrayList<String>();
 	public static String supportGroup ="";
 	public static String adminGroup ="";
-	
-	
+	public static String supportUserEmail ="";
+	public static String adminUserEmail ="";
 	
 		
 }
