@@ -39,27 +39,23 @@ public class BackgroundSteps {
 	@Before(value="@loginAsGPAdmin",order=0)
 	public static void login_As_GP_Admin() {
 		try {
-			if (leftNavigation.logoutLabel.isDisplayed()) {
-				leftNavigation.initLeftNavLink(CommonUtils.userLabel_GBL);
-				if (leftNavigation.leftNavLink.getText() == AcquirerPortalGlobal.GP_ADMIN_LABEL) {
+			if (leftNavigation.logoutLabel.isDisplayed()) {			
+				if (leftNavigation.loggedInUserLink.getText() != AcquirerPortalGlobal.GP_ADMIN_LABEL) {
 					leftNavigation.logoutLabel.click();
-					loginAsGlobalPaymentsAdministrator(); 
+					loginAsGlobalPaymentsAdministrator();  /* login back as GP admin */
 				}
 				return;
 			}
 		} catch (TimeoutException ex) {
 			loginAsGlobalPaymentsAdministrator();
-		}
-		catch (ElementClickInterceptedException ex) {
-			loginAsRootAdministrator();
-		}
+		}	
 	}
 
 	@Before("@loginAsRootAdmin")
 	public static void login_As_Root_Admin() {
 		try {		
-			if (leftNavigation.logoutLabel.exists(3)) {
-				if (leftNavigation.leftNavLink.getText() != AcquirerPortalGlobal.ROOT_ADMIN_LABEL) {
+			if (leftNavigation.logoutLabel.isDisplayed()) {	
+				if (leftNavigation.loggedInUserLink.getText() != AcquirerPortalGlobal.ROOT_ADMIN_LABEL) {
 					leftNavigation.logoutLabel.click();
 					loginAsRootAdministrator(); /* login back as root admin */
 				}
@@ -68,9 +64,9 @@ public class BackgroundSteps {
 		} catch (TimeoutException ex) {
 			loginAsRootAdministrator();
 		}
-		catch (ElementClickInterceptedException ex) {
+		/*catch (ElementClickInterceptedException ex) {
 			loginAsRootAdministrator();
-		}
+		}*/
 	}
 
 	@Before("@navigateToGroupSummaryPage")
@@ -150,12 +146,5 @@ public class BackgroundSteps {
 		CommonUtils.username_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
 		CommonUtils.password_GBL = AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD;
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
-	}
-	
-
-
-
-	
-
-	
+	}	
 }

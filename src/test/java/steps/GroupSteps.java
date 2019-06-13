@@ -17,6 +17,7 @@ import utils.CleanUp;
 import utils.CommonUtils;
 import utils.Log;
 import utils.TestDataGenerator;
+
 public class GroupSteps {
 
 	public static GroupsSummaryPage groupsSummaryPage = new GroupsSummaryPage();
@@ -25,12 +26,11 @@ public class GroupSteps {
 	public static GroupDetailPage groupDetailPage = new GroupDetailPage();
 	public static GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
 	static TestDataGenerator testDataGenerator = new TestDataGenerator();
-	public static String groupName = "";	
-	
+	public static String groupName = "";
 
 	@Given("^User successfully navigated to Groups summary Page$")
 	public void user_successfully_navigated_to_Groups_summary_Page() {
-		//leftNavigation.initLeftNavLink("Groups").exists(3);
+		// leftNavigation.initLeftNavLink("Groups").exists(3);
 		Browser.sleep(30000);
 		leftNavigation.initLeftNavLink("Groups").click();
 		Assert.assertEquals("User is unable to navigate to group summary page", AcquirerPortalGlobal.GROUP_URL,
@@ -39,13 +39,14 @@ public class GroupSteps {
 
 	@When("^user click on New Group button$")
 	public void user_click_on_New_Group_button() throws Throwable {
-		groupsSummaryPage.newGroupButton.exists(2); /* we need have implicit wait */
+		groupsSummaryPage.newGroupButton
+				.exists(2); /* we need have implicit wait */
 		groupsSummaryPage.newGroupButton.click();
 	}
 
 	@When("^provide details to create a new Group$")
 	public void provide_details_to_create_a_new_Group() {
-		createSupportGroup();	
+		createSupportGroup();
 	}
 
 	@When("^provide details to create a new Admin Group$")
@@ -67,7 +68,7 @@ public class GroupSteps {
 
 	@Given("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
-		groupsSummaryPage.selectElementintheResultsTabel2(groupName,"Details");	
+		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 	}
 
 	@Then("^edit group permissions from group details$")
@@ -75,7 +76,6 @@ public class GroupSteps {
 		Log.info(groupDetailPage.groupPermisionLabel.getText());
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
-		
 	}
 
 	@When("^assign and revoke screen appears$")
@@ -91,28 +91,31 @@ public class GroupSteps {
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
 		groupPermissionsPage.DoneBtn.click();
-		CommonUtils.supportGroup=groupName;
+		CommonUtils.supportGroup = groupName;
 	}
 
 	@Then("^set permissions to create admin user group$")
-	public void set_permissions_to_create_admin_user_group() throws Throwable {
+	public static void set_permissions_to_create_admin_user_group() throws Throwable {
 		groupPermissionsPage.portalUserPermisionLabel.click();
-		groupPermissionsPage.selectAllPortalUserPermissions();		
+		groupPermissionsPage.selectAllPortalUserPermissions();
 		groupPermissionsPage.PortalGroupPermissionsLabel.click();
-		groupPermissionsPage.selectAllPortalGroupPermissions();		
+		groupPermissionsPage.selectAllPortalGroupPermissions();
 		groupPermissionsPage.mrchantPermisionLabel.click();
 		groupPermissionsPage.selectAllMerchantPermissions();
 		groupPermissionsPage.transactionPermisionLabel.click();
 		groupPermissionsPage.selectAllTransactionPermissions();
 		groupPermissionsPage.onboardingFilePermisionLabel.click();
 		groupPermissionsPage.selectAllOnboardingFilePermissions();
-		groupPermissionsPage.auditLogPermisionLabel.click();		
+		groupPermissionsPage.auditLogPermisionLabel.click();
 		groupPermissionsPage.selectAllAuditLogPermissions();
-		groupPermissionsPage.DoneBtn.click();			
-		CommonUtils.adminGroup=groupName;		
-		
+		groupPermissionsPage.DoneBtn.click();
+		CommonUtils.adminGroup = groupName;
+
 	}
 
+	/**
+	 *  
+	 */
 	public static void createSupportGroup() {
 		Log.info("Creating new Support Group");
 		groupName = "AetTest" + testDataGenerator.getRandomNumber(100);
@@ -136,21 +139,19 @@ public class GroupSteps {
 		Log.info(groupName + "is created ");
 		Browser.sleep(3000);
 	}
-	
+
 	public static void filterGroupByName() {
 		Log.info("Filter new Group");
-		groupsSummaryPage.filterButton.click();		
+		groupsSummaryPage.filterButton.click();
 		groupsSummaryPage.nameFilterOptions.selectDropDownItem(groupName);
 		groupsSummaryPage.OkFilterButton.click();
 		Browser.sleep(3000);
 		Assert.assertTrue("Group is listed",
 				((groupsSummaryPage.selectElementintheResultsTabel(groupName)).getText().contentEquals(groupName)));
 	}
-	
-	
 
 	public static void selectGroupandassignSupportGroupPermisisons() {
-		groupsSummaryPage.selectElementintheResultsTabel2(groupName,"Details");
+		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
 		groupPermissionsPage.portalUserPermisionLabel.exists(2);
@@ -158,35 +159,15 @@ public class GroupSteps {
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_1);
 		groupPermissionsPage.selectPortalUserPermisisons(AcquirerPortalGlobal.PORTALUSER_PERMISSION_4);
 		groupPermissionsPage.DoneBtn.click();
-		CommonUtils.supportGroup=groupName;		
+		CommonUtils.supportGroup = groupName;
 	}
 
-	public static void selectGroupandassignAdminGroupPermisisons() {
-		groupsSummaryPage.selectElementintheResultsTabel2(groupName,"Details");
+	public static void selectGroupandassignAdminGroupPermisisons() throws Throwable {
+		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
-		groupDetailPage.groupPermisionEditButton.click();		
+		groupDetailPage.groupPermisionEditButton.click();
 		Assert.assertEquals("Portal user permissions link appears",
 				groupPermissionsPage.portalUserPermisionLabel.isDisplayed(), true);
-		groupPermissionsPage.portalUserPermisionLabel.click();
-		groupPermissionsPage.selectAllPortalUserPermissions();		
-		groupPermissionsPage.PortalGroupPermissionsLabel.click();
-		groupPermissionsPage.selectAllPortalGroupPermissions();		
-		groupPermissionsPage.mrchantPermisionLabel.click();
-		groupPermissionsPage.selectAllMerchantPermissions();
-		groupPermissionsPage.transactionPermisionLabel.click();
-		groupPermissionsPage.selectAllTransactionPermissions();
-		groupPermissionsPage.onboardingFilePermisionLabel.click();
-		groupPermissionsPage.selectAllOnboardingFilePermissions();
-		groupPermissionsPage.auditLogPermisionLabel.click();		
-		groupPermissionsPage.selectAllAuditLogPermissions();
-		groupPermissionsPage.DoneBtn.click();		
-		CommonUtils.adminGroup=groupName;		
-		
+		set_permissions_to_create_admin_user_group();
 	}
-	
-	
-
-	
-
-	
 }

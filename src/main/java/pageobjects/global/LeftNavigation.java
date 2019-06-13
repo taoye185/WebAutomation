@@ -21,6 +21,9 @@ public class LeftNavigation extends WebPageInit {
 
 	public WebItem leftNavLink;
 	
+	@FindBy(id="userlink")
+	public WebItem loggedInUserLink;
+	
 	public WebItem initLeftNavLink(String text){
 	String xpath = "//*[contains(text(),'"+text+"')]";
 	return leftNavLink = new WebItem(By.xpath(xpath));
