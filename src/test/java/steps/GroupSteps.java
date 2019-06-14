@@ -1,6 +1,7 @@
 package steps;
 
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -140,7 +141,7 @@ public class GroupSteps {
 	public static void filterGroupByName() {
 		Log.info("Filter new Group");
 		groupsSummaryPage.filterButton.click();
-		groupsSummaryPage.nameFilterOptions.selectDropDownItem(groupName);
+		groupsSummaryPage.nameFilterOptions.sendKeys(groupName + Keys.TAB);
 		groupsSummaryPage.OkFilterButton.click();
 		Browser.sleep(3000);
 		Assert.assertTrue("Group is listed",

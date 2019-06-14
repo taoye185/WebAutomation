@@ -157,8 +157,7 @@ public class WebItem implements WebElement {
 	}
 
 	/**
-	 * This method is useful to select one option from drop down list by option
-	 * text
+	 * This method is useful to select one option from drop down list by option text
 	 * 
 	 * @para visibleText- text that is used select an option
 	 **/
@@ -181,10 +180,8 @@ public class WebItem implements WebElement {
 		getActiveItem().click();// drop down list.
 		WebElement element = getItem(Global.DEFAULT_EXPLICIT_WAIT,
 				ExpectedConditions.presenceOfElementLocated(By.xpath(valueOfXpath)));
-		// JavascriptExecutor javascriptExecutor = (JavascriptExecutor)
-		// Browser.getDriver();
-		// javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
-		// element);
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) Browser.getDriver();
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 		element.click(); // element to select from drop down list.
 	}
 
