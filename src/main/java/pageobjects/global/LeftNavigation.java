@@ -13,19 +13,34 @@ import utils.WebPageInit;
  */
 public class LeftNavigation extends WebPageInit {
 
-	@FindBy(xpath = "//span[contains(text(),'Portal users')]")
+	@FindBy(id = "merchants-link")
+	public WebItem merchantsLink;
+
+	@FindBy(id = "transactions-link")
+	public WebItem transactionsLink;
+
+	@FindBy(id = "portal-users-link")
 	public WebItem portalUserLink;
 
-	@FindBy(xpath = "//span[contains(text(),'Log out')]")
+	@FindBy(id = "groups-link")
+	public WebItem groupsLink;
+
+	@FindBy(id = "logout-link")
 	public WebItem logoutLabel;
 
-	public WebItem leftNavLink;
-	
-	@FindBy(id="userlink")
+	@FindBy(id = "userlink")
 	public WebItem loggedInUserLink;
-	
-	public WebItem initLeftNavLink(String text){
-	String xpath = "//*[contains(text(),'"+text+"')]";
-	return leftNavLink = new WebItem(By.xpath(xpath));
+
+	@FindBy(id = "division-name")
+	public WebItem divisionName;
+
+	@FindBy(id = "payment-processor")
+	public WebItem paymentProcessorName;
+
+	public WebItem leftNavLink;
+
+	public WebItem initLeftNavLink(String text) {
+		String xpath = "//*[contains(text(),'" + text + "')]";
+		return leftNavLink = new WebItem(By.xpath(xpath));
 	}
 }

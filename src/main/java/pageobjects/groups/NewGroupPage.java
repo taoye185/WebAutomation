@@ -9,7 +9,7 @@ public class NewGroupPage extends WebPageInit {
 
     @FindBy(id = "divisionId")
     public WebItem divisionDropdown;
-    // *[@id="divisionId"]/following::div/following::div/following::div/following::div/following::div
+
     @FindBy(xpath = "//label[contains(text(),'Division')]")
     public WebItem divisionLabel;
     @FindBy(id = "name")
@@ -18,6 +18,8 @@ public class NewGroupPage extends WebPageInit {
     public WebItem groupDescriptionTxtBox;
     @FindBy(xpath = "//button[contains(text(),'Create group')]")
     public WebItem groupCreateButton;
+
+    //below code can be removed
 
     public String groupOptionsXpath = "//label[contains(text(),'Division')]//following::div[contains(text(),'Global Payments')]";
 

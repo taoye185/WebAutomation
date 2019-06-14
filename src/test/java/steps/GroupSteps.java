@@ -13,7 +13,6 @@ import pageobjects.groups.GroupPermissionsPage;
 import pageobjects.groups.GroupsSummaryPage;
 import pageobjects.groups.NewGroupPage;
 import utils.Browser;
-import utils.CleanUp;
 import utils.CommonUtils;
 import utils.Log;
 import utils.TestDataGenerator;
@@ -30,17 +29,15 @@ public class GroupSteps {
 
 	@Given("^User successfully navigated to Groups summary Page$")
 	public void user_successfully_navigated_to_Groups_summary_Page() {
-		// leftNavigation.initLeftNavLink("Groups").exists(3);
-		Browser.sleep(30000);
-		leftNavigation.initLeftNavLink("Groups").click();
+		Browser.sleep(2000);
+		leftNavigation.groupsLink.click();
 		Assert.assertEquals("User is unable to navigate to group summary page", AcquirerPortalGlobal.GROUP_URL,
 				Browser.getDriver().getCurrentUrl());
 	}
 
 	@When("^user click on New Group button$")
 	public void user_click_on_New_Group_button() throws Throwable {
-		groupsSummaryPage.newGroupButton
-				.exists(2); /* we need have implicit wait */
+		groupsSummaryPage.newGroupButton.exists(2); /* we need have explicit wait */
 		groupsSummaryPage.newGroupButton.click();
 	}
 
@@ -118,22 +115,22 @@ public class GroupSteps {
 	 */
 	public static void createSupportGroup() {
 		Log.info("Creating new Support Group");
-		groupName = "AetTest" + testDataGenerator.getRandomNumber(100);
-		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
+		groupName = "Support_Group_" + testDataGenerator.getRandomNumber(100);
+		newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GLOBAL_PAYMENTS);
 		newGroupPage.groupNameTxtBox.sendKeys(groupName);
 		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Support Group for Automation");
 		newGroupPage.groupCreateButton.click();
-		CommonUtils.Group_GBL.add(groupName);
-		Log.info(groupName + "is created ");
+		CommonUtils.Group_GBL.add(groupName); // adding to array list for clean up
+		Log.info(groupName + ":is created ");
 		Browser.sleep(3000);
 	}
 
 	public static void CreateAdminGroup() {
 		Log.info("Creating new Admin Group");
-		groupName = "AetTest" + testDataGenerator.getRandomNumber(100);
-		newGroupPage.divisionDropdown.selectDropDownItem("Global Payments");
+		groupName = "Admin_Group_" + testDataGenerator.getRandomNumber(100);
+		newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GLOBAL_PAYMENTS);
 		newGroupPage.groupNameTxtBox.sendKeys(groupName);
-		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Support Group for Automation");
+		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Admin Group for Automation");
 		newGroupPage.groupCreateButton.click();
 		CommonUtils.Group_GBL.add(groupName);
 		Log.info(groupName + "is created ");
