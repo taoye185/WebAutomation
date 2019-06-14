@@ -1,6 +1,7 @@
 package steps;
 
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 
 import cucumber.api.java.en.Given;
@@ -60,12 +61,13 @@ public class GroupSteps {
 	@Then("^verify group is listed down in the results table$")
 	public void verify_group_is_listed_down_in_the_results_table() throws Throwable {
 		Browser.sleep(3000);
-		Assert.assertTrue("Group is listed",
+		Assert.assertTrue("Group is not listed",
 				((groupsSummaryPage.selectElementintheResultsTabel(groupName)).getText().contentEquals(groupName)));
 	}
 
-	@Given("^click on details of the Group$")
+	@When("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
+		Browser.sleep(3000);
 		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 	}
 
@@ -76,7 +78,7 @@ public class GroupSteps {
 		groupDetailPage.groupPermisionEditButton.click();
 	}
 
-	@When("^assign and revoke screen appears$")
+	@Then("^assign and revoke screen appears$")
 	public void assign_and_rework_screen_appears() throws Throwable {
 		Assert.assertEquals("Portal user permissions link appears",
 				groupPermissionsPage.portalUserPermisionLabel.isDisplayed(), true);
@@ -116,7 +118,7 @@ public class GroupSteps {
 	 */
 	public static void createSupportGroup() {
 		Log.info("Creating new Support Group");
-		groupName = "Support_Group_" + testDataGenerator.getRandomNumber(100);
+		groupName = "Support_Group_" + testDataGenerator.timestamp();
 		newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GLOBAL_PAYMENTS);
 		newGroupPage.groupNameTxtBox.sendKeys(groupName);
 		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Support Group for Automation");
@@ -128,7 +130,7 @@ public class GroupSteps {
 
 	public static void CreateAdminGroup() {
 		Log.info("Creating new Admin Group");
-		groupName = "Admin_Group_" + testDataGenerator.getRandomNumber(100);
+		groupName = "Admin_Group_" + testDataGenerator.timestamp();
 		newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GLOBAL_PAYMENTS);
 		newGroupPage.groupNameTxtBox.sendKeys(groupName);
 		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Admin Group for Automation");
@@ -141,10 +143,15 @@ public class GroupSteps {
 	public static void filterGroupByName() {
 		Log.info("Filter new Group");
 		groupsSummaryPage.filterButton.click();
-		groupsSummaryPage.nameFilterOptions.sendKeys(groupName + Keys.TAB);
+		groupsSummaryPage.nameFilterDropdown.click();
+		groupsSummaryPage.nameTextField.sendKeys(groupName);
+		Browser.sleep(3000);
+		groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
+		Browser.sleep(3000);
 		groupsSummaryPage.OkFilterButton.click();
 		Browser.sleep(3000);
-		Assert.assertTrue("Group is listed",
+		// i didn't get this assertion?
+		Assert.assertTrue("Group is not listed",
 				((groupsSummaryPage.selectElementintheResultsTabel(groupName)).getText().contentEquals(groupName)));
 	}
 

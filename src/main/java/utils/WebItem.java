@@ -145,6 +145,13 @@ public class WebItem implements WebElement {
 		locator = byID;
 	}
 
+	/**
+	 * This method is useful for checking that the element is present with in the
+	 * specified time
+	 * 
+	 * @para waitTime- time frame to check that the element is clickable
+	 **/
+
 	public boolean exists(int... waitTime) {
 		int waitValue = waitTime.length == 0 ? 0 : waitTime[0];
 		boolean result = false;
@@ -153,6 +160,24 @@ public class WebItem implements WebElement {
 		} catch (Exception ignored) {
 		}
 		Log.info("'" + locator.toString() + "' existence verification. Exists = " + result);
+		return result;
+	}
+
+	/**
+	 * This method is useful for checking that the element is present and clickable
+	 * with in the specified time
+	 * 
+	 * @para waitTime- time frame to check that the element is clickable
+	 **/
+
+	public boolean isClickable(int... waitTime) {
+		int waitValue = waitTime.length == 0 ? 0 : waitTime[0];
+		boolean result = false;
+		try {
+			result = getItem(waitValue, ExpectedConditions.elementToBeClickable(locator)) != null;
+		} catch (Exception ignored) {
+		}
+		Log.info("'" + locator.toString() + "' element is clickable . clickable = " + result);
 		return result;
 	}
 
@@ -251,6 +276,7 @@ public class WebItem implements WebElement {
 			if (tempElement.getText().equalsIgnoreCase(elementText)) {
 				Log.info("element " + i + tempElement.getText() + tempElement.getLocation());
 				tempElement.click();
+				Browser.sleep(2000);
 				// Log.info("element " + i + tempElement.getText() +
 				// tempElement.getLocation());
 				return;
@@ -267,7 +293,7 @@ public class WebItem implements WebElement {
 			if (tempElement.getText() != null) {
 				tempElement.click();
 			}
-			Browser.sleep(300);
+			Browser.sleep(3000);
 		}
 	}
 
@@ -277,6 +303,7 @@ public class WebItem implements WebElement {
 		WebElement tempElement = findElement(By.xpath(xpath));
 		Log.info("element " + tempElement.getText() + tempElement.getLocation());
 		tempElement.click();
+		Browser.sleep(2000);
 		return tempElement;
 	}
 

@@ -18,6 +18,9 @@ public class GroupsSummaryPage extends WebPageInit {
 		newGroupButton.exists(5);
 	}
 
+	@FindBy(id = "hive-groups-list")
+	public WebItem groupsListGrid;
+
 	@FindBy(id = "add-group-btn")
 	public WebItem newGroupButton;
 
@@ -26,25 +29,21 @@ public class GroupsSummaryPage extends WebPageInit {
 
 	@FindBy(xpath = "//label[contains(text(),'Names')]")
 	public WebItem nameLabel;
-	@FindBy(xpath = "//*[@id='Names']/div[1]/div[1]/div[1]")
+
+	@FindBy(id = "Names")
 	public WebItem nameFilterDropdown;
+
+	@FindBy(xpath = "//*[@id='Names']//input[contains(@tabindex,'0')]")
+	public WebItem nameTextField;
+
 	@FindBy(xpath = "//*[@id='Names']/div[1]/div[2]/div")
 	public WebItem nameFilterDropdownArrow;
-
-	// @FindBy(xpath = "//*[contains(text(),'AetTest01')]/..")
-	// public WebItem nameFilterDropdownOption;
 
 	@FindBy(xpath = "//*[@id='Descriptions']/div[1]/div[2]/div/")
 	public WebItem descriptionFilterDropdownArrow;
 
 	@FindBy(xpath = "//div[@id='Descriptions']//*[contains(text(),'Select...')]")
 	public WebItem descriptionsFilterDropdown;
-
-	// @FindBy(xpath = "//*[contains(text(),'AetTest01')]")
-	// public WebItem nameFilterOption;
-
-	@FindBy(id = "Names")
-	public WebItem nameFilterOptions;
 
 	@FindBy(xpath = "//button[contains(text(),'Ok')]")
 	public WebItem OkFilterButton;
