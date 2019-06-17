@@ -1,7 +1,10 @@
 package utils;
 
 import org.apache.log4j.Logger;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Log extends Logger {
 
@@ -17,6 +20,7 @@ public class Log extends Logger {
      * 
      **/
     public static String getCallingClassName() {
+        setCurrentDateWithTime();
         StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
         for (int i = 1; i < stElements.length; i++) {
             StackTraceElement sTraceElement = stElements[i];
@@ -28,6 +32,15 @@ public class Log extends Logger {
             }
         }
         return null;
+    }
+
+    /**
+     * This method set the current date with time value to current.date.time as a
+     * environment variable This variable is used in Log4j.properties file
+     **/
+    public static void setCurrentDateWithTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hhmmss");
+        System.setProperty("current.date.time", dateFormat.format(new Date()));
     }
 
     /**
