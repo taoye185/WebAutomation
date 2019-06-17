@@ -37,10 +37,5 @@ public class LeftNavigation extends WebPageInit {
 	@FindBy(id = "payment-processor")
 	public WebItem paymentProcessorName;
 
-	public WebItem leftNavLink;
-
-	public WebItem initLeftNavLink(String text) {
-		String xpath = "//*[contains(text(),'" + text + "')]";
-		return leftNavLink = new WebItem(By.xpath(xpath));
-	}
+	
 }

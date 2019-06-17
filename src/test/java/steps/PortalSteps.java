@@ -35,12 +35,10 @@ public class PortalSteps {
 	@Given("^User successfully navigated to Portal Users Page$")
 	public void user_successfully_navigated_to_Portal_Users_Page() throws Throwable {
 		Browser.sleep(2000);
-		if (leftNavigation.initLeftNavLink("Portal users").exists(2))
-			leftNavigation.initLeftNavLink("Portal users").click();
-		// portalUsersPage.navigatePortalUserPage();
-		leftNavigation.initLeftNavLink(CommonUtils.userLabel_GBL);
+		if (leftNavigation.portalUserLink.exists(2))
+			leftNavigation.portalUserLink.click();			
 		Assert.assertTrue("User is logged in ",
-				(leftNavigation.leftNavLink.getText().contentEquals(CommonUtils.userLabel_GBL)));
+				(leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
 		Browser.sleep(2000);
 	}
 

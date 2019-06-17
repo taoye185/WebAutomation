@@ -84,7 +84,7 @@ public class BackgroundSteps {
 		if (CommonUtils.adminGroup.isEmpty()) {
 			Log.info("Admin Group is not created yet");
 			leftNavigation.groupsLink.click();
-			groupsSummaryPage.newGroupButton.exists(2000);
+			groupsSummaryPage.newGroupButton.exists(2);
 			groupsSummaryPage.newGroupButton.click();
 			GroupSteps.CreateAdminGroup();
 			GroupSteps.filterGroupByName();
@@ -98,7 +98,7 @@ public class BackgroundSteps {
 		if (CommonUtils.supportGroup.isEmpty()) {
 			Log.info("Support Group is not created yet");
 			leftNavigation.groupsLink.click();
-			groupsSummaryPage.newGroupButton.exists(2000); 
+			groupsSummaryPage.newGroupButton.exists(2); 
 			groupsSummaryPage.newGroupButton.click();
 			GroupSteps.createSupportGroup();
 			GroupSteps.filterGroupByName();
@@ -140,8 +140,7 @@ public class BackgroundSteps {
 		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
-		loginPage.signInBtn.click();
-		// PortalUsersPage.newPortalUserButton.exists(4);
+		loginPage.signInBtn.click();		
 		CommonUtils.username_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
 		CommonUtils.password_GBL = AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD;
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;

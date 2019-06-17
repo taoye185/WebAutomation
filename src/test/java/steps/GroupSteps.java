@@ -14,6 +14,7 @@ import pageobjects.groups.GroupDetailPage;
 import pageobjects.groups.GroupPermissionsPage;
 import pageobjects.groups.GroupsSummaryPage;
 import pageobjects.groups.NewGroupPage;
+import utils.AgGridCommon;
 import utils.Browser;
 import utils.CommonUtils;
 import utils.Log;
@@ -61,14 +62,13 @@ public class GroupSteps {
 	@Then("^verify group is listed down in the results table$")
 	public void verify_group_is_listed_down_in_the_results_table() throws Throwable {
 		Browser.sleep(1000);
-		Assert.assertTrue("Group is listed",
-				((groupsSummaryPage.selectElementintheResultsTabel(groupName)).getText().contentEquals(groupName)));
+		Assert.assertTrue("Group is listed",(AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName)).isDisplayed());
 	}
 
 	@When("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
 		Browser.sleep(1000);
-		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
+		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,groupName, "Details");
 	}
 
 	@Then("^edit group permissions from group details$")
@@ -155,18 +155,15 @@ public class GroupSteps {
 		groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
 		Browser.sleep(1000);
 		groupsSummaryPage.OkFilterButton.click();
-		Browser.sleep(1000);
-		// i didn't get this assertion?
-		// The assertion is to verify the filtered group is displayed in the results table [MP] 
-		Assert.assertTrue("Group is not listed",
-				((groupsSummaryPage.selectElementintheResultsTabel(groupName)).getText().contentEquals(groupName)));
+		Browser.sleep(1000);	
+		Assert.assertTrue("Group is not listed", AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid,groupName).isDisplayed());
 	}
 
 	/**
 	 * Just assign few permission to create a support group 
 	 */
 	public static void selectGroupandassignSupportGroupPermisisons() {
-		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
+		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
 		groupPermissionsPage.portalUserPermisionLabel.exists(2);
@@ -182,7 +179,7 @@ public class GroupSteps {
 	 * @throws Throwable
 	 */
 	public static void selectGroupandassignAdminGroupPermisisons() throws Throwable {
-		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
+		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
 		Assert.assertEquals("Portal user permissions link appears",

@@ -8,6 +8,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import utils.Browser;
 import utils.CleanUp;
+import utils.Log;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
@@ -23,12 +24,15 @@ public class RunTest {
 	@AfterClass
 	public static void teardown() {
 		try{
-		System.out.println(" Clean up started ");
-		CleanUp.deleteAllGroups();
-		Browser.quitDriver();
+		Log.info(" Clean up started ");
+		//Log.info("Deleting the created groups " +  ); mention 
+		CleanUp.deleteAllGroups();		
 		}
 		catch(Exception ex){
-			CleanUp.deleteAllGroups();
+			CleanUp.deleteAllGroups();	
+			Log.info(ex.getMessage());			
+		}
+		finally{
 			Browser.quitDriver();
 		}
 	}

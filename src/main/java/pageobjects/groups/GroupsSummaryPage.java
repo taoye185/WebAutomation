@@ -57,7 +57,7 @@ public class GroupsSummaryPage extends WebPageInit {
 	@FindBy(xpath = "//div[contains(text(),'Name')]")
 	public WebItem nameHeaderinResults;
 
-	public String groupDetailsRowXpath = "";
+	
 
 	/*
 	 * public void selectNameOption(String groupName) { //
@@ -70,19 +70,6 @@ public class GroupsSummaryPage extends WebPageInit {
 	 * nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(groupName);
 	 * }
 	 */
-	public WebElement selectElementintheResultsTabel(String text) {
-		return nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(text);
-	}
 
-	public void selectElementintheResultsTabel2(String siblingName, String elementText) {
-		groupDetailsRowXpath = "//*[.='" + siblingName + "']/following-sibling::*";
-		System.out.println(" groupDetailsRowXpath " + groupDetailsRowXpath);
-		nameHeaderinResults.getSiblingElement(groupDetailsRowXpath, elementText);
-
-	}
-
-	public void setDescriptionOption(String description) {
-		// nameFilterDropdownOption.selectDropDownItem(description);
-	}
 
 }

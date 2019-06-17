@@ -33,7 +33,7 @@ public class CleanUp {
 			Browser.sleep(2000);
 			groupsSummaryPage.OkFilterButton.click();
 			Browser.sleep(2000);		
-			groupsSummaryPage.selectElementintheResultsTabel2(tempGroup, "Details");
+			AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,tempGroup, "Details");
 			groupDetailPage.deleteGroupButton.exists(2);
 			groupDetailPage.deleteGroupButton.click();
 			Browser.sleep(1000);
