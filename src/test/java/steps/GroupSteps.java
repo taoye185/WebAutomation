@@ -60,14 +60,14 @@ public class GroupSteps {
 
 	@Then("^verify group is listed down in the results table$")
 	public void verify_group_is_listed_down_in_the_results_table() throws Throwable {
-		Browser.sleep(3000);
-		Assert.assertTrue("Group is not listed",
+		Browser.sleep(1000);
+		Assert.assertTrue("Group is listed",
 				((groupsSummaryPage.selectElementintheResultsTabel(groupName)).getText().contentEquals(groupName)));
 	}
 
 	@When("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
-		Browser.sleep(3000);
+		Browser.sleep(1000);
 		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 	}
 
@@ -114,7 +114,7 @@ public class GroupSteps {
 	}
 
 	/**
-	 *  
+	 *  Create a support group. 
 	 */
 	public static void createSupportGroup() {
 		Log.info("Creating new Support Group");
@@ -128,6 +128,9 @@ public class GroupSteps {
 		Browser.sleep(3000);
 	}
 
+	/**
+	 * Create an Admin  Group
+	 */
 	public static void CreateAdminGroup() {
 		Log.info("Creating new Admin Group");
 		groupName = "Admin_Group_" + testDataGenerator.timestamp();
@@ -140,6 +143,9 @@ public class GroupSteps {
 		Browser.sleep(3000);
 	}
 
+	/**
+	 * Filtering Group by Name 
+	 */
 	public static void filterGroupByName() {
 		Log.info("Filter new Group");
 		groupsSummaryPage.filterButton.click();
@@ -147,14 +153,18 @@ public class GroupSteps {
 		groupsSummaryPage.nameTextField.sendKeys(groupName);
 		Browser.sleep(3000);
 		groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
-		Browser.sleep(3000);
+		Browser.sleep(1000);
 		groupsSummaryPage.OkFilterButton.click();
-		Browser.sleep(3000);
+		Browser.sleep(1000);
 		// i didn't get this assertion?
+		// The assertion is to verify the filtered group is displayed in the results table [MP] 
 		Assert.assertTrue("Group is not listed",
 				((groupsSummaryPage.selectElementintheResultsTabel(groupName)).getText().contentEquals(groupName)));
 	}
 
+	/**
+	 * Just assign few permission to create a support group 
+	 */
 	public static void selectGroupandassignSupportGroupPermisisons() {
 		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
@@ -167,6 +177,10 @@ public class GroupSteps {
 		CommonUtils.supportGroup = groupName;
 	}
 
+	/**
+	 * Assign all the permissions to create an Admin group
+	 * @throws Throwable
+	 */
 	public static void selectGroupandassignAdminGroupPermisisons() throws Throwable {
 		groupsSummaryPage.selectElementintheResultsTabel2(groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);

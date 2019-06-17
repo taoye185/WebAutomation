@@ -1,5 +1,7 @@
 package utils;
 
+import org.openqa.selenium.Keys;
+
 import pageobjects.global.LeftNavigation;
 import pageobjects.groups.GroupDetailPage;
 import pageobjects.groups.GroupsSummaryPage;
@@ -22,16 +24,22 @@ public class CleanUp {
 
 			String tempGroup = CommonUtils.Group_GBL.get(i);
 			Log.info(" delete group " + tempGroup);
+			Log.info("Filter new Group");
 			groupsSummaryPage.filterButton.click();
+			groupsSummaryPage.nameFilterDropdown.click();
 			groupsSummaryPage.nameTextField.sendKeys(tempGroup);
-			groupsSummaryPage.OkFilterButton.exists(2);
+			Browser.sleep(2000);
+			groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
+			Browser.sleep(2000);
 			groupsSummaryPage.OkFilterButton.click();
-			Browser.sleep(1000);
+			Browser.sleep(2000);		
 			groupsSummaryPage.selectElementintheResultsTabel2(tempGroup, "Details");
 			groupDetailPage.deleteGroupButton.exists(2);
 			groupDetailPage.deleteGroupButton.click();
+			Browser.sleep(1000);
 			groupDetailPage.deleteConfirmationButton.exists(2);
 			groupDetailPage.deleteConfirmationButton.click();
+			Browser.sleep(1000);
 
 			if (tempGroup.contentEquals(CommonUtils.adminGroup)) {
 				CommonUtils.adminGroup = "";
@@ -41,9 +49,13 @@ public class CleanUp {
 				CommonUtils.supportGroup = "";
 				Log.info(" Admin group " + tempGroup + "set to nul" + CommonUtils.supportGroup);
 			}
-			CommonUtils.Group_GBL.remove(i);
-
 		}
+		
+		// clearing the groups generated while  in the test run.  
+		for (int i = 0; i < CommonUtils.Group_GBL.size(); i++) {
+			CommonUtils.Group_GBL.remove(i);
+		}
+		
 	}
 
 }

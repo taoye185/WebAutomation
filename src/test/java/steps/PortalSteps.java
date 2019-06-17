@@ -118,6 +118,7 @@ public class PortalSteps {
 	public void delete_the_portal_user_record() throws Throwable {
 		portalUserDetailPage.deleteUserButton.click();
 		portalUserDetailPage.deleteConfirmationButton.click();
+		Browser.sleep(1000);
 	}
 	
 	public static void filterPortlUserByName(String portlUserEmail ) {

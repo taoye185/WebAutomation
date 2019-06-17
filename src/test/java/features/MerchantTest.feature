@@ -3,7 +3,7 @@ Feature: 4_Merchant_Tests
 	Background:
 		Given User successfully navigated to merchant Summary Page
 
-	@sanity @loginAsGPAdmin
+	@sanity1 @loginAsGPAdmin
 	Scenario Outline: Verify new merchant account can be locked and unlocked
 		Given user click on New Merchant button and navigates to merchants Registration Page
 		And provide details to create a new Merchant

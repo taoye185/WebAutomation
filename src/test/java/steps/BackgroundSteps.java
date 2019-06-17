@@ -34,16 +34,17 @@ public class BackgroundSteps {
 	public static GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
 	static TestDataGenerator testDataGenerator = new TestDataGenerator();
 	public static PortalUsersPage portalUsersPage = new PortalUsersPage();
-	// public static String groupName = "";
+	
 
 	@Before(value = "@loginAsGPAdmin", order = 0)
 	public static void login_As_GP_Admin() {
+		Log.info("In GP Admin Login");
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
-				if (!(leftNavigation.loggedInUserLink.getText())
-						.equalsIgnoreCase(AcquirerPortalGlobal.GP_ADMIN_LABEL)) {
+				if (!(leftNavigation.loggedInUserLink.getText()).contentEquals(AcquirerPortalGlobal.GP_ADMIN_LABEL)) {
+					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
-					loginAsGlobalPaymentsAdministrator(); /* login back as GP admin */
+					loginAsGlobalPaymentsAdministrator(); /* login back as GP Admin */
 				}
 				return;
 			}
@@ -56,19 +57,17 @@ public class BackgroundSteps {
 	public static void login_As_Root_Admin() {
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
-				if (!(leftNavigation.loggedInUserLink.getText())
-						.equalsIgnoreCase(AcquirerPortalGlobal.ROOT_ADMIN_LABEL)) {
+				if (!(leftNavigation.loggedInUserLink.getText()).contentEquals(AcquirerPortalGlobal.ROOT_ADMIN_LABEL)) {
+					Log.info(" Not in Root Admin Login, Trying to log out and re loagin ");
+					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
-					loginAsRootAdministrator(); /* login back as root admin */
+					loginAsRootAdministrator(); /* login back as Root admin */
 				}
 				return;
 			}
 		} catch (TimeoutException ex) {
 			loginAsRootAdministrator();
 		}
-		/*
-		 * catch (ElementClickInterceptedException ex) { loginAsRootAdministrator(); }
-		 */
 	}
 
 	@Before("@navigateToGroupSummaryPage")
@@ -99,7 +98,7 @@ public class BackgroundSteps {
 		if (CommonUtils.supportGroup.isEmpty()) {
 			Log.info("Support Group is not created yet");
 			leftNavigation.groupsLink.click();
-			groupsSummaryPage.newGroupButton.exists(2000); /* we need have implicit wait */
+			groupsSummaryPage.newGroupButton.exists(2000); 
 			groupsSummaryPage.newGroupButton.click();
 			GroupSteps.createSupportGroup();
 			GroupSteps.filterGroupByName();
@@ -116,17 +115,16 @@ public class BackgroundSteps {
 	}
 
 	/**
-	 * login as gp admin
+	 * login as GP Admin
 	 */
 	public static void loginAsGlobalPaymentsAdministrator() {
 
 		Browser.open(AcquirerPortalGlobal.URL);
 		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_LABEL);
+		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
-		loginPage.signInBtn.click();
-		merchantsPage.newMerchantButton.exists(2);
-		// what is the reason to write this lines of code.
+		loginPage.signInBtn.click();	
 		CommonUtils.username_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
 		CommonUtils.password_GBL = AcquirerPortalGlobal.GP_ADMIN_PASSWORD;
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.GP_ADMIN_LABEL;
@@ -139,11 +137,11 @@ public class BackgroundSteps {
 
 		Browser.open(AcquirerPortalGlobal.URL);
 		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
-		loginPage.usernameTxtBox.exists(15);
+		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
-		PortalUsersPage.newPortalUserButton.exists(4);
+		// PortalUsersPage.newPortalUserButton.exists(4);
 		CommonUtils.username_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
 		CommonUtils.password_GBL = AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD;
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;

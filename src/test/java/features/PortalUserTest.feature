@@ -14,5 +14,14 @@ Scenario Outline: Create Portal user accounts
 		| support|
 		
 		
-		
+	@sanity 
+	Scenario Outline:  Delete Portal users
+	And Filter portal users by "<email>" email
+	And User validate the portal user details from results
+	And click on details of the portl user from results table
+	Then Delete the portal user record
+	Examples:
+		| email    |
+		| supportEmail |
+		| adminEmail |
 		

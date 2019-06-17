@@ -293,7 +293,7 @@ public class WebItem implements WebElement {
 			if (tempElement.getText() != null) {
 				tempElement.click();
 			}
-			Browser.sleep(3000);
+			Browser.sleep(500);
 		}
 	}
 

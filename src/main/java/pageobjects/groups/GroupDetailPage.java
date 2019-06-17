@@ -1,10 +1,7 @@
 package pageobjects.groups;
 
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.FindBy;
 
-import pageobjects.global.GroupPermissions;
+import org.openqa.selenium.support.FindBy;
 import utils.WebItem;
 import utils.WebPageInit;
 
