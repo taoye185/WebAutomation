@@ -1,13 +1,9 @@
 package steps;
 
-import org.junit.Assert;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.TimeoutException;
 
-import cucumber.api.Scenario;
+import org.openqa.selenium.TimeoutException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
 import pageobjects.global.AcquirerPortalGlobal;
 import pageobjects.global.LeftNavigation;
 import pageobjects.groups.GroupDetailPage;
