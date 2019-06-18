@@ -13,6 +13,7 @@ import pageobjects.login.LoginPage;
 import pageobjects.portalusers.NewPortalUserRegistrationPage;
 import pageobjects.portalusers.PortalUserDetailPage;
 import pageobjects.portalusers.PortalUsersPage;
+import utils.AgGridCommon;
 import utils.Browser;
 import utils.CleanUp;
 import utils.CommonUtils;
@@ -52,7 +53,8 @@ public class PortalSteps {
 
 	@And("^click on details of the portl user from results table$")
 	public void click_on_details_of_the_portl_user_from_results_table() throws Throwable {
-		portalUsersPage.selectElementintheResultsTabel2(portalUserEmail, "Details");
+		AgGridCommon.selectAndGetSiblingElementBySearchText(portalUsersPage.portalUserListGrid, portalUserEmail,"Details");
+				//portalUsersPage.selectElementintheResultsTabel2(portalUserEmail, "Details");
 	}
 	
 	@Given("^user click on New Portal User button$")
@@ -107,10 +109,8 @@ public class PortalSteps {
 		if(email.contentEquals("adminEmail")){
 			portalUserEmail=AcquirerPortalGlobal.GP_NEWADMIN_EMAIL;			
 		}
-		filterPortlUserByName(portalUserEmail);
-		Assert.assertTrue("Check Portal user is listed",
-				((portalUsersPage.selectElementintheResultsTabel(portalUserEmail)).getText().contentEquals(portalUserEmail)));
-	}
+		filterPortlUserByName(portalUserEmail);		
+		}
 
 	@Then("^Delete the portal user record$")
 	public void delete_the_portal_user_record() throws Throwable {
@@ -125,8 +125,7 @@ public class PortalSteps {
 		portalUsersPage.emailFilterOptions.selectDropDownItem(portlUserEmail);
 		portalUsersPage.OkFilterButton.click();
 		Browser.sleep(3000);
-		Assert.assertTrue("Group is listed",
-				((portalUsersPage.selectElementintheResultsTabel(portlUserEmail)).getText().contentEquals(portlUserEmail)));
+		Assert.assertTrue("Portal user email is not listed", (AgGridCommon.selectAndGetElementInTheGrid(portalUsersPage.portalUserListGrid,portalUserEmail).isDisplayed()));
 	}
 
 }

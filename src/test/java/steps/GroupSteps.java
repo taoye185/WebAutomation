@@ -30,6 +30,7 @@ public class GroupSteps {
 	static TestDataGenerator testDataGenerator = new TestDataGenerator();
 	public static String groupName = "";
 
+
 	@Given("^User successfully navigated to Groups summary Page$")
 	public void user_successfully_navigated_to_Groups_summary_Page() {
 		Browser.sleep(2000);

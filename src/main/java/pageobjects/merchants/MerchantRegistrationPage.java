@@ -15,8 +15,6 @@ public class MerchantRegistrationPage extends WebPageInit {
 	@FindBy(id = "mposUserEmail")
 	public WebItem userEmail;
 
-	public void getChilds() {
-		newMerchantRegistrationDivisionDropDown.getSiblingElementsintoList("//*[@id='divisionId']");
-	}
+
 
 }

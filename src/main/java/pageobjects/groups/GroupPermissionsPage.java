@@ -1,14 +1,9 @@
 package pageobjects.groups;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import pageobjects.global.GroupPermissions;
-import utils.Log;
+
 import utils.WebItem;
 import utils.WebPageInit;
 

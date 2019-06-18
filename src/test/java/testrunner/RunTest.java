@@ -15,7 +15,7 @@ import utils.Log;
 		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {"@sanity"})
 
 public class RunTest {
-
+	
 	/// <summary>
 	/// This method can be use to set initial background before test starts
 	/// </summary>

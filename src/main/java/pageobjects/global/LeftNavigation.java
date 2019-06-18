@@ -1,6 +1,5 @@
 package pageobjects.global;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import utils.WebItem;
 import utils.WebPageInit;

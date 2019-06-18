@@ -1,8 +1,6 @@
 package pageobjects.portalusers;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import pageobjects.global.AcquirerPortalGlobal;
 import utils.Browser;
 import utils.WebItem;
@@ -15,6 +13,9 @@ public class PortalUsersPage extends WebPageInit {
 		newPortalUserButton.exists(5);
 	}
 
+	@FindBy(id = "hive-groups-list")
+	public WebItem portalUserListGrid;
+	
 	@FindBy(id = "add-user-btn")
 	public WebItem newPortalUserButton;
 
@@ -41,7 +42,7 @@ public class PortalUsersPage extends WebPageInit {
 
 	public String portalUserDetailsRowXpath = "";
 
-	public WebElement selectElementintheResultsTabel(String text) {
+	/*public WebElement selectElementintheResultsTabel(String text) {
 		return nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(text);
 	}
 
@@ -50,6 +51,6 @@ public class PortalUsersPage extends WebPageInit {
 		System.out.println(" groupDetailsRowXpath " + portalUserDetailsRowXpath);
 		emailHeaderinResults.getSiblingElement(portalUserDetailsRowXpath, elementText);
 
-	}
+	}*/
 
 }

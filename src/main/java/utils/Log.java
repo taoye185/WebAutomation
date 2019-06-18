@@ -4,8 +4,9 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 
 public class Log extends Logger {
+	
 
-    protected Log(String name) {
+	protected Log(String name) {
         super(name);
     }
 

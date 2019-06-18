@@ -1,8 +1,7 @@
 package pageobjects.groups;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
+import org.openqa.selenium.support.FindBy;
 import pageobjects.global.AcquirerPortalGlobal;
 import utils.Browser;
 import utils.WebItem;
@@ -51,25 +50,8 @@ public class GroupsSummaryPage extends WebPageInit {
 	@FindBy(xpath = "//button[contains(text(),'Clear filters')]")
 	public WebItem clearFilterButton;
 
-	// @FindBy(xpath = "//*[.='AetTest01']")
-	// public WebItem groupNameResultsCell;
-
 	@FindBy(xpath = "//div[contains(text(),'Name')]")
 	public WebItem nameHeaderinResults;
-
-	
-
-	/*
-	 * public void selectNameOption(String groupName) { //
-	 * nameFilterDropdownArrow.selectDropDownItem(groupName);
-	 * nameFilterDropdownArrow.getSiblingElement(namesFilterOptionsXpath,
-	 * groupName); }
-	 */
-	/*
-	 * public WebElement selectGeneratedGroupName(String groupName) { return
-	 * nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(groupName);
-	 * }
-	 */
 
 
 }

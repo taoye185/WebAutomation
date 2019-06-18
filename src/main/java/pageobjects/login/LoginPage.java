@@ -19,6 +19,7 @@ public class LoginPage extends WebPageInit {
 		usernameTxtBox.exists(5);
 	}
 
+	
 	@FindBy(name = "username")
 	public WebItem usernameTxtBox;
 

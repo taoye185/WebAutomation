@@ -79,6 +79,10 @@ public class BackgroundSteps {
 		}
 	}
 
+	/**
+	 * Create Admin group if it is not created 
+	 * @throws Throwable
+	 */
 	@Before(value = "@CreateAdminGroup", order = 1)
 	public void create_AdminGroup() throws Throwable {
 		if (CommonUtils.adminGroup.isEmpty()) {
@@ -89,7 +93,6 @@ public class BackgroundSteps {
 			GroupSteps.CreateAdminGroup();
 			GroupSteps.filterGroupByName();
 			GroupSteps.selectGroupandassignAdminGroupPermisisons();
-
 		}
 	}
 

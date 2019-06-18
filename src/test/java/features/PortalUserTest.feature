@@ -2,7 +2,7 @@
 Feature: 2_Portal_Tests 
 
 Background: 
-	Given User successfully navigated to Portal Users Page 
+	Given User successfully navigated to Portal Users Page 	
 	
 @sanity @loginAsGPAdmin @CreateAdminGroup @CreateSupportGroup 
 Scenario Outline: Create Portal user accounts 
@@ -11,8 +11,7 @@ Scenario Outline: Create Portal user accounts
 	Examples: 
 		| user   |			
 		| admin  |
-		| support|
-		
+		| support|		
 		
 	@sanity 
 	Scenario Outline:  Delete Portal users
