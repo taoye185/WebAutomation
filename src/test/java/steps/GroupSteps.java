@@ -35,8 +35,7 @@ public class GroupSteps {
 	public void user_successfully_navigated_to_Groups_summary_Page() {
 		Browser.sleep(2000);
 		leftNavigation.groupsLink.click();
-		Assert.assertEquals("User is unable to navigate to group summary page", AcquirerPortalGlobal.GROUP_URL,
-				Browser.getDriver().getCurrentUrl());
+		Assert.assertTrue("User is unable to navigate to group summary page", AcquirerPortalGlobal.GROUP_URL.equalsIgnoreCase(Browser.getDriver().getCurrentUrl()));
 	}
 
 	@When("^user click on New Group button$")
@@ -63,7 +62,7 @@ public class GroupSteps {
 	@Then("^verify group is listed down in the results table$")
 	public void verify_group_is_listed_down_in_the_results_table() throws Throwable {
 		Browser.sleep(1000);
-		Assert.assertTrue("Group is listed",(AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName)).isDisplayed());
+		Assert.assertTrue("Group is not listed",(AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName)).isDisplayed());
 	}
 
 	@When("^click on details of the Group$")
@@ -81,8 +80,7 @@ public class GroupSteps {
 
 	@Then("^assign and revoke screen appears$")
 	public void assign_and_rework_screen_appears() throws Throwable {
-		Assert.assertEquals("Portal user permissions link appears",
-				groupPermissionsPage.portalUserPermisionLabel.isDisplayed(), true);
+		Assert.assertTrue("Portal user permissions link not appears",groupPermissionsPage.portalUserPermisionLabel.isDisplayed());
 
 	}
 
@@ -183,8 +181,7 @@ public class GroupSteps {
 		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
-		Assert.assertEquals("Portal user permissions link appears",
-				groupPermissionsPage.portalUserPermisionLabel.isDisplayed(), true);
+		Assert.assertTrue("Portal user permissions link not appears",groupPermissionsPage.portalUserPermisionLabel.isDisplayed());
 		set_permissions_to_create_admin_user_group();
 	}
 }

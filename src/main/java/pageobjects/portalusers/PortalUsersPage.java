@@ -13,7 +13,7 @@ public class PortalUsersPage extends WebPageInit {
 		newPortalUserButton.exists(5);
 	}
 
-	@FindBy(id = "hive-groups-list")
+	@FindBy(id = "portal-users-list")
 	public WebItem portalUserListGrid;
 	
 	@FindBy(id = "add-user-btn")

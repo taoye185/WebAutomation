@@ -32,28 +32,28 @@ public class LoginSteps {
 		loginPage.signInBtn.click();
 	}
 
-	@When("^User enter valid \"([^\"]*)\" and \"([^\"]*)\" and hit Login button$")
+/*	@When("^User enter valid \"([^\"]*)\" and \"([^\"]*)\" and hit Login button$")
 	public void user_enter_valid_and_and_hit_Login_button(String username, String password) throws Throwable {
 		CommonUtils.userLabel_GBL = username;
 		CommonUtils.password_GBL = password;
 		loginPage.usernameTxtBox.sendKeys(CommonUtils.username_GBL);
 		loginPage.passwordTxtBox.sendKeys(CommonUtils.password_GBL);
 		loginPage.signInBtn.click();
-	}
+	}*/
 
-	@Then("^User navigates to portal user page$")
+	
+/*	@Then("^User navigates to portal user page$")
 	public void user_navigates_to_portal_user_page() throws Throwable {
 		Browser.sleep(1000);
 		Assert.assertEquals("User is navigated to Portal User Page", Browser.getDriver().getCurrentUrl(),
 				AcquirerPortalGlobal.PORTALUSER_URL);
 
-	}
+	}*/
 
 	@Then("^User navigates to merchants summary page$")
 	public void User_navigates_to_merchants_summary_page() throws Throwable {
 		Browser.sleep(1000);
-		Assert.assertEquals("User is navigated to Portal User Page", Browser.getDriver().getCurrentUrl(),
-				AcquirerPortalGlobal.MERCHANTS_URL);
+		Assert.assertTrue("User is not navigated to Portal User Page", Browser.getDriver().getCurrentUrl().equalsIgnoreCase(AcquirerPortalGlobal.MERCHANTS_URL));
 
 	}
 
@@ -70,8 +70,7 @@ public class LoginSteps {
 	public void click_log_out_to_exit() throws Throwable {
 		leftNavigation.logoutLabel.click();
 		Browser.sleep(1000);
-		Assert.assertEquals("username text box appears", loginPage.usernameTxtBox.isDisplayed(), true);
-		CommonUtils.userLabel_GBL="";
+		Assert.assertTrue("username text box not appears", loginPage.usernameTxtBox.isDisplayed());		
 	}
 
 }

@@ -1,5 +1,7 @@
 package testrunner;
 
+import java.util.Arrays;
+
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.ElementClickInterceptedException;
@@ -8,6 +10,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import utils.Browser;
 import utils.CleanUp;
+import utils.CommonUtils;
 import utils.Log;
 
 @RunWith(Cucumber.class)
@@ -25,7 +28,7 @@ public class RunTest {
 	public static void teardown() {
 		try{
 		Log.info(" Clean up started ");
-		//Log.info("Deleting the created groups " +  ); mention 
+		Log.info("Deleting the created groups " + Arrays.toString(CommonUtils.Group_GBL.toArray()) );  
 		CleanUp.deleteAllGroups();		
 		}
 		catch(Exception ex){

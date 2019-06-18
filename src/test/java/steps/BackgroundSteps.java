@@ -123,9 +123,7 @@ public class BackgroundSteps {
 		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
-		loginPage.signInBtn.click();	
-		CommonUtils.username_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
-		CommonUtils.password_GBL = AcquirerPortalGlobal.GP_ADMIN_PASSWORD;
+		loginPage.signInBtn.click();			
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.GP_ADMIN_LABEL;
 	}
 
@@ -139,9 +137,8 @@ public class BackgroundSteps {
 		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
-		loginPage.signInBtn.click();		
-		CommonUtils.username_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
-		CommonUtils.password_GBL = AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD;
+		loginPage.signInBtn.click();	
+		
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
 	}
 }
