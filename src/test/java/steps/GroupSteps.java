@@ -1,9 +1,7 @@
 package steps;
 
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -40,7 +38,7 @@ public class GroupSteps {
 
 	@When("^user click on New Group button$")
 	public void user_click_on_New_Group_button() throws Throwable {
-		groupsSummaryPage.newGroupButton.exists(2); /* we need have explicit wait */
+		groupsSummaryPage.newGroupButton.exists(5); /* we need have explicit wait */
 		groupsSummaryPage.newGroupButton.click();
 	}
 
@@ -119,8 +117,8 @@ public class GroupSteps {
 		Log.info("Creating new Support Group");
 		groupName = "Support_Group_" + testDataGenerator.timestamp();
 		newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GLOBAL_PAYMENTS);
-		newGroupPage.groupNameTxtBox.sendKeys(groupName);
-		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Support Group for Automation");
+		newGroupPage.groupNameTxtBox.clearAndSendKeys(groupName);
+		newGroupPage.groupDescriptionTxtBox.clearAndSendKeys(groupName + " Support Group for Automation");
 		newGroupPage.groupCreateButton.click();
 		CommonUtils.Group_GBL.add(groupName); // adding to array list for clean up
 		Log.info(groupName + ":is created ");
@@ -134,8 +132,8 @@ public class GroupSteps {
 		Log.info("Creating new Admin Group");
 		groupName = "Admin_Group_" + testDataGenerator.timestamp();
 		newGroupPage.divisionDropdown.selectDropDownItem(AcquirerPortalGlobal.GLOBAL_PAYMENTS);
-		newGroupPage.groupNameTxtBox.sendKeys(groupName);
-		newGroupPage.groupDescriptionTxtBox.sendKeys(groupName + " Admin Group for Automation");
+		newGroupPage.groupNameTxtBox.clearAndSendKeys(groupName);
+		newGroupPage.groupDescriptionTxtBox.clearAndSendKeys(groupName + " Admin Group for Automation");
 		newGroupPage.groupCreateButton.click();
 		CommonUtils.Group_GBL.add(groupName);
 		Log.info(groupName + "is created ");
@@ -149,7 +147,7 @@ public class GroupSteps {
 		Log.info("Filter new Group");
 		groupsSummaryPage.filterButton.click();
 		groupsSummaryPage.nameFilterDropdown.click();
-		groupsSummaryPage.nameTextField.sendKeys(groupName);
+		groupsSummaryPage.nameTextField.clearAndSendKeys(groupName);
 		Browser.sleep(3000);
 		groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
 		Browser.sleep(1000);

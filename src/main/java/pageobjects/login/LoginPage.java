@@ -31,4 +31,7 @@ public class LoginPage extends WebPageInit {
 
 	@FindBy(id = "forgotpw")
 	public WebItem forgetPasswordLink;
+	
+	
+	
 }

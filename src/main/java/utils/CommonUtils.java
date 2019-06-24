@@ -10,6 +10,6 @@ public class CommonUtils {
 	public static String supportGroup = "";
 	public static String adminGroup = "";
 	public static String supportUserEmail = "";
-	public static String adminUserEmail = "";
+	public static String adminUserEmail = "";	
 
 }

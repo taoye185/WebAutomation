@@ -2,7 +2,7 @@ Feature: 3_Groups_Tests
 	Background:
 		Given User successfully navigated to Groups summary Page
 
-	@sanity @loginAsGPAdmin 
+	@sanity1 @loginAsGPAdmin 
 	Scenario: Create a Support Group
 		When user click on New Group button
 		And provide details to create a new Group

@@ -330,4 +330,16 @@ public class WebItem implements WebElement {
 
 		}
 	}
+	
+	/**
+	 * Clears the text field and sends the value passed as a parameter.
+	 * @para value- value to be passed to text field
+	 **/
+	public void clearAndSendKeys(String value){
+	Log.info("Clearing and sending '"+value+"' to the '"+locator.toString()+"' text box");
+	WebElement element = getActiveItem();
+	element.clear();
+	element.sendKeys(value);
+	}
+	
 }

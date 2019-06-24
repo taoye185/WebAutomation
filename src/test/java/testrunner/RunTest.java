@@ -13,6 +13,10 @@ import utils.CleanUp;
 import utils.CommonUtils;
 import utils.Log;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RunTest.
+ */
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
 		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {"@sanity"})
@@ -24,6 +28,9 @@ public class RunTest {
 	/// </summary>
 	/// <returns></returns>
 
+	/**
+	 * Teardown.
+	 */
 	@AfterClass
 	public static void teardown() {
 		try{
