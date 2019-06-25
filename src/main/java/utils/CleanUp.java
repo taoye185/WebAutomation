@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import pageobjects.global.LeftNavigation;
 import pageobjects.groups.GroupDetailPage;
 import pageobjects.groups.GroupsSummaryPage;
+import steps.BackgroundSteps;
 
 public class CleanUp {
 
@@ -14,6 +15,7 @@ public class CleanUp {
 	public static boolean testRunCompleted = true;
 
 	public static void deleteAllGroups() {
+		BackgroundSteps.login_As_GP_Admin();
 		leftNavigation.groupsLink.click();
 
 		for (int i = 0; i < CommonUtils.Group_GBL.size(); i++) {
