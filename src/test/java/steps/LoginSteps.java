@@ -81,7 +81,7 @@ public class LoginSteps {
 	@When("^user \"([^\"]*)\" enter credentials and hit Login Button$")
 	public void user_login_as_(String userName) throws Throwable {
 		if (userName.equalsIgnoreCase("RootAdmin")) {
-			BackgroundSteps.loginAsRootAdministrator();
+			BackgroundSteps.login_As_Root_Admin();
 		}
 		if (userName.equalsIgnoreCase("GPAdmin")) {
 			BackgroundSteps.loginAsGlobalPaymentsAdministrator();
