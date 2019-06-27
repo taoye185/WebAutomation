@@ -62,7 +62,7 @@ public class PortalSteps {
 		try {
 			portalUsersPage.newPortalUserButton.click();
 		} catch (NoSuchElementException e) {
-			newPortalUserRegistrationPage.cloeButton.click();
+			newPortalUserRegistrationPage.closeButton.click();
 			CleanUp.deleteAllGroups();
 		}
 	}
@@ -70,44 +70,21 @@ public class PortalSteps {
 	@Given("^provide details to create a new Portal user$")
 	public void provide_details_to_create_a_new_Portal_user() throws Throwable {
 		Log.info("Creating new portal user");
-		newPortalUserRegistrationPage.portalNameTxtBox.sendKeys("Aet user");
+		newPortalUserRegistrationPage.portalNameTxtBox.clearAndSendKeys("Aet user");
 		newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("AetTest01");
 	}
 
-	@Given("^provide details to create a \"([^\"]*)\" new Portal user$")
-	public void provide_details_to_create_a_new_Portal_user(String user) throws Throwable {
-		// String userName = user.replaceAll("\\s+", "");
-		Browser.sleep(2000);
-		Log.info("Creating new portal user");
-		if (user.contentEquals("support")) {
-			newPortalUserRegistrationPage.portalNameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_NAME);
-			newPortalUserRegistrationPage.portalUsernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_USER_NAME);
-			newPortalUserRegistrationPage.portalEmailTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWSUPPORT_EMAIL);
-			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.supportGroup);
-			//CommonUtils.supportUserEmail =AcquirerPortalGlobal.GP_NEWSUPPORT_EMAIL;
-			
-		}
-		if (user.contentEquals("admin")) {
-			newPortalUserRegistrationPage.portalNameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_NAME);
-			newPortalUserRegistrationPage.portalUsernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_USER_NAME);
-			newPortalUserRegistrationPage.portalEmailTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWADMIN_EMAIL);
-			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.adminGroup);
-			//CommonUtils.adminUserEmail =AcquirerPortalGlobal.GP_NEWADMIN_EMAIL;
-		}
 
-		newPortalUserRegistrationPage.createUserButton.click();
-
-	}
 
 	@Given("^Filter portal users by \"([^\"]*)\" email$")
 	public void filter_portal_users_by_email(String email) throws Throwable {
 		Browser.sleep(3000);
 		
 		if(email.contentEquals("supportEmail")){
-			portalUserEmail=AcquirerPortalGlobal.GP_NEWSUPPORT_EMAIL;			
+			portalUserEmail=CommonUtils.supportUserEmail ;			
 		}
 		if(email.contentEquals("adminEmail")){
-			portalUserEmail=AcquirerPortalGlobal.GP_NEWADMIN_EMAIL;			
+			portalUserEmail=CommonUtils.adminUserEmail;		
 		}
 		filterPortlUserByName(portalUserEmail);		
 		}
@@ -126,6 +103,32 @@ public class PortalSteps {
 		portalUsersPage.OkFilterButton.click();
 		Browser.sleep(3000);
 		Assert.assertTrue("Portal user email is not listed", (AgGridCommon.selectAndGetElementInTheGrid(portalUsersPage.portalUserListGrid,portalUserEmail).isDisplayed()));
+	}
+	
+
+ 	@Given("^provide details to create a \"([^\"]*)\" new Portal user$")
+	public void provide_details_to_create_a_new_Portal_user(String user) throws Throwable {
+		// String userName = user.replaceAll("\\s+", "");
+		Browser.sleep(2000);
+		Log.info("Creating new portal user");
+		if (user.contentEquals("support")) {
+			newPortalUserRegistrationPage.portalNameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_NAME);
+			newPortalUserRegistrationPage.portalUsernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_USER_NAME);
+			newPortalUserRegistrationPage.portalEmailTxtBox.clearAndSendKeys(BackgroundSteps.tempEmail);
+			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.supportGroup);
+			CommonUtils.supportUserEmail =BackgroundSteps.tempEmail;
+			
+		}
+		if (user.contentEquals("admin")) {
+			newPortalUserRegistrationPage.portalNameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWADMIN_NAME);
+			newPortalUserRegistrationPage.portalUsernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWADMIN_USER_NAME);
+			newPortalUserRegistrationPage.portalEmailTxtBox.clearAndSendKeys(BackgroundSteps.tempEmail);
+			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.adminGroup);
+			CommonUtils.adminUserEmail =BackgroundSteps.tempEmail;
+		}
+
+		newPortalUserRegistrationPage.createUserButton.click();
+
 	}
 
 }

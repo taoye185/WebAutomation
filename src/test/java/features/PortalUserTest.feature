@@ -4,7 +4,7 @@ Feature: 2_Portal_Tests
 Background: 
 	Given User successfully navigated to Portal Users Page 	
 	
-@sanity @loginAsGPAdmin @CreateAdminGroup @CreateSupportGroup 
+@sanity @loginAsGPAdmin @CreateAdminGroup @CreateSupportGroup @create10MinuteEmail 
 Scenario Outline: Create Portal user accounts 
 	And user click on New Portal User button 
 	Then provide details to create a "<user>" new Portal user 
@@ -13,7 +13,7 @@ Scenario Outline: Create Portal user accounts
 		| admin  |
 		| support|		
 		
-	@sanity 
+	@sanity
 	Scenario Outline:  Delete Portal users
 	And Filter portal users by "<email>" email
 	And User validate the portal user details from results
@@ -23,4 +23,5 @@ Scenario Outline: Create Portal user accounts
 		| email    |
 		| supportEmail |
 		| adminEmail |
+		
 		

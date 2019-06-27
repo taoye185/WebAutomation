@@ -30,6 +30,6 @@ public class NewPortalUserRegistrationPage extends WebPageInit {
 	public WebItem createUserButton;
 	
 	@FindBy(xpath = "/html/body/div[3]/div/div/div/div[1]/button")
-	public WebItem cloeButton;
+	public WebItem closeButton;
 	
 }
