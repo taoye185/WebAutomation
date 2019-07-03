@@ -23,7 +23,7 @@ public class AcquirerPortalGlobal {
 
 	public static final String GP_ADMIN_USER_NAME = "Madura";
 	public static final String GP_ADMIN_PASSWORD = "Test123$";
-	public static final String GP_ADMIN_LABEL = "Madura";
+	public static final String GP_ADMIN_LABEL = "GP Admin";
 
 	public static final String GP_NEWADMIN_USER_NAME = "GPNewAdmin";
 	public static final String GP_NEWADMIN_NAME = "GP New Admin";

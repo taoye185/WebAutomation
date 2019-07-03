@@ -66,7 +66,8 @@ public class LoginSteps {
 		Browser.sleep(1000);	
 		leftNavigation.loggedInUserLink.exists(2);
 		Log.info(" leftNavigation userLink  " + leftNavigation.loggedInUserLink.getText());
-		Assert.assertTrue("User is logged in ",
+		String assertError ="User is not logged in left navigation label  " + leftNavigation.loggedInUserLink.getText() + "user expected to logged in " + CommonUtils.userLabel_GBL;
+		Assert.assertTrue(assertError,
 				(leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
 	}
 
@@ -84,7 +85,7 @@ public class LoginSteps {
 			BackgroundSteps.login_As_Root_Admin();
 		}
 		if (userName.equalsIgnoreCase("GPAdmin")) {
-			BackgroundSteps.loginAsGlobalPaymentsAdministrator();
+			BackgroundSteps.login_As_GP_Admin();
 		}
 	}
 
