@@ -19,7 +19,7 @@ import utils.Log;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
-		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {"@sanity"})
+		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {"@sanity3"})
 
 public class RunTest {
 	
@@ -31,6 +31,7 @@ public class RunTest {
 	/**
 	 * Teardown.
 	 */
+	
 	@AfterClass
 	public static void teardown() {
 		try{

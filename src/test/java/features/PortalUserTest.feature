@@ -25,10 +25,15 @@ Scenario Outline: Create Portal user accounts
 		| adminEmail |
 		
 		
-@sanity @loginAsGPAdmin @CreateSupportGroup @create10MinuteEmail 
+@sanity3 @loginAsGPAdmin  @create10MinuteEmail 
 Scenario Outline: Create Portal user accounts 
 	And user click on New Portal User button 	
-	Then provide details to create a "<user>" new Portal user 
+	And provide details to create a "<newuser>" new Portal user 
+	And logout from portal
+	And user navigates back to email and capture temporary password
+	And new user successfully navigated to Home Page
+	And new user "<newuser>" enter credentials and hit Login Button
+	And user change password 	
 	Examples: 
-		| user   |	
+		| newuser   |	
 		| support|		

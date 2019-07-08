@@ -9,7 +9,10 @@ public class CommonUtils {
 	public static List<String> Group_GBL = new ArrayList<String>();
 	public static String supportGroup = "";
 	public static String adminGroup = "";
+	public static String tempEmail = "";
 	public static String supportUserEmail = "";
-	public static String adminUserEmail = "";	
+	public static String supportUserName = "";
+	public static String adminUserEmail = "";
+	public static String adminUserName = "";
 
 }

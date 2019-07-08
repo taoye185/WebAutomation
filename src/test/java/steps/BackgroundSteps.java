@@ -3,6 +3,7 @@ package steps;
 import org.openqa.selenium.TimeoutException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import pageobjects.email.EmailPage;
 import pageobjects.global.AcquirerPortalGlobal;
@@ -33,6 +34,7 @@ public class BackgroundSteps {
 	public static PortalUsersPage portalUsersPage = new PortalUsersPage();
 	public static EmailPage emailPage = new EmailPage();
 	public static String tempEmail = "";
+	public static String tempPassword = "";
 
 	@Before(value = "@loginAsGPAdmin", order = 0)
 	public static void login_As_GP_Admin() {
@@ -124,6 +126,7 @@ public class BackgroundSteps {
 		emailPage.mailAddress.scrollIntoView();
 		tempEmail = emailPage.mailAddress.getAttribute("value");
 		Log.info("tempEmail " + tempEmail);
+		//tempPassword= emailPage.
 		Browser.sleep(1000);
 		Browser.navigate(AcquirerPortalGlobal.PORTALUSER_URL);
 
@@ -131,10 +134,19 @@ public class BackgroundSteps {
 
 	@After("@logout")
 	public static void logout() {
-		if (leftNavigation.logoutLabel.isDisplayed()) {
-			leftNavigation.logoutLabel.click();
+		Browser.sleep(1000);
+		Browser.navigate(AcquirerPortalGlobal.URL);
+		Browser.sleep(2000);
+		/*leftNavigation.logoutLabel.exists(3);
+		if (leftNavigation.logoutLabel2.isClickable(3)) {
+			
+			leftNavigation.logoutLabel2.click();
+			Log.info(" clicked log out button");
 		}
-		loginPage.usernameTxtBox.exists(3);
+		else{
+			Log.info(" log out button is not clickable");
+		}*/
+		//loginPage.usernameTxtBox.exists(3);
 	}
 
 	/**
@@ -176,4 +188,17 @@ public class BackgroundSteps {
 		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
 		Browser.open(AcquirerPortalGlobal.URL);
 	}
+	
+	public static void login(String email, String password){
+		loginPage.usernameTxtBox.exists(16);
+		loginPage.usernameTxtBox.clearAndSendKeys(email);
+		loginPage.passwordTxtBox.clearAndSendKeys(password);
+		loginPage.signInBtn.click();
+	}
+	
+ 	@And("^logout from portal$")
+ 	public void logout_from_portal() throws Throwable {
+ 		logout();
+ 	}
+
 }

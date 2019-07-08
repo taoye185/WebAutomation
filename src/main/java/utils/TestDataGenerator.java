@@ -30,7 +30,7 @@ public class TestDataGenerator {
      * @param text : if you pass -test you will get back something like "test4981"
      */
     public String getCharacterNumericString(String text) { /* TO-DO */
-        String finalText = text + "_" + getRandomValueBetweenMaxAndMin(10000000, 99999999);
+        String finalText = text +  (int)(getRandomValueBetweenMaxAndMin(1001, 9999));
         return finalText;
     }
 

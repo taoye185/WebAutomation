@@ -1,13 +1,20 @@
 package pageobjects.portalusers;
 
 
+import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 
+import utils.AgGridCommon;
+import utils.Browser;
+import utils.Log;
 import utils.WebItem;
 import utils.WebPageInit;
 
 public class NewPortalUserRegistrationPage extends WebPageInit {
 
+	public static String groupName = "000";
+	
 	@FindBy(xpath = "//h4[contains(text(),'New portal user')]")
 	public WebItem newPortalUserHeading;
 
@@ -30,6 +37,21 @@ public class NewPortalUserRegistrationPage extends WebPageInit {
 	public WebItem createUserButton;
 	
 	@FindBy(xpath = "/html/body/div[3]/div/div/div/div[1]/button")
-	public WebItem closeButton;
+	public WebItem closeButton;	
+	
+	@FindBy(xpath = "//*[@id='hiveGroupId']//input[contains(@tabindex,'0')]")
+	public WebItem groupNameTextField;
+	
+	
+	/**
+	 * Filtering Group by Name 
+	 */
+	public void filterGroupByName() {
+		Log.info("Filter new Group in Portal USers");		
+		groupNameTextField.clearAndSendKeys(groupName);
+		Browser.sleep(2000);
+		groupNameTextField.sendKeys(Keys.TAB);
+		Browser.sleep(1000);
+	}
 	
 }

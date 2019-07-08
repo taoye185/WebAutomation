@@ -24,8 +24,13 @@ public class LeftNavigation extends WebPageInit {
 	@FindBy(id = "groups-link")
 	public WebItem groupsLink;
 
-	@FindBy(id = "logout-link")
+	@FindBy(xpath = "//*[@id='logout-link']/span/div/svg/path")
 	public WebItem logoutLabel;
+	
+	@FindBy(xpath = "//*[@id='root']/aside/nav/div/div[5]")
+	public WebItem logoutLabel2;
+	
+	
 
 	@FindBy(id = "userlink")
 	public WebItem loggedInUserLink;
@@ -36,5 +41,8 @@ public class LeftNavigation extends WebPageInit {
 	@FindBy(id = "payment-processor")
 	public WebItem paymentProcessorName;
 
+	@FindBy(xpath = "//a[contains(@tabindex,'0')]")
+	public WebItem leftNavLink;
+	
 	
 }

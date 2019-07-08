@@ -54,4 +54,5 @@ public class GroupsSummaryPage extends WebPageInit {
 	public WebItem nameHeaderinResults;
 
 
+
 }

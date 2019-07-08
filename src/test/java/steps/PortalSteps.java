@@ -9,6 +9,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pageobjects.global.AcquirerPortalGlobal;
 import pageobjects.global.LeftNavigation;
+import pageobjects.login.ChangePasswordPage;
 import pageobjects.login.LoginPage;
 import pageobjects.portalusers.NewPortalUserRegistrationPage;
 import pageobjects.portalusers.PortalUserDetailPage;
@@ -18,6 +19,7 @@ import utils.Browser;
 import utils.CleanUp;
 import utils.CommonUtils;
 import utils.Log;
+import utils.TestDataGenerator;
 
 public class PortalSteps {
 	public static LoginPage loginPage = new LoginPage();
@@ -26,6 +28,9 @@ public class PortalSteps {
 	public static NewPortalUserRegistrationPage newPortalUserRegistrationPage = new NewPortalUserRegistrationPage();
 	public static PortalUserDetailPage portalUserDetailPage = new PortalUserDetailPage();
 	public static String portalUserEmail="";
+	public static String newPortalUserID="";
+	public TestDataGenerator testDataGenerator = new TestDataGenerator();
+	public static ChangePasswordPage changePasswordPage = new ChangePasswordPage();
 	
 	@Given("^User \"([^\"]*)\" is successfully navigated to Portal User Page$")
 	public void user_is_successfully_navigated_to_Portal_User_Page(String username) throws Throwable {
@@ -112,12 +117,15 @@ public class PortalSteps {
 		Browser.sleep(2000);
 		Log.info("Creating new portal user");
 		if (user.contentEquals("support")) {
+			String userName=testDataGenerator.getCharacterNumericString("newsupport");
 			newPortalUserRegistrationPage.portalNameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_NAME);
-			newPortalUserRegistrationPage.portalUsernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_USER_NAME);
+			newPortalUserRegistrationPage.portalUsernameTxtBox.clearAndSendKeys(userName);
 			newPortalUserRegistrationPage.portalEmailTxtBox.clearAndSendKeys(BackgroundSteps.tempEmail);
-			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.supportGroup);
+			//newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.supportGroup);			
+			newPortalUserRegistrationPage.filterGroupByName();
+			//newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("000");
 			CommonUtils.supportUserEmail =BackgroundSteps.tempEmail;
-			
+			CommonUtils.supportUserName = userName;
 		}
 		if (user.contentEquals("admin")) {
 			newPortalUserRegistrationPage.portalNameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWADMIN_NAME);
@@ -126,9 +134,48 @@ public class PortalSteps {
 			newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.adminGroup);
 			CommonUtils.adminUserEmail =BackgroundSteps.tempEmail;
 		}
-
+		newPortalUserRegistrationPage.createUserButton.exists(3);
 		newPortalUserRegistrationPage.createUserButton.click();
-
+		
 	}
 
+ 	@Given("^new user \"([^\"]*)\" enter credentials and hit Login Button$")
+ 	public void new_user_enter_credentials_and_hit_Login_Button(String user) throws Throwable {
+ 		Browser.sleep(1000);
+ 		
+ 		if (user.contentEquals("support")) {
+ 			BackgroundSteps.login(EmailSteps.tempUserID, EmailSteps.tempEmailPassword);
+ 		}
+ 		if (user.contentEquals("admin")) {
+ 			
+ 		}
+ 	}
+
+
+ 	@And("^user navigates back to email and capture temporary password$")
+ 	public void user_navigates_back_to_email_and_capture_temporary_password() throws Throwable {
+ 		Browser.navigate(AcquirerPortalGlobal.EMAIL_URL);
+ 		EmailSteps.clickMessage("User Activation");  		
+ 		Browser.sleep(30000);
+ 	}
+
+ 	@And("^new user successfully navigated to Home Page$")
+ 	public void new_user_successfully_navigated_to_Home_Page() throws Throwable {
+ 		Browser.navigate(AcquirerPortalGlobal.URL);
+ 	}
+
+ 	@And("^user change password$")
+ 	public void user_change_password() throws Throwable {
+ 		Browser.sleep(1000);
+ 		changePasswordPage.changePasswordLabel.exists(5);
+ 		changePasswordPage.oldPasswordTxtBox.sendKeys(EmailSteps.tempEmailPassword);
+ 		changePasswordPage.newPasswordTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWSUPPORT_PASSWORD);
+ 		changePasswordPage.confirmNewPasswordTxtBox.sendKeys(AcquirerPortalGlobal.GP_NEWSUPPORT_PASSWORD);
+ 		Browser.sleep(1000);
+ 		changePasswordPage.changePasswordButton.click();		
+ 		Browser.sleep(30000);
+ 	}
+
+ 	
+ 	
 }
