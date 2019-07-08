@@ -154,14 +154,14 @@ public class PortalSteps {
 
  	@And("^user navigates back to email and capture temporary password$")
  	public void user_navigates_back_to_email_and_capture_temporary_password() throws Throwable {
- 		Browser.navigate(AcquirerPortalGlobal.EMAIL_URL);
+ 		Browser.open(AcquirerPortalGlobal.EMAIL_URL,10);
  		EmailSteps.clickMessage("User Activation");  		
  		Browser.sleep(30000);
  	}
 
  	@And("^new user successfully navigated to Home Page$")
  	public void new_user_successfully_navigated_to_Home_Page() throws Throwable {
- 		Browser.navigate(AcquirerPortalGlobal.URL);
+ 		Browser.open(AcquirerPortalGlobal.URL,30);
  	}
 
  	@And("^user change password$")

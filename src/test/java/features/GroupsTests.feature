@@ -1,4 +1,4 @@
-Feature: 3_Groups_Tests
+Feature: Groups_Tests
 	Background:
 		Given User successfully navigated to Groups summary Page
 
@@ -13,7 +13,7 @@ Feature: 3_Groups_Tests
 		And assign and revoke screen appears
 		Then set permissions to create support user group
 
-	@sanity @loginAsGPAdmin
+	@sanity
 	Scenario: Create a Admin Group
 		When user click on New Group button
 		And provide details to create a new Admin Group

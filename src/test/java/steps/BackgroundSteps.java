@@ -47,10 +47,7 @@ public class BackgroundSteps {
 					leftNavigation.logoutLabel.click();
 					//navigate_to_home();
 					//Browser.open(AcquirerPortalGlobal.URL);
-					loginAsGlobalPaymentsAdministrator(); /*
-															 * login back as GP
-															 * Admin
-															 */
+					loginAsGlobalPaymentsAdministrator(); /* login back as GP Admin */
 				}
 				return;
 			}
@@ -81,7 +78,7 @@ public class BackgroundSteps {
 	@Before("@navigateToGroupSummaryPage")
 	public static void navigate_To_Group_Summary_Page() {
 		try {
-			Browser.open(AcquirerPortalGlobal.GROUP_URL);
+			Browser.open(AcquirerPortalGlobal.GROUP_URL,5);
 		} catch (TimeoutException ex) {
 
 		}
@@ -121,40 +118,32 @@ public class BackgroundSteps {
 	@Before(value = "@create10MinuteEmail", order = 3)
 	public void create_10MinuteEmail() throws Throwable {
 		Browser.sleep(5000);
-		Browser.navigate(AcquirerPortalGlobal.EMAIL_URL);
+		Browser.open(AcquirerPortalGlobal.EMAIL_URL,5);
 		Browser.sleep(1000);
 		emailPage.mailAddress.scrollIntoView();
 		tempEmail = emailPage.mailAddress.getAttribute("value");
 		Log.info("tempEmail " + tempEmail);
 		//tempPassword= emailPage.
 		Browser.sleep(1000);
-		Browser.navigate(AcquirerPortalGlobal.PORTALUSER_URL);
+		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL,5);
 
 	}
 
 	@After("@logout")
 	public static void logout() {
-		Browser.sleep(1000);
-		Browser.navigate(AcquirerPortalGlobal.URL);
-		Browser.sleep(2000);
-		/*leftNavigation.logoutLabel.exists(3);
-		if (leftNavigation.logoutLabel2.isClickable(3)) {
-			
-			leftNavigation.logoutLabel2.click();
-			Log.info(" clicked log out button");
+		if (leftNavigation.logoutLabel.isDisplayed()) {
+			leftNavigation.logoutLabel.click();
 		}
-		else{
-			Log.info(" log out button is not clickable");
-		}*/
-		//loginPage.usernameTxtBox.exists(3);
+		loginPage.usernameTxtBox.exists(3);
 	}
-
+	
 	/**
 	 * login as GP Admin
 	 */
 	public static void loginAsGlobalPaymentsAdministrator() {
 		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_LABEL);
-		Browser.open(AcquirerPortalGlobal.URL);
+		//Browser.open(AcquirerPortalGlobal.URL);
+		loginPage.navigateToLoginPage();
 		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
@@ -167,7 +156,7 @@ public class BackgroundSteps {
 	 */
 	public static void loginAsRootAdministrator() {
 		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
-		Browser.open(AcquirerPortalGlobal.URL);
+		Browser.open(AcquirerPortalGlobal.URL,5);
 		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
@@ -178,27 +167,23 @@ public class BackgroundSteps {
 
 	@Given("^User successfully navigated to Home Page$")
 	public void user_successfully_navigated_to_Home_Page() throws Throwable {
-		navigate_to_home();
-	}
-
-	/**
-	 * Initial navigation to home page
-	 */
-	public static void navigate_to_home() {
-		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
-		Browser.open(AcquirerPortalGlobal.URL);
-	}
-	
-	public static void login(String email, String password){
-		loginPage.usernameTxtBox.exists(16);
-		loginPage.usernameTxtBox.clearAndSendKeys(email);
-		loginPage.passwordTxtBox.clearAndSendKeys(password);
-		loginPage.signInBtn.click();
+		loginPage.navigateToLoginPage();
+		
 	}
 	
  	@And("^logout from portal$")
  	public void logout_from_portal() throws Throwable {
  		logout();
  	}
-
+ 	
+	/**
+	 * @param userName - userName of the login user
+	 * @param password - password of the login user
+	 */
+	public static void login(String userName, String password){
+		loginPage.usernameTxtBox.exists(16);
+		loginPage.usernameTxtBox.clearAndSendKeys(userName);
+		loginPage.passwordTxtBox.clearAndSendKeys(password);
+		loginPage.signInBtn.click();
+	}
 }

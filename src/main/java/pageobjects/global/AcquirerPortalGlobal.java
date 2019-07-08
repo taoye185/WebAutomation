@@ -1,7 +1,8 @@
 package pageobjects.global;
 
 public class AcquirerPortalGlobal {
-	public static final String URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/login";
+	public static final String URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/";
+	public static final String LOGIN_URL= "" + URL +"login";
 	public static final String PORTALUSER_URL = "" + URL + "portalusers";
 	public static final String MERCHANTS_URL = "" + URL + "merchants";
 	public static final String GROUP_URL = "" + URL + "groups";

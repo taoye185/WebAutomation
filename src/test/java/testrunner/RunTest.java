@@ -19,7 +19,7 @@ import utils.Log;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty", "html:target/cucumber-html-report",
-		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {"@sanity3"})
+		"json:target/cucumber-report.json" }, glue = "steps", features = "src/test/java/features/", tags = {"@sanity123"})
 
 public class RunTest {
 	
@@ -35,13 +35,13 @@ public class RunTest {
 	@AfterClass
 	public static void teardown() {
 		try{
-		Log.info(" Clean up started ");
+		/*Log.info(" Clean up started ");
 		Log.info("Deleting the created groups " + Arrays.toString(CommonUtils.Group_GBL.toArray()) );  
-		CleanUp.deleteAllGroups();		
+		CleanUp.deleteAllGroups();		*/
 		}
 		catch(Exception ex){
-			CleanUp.deleteAllGroups();	
-			Log.info(ex.getMessage());			
+			/*CleanUp.deleteAllGroups();	
+			Log.info(ex.getMessage());	*/		
 		}
 		finally{
 			Browser.quitDriver();

@@ -7,10 +7,12 @@ import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -32,6 +34,7 @@ public class Browser {
 	private void setDriver(WebDriver driver) {
 		Browser.driver = driver;
 		setPageLoadTime(Global.DEFAULT_IMPLICIT_WAIT);
+
 		Browser.driver.manage().window().maximize();
 
 	}
@@ -57,6 +60,13 @@ public class Browser {
 		switch (browserType) {
 		case Global.CHROME: {
 			WebDriverManager.chromedriver().setup();
+			// DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+			// capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION,
+			// "true");
+			// ChromeOptions options = new ChromeOptions();
+			// capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+			// options.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION,
+			// "true");
 			this.setDriver(new ChromeDriver());
 		}
 			break;
@@ -75,29 +85,21 @@ public class Browser {
 		}
 	}
 
-	public Browser() {
-		// WebDriverManager.chromedriver().setup();
-		// this.setDriver(new ChromeDriver());
+	public static void refresh() {
+		Log.info(String.format("Refreshing the Browser url"));
+		getDriver().navigate().refresh();
 	}
 
-	public static void open(String url) {
+	public static void open(String url, int currentPageLoadWaitTime) {
+		setPageLoadTime(currentPageLoadWaitTime);
 		try {
 			Log.info(String.format("Opening %s url", url));
 			getDriver().get(url);
-		} catch (NoSuchSessionException ex) {
-			// browser = new Browser(Global.BROWSER);
-			// getDriver().get(url);
-		}
-	}
+			refresh();
 
-	public static void navigate(String url) {
-		try {
-			Log.info(String.format("Navigating %s url", url));
-			getDriver().get(url);
-		} catch (NoSuchSessionException ex) {
-			// browser = new Browser(Global.BROWSER);
-			// getDriver().get(url);
+		} catch (TimeoutException ignored) {
 		}
+		setPageLoadTime(Global.DEFAULT_IMPLICIT_WAIT);
 	}
 
 	/**
@@ -133,8 +135,6 @@ public class Browser {
 		}
 		return false;
 	}
-	
-	
 
 	public static boolean textExists(String text, int seconds) {
 		Log.info(String.format("Checking if '%s' text exists on the page withing %s seconds", text, seconds));

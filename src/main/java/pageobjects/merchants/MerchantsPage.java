@@ -10,7 +10,7 @@ import utils.WebPageInit;
 public class MerchantsPage extends WebPageInit {
 
 	public void navigateToMerchantSummaryPage() {
-		Browser.open(AcquirerPortalGlobal.MERCHANTS_URL);
+		Browser.open(AcquirerPortalGlobal.MERCHANTS_URL,5);
 		newMerchantButton.exists(5);
 	}
 

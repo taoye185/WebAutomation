@@ -25,13 +25,18 @@ public class LeftNavigation extends WebPageInit {
 	public WebItem groupsLink;
 
 	@FindBy(xpath = "//*[@id='logout-link']/span/div/svg/path")
-	public WebItem logoutLabel;
+	public WebItem logoutLabel3;
 	
 	@FindBy(xpath = "//*[@id='root']/aside/nav/div/div[5]")
 	public WebItem logoutLabel2;
 	
-	
+	@FindBy(id = "logout-link")
+	public WebItem logoutLabel;
 
+	
+	
+	
+	
 	@FindBy(id = "userlink")
 	public WebItem loggedInUserLink;
 

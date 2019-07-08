@@ -25,12 +25,16 @@ public class LoginSteps {
 		Assert.assertTrue("User is unable to land on home page ", loginPage.passwordTxtBox.isDisplayed());
 	}
 
-	@When("^User enter valid username and password and hit Login button$")
-	public void user_enter_valid_username_and_password() throws Throwable {
-		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
-		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
-		loginPage.signInBtn.click();
+	@Then("^\"([^\"]*)\" should be displayed on the left navigation Menu$")
+	public void Validate_username_label_from_leftNav(String userName) throws Throwable {			
+		leftNavigation.loggedInUserLink.exists(4);
+		Log.info(" leftNavigation userLink  " + leftNavigation.loggedInUserLink.getText());		
+		Assert.assertTrue("Logged in user is not equals to " + userName,
+				(leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(userName)));
 	}
+
+	
+
 
 	/*
 	 * @When("^User enter valid \"([^\"]*)\" and \"([^\"]*)\" and hit Login button$"
@@ -71,6 +75,16 @@ public class LoginSteps {
 				(leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
 	}
 
+	
+	@When("^User enter valid username and password and hit Login button$")
+	public void user_enter_valid_username_and_password() throws Throwable {
+		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
+		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
+		loginPage.signInBtn.click();
+	}
+	
+	
+	
 	@Then("^click log out to exit$")
 	public void click_log_out_to_exit() throws Throwable {
 		leftNavigation.logoutLabel.click();
@@ -81,12 +95,22 @@ public class LoginSteps {
 
 	@When("^user \"([^\"]*)\" enter credentials and hit Login Button$")
 	public void user_login_as_(String userName) throws Throwable {
-		if (userName.equalsIgnoreCase("RootAdmin")) {
-			BackgroundSteps.login_As_Root_Admin();
+		switch(userName.toUpperCase()){
+		case "ROOTADMIN":{		
+			loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
+			loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
+			loginPage.signInBtn.click();
+		break;
 		}
-		if (userName.equalsIgnoreCase("GPAdmin")) {
-			BackgroundSteps.login_As_GP_Admin();
+		case "GPADMIN":	{	
+			loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
+			loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
+			loginPage.signInBtn.click();
+			break;	
 		}
+		default:
+			Log.info( userName + " doesnt exists ");
 	}
-
+	}
+	
 }

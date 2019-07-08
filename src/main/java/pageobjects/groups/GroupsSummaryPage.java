@@ -13,7 +13,7 @@ public class GroupsSummaryPage extends WebPageInit {
 			"View details" };
 
 	public void navigateToGroupSummaryPage() {
-		Browser.open(AcquirerPortalGlobal.GROUP_URL);
+		Browser.open(AcquirerPortalGlobal.GROUP_URL,5);
 		newGroupButton.exists(5);
 	}
 

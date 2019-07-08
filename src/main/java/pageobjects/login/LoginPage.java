@@ -15,8 +15,9 @@ public class LoginPage extends WebPageInit {
 	 */
 
 	public void navigateToLoginPage() {
-		Browser.open(AcquirerPortalGlobal.URL);
-		usernameTxtBox.exists(5);
+		
+		Browser.open(AcquirerPortalGlobal.URL,30);		
+		usernameTxtBox.exists(7);
 	}
 
 	

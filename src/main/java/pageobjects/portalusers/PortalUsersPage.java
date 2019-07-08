@@ -9,7 +9,7 @@ import utils.WebPageInit;
 public class PortalUsersPage extends WebPageInit {
 
 	public void navigatePortalUserPage() {
-		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL);
+		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL,5);
 		newPortalUserButton.exists(5);
 	}
 
