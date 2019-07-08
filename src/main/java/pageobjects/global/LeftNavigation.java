@@ -18,6 +18,8 @@ public class LeftNavigation extends WebPageInit {
 
 	@FindBy(xpath = "//span[contains(text(),'Log out')]")
 	public WebItem logoutLabel;
+	@FindBy(id = "userlink")
+	public WebItem loggedInUserLink;
 
 	public WebItem leftNavLink;
 	

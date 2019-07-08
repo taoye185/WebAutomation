@@ -26,7 +26,8 @@ public class BackgroundSteps {
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				leftNavigation.initLeftNavLink(CommonUtils.userLabel_GBL);
-				if (leftNavigation.leftNavLink.getText() == AcquirerPortalGlobal.GP_ADMIN_LABEL) {
+				if (!(leftNavigation.loggedInUserLink.getText())
+						.equalsIgnoreCase(AcquirerPortalGlobal.GP_ADMIN_LABEL)) {
 					leftNavigation.logoutLabel.click();
 					loginAsGlobalPaymentsAdministrator(); /* login back as global payment admin */
 				}
@@ -41,7 +42,8 @@ public class BackgroundSteps {
 	public static void login_As_Root_Admin() {
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
-				if (leftNavigation.leftNavLink.getText() != AcquirerPortalGlobal.ROOT_ADMIN_LABEL) {
+				if (!(leftNavigation.loggedInUserLink.getText())
+						.equalsIgnoreCase(AcquirerPortalGlobal.ROOT_ADMIN_LABEL)) {
 					leftNavigation.logoutLabel.click();
 					loginAsRootAdministrator(); /* login back as root admin */
 				}

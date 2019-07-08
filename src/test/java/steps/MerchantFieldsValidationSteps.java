@@ -13,7 +13,7 @@ import pageobjects.merchants.MerchantRegistrationPage;
 import pageobjects.merchants.MerchantsPage;
 import utils.Browser;
 
-public class MerchantFieldsValidationSteps 
+public class MerchantFieldsValidationSteps  
 
 
 {
@@ -25,51 +25,80 @@ public class MerchantFieldsValidationSteps
 	  public void User_successfully_navigated_to_New_Merchant_Page(){
 	
 		 merchantsPage.navigateToMerchantSummaryPage();
-		 Assert.assertEquals("User is navigated to Merchnats Page", Browser.getDriver().getCurrentUrl(),
-		 AcquirerPortalGlobal.MERCHANTS_URL);	
+		 Assert.assertEquals("User is navigated to Merchnats Page", Browser.getDriver().getCurrentUrl(), AcquirerPortalGlobal.MERCHANTS_URL);
 		 merchantsPage.newMerchantButton.click();
 		 MerchantRegistrationPage.newMerchantRegistrationDivisionDropDown.selectDropDownItem("Global Payments");
-	  }
+	}
+	
 
-	@When ("^User leave the \\\"([^\\\"]*)\\\" empty$") 
+	@When ("^User leave the \"([^\"]*)\" empty$") 
 	  public void User_leave_the_merchant_ID_empty(String FieldName) {
 		switch(FieldName) {
-		case "MerchantIDTextbox":{
-			MerchantRegistrationPage.MerchantIDTextbox.sendKeys("");
-			MerchantRegistrationPage.MerchantIDTextbox.sendKeys(Keys.TAB);
-		}
-		
-	  case "mposUserName":{
-			MerchantRegistrationPage.mposUserNameTextbox.sendKeys("");
-			MerchantRegistrationPage.mposUserNameTextbox.sendKeys(Keys.TAB);
-		}
-	  /*case "UserEmail" :{
-		  MerchantRegistrationPage.userEmailTextbox.sendKeys("");
-			MerchantRegistrationPage.userEmailTextbox.sendKeys(Keys.TAB);
-	  }*/
-	  case "businessName":{
-			MerchantRegistrationPage.businessNameTextbox.sendKeys("");
-			MerchantRegistrationPage.businessNameTextbox.sendKeys(Keys.TAB);
-		}
+		 case "businessName":{
+				MerchantRegistrationPage.businessNameTextbox.sendKeys("");
+				MerchantRegistrationPage.businessNameTextbox.sendKeys(Keys.TAB);
+				break; 
+				
+			}
+		 case "address":{
+				MerchantRegistrationPage.addressTextbox.sendKeys("");
+				MerchantRegistrationPage.addressTextbox.sendKeys(Keys.TAB);
+				break; 
+			}
+		 case "city":{
+				MerchantRegistrationPage.cityTextbox.sendKeys("");
+				MerchantRegistrationPage.cityTextbox.sendKeys(Keys.TAB);
+				break; 
+			}
+		 case "zipCode":{
+				MerchantRegistrationPage.zipCodeTextbox.sendKeys("");
+				MerchantRegistrationPage.zipCodeTextbox.sendKeys(Keys.TAB);
+				break; 
+			}
+		 
+		 case "mposUserName":{
+				MerchantRegistrationPage.mposUserNameTextbox.sendKeys("");
+				MerchantRegistrationPage.mposUserNameTextbox.sendKeys(Keys.TAB);
+				break; 
+			}
+		 case "mposUserEmail":{
+				MerchantRegistrationPage.userEmailTextbox.sendKeys("");
+				MerchantRegistrationPage.userEmailTextbox.sendKeys(Keys.TAB);
+				break; 
+			}
+		 
 	  }
 	}
-	@Then("^An \\\\\\\"([^\\\\\\\"]*)\\\\\\\" shall be displayed under the \\\\\\\"([^\\\\\\\"]*)\\\\\\\" field$") 
-	 public void An_error_message_shall_be_displayed_under_the_merchant_ID_field(String FieldName) {
+	@Then("^An error message shall be displayed under the missing \"([^\"]*)\" field$") 
+	 public void An_error_message_shall_be_displayed_under_the_missing_field(String FieldName) {
 		String actualErrorMessage = MerchantRegistrationPage.errortooltiptext.getText();
+	System.out.append(actualErrorMessage);
 
-		switch(FieldName) {
-		case "MerchantIDTextbox":{
-			Assert.assertTrue("Merchant ID is not added",actualErrorMessage.contains("Please enter the merchant ID"));
+		switch(FieldName.toUpperCase()) {
+		case "BUSINESSNAME":{
+			Assert.assertTrue("Business Name error-tooltip is not displayed Correctly",actualErrorMessage.equalsIgnoreCase("Please enter a business name"));
+			
+			break; 
 		}
-		
-	  case "mposUserName":{
-			Assert.assertTrue("The mpos administrator is not added",actualErrorMessage.contains("Please enter a name"));
+		case "ADDRESS":{
+			Assert.assertTrue("Address error-tooltip is not displayed Correctly",actualErrorMessage.equalsIgnoreCase("Please enter an address"));
+			break; 
 		}
-	 /* case "UserEmail" :{
-			Assert.assertTrue("The mpos Email is not added",actualErrorMessage.contains("Please enter an email"));
-	  }*/
-	  case "businessName":{
-			Assert.assertTrue("Business Name is not added",actualErrorMessage.contains("Please enter a business name"));
+		case "CITY":{
+			Assert.assertTrue("City error-tooltip is not displayed Correctly",actualErrorMessage.equalsIgnoreCase("Please enter a City"));
+			break; 
+		}
+		case "ZIPCODE":{
+			Assert.assertTrue("zipCode error-tooltip is not displayed Correctly",actualErrorMessage.equalsIgnoreCase("Please enter a postal / ZIP code"));
+			break; 
+		}
+		case "MPOSUSERNAME":{
+			Assert.assertTrue("Merchant full name error-tooltip is not displayed Correctly",actualErrorMessage.equalsIgnoreCase("Please enter a name"));
+			break; 
+		}
+		case "MPOSUSEREMAIL":{
+			Assert.assertTrue("Merchant Email error-tooltip is not displayed Correctly",actualErrorMessage.equalsIgnoreCase("Please enter an email"));
+			break; 
 		}
 		}
 		}
@@ -82,7 +111,7 @@ public class MerchantFieldsValidationSteps
 	  }
 }
 	
-	/*@When ("^User leave the merchant ID empty$") 
+/*  @When ("^User leave the merchant ID empty$") 
 	  public void User_leave_the_merchant_ID_empty() {
 		MerchantRegistrationPage.MerchantIDTextbox.sendKeys("");
 		MerchantRegistrationPage.MerchantIDTextbox.sendKeys(Keys.TAB);
