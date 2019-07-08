@@ -15,6 +15,7 @@ Feature: New Merchant Fields Validation
 	And Create Merchant button is not active
 Examples:
 	|FieldName					|ExpectedErrorMessage			|ErrorMessageInCaseNotMatch| 
+	|businessName				|Please enter a business name	|Business Name is not added|
 	|MerchantIDTextbox			|Please enter the merchant ID	|Merchant ID is not added| 
  	|MerchantTimeZoneDropdown	|Please enter a name			|The mpos administrator is not added| 
 	|userEmailTextbox			| Please enter an email			|The mpos Email is not added|

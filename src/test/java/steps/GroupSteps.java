@@ -13,7 +13,6 @@ import pageobjects.groups.GroupPermissionsPage;
 import pageobjects.groups.GroupsSummaryPage;
 import pageobjects.groups.NewGroupPage;
 import utils.Browser;
-import utils.CleanUp;
 import utils.CommonUtils;
 import utils.Log;
 import utils.TestDataGenerator;

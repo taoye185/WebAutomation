@@ -16,8 +16,14 @@ public class MerchantRegistrationPage extends WebPageInit {
 	@FindBy(id = "divisionId")
 	public WebItem newMerchantRegistrationDivisionDropDown;
 	
+	@FindBy(id = "error-tooltip")
+	public WebItem errortooltiptext;
+	
+	
+	
 /* Payment processor credentials*/
-
+	
+	
 	@FindBy(id = "accountNumber")
 	public WebItem MerchantIDTextbox;
 	

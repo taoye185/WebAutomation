@@ -1,6 +1,5 @@
 package steps;
 
-import java.lang.reflect.Type;
 
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
@@ -29,6 +28,7 @@ public class MerchantFieldsValidationSteps
 		 Assert.assertEquals("User is navigated to Merchnats Page", Browser.getDriver().getCurrentUrl(),
 		 AcquirerPortalGlobal.MERCHANTS_URL);	
 		 merchantsPage.newMerchantButton.click();
+		 MerchantRegistrationPage.newMerchantRegistrationDivisionDropDown.selectDropDownItem("Global Payments");
 	  }
 
 	@When ("^User leave the \\\"([^\\\"]*)\\\" empty$") 
@@ -43,25 +43,33 @@ public class MerchantFieldsValidationSteps
 			MerchantRegistrationPage.mposUserNameTextbox.sendKeys("");
 			MerchantRegistrationPage.mposUserNameTextbox.sendKeys(Keys.TAB);
 		}
-	  case "UserEmail" :{
+	  /*case "UserEmail" :{
 		  MerchantRegistrationPage.userEmailTextbox.sendKeys("");
 			MerchantRegistrationPage.userEmailTextbox.sendKeys(Keys.TAB);
-	  }
-	  
-		
+	  }*/
+	  case "businessName":{
+			MerchantRegistrationPage.businessNameTextbox.sendKeys("");
+			MerchantRegistrationPage.businessNameTextbox.sendKeys(Keys.TAB);
+		}
 	  }
 	}
-	@Then("^An \\\\\\\"([^\\\\\\\"]*)\\\\\\\" shall be displayed under the  \\\\\\\"([^\\\\\\\"]*)\\\\\\\" field$") 
+	@Then("^An \\\\\\\"([^\\\\\\\"]*)\\\\\\\" shall be displayed under the \\\\\\\"([^\\\\\\\"]*)\\\\\\\" field$") 
 	 public void An_error_message_shall_be_displayed_under_the_merchant_ID_field(String FieldName) {
+		String actualErrorMessage = MerchantRegistrationPage.errortooltiptext.getText();
+
 		switch(FieldName) {
 		case "MerchantIDTextbox":{
-			String actualErrorMessage = MerchantRegistrationPage.MerchantIDErrorMessage.getText();
-			Assert.assertTrue("No Validation for the Merchant ID",actualErrorMessage.contains("Please enter the merchant ID"));
+			Assert.assertTrue("Merchant ID is not added",actualErrorMessage.contains("Please enter the merchant ID"));
 		}
 		
 	  case "mposUserName":{
-		  String actualErrorMessage = MerchantRegistrationPage.MerchantIDErrorMessage.getText();
-			Assert.assertTrue("No Validation for the Business Name",actualErrorMessage.contains("Please enter a name"));
+			Assert.assertTrue("The mpos administrator is not added",actualErrorMessage.contains("Please enter a name"));
+		}
+	 /* case "UserEmail" :{
+			Assert.assertTrue("The mpos Email is not added",actualErrorMessage.contains("Please enter an email"));
+	  }*/
+	  case "businessName":{
+			Assert.assertTrue("Business Name is not added",actualErrorMessage.contains("Please enter a business name"));
 		}
 		}
 		}
