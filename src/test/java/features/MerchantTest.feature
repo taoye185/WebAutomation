@@ -1,3 +1,4 @@
+@merchantTest
 Feature: 4_Merchant_Tests
 
 	Background:
@@ -25,8 +26,8 @@ Feature: 4_Merchant_Tests
 	|FieldName					|ExpectedErrorMessage			|
 	|businessName				|Please enter a business name|
 	|address					|Please enter an address|
-	|CITY						|Please enter a City|
-	|ZIPCODE					|Please enter a postal / ZIP code|	
-	|MPOSUSERNAME				|Please enter a name|
-	|MPOSUSEREMAIL				|Please enter an email|
+	|city						|Please enter a City|
+	|zipCode					|Please enter a postal / ZIP code|	
+	|mposUserName				|Please enter a name|
+	|mposUserEmail				|Please enter an email|
 			

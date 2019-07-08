@@ -38,7 +38,7 @@ public class MerchantRegistrationPage extends WebPageInit {
 	@FindBy(id = "mposUserName")
 	public WebItem mposUserNameTextbox;
 	
-	@FindBy(id = "userEmail")
+	@FindBy(id = "mposUserEmail")
 	public WebItem userEmailTextbox;
 	
 	@FindBy(id = "mposUserPhone")

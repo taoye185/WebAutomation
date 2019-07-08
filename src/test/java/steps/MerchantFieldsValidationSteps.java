@@ -35,6 +35,7 @@ public class MerchantFieldsValidationSteps
 	  public void User_leave_the_merchant_ID_empty(String FieldName) {
 		switch(FieldName) {
 		 case "businessName":{
+			 
 				MerchantRegistrationPage.businessNameTextbox.sendKeys("");
 				MerchantRegistrationPage.businessNameTextbox.sendKeys(Keys.TAB);
 				break; 
@@ -46,22 +47,26 @@ public class MerchantFieldsValidationSteps
 				break; 
 			}
 		 case "city":{
+			 	MerchantRegistrationPage.cityTextbox.scrollIntoView();
 				MerchantRegistrationPage.cityTextbox.sendKeys("");
 				MerchantRegistrationPage.cityTextbox.sendKeys(Keys.TAB);
 				break; 
 			}
 		 case "zipCode":{
+			 	MerchantRegistrationPage.zipCodeTextbox.scrollIntoView();
 				MerchantRegistrationPage.zipCodeTextbox.sendKeys("");
 				MerchantRegistrationPage.zipCodeTextbox.sendKeys(Keys.TAB);
 				break; 
 			}
 		 
 		 case "mposUserName":{
+			 	MerchantRegistrationPage.mposUserNameTextbox.scrollIntoView();
 				MerchantRegistrationPage.mposUserNameTextbox.sendKeys("");
 				MerchantRegistrationPage.mposUserNameTextbox.sendKeys(Keys.TAB);
 				break; 
 			}
 		 case "mposUserEmail":{
+			 	MerchantRegistrationPage.userEmailTextbox.scrollIntoView();
 				MerchantRegistrationPage.userEmailTextbox.sendKeys("");
 				MerchantRegistrationPage.userEmailTextbox.sendKeys(Keys.TAB);
 				break; 
