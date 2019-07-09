@@ -28,12 +28,12 @@ public class GroupSteps {
 	static TestDataGenerator testDataGenerator = new TestDataGenerator();
 	public static String groupName = "";
 
-
 	@Given("^User successfully navigated to Groups summary Page$")
 	public void user_successfully_navigated_to_Groups_summary_Page() {
 		Browser.sleep(2000);
 		leftNavigation.groupsLink.click();
-		Assert.assertTrue("User is unable to navigate to group summary page", AcquirerPortalGlobal.GROUP_URL.equalsIgnoreCase(Browser.getDriver().getCurrentUrl()));
+		Assert.assertTrue("User is unable to navigate to group summary page",
+				AcquirerPortalGlobal.GROUP_URL.equalsIgnoreCase(Browser.getDriver().getCurrentUrl()));
 	}
 
 	@When("^user click on New Group button$")
@@ -60,13 +60,14 @@ public class GroupSteps {
 	@Then("^verify group is listed down in the results table$")
 	public void verify_group_is_listed_down_in_the_results_table() throws Throwable {
 		Browser.sleep(1000);
-		Assert.assertTrue("Group is not listed",(AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName)).isDisplayed());
+		Assert.assertTrue("Group is not listed",
+				(AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName)).isDisplayed());
 	}
 
 	@When("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
 		Browser.sleep(1000);
-		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,groupName, "Details");
+		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
 	}
 
 	@Then("^edit group permissions from group details$")
@@ -78,7 +79,8 @@ public class GroupSteps {
 
 	@Then("^assign and revoke screen appears$")
 	public void assign_and_rework_screen_appears() throws Throwable {
-		Assert.assertTrue("Portal user permissions link not appears",groupPermissionsPage.portalUserPermisionLabel.isDisplayed());
+		Assert.assertTrue("Portal user permissions link not appears",
+				groupPermissionsPage.portalUserPermisionLabel.isDisplayed());
 
 	}
 
@@ -111,7 +113,7 @@ public class GroupSteps {
 	}
 
 	/**
-	 *  Create a support group. 
+	 * Create a support group.
 	 */
 	public static void createSupportGroup() {
 		Log.info("Creating new Support Group");
@@ -126,7 +128,7 @@ public class GroupSteps {
 	}
 
 	/**
-	 * Create an Admin  Group
+	 * Create an Admin Group
 	 */
 	public static void CreateAdminGroup() {
 		Log.info("Creating new Admin Group");
@@ -141,10 +143,14 @@ public class GroupSteps {
 	}
 
 	/**
-	 * Filtering Group by Name 
+	 * Filtering Group by Name
 	 */
 	public static void filterGroupByName() {
 		Log.info("Filter new Group");
+		// Clearing the filter if already selected a value
+		if (groupsSummaryPage.clearFilterButton.exists(1)) {
+			groupsSummaryPage.clearFilterButton.click();
+		}
 		groupsSummaryPage.filterButton.click();
 		groupsSummaryPage.nameFilterDropdown.click();
 		groupsSummaryPage.nameTextField.clearAndSendKeys(groupName);
@@ -152,15 +158,16 @@ public class GroupSteps {
 		groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
 		Browser.sleep(1000);
 		groupsSummaryPage.OkFilterButton.click();
-		Browser.sleep(1000);	
-		Assert.assertTrue("Group is not listed", AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid,groupName).isDisplayed());
+		Browser.sleep(1000);
+		Assert.assertTrue("Group is not listed",
+				AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName).isDisplayed());
 	}
 
 	/**
-	 * Just assign few permission to create a support group 
+	 * Just assign few permission to create a support group
 	 */
 	public static void selectGroupandassignSupportGroupPermisisons() {
-		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,groupName, "Details");
+		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
 		groupPermissionsPage.portalUserPermisionLabel.exists(2);
@@ -173,13 +180,15 @@ public class GroupSteps {
 
 	/**
 	 * Assign all the permissions to create an Admin group
+	 * 
 	 * @throws Throwable
 	 */
 	public static void selectGroupandassignAdminGroupPermisisons() throws Throwable {
-		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,groupName, "Details");
+		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
-		Assert.assertTrue("Portal user permissions link not appears",groupPermissionsPage.portalUserPermisionLabel.isDisplayed());
+		Assert.assertTrue("Portal user permissions link not appears",
+				groupPermissionsPage.portalUserPermisionLabel.isDisplayed());
 		set_permissions_to_create_admin_user_group();
 	}
 }

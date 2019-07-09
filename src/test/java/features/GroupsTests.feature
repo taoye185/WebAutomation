@@ -1,3 +1,4 @@
+@groupsPage
 Feature: Groups_Tests
 	Background:
 		Given User successfully navigated to Groups summary Page

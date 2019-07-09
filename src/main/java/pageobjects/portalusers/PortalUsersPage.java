@@ -2,14 +2,14 @@ package pageobjects.portalusers;
 
 import org.openqa.selenium.support.FindBy;
 import pageobjects.global.AcquirerPortalGlobal;
-import utils.Browser;
-import utils.WebItem;
-import utils.WebPageInit;
+import coreutils.Browser;
+import coreutils.WebItem;
+import coreutils.WebPageInit;
 
 public class PortalUsersPage extends WebPageInit {
 
 	public void navigatePortalUserPage() {
-		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL,5);
+		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL);
 		newPortalUserButton.exists(5);
 	}
 

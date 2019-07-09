@@ -3,11 +3,9 @@ package steps;
 import org.openqa.selenium.TimeoutException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import pageobjects.email.EmailPage;
-import pageobjects.global.AcquirerPortalGlobal;
-import pageobjects.global.LeftNavigation;
+import AcquirerPortalGlobal;
+import pageobjects.LeftNavigation;
 import pageobjects.groups.GroupDetailPage;
 import pageobjects.groups.GroupPermissionsPage;
 import pageobjects.groups.GroupsSummaryPage;
@@ -15,10 +13,10 @@ import pageobjects.groups.NewGroupPage;
 import pageobjects.login.LoginPage;
 import pageobjects.merchants.MerchantsPage;
 import pageobjects.portalusers.PortalUsersPage;
-import utils.Browser;
-import utils.CommonUtils;
-import utils.Log;
-import utils.TestDataGenerator;
+import coreutils.Browser;
+import CommonUtils;
+import coreutils.Log;
+import coreutils.TestDataGenerator;
 
 public class BackgroundSteps {
 
@@ -38,15 +36,15 @@ public class BackgroundSteps {
 
 	@Before(value = "@loginAsGPAdmin", order = 0)
 	public static void login_As_GP_Admin() {
-		Log.info("In GP Admin Login");
+		Log.info("Logging In as a GP Admin");
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				if (!(leftNavigation.loggedInUserLink.getText())
 						.equalsIgnoreCase(AcquirerPortalGlobal.GP_ADMIN_LABEL)) {
 					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
-					//navigate_to_home();
-					//Browser.open(AcquirerPortalGlobal.URL);
+					// navigate_to_home();
+					// Browser.open(AcquirerPortalGlobal.URL);
 					loginAsGlobalPaymentsAdministrator(); /* login back as GP Admin */
 				}
 				return;
@@ -62,10 +60,10 @@ public class BackgroundSteps {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				if (!(leftNavigation.loggedInUserLink.getText())
 						.equalsIgnoreCase(AcquirerPortalGlobal.ROOT_ADMIN_LABEL)) {
-					Log.info(" Log out and re loagin as Root Admin user ");
+					Log.info(" Log out and re-login as Root Admin user ");
 					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
-					//navigate_to_home();
+					// navigate_to_home();
 					loginAsRootAdministrator(); /* login back as Root admin */
 				}
 				return;
@@ -75,19 +73,10 @@ public class BackgroundSteps {
 		}
 	}
 
-	@Before("@navigateToGroupSummaryPage")
-	public static void navigate_To_Group_Summary_Page() {
-		try {
-			Browser.open(AcquirerPortalGlobal.GROUP_URL,5);
-		} catch (TimeoutException ex) {
-
-		}
-	}
-
 	/**
 	 * Create Admin group if it is not created
 	 * 
-	 * @throws Throwable
+	 *
 	 */
 	@Before(value = "@CreateAdminGroup", order = 1)
 	public void create_AdminGroup() throws Throwable {
@@ -118,36 +107,45 @@ public class BackgroundSteps {
 	@Before(value = "@create10MinuteEmail", order = 3)
 	public void create_10MinuteEmail() throws Throwable {
 		Browser.sleep(5000);
-		Browser.open(AcquirerPortalGlobal.EMAIL_URL,5);
+		Browser.open(AcquirerPortalGlobal.EMAIL_URL);
 		Browser.sleep(1000);
 		emailPage.mailAddress.scrollIntoView();
 		tempEmail = emailPage.mailAddress.getAttribute("value");
 		Log.info("tempEmail " + tempEmail);
-		//tempPassword= emailPage.
+		// tempPassword= emailPage.
 		Browser.sleep(1000);
-		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL,5);
+		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL);
 
 	}
 
-	@After("@logout")
+	@Before("@logout")
+	public static void logoutOfAcquirerPortal() {
+		logout();
+	}
+
+	/**
+	 * Logout of Acquirer portal
+	 */
 	public static void logout() {
-		if (leftNavigation.logoutLabel.isDisplayed()) {
-			leftNavigation.logoutLabel.click();
+		if (leftNavigation.logoutLabel.isClickable(4)) {
+			Log.info("User is logged off of the Portal");
+			leftNavigation.logoutLabel.clickByJavaScript();
 		}
-		loginPage.usernameTxtBox.exists(3);
+		Browser.sleep(2000);
+		loginPage.passwordTxtBox.exists(3);
 	}
-	
+
 	/**
 	 * login as GP Admin
 	 */
 	public static void loginAsGlobalPaymentsAdministrator() {
 		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_LABEL);
-		//Browser.open(AcquirerPortalGlobal.URL);
+		// Browser.open(AcquirerPortalGlobal.URL);
 		loginPage.navigateToLoginPage();
-		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
+		leftNavigation.merchantsLink.exists(5);
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.GP_ADMIN_LABEL;
 	}
 
@@ -156,31 +154,19 @@ public class BackgroundSteps {
 	 */
 	public static void loginAsRootAdministrator() {
 		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
-		Browser.open(AcquirerPortalGlobal.URL,5);
-		loginPage.usernameTxtBox.exists(16);
+		Browser.open(AcquirerPortalGlobal.URL);
 		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
-
+		leftNavigation.portalUserLink.exists(5);
 		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
 	}
 
-	@Given("^User successfully navigated to Home Page$")
-	public void user_successfully_navigated_to_Home_Page() throws Throwable {
-		loginPage.navigateToLoginPage();
-		
-	}
-	
- 	@And("^logout from portal$")
- 	public void logout_from_portal() throws Throwable {
- 		logout();
- 	}
- 	
 	/**
 	 * @param userName - userName of the login user
 	 * @param password - password of the login user
 	 */
-	public static void login(String userName, String password){
+	public static void login(String userName, String password) {
 		loginPage.usernameTxtBox.exists(16);
 		loginPage.usernameTxtBox.clearAndSendKeys(userName);
 		loginPage.passwordTxtBox.clearAndSendKeys(password);

@@ -5,11 +5,11 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 
-import utils.AgGridCommon;
-import utils.Browser;
-import utils.Log;
-import utils.WebItem;
-import utils.WebPageInit;
+import coreutils.AgGridCommon;
+import coreutils.Browser;
+import coreutils.Log;
+import coreutils.WebItem;
+import coreutils.WebPageInit;
 
 public class NewPortalUserRegistrationPage extends WebPageInit {
 

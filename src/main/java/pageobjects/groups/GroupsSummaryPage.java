@@ -1,11 +1,9 @@
 package pageobjects.groups;
 
-
 import org.openqa.selenium.support.FindBy;
-import pageobjects.global.AcquirerPortalGlobal;
-import utils.Browser;
-import utils.WebItem;
-import utils.WebPageInit;
+import coreutils.Browser;
+import coreutils.WebItem;
+import coreutils.WebPageInit;
 
 public class GroupsSummaryPage extends WebPageInit {
 
@@ -13,7 +11,7 @@ public class GroupsSummaryPage extends WebPageInit {
 			"View details" };
 
 	public void navigateToGroupSummaryPage() {
-		Browser.open(AcquirerPortalGlobal.GROUP_URL,5);
+		Browser.open(AcquirerPortalGlobal.GROUP_URL);
 		newGroupButton.exists(5);
 	}
 
@@ -52,7 +50,5 @@ public class GroupsSummaryPage extends WebPageInit {
 
 	@FindBy(xpath = "//div[contains(text(),'Name')]")
 	public WebItem nameHeaderinResults;
-
-
 
 }

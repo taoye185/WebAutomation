@@ -1,4 +1,3 @@
-package pageobjects.global;
 
 public class AcquirerPortalGlobal {
 	public static final String URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/";

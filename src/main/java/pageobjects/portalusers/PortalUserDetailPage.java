@@ -2,8 +2,8 @@ package pageobjects.portalusers;
 
 import org.openqa.selenium.support.FindBy;
 
-import utils.WebItem;
-import utils.WebPageInit;
+import coreutils.WebItem;
+import coreutils.WebPageInit;
 
 public class PortalUserDetailPage extends WebPageInit {
 	

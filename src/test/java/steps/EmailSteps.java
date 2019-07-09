@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import cucumber.api.java.en.Given;
 import pageobjects.email.EmailPage;
-import utils.Browser;
-import utils.CommonUtils;
-import utils.Log;
+import coreutils.Browser;
+import CommonUtils;
+import coreutils.Log;
 
 public class EmailSteps {
 

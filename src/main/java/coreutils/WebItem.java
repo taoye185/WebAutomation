@@ -1,4 +1,4 @@
-package utils;
+package coreutils;
 
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -13,6 +13,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -245,6 +246,25 @@ public class WebItem implements WebElement {
 		dropDown.selectByValue(value);
 	}
 
+	/**
+	 * This method is used Element not getting clicked due to JavaScript or AJAX
+	 * calls present
+	 */
+	public void moveToElementAndClick() {
+		Log.info("Moving to and clicking on '" + locator.toString() + "'");
+		Actions action = new Actions(Browser.getDriver());
+		action.moveToElement(getActiveItem()).click().build().perform();
+	}
+
+	/**
+	 * This method is used when Element is not getting clicked as it is not within
+	 * Viewport
+	 */
+	public void clickByJavaScript() {
+		Log.info("Clicking by javascript on '" + locator.toString() + "'");
+		((JavascriptExecutor) Browser.getDriver()).executeScript("arguments[0].click();", getActiveItem());
+	}
+
 	@SuppressWarnings("rawtypes")
 	public static List getDropdownOptions(Select dropdown) {
 		List<WebElement> options = new ArrayList();
@@ -307,8 +327,6 @@ public class WebItem implements WebElement {
 		return tempElement;
 	}
 
-
-	
 	public static void enter() {
 		try {
 			Robot robot = new Robot();
@@ -330,16 +348,17 @@ public class WebItem implements WebElement {
 
 		}
 	}
-	
+
 	/**
 	 * Clears the text field and sends the value passed as a parameter.
+	 * 
 	 * @para value- value to be passed to text field
 	 **/
-	public void clearAndSendKeys(String value){
-	Log.info("Clearing and sending '"+value+"' to the '"+locator.toString()+"' text box");
-	WebElement element = getActiveItem();
-	element.clear();
-	element.sendKeys(value);
+	public void clearAndSendKeys(String value) {
+		Log.info("Clearing and sending '" + value + "' to the '" + locator.toString() + "' text box");
+		WebElement element = getActiveItem();
+		element.clear();
+		element.sendKeys(value);
 	}
-	
+
 }

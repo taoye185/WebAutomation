@@ -1,11 +1,12 @@
-package utils;
-
 import org.openqa.selenium.Keys;
 
-import pageobjects.global.LeftNavigation;
+import coreutils.AgGridCommon;
+import coreutils.Browser;
+import coreutils.Log;
+import pageobjects.LeftNavigation;
 import pageobjects.groups.GroupDetailPage;
 import pageobjects.groups.GroupsSummaryPage;
-import steps.BackgroundSteps;
+//import steps.BackgroundSteps;
 
 public class CleanUp {
 
@@ -15,7 +16,7 @@ public class CleanUp {
 	public static boolean testRunCompleted = true;
 
 	public static void deleteAllGroups() {
-		BackgroundSteps.login_As_GP_Admin();
+		// BackgroundSteps.login_As_GP_Admin();
 		leftNavigation.groupsLink.click();
 
 		for (int i = 0; i < CommonUtils.Group_GBL.size(); i++) {
@@ -34,8 +35,8 @@ public class CleanUp {
 			groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
 			Browser.sleep(2000);
 			groupsSummaryPage.OkFilterButton.click();
-			Browser.sleep(2000);		
-			AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid,tempGroup, "Details");
+			Browser.sleep(2000);
+			AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, tempGroup, "Details");
 			groupDetailPage.deleteGroupButton.exists(2);
 			groupDetailPage.deleteGroupButton.click();
 			Browser.sleep(1000);
@@ -52,12 +53,12 @@ public class CleanUp {
 				Log.info(" Admin group " + tempGroup + "set to nul" + CommonUtils.supportGroup);
 			}
 		}
-		
-		// clearing the groups generated while  in the test run.  
+
+		// clearing the groups generated while in the test run.
 		for (int i = 0; i < CommonUtils.Group_GBL.size(); i++) {
 			CommonUtils.Group_GBL.remove(i);
 		}
-		
+
 	}
 
 }

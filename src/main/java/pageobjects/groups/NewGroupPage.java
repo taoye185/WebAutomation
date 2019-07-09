@@ -2,8 +2,8 @@ package pageobjects.groups;
 
 import org.openqa.selenium.support.FindBy;
 
-import utils.WebItem;
-import utils.WebPageInit;
+import coreutils.WebItem;
+import coreutils.WebPageInit;
 
 public class NewGroupPage extends WebPageInit {
 

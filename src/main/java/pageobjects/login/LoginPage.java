@@ -2,25 +2,17 @@ package pageobjects.login;
 
 import org.openqa.selenium.support.FindBy;
 
-import pageobjects.global.AcquirerPortalGlobal;
-import utils.Browser;
-import utils.WebItem;
-import utils.WebPageInit;
+import coreutils.Browser;
+import coreutils.WebItem;
+import coreutils.WebPageInit;
 
 public class LoginPage extends WebPageInit {
 
-	/*
-	 * Define a unique element of a page, useful to verify that the user is one
-	 * login page
-	 */
-
 	public void navigateToLoginPage() {
-		
-		Browser.open(AcquirerPortalGlobal.URL,30);		
+		Browser.open(AcquirerPortalGlobal.URL);
 		usernameTxtBox.exists(7);
 	}
 
-	
 	@FindBy(name = "username")
 	public WebItem usernameTxtBox;
 
@@ -32,7 +24,5 @@ public class LoginPage extends WebPageInit {
 
 	@FindBy(id = "forgotpw")
 	public WebItem forgetPasswordLink;
-	
-	
-	
+
 }
