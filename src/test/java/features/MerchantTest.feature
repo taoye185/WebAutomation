@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 @merchantTest
 Feature: 4_Merchant_Tests
+=======
+@merchantPage
+Feature: Merchant_Tests
+>>>>>>> master
 
 	Background:
 		Given User successfully navigated to merchant Summary Page

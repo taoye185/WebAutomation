@@ -1,18 +1,21 @@
 package steps;
 
 import org.openqa.selenium.TimeoutException;
-
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import pageobjects.global.AcquirerPortalGlobal;
-import pageobjects.global.LeftNavigation;
-import pageobjects.login.LoginPage;
-import pageobjects.merchants.MerchantsPage;
-import pageobjects.portalusers.PortalUsersPage;
-import utils.Browser;
-import utils.CommonUtils;
-import utils.Log;
+import acquirerportal.pageobjects.email.EmailPage;
+import acquirerportal.AcquirerPortalGlobal;
+import acquirerportal.pageobjects.LeftNavigation;
+import acquirerportal.pageobjects.groups.GroupDetailPage;
+import acquirerportal.pageobjects.groups.GroupPermissionsPage;
+import acquirerportal.pageobjects.groups.GroupsSummaryPage;
+import acquirerportal.pageobjects.groups.NewGroupPage;
+import acquirerportal.pageobjects.login.LoginPage;
+import acquirerportal.pageobjects.merchants.MerchantsPage;
+import acquirerportal.pageobjects.portalusers.PortalUsersPage;
+import coreutils.Browser;
+import acquirerportal.CommonUtils;
+import coreutils.Log;
+import coreutils.TestDataGenerator;
 
 public class BackgroundSteps {
 
@@ -20,16 +23,28 @@ public class BackgroundSteps {
 	public static MerchantsPage merchantsPage = new MerchantsPage();
 	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static PortalUsersPage PortalUsersPage = new PortalUsersPage();
+	public static GroupsSummaryPage groupsSummaryPage = new GroupsSummaryPage();
+	public static NewGroupPage newGroupPage = new NewGroupPage();
+	public static GroupDetailPage groupDetailPage = new GroupDetailPage();
+	public static GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
+	static TestDataGenerator testDataGenerator = new TestDataGenerator();
+	public static PortalUsersPage portalUsersPage = new PortalUsersPage();
+	public static EmailPage emailPage = new EmailPage();
+	public static String tempEmail = "";
+	public static String tempPassword = "";
 
-	@Before("@loginAsGPAdmin")	
+	@Before(value = "@loginAsGPAdmin", order = 0)
 	public static void login_As_GP_Admin() {
+		Log.info("Logging In as a GP Admin");
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
-				leftNavigation.initLeftNavLink(CommonUtils.userLabel_GBL);
 				if (!(leftNavigation.loggedInUserLink.getText())
 						.equalsIgnoreCase(AcquirerPortalGlobal.GP_ADMIN_LABEL)) {
+					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
-					loginAsGlobalPaymentsAdministrator(); /* login back as global payment admin */
+					// navigate_to_home();
+					// Browser.open(AcquirerPortalGlobal.URL);
+					loginAsGlobalPaymentsAdministrator(); /* login back as GP Admin */
 				}
 				return;
 			}
@@ -44,8 +59,11 @@ public class BackgroundSteps {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				if (!(leftNavigation.loggedInUserLink.getText())
 						.equalsIgnoreCase(AcquirerPortalGlobal.ROOT_ADMIN_LABEL)) {
+					Log.info(" Log out and re-login as Root Admin user ");
+					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
-					loginAsRootAdministrator(); /* login back as root admin */
+					// navigate_to_home();
+					loginAsRootAdministrator(); /* login back as Root admin */
 				}
 				return;
 			}
@@ -54,53 +72,103 @@ public class BackgroundSteps {
 		}
 	}
 
-	@Before("@navigateToGroupSummaryPage")
-	public static void navigate_To_Group_Summary_Page() {
-		try {		
-			Browser.open(AcquirerPortalGlobal.GROUP_URL);
-		} catch (TimeoutException ex) {
-			
+	/**
+	 * Create Admin group if it is not created
+	 * 
+	 *
+	 */
+	@Before(value = "@CreateAdminGroup", order = 1)
+	public void create_AdminGroup() throws Throwable {
+		if (CommonUtils.adminGroup.isEmpty()) {
+			Log.info("Admin Group is not created yet");
+			leftNavigation.groupsLink.click();
+			groupsSummaryPage.newGroupButton.exists(2);
+			groupsSummaryPage.newGroupButton.click();
+			GroupSteps.CreateAdminGroup();
+			GroupSteps.filterGroupByName();
+			GroupSteps.selectGroupandassignAdminGroupPermisisons();
 		}
 	}
-	
-	@After("@logout")
-	public static void logout() {
-		if (leftNavigation.logoutLabel.isDisplayed()) {
-			leftNavigation.logoutLabel.click();
+
+	@Before(value = "@CreateSupportGroup", order = 2)
+	public void create_SupportGroup() throws Throwable {
+		if (CommonUtils.supportGroup.isEmpty()) {
+			Log.info("Support Group is not created yet");
+			leftNavigation.groupsLink.click();
+			groupsSummaryPage.newGroupButton.exists(2);
+			groupsSummaryPage.newGroupButton.click();
+			GroupSteps.createSupportGroup();
+			GroupSteps.filterGroupByName();
+			GroupSteps.selectGroupandassignSupportGroupPermisisons();
 		}
-		loginPage.usernameTxtBox.exists(3);
+	}
+
+	@Before(value = "@create10MinuteEmail", order = 3)
+	public void create_10MinuteEmail() throws Throwable {
+		Browser.sleep(5000);
+		Browser.open(AcquirerPortalGlobal.EMAIL_URL);
+		Browser.sleep(1000);
+		emailPage.mailAddress.scrollIntoView();
+		tempEmail = emailPage.mailAddress.getAttribute("value");
+		Log.info("tempEmail " + tempEmail);
+		// tempPassword= emailPage.
+		Browser.sleep(1000);
+		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL);
+
+	}
+
+	@Before("@logout")
+	public static void logoutOfAcquirerPortal() {
+		logout();
 	}
 
 	/**
-	 * login as gp admin
+	 * Logout of Acquirer portal
+	 */
+	public static void logout() {
+		if (leftNavigation.logoutLabel.isClickable(4)) {
+			Log.info("User is logged off of the Portal");
+			leftNavigation.logoutLabel.clickByJavaScript();
+		}
+		Browser.sleep(2000);
+		loginPage.passwordTxtBox.exists(3);
+	}
+
+	/**
+	 * login as GP Admin
 	 */
 	public static void loginAsGlobalPaymentsAdministrator() {
-
-		Browser.open(AcquirerPortalGlobal.URL);
 		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_LABEL);
-		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
-		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
+		// Browser.open(AcquirerPortalGlobal.URL);
+		loginPage.navigateToLoginPage();
+		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
+		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
-		merchantsPage.newMerchantButton.exists(4);
-		CommonUtils.username_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
-		CommonUtils.password_GBL= AcquirerPortalGlobal.GP_ADMIN_PASSWORD;
-		CommonUtils.userLabel_GBL=AcquirerPortalGlobal.GP_ADMIN_LABEL;
+		leftNavigation.merchantsLink.exists(5);
+		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.GP_ADMIN_LABEL;
 	}
 
 	/**
 	 * login as root admin
 	 */
 	public static void loginAsRootAdministrator() {
-
-		Browser.open(AcquirerPortalGlobal.URL);
 		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
-		loginPage.usernameTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
-		loginPage.passwordTxtBox.sendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
+		Browser.open(AcquirerPortalGlobal.URL);
+		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
+		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
-		PortalUsersPage.newPortalUserButton.exists(4);
-		CommonUtils.username_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
-		CommonUtils.password_GBL= AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD;
-		CommonUtils.userLabel_GBL=AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
+		leftNavigation.portalUserLink.exists(5);
+		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
 	}
 
+	/**
+	 * @param userName - userName of the login user
+	 * @param password - password of the login user
+	 */
+	public static void login(String userName, String password) {
+		loginPage.usernameTxtBox.exists(16);
+		loginPage.usernameTxtBox.clearAndSendKeys(userName);
+		loginPage.passwordTxtBox.clearAndSendKeys(password);
+		loginPage.signInBtn.click();
+	}
 }
