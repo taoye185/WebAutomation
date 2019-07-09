@@ -14,3 +14,23 @@ Feature: Merchant_Tests
 		Examples:
 			| NewMerchant |
 			| MWTest01    |
+
+	@sanity @NewMerchant
+	Scenario Outline: To Verify that an error message should be displayed when the Field values are missing
+		Given User successfully navigated to New Merchant Page
+		When User click on New merchant button
+		And User select the division from dropdown 
+		|division | 
+		|Global Payments|
+		And User leave the "<fieldName>" empty
+		Then An error message "<expectedErrorMessage>" shall be displayed under the missing "<fieldName>" field
+		And Create Merchant button is not active
+
+		Examples:
+			| fieldName     | expectedErrorMessage             |
+			| businessName  | Please enter a business name     |
+			| address       | Please enter an address          |
+			| city          | Please enter a City              |
+			| zipCode       | Please enter a postal / ZIP code |
+			| mposUserName  | Please enter a name              |
+			| mposUserEmail | Please enter an email            |
