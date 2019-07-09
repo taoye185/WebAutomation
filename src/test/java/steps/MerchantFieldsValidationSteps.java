@@ -3,7 +3,6 @@ package steps;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -11,19 +10,20 @@ import acquirerportal.AcquirerPortalGlobal;
 import acquirerportal.pageobjects.merchants.MerchantRegistrationPage;
 import acquirerportal.pageobjects.merchants.MerchantsPage;
 import coreutils.Browser;
+import coreutils.Log;
 
 public class MerchantFieldsValidationSteps
 
 {
 	public static MerchantRegistrationPage MerchantRegistrationPage = new MerchantRegistrationPage();
-	MerchantsPage merchantsPage = new MerchantsPage();
+	public static MerchantsPage merchantsPage = new MerchantsPage();
 	String FieldName;
 
 	@Given("^User successfully navigated to New Merchant Page$")
 	public void User_successfully_navigated_to_New_Merchant_Page() {
 
 		merchantsPage.navigateToMerchantSummaryPage();
-		Assert.assertEquals("User is navigated to Merchnats Page", Browser.getDriver().getCurrentUrl(),
+		Assert.assertEquals("User is navigated to Merchants Page", Browser.getDriver().getCurrentUrl(),
 				AcquirerPortalGlobal.MERCHANTS_URL);
 		merchantsPage.newMerchantButton.click();
 		MerchantRegistrationPage.newMerchantRegistrationDivisionDropDown.selectDropDownItem("Global Payments");
@@ -33,11 +33,9 @@ public class MerchantFieldsValidationSteps
 	public void User_leave_the_merchant_ID_empty(String FieldName) {
 		switch (FieldName) {
 		case "businessName": {
-
 			MerchantRegistrationPage.businessNameTextbox.sendKeys("");
 			MerchantRegistrationPage.businessNameTextbox.sendKeys(Keys.TAB);
 			break;
-
 		}
 		case "address": {
 			MerchantRegistrationPage.addressTextbox.sendKeys("");
@@ -56,7 +54,6 @@ public class MerchantFieldsValidationSteps
 			MerchantRegistrationPage.zipCodeTextbox.sendKeys(Keys.TAB);
 			break;
 		}
-
 		case "mposUserName": {
 			MerchantRegistrationPage.mposUserNameTextbox.scrollIntoView();
 			MerchantRegistrationPage.mposUserNameTextbox.sendKeys("");
@@ -76,13 +73,11 @@ public class MerchantFieldsValidationSteps
 	@Then("^An error message shall be displayed under the missing \"([^\"]*)\" field$")
 	public void An_error_message_shall_be_displayed_under_the_missing_field(String FieldName) {
 		String actualErrorMessage = MerchantRegistrationPage.errortooltiptext.getText();
-		System.out.append(actualErrorMessage);
-
+		Log.info(actualErrorMessage);
 		switch (FieldName.toUpperCase()) {
 		case "BUSINESSNAME": {
 			Assert.assertTrue("Business Name error-tooltip is not displayed Correctly",
 					actualErrorMessage.equalsIgnoreCase("Please enter a business name"));
-
 			break;
 		}
 		case "ADDRESS": {
@@ -110,10 +105,13 @@ public class MerchantFieldsValidationSteps
 					actualErrorMessage.equalsIgnoreCase("Please enter an email"));
 			break;
 		}
+		default: {
+			Log.info(FieldName + " doesn't exist ");
+		}
 		}
 	}
 
-	@And("^Create Merchant button is not active$")
+	@Then("^Create Merchant button is not active$")
 	public void Create_Merchant_button_is_not_active$() {
 		MerchantRegistrationPage.MerchantCreateButton.scrollIntoView();
 		Assert.assertTrue(!(MerchantRegistrationPage.MerchantCreateButton.isEnabled()));
