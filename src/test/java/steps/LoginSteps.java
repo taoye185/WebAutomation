@@ -5,12 +5,11 @@ import org.junit.Assert;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageobjects.global.AcquirerPortalGlobal;
-import pageobjects.global.LeftNavigation;
-import pageobjects.login.LoginPage;
-import utils.Browser;
-import utils.CommonUtils;
-import utils.Log;
+import acquirerportal.AcquirerPortalGlobal;
+import acquirerportal.pageobjects.LeftNavigation;
+import acquirerportal.pageobjects.login.LoginPage;
+import coreutils.Browser;
+import coreutils.Log;
 
 public class LoginSteps {
 

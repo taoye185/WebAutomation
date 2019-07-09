@@ -1,4 +1,4 @@
-package pageobjects.login;
+package acquirerportal.pageobjects.login;
 
 import org.openqa.selenium.support.FindBy;
 

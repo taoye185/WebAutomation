@@ -1,10 +1,10 @@
 package steps;
 
 import cucumber.api.java.en.Given;
-import pageobjects.global.AcquirerPortalGlobal;
-import pageobjects.merchants.MerchantRegistrationPage;
-import pageobjects.merchants.MerchantsPage;
-import utils.Browser;
+import acquirerportal.AcquirerPortalGlobal;
+import acquirerportal.pageobjects.merchants.MerchantRegistrationPage;
+import acquirerportal.pageobjects.merchants.MerchantsPage;
+import coreutils.Browser;
 import cucumber.api.java.en.Then;
 
 import org.junit.Assert;

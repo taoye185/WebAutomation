@@ -1,8 +1,8 @@
-package pageobjects.merchants;
+package acquirerportal.pageobjects.merchants;
 
 import org.openqa.selenium.support.FindBy;
 
-import AcquirerPortalGlobal;
+import acquirerportal.AcquirerPortalGlobal;
 import coreutils.Browser;
 import coreutils.WebItem;
 import coreutils.WebPageInit;

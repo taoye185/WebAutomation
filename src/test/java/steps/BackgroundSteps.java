@@ -1,20 +1,19 @@
 package steps;
 
 import org.openqa.selenium.TimeoutException;
-import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import pageobjects.email.EmailPage;
-import AcquirerPortalGlobal;
-import pageobjects.LeftNavigation;
-import pageobjects.groups.GroupDetailPage;
-import pageobjects.groups.GroupPermissionsPage;
-import pageobjects.groups.GroupsSummaryPage;
-import pageobjects.groups.NewGroupPage;
-import pageobjects.login.LoginPage;
-import pageobjects.merchants.MerchantsPage;
-import pageobjects.portalusers.PortalUsersPage;
+import acquirerportal.pageobjects.email.EmailPage;
+import acquirerportal.AcquirerPortalGlobal;
+import acquirerportal.pageobjects.LeftNavigation;
+import acquirerportal.pageobjects.groups.GroupDetailPage;
+import acquirerportal.pageobjects.groups.GroupPermissionsPage;
+import acquirerportal.pageobjects.groups.GroupsSummaryPage;
+import acquirerportal.pageobjects.groups.NewGroupPage;
+import acquirerportal.pageobjects.login.LoginPage;
+import acquirerportal.pageobjects.merchants.MerchantsPage;
+import acquirerportal.pageobjects.portalusers.PortalUsersPage;
 import coreutils.Browser;
-import CommonUtils;
+import acquirerportal.CommonUtils;
 import coreutils.Log;
 import coreutils.TestDataGenerator;
 

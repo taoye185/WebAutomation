@@ -1,4 +1,4 @@
-package pageobjects;
+package acquirerportal.pageobjects;
 
 import org.openqa.selenium.support.FindBy;
 import coreutils.WebItem;

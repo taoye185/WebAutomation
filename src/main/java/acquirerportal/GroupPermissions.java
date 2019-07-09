@@ -1,3 +1,5 @@
+package acquirerportal;
+
 public class GroupPermissions {
 
 	public static final String PORTALUSER_PERMISSION = "Portal user permissions";

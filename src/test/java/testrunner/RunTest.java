@@ -6,10 +6,10 @@ import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import utils.Browser;
-import utils.CleanUp;
-import utils.CommonUtils;
-import utils.Log;
+import coreutils.Browser;
+import acquirerportal.CleanUp;
+import acquirerportal.CommonUtils;
+import coreutils.Log;
 
 // TODO: Auto-generated Javadoc
 /**

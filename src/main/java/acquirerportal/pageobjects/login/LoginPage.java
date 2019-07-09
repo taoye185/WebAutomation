@@ -1,7 +1,7 @@
-package pageobjects.login;
+package acquirerportal.pageobjects.login;
 
 import org.openqa.selenium.support.FindBy;
-
+import acquirerportal.AcquirerPortalGlobal;
 import coreutils.Browser;
 import coreutils.WebItem;
 import coreutils.WebPageInit;

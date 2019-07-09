@@ -1,12 +1,12 @@
-package acquireportal;
+package acquirerportal;
 
 import org.openqa.selenium.Keys;
 import coreutils.AgGridCommon;
 import coreutils.Browser;
 import coreutils.Log;
-import pageobjects.LeftNavigation;
-import acquireportal.pageobjects.groups.GroupDetailPage;
-import acquireportal.pageobjects.groups.GroupsSummaryPage;
+import acquirerportal.pageobjects.LeftNavigation;
+import acquirerportal.pageobjects.groups.GroupDetailPage;
+import acquirerportal.pageobjects.groups.GroupsSummaryPage;
 //import steps.BackgroundSteps;
 
 public class CleanUp {

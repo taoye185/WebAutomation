@@ -1,4 +1,4 @@
-package pageobjects.merchants;
+package acquirerportal.pageobjects.merchants;
 
 import org.openqa.selenium.support.FindBy;
 

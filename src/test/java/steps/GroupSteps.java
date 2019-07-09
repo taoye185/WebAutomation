@@ -5,18 +5,18 @@ import org.openqa.selenium.Keys;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import pageobjects.global.AcquirerPortalGlobal;
-import pageobjects.global.LeftNavigation;
+import acquirerportal.AcquirerPortalGlobal;
+import acquirerportal.pageobjects.LeftNavigation;
 
-import pageobjects.groups.GroupDetailPage;
-import pageobjects.groups.GroupPermissionsPage;
-import pageobjects.groups.GroupsSummaryPage;
-import pageobjects.groups.NewGroupPage;
-import utils.AgGridCommon;
-import utils.Browser;
-import utils.CommonUtils;
-import utils.Log;
-import utils.TestDataGenerator;
+import acquirerportal.pageobjects.groups.GroupDetailPage;
+import acquirerportal.pageobjects.groups.GroupPermissionsPage;
+import acquirerportal.pageobjects.groups.GroupsSummaryPage;
+import acquirerportal.pageobjects.groups.NewGroupPage;
+import coreutils.AgGridCommon;
+import coreutils.Browser;
+import acquirerportal.CommonUtils;
+import coreutils.Log;
+import coreutils.TestDataGenerator;
 
 public class GroupSteps {
 

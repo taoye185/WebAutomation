@@ -1,7 +1,7 @@
-package pageobjects.portalusers;
+package acquirerportal.pageobjects.portalusers;
 
 import org.openqa.selenium.support.FindBy;
-import pageobjects.global.AcquirerPortalGlobal;
+import acquirerportal.AcquirerPortalGlobal;
 import coreutils.Browser;
 import coreutils.WebItem;
 import coreutils.WebPageInit;
@@ -15,7 +15,7 @@ public class PortalUsersPage extends WebPageInit {
 
 	@FindBy(id = "portal-users-list")
 	public WebItem portalUserListGrid;
-	
+
 	@FindBy(id = "add-user-btn")
 	public WebItem newPortalUserButton;
 
@@ -42,15 +42,18 @@ public class PortalUsersPage extends WebPageInit {
 
 	public String portalUserDetailsRowXpath = "";
 
-	/*public WebElement selectElementintheResultsTabel(String text) {
-		return nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(text);
-	}
-
-	public void selectElementintheResultsTabel2(String siblingName, String elementText) {
-		portalUserDetailsRowXpath = "//*[.='" + siblingName + "']/following-sibling::*";
-		System.out.println(" groupDetailsRowXpath " + portalUserDetailsRowXpath);
-		emailHeaderinResults.getSiblingElement(portalUserDetailsRowXpath, elementText);
-
-	}*/
+	/*
+	 * public WebElement selectElementintheResultsTabel(String text) { return
+	 * nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(text); }
+	 * 
+	 * public void selectElementintheResultsTabel2(String siblingName, String
+	 * elementText) { portalUserDetailsRowXpath = "//*[.='" + siblingName +
+	 * "']/following-sibling::*"; System.out.println(" groupDetailsRowXpath " +
+	 * portalUserDetailsRowXpath);
+	 * emailHeaderinResults.getSiblingElement(portalUserDetailsRowXpath,
+	 * elementText);
+	 * 
+	 * }
+	 */
 
 }
