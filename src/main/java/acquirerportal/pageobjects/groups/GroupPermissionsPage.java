@@ -1,5 +1,6 @@
+package acquirerportal.pageobjects.groups;
 import org.openqa.selenium.support.FindBy;
-import java.GroupPermissions;
+import acquireportal.;
 import coreutils.WebItem;
 import coreutils.WebPageInit;
 

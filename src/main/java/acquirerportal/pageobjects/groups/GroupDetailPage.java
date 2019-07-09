@@ -1,4 +1,4 @@
-package pageobjects.groups;
+package acquirerportal.pageobjects.groups;
 
 
 import org.openqa.selenium.support.FindBy;

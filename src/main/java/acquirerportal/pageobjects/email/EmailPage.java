@@ -1,4 +1,4 @@
-package pageobjects.email;
+package acquirerportal.pageobjects.email;
 
 import java.util.List;
 

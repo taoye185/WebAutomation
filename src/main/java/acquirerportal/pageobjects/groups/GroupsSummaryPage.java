@@ -1,6 +1,8 @@
-package pageobjects.groups;
+package acquirerportal.pageobjects.groups;
 
 import org.openqa.selenium.support.FindBy;
+
+import acquireportal.AcquirerPortalGlobal;
 import coreutils.Browser;
 import coreutils.WebItem;
 import coreutils.WebPageInit;
