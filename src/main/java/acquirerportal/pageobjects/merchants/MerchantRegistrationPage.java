@@ -27,9 +27,6 @@ public class MerchantRegistrationPage extends WebPageInit {
 	@FindBy(id = "accountNumber")
 	public WebItem MerchantIDTextbox;
 	
-	@FindBy(xpath = "//*[@id=\"root\"]/div/main/div/form/div[3]/div[2]/div/div[1]/div")
-	public WebItem MerchantIDErrorMessage;
-	
 	@FindBy(id = "merchantConfigurationTimeZoneId")
 	public WebItem MerchantTimeZoneDropdown;
 	

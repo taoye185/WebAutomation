@@ -18,7 +18,11 @@ Feature: Merchant_Tests
 	@sanity @NewMerchant
 	Scenario Outline: To Verify that an error message should be displayed when the "<FieldName>" is missing
 		Given User successfully navigated to New Merchant Page
-		When User leave the "<FieldName>" empty
+		When User click on New merchant button
+		And User select the division from dropdown 
+		|division | 
+		|Global Payments|
+		And User leave the "<FieldName>" empty
 		Then An error message shall be displayed under the missing "<FieldName>" field
 		And Create Merchant button is not active
 
