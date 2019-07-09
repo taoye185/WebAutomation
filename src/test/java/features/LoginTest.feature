@@ -1,12 +1,16 @@
 @loginPage
 Feature: verify user is able do all the actions on login page
 
-	@sanity @loginAsRootAdmin @logout
-	Scenario: Login as Root Admin
-		Then User navigates to portal user page
-		And Validate user name label from the left navigation is successful
+	Background:
+		Given User is successfully navigated to Home Page
 
-	@sanity @loginAsGPAdmin  @logout
-	Scenario: Login as GP Admin
-		Then User navigates to merchants summary page
-		And Validate user name label from the left navigation is successful
+	@sanity @logout
+	Scenario Outline: Login as User
+		When user "<userName>" enter credentials and hit login button
+		Then "<userName>" should be displayed on the left navigation Menu
+		Examples:
+			| userName  |
+			| RootAdmin |
+			| GPAdmin   |
+
+
