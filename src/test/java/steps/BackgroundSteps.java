@@ -2,7 +2,7 @@ package steps;
 
 import org.openqa.selenium.TimeoutException;
 
-import cucumber.api.Scenario;
+//import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import pageobjects.global.AcquirerPortalGlobal;

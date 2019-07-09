@@ -134,7 +134,7 @@ public class Browser {
 		return false;
 	}
 
-	public static boolean textExists(String text, int seconds) {
+	public static boolean textExists (String text, int seconds) {
 		Log.info(String.format("Checking if '%s' text exists on the page withing %s seconds", text, seconds));
 		return dynamicElementExists(By.xpath("//*[contains(text(),'" + text + "')]"), seconds);
 	}
