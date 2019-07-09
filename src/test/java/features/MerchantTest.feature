@@ -16,18 +16,18 @@ Feature: Merchant_Tests
 			| MWTest01    |
 
 	@sanity @NewMerchant
-	Scenario Outline: To Verify that an error message should be displayed when the "<FieldName>" is missing
+	Scenario Outline: To Verify that an error message should be displayed when the Field values are missing
 		Given User successfully navigated to New Merchant Page
 		When User click on New merchant button
 		And User select the division from dropdown 
 		|division | 
 		|Global Payments|
-		And User leave the "<FieldName>" empty
-		Then An error message shall be displayed under the missing "<FieldName>" field
+		And User leave the "<fieldName>" empty
+		Then An error message "<expectedErrorMessage>" shall be displayed under the missing "<fieldName>" field
 		And Create Merchant button is not active
 
 		Examples:
-			| FieldName     | ExpectedErrorMessage             |
+			| fieldName     | expectedErrorMessage             |
 			| businessName  | Please enter a business name     |
 			| address       | Please enter an address          |
 			| city          | Please enter a City              |

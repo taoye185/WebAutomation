@@ -81,43 +81,43 @@ public class MerchantFieldsValidationSteps
 		}
 	}
 
-	@Then("^An error message shall be displayed under the missing \"([^\"]*)\" field$")
-	public void An_error_message_shall_be_displayed_under_the_missing_field(String FieldName) {
+	@Then("^An error message \"([^\"]*)\" shall be displayed under the missing \"([^\"]*)\" field$")
+	public void An_error_message_shall_be_displayed_under_the_missing_field(String expectedErrorMessage, String fieldName) {
 		String actualErrorMessage = MerchantRegistrationPage.errortooltiptext.getText();
 		Log.info(actualErrorMessage);
-		switch (FieldName.toUpperCase()) {
+		switch (fieldName.toUpperCase()) {
 		case "BUSINESSNAME": {
 			Assert.assertTrue("Business Name error-tooltip is not displayed Correctly",
-					actualErrorMessage.equalsIgnoreCase("Please enter a business name"));
+					actualErrorMessage.equalsIgnoreCase(expectedErrorMessage));
 			break;
 		}
 		case "ADDRESS": {
 			Assert.assertTrue("Address error-tooltip is not displayed Correctly",
-					actualErrorMessage.equalsIgnoreCase("Please enter an address"));
+					actualErrorMessage.equalsIgnoreCase(expectedErrorMessage));
 			break;
 		}
 		case "CITY": {
 			Assert.assertTrue("City error-tooltip is not displayed Correctly",
-					actualErrorMessage.equalsIgnoreCase("Please enter a City"));
+					actualErrorMessage.equalsIgnoreCase(expectedErrorMessage));
 			break;
 		}
 		case "ZIPCODE": {
 			Assert.assertTrue("zipCode error-tooltip is not displayed Correctly",
-					actualErrorMessage.equalsIgnoreCase("Please enter a postal / ZIP code"));
+					actualErrorMessage.equalsIgnoreCase(expectedErrorMessage));
 			break;
 		}
 		case "MPOSUSERNAME": {
 			Assert.assertTrue("Merchant full name error-tooltip is not displayed Correctly",
-					actualErrorMessage.equalsIgnoreCase("Please enter a name"));
+					actualErrorMessage.equalsIgnoreCase(expectedErrorMessage));
 			break;
 		}
 		case "MPOSUSEREMAIL": {
 			Assert.assertTrue("Merchant Email error-tooltip is not displayed Correctly",
-					actualErrorMessage.equalsIgnoreCase("Please enter an email"));
+					actualErrorMessage.equalsIgnoreCase(expectedErrorMessage));
 			break;
 		}
 		default: {
-			Log.info(FieldName + " doesn't exist ");
+			Log.info(fieldName + " doesn't exist ");
 		}
 		}}
 	@Then("^Create Merchant button is not active$")
