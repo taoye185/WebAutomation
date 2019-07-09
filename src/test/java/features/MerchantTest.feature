@@ -1,4 +1,5 @@
-Feature: 4_Merchant_Tests
+@merchantPage
+Feature: Merchant_Tests
 
 	Background:
 		Given User successfully navigated to merchant Summary Page

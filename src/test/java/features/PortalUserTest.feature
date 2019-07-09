@@ -1,14 +1,18 @@
-@portaluser
-Feature: 2_Portal_Tests
+@portalUser
+Feature: Portal_Tests
 
 	Background:
 		Given User successfully navigated to Portal Users Page
 
-	@sanity @loginAsGPAdmin
-	Scenario Outline:Create an Support Account
-		Given user click on New Portal User button
-		And provide details to create a "<user>" new Portal user
+	@sanity @loginAsGPAdmin  @create10MinuteEmail
+	Scenario Outline: Create Portal user accounts
+		And user click on New Portal User button
+		And provide details to create a "<newuser>" new Portal user
+		And logout from portal
+		#And user navigates back to email and capture temporary password
+		#And new user successfully navigated to Home Page
+		#And new user "<newuser>" enter credentials and hit Login Button
+		#And user change password
 		Examples:
-			| user    |
+			| newuser |
 			| support |
-
