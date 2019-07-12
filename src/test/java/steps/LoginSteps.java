@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 
 import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
+//import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -130,7 +130,7 @@ public class LoginSteps {
 		Assert.assertTrue("user name error message is not displayed", Browser.textExists(list.get(0), 2));
 	}
 
-	@And("^error message is displayed for blank Password$")
+	@Then("^error message is displayed for blank Password$")
 	public void Validate_error_message_displayed_for_blank_Password(DataTable args) throws Throwable {
 		List<String> list = args.asList(String.class);
 		Assert.assertTrue("Password error message is not displayed", Browser.textExists(list.get(0), 2));
@@ -139,20 +139,14 @@ public class LoginSteps {
 	@When("^User enters invalid combination of \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void user_enters_invalid_combination_of_Username_and_Password(String Username, String Password)
 			throws Throwable {
-		loginPage.usernameTxtBox.clear();
-		loginPage.usernameTxtBox.sendKeys(Username);
-		loginPage.passwordTxtBox.clear();
-		loginPage.passwordTxtBox.sendKeys(Password);
+		loginPage.usernameTxtBox.clearAndSendKeys(Username);
+		loginPage.passwordTxtBox.clearAndSendKeys(Password);
 		loginPage.signInBtn.click();
-		Browser.sleep(20000);
 	}
 
 	@Then("^\"([^\"]*)\" is displayed$")
-	public void error_message_invalid_combination_of_Username_and_Password(DataTable args) throws Throwable {
-		List<String> list = args.asList(String.class);
-		Assert.assertTrue("error message is not displayed for incorrect password", Browser.textExists(list.get(0), 2));
-		Assert.assertTrue("error message is not displayed for incorrect username", Browser.textExists(list.get(1), 2));
-		Assert.assertTrue("error message is not displayed for incorrect username", Browser.textExists(list.get(2), 2));
+	public void error_message_invalid_combination_of_Username_and_Password(String expectedErrorMessage) throws Throwable {
+		Assert.assertTrue("error message is not displayed: "+expectedErrorMessage, Browser.textExists(expectedErrorMessage,2));
 	}
 
 }

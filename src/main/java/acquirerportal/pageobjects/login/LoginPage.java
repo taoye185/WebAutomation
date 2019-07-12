@@ -25,6 +25,5 @@ public class LoginPage extends WebPageInit {
 	@FindBy(id = "forgotpw")
 	public WebItem forgetPasswordLink;
 	
-	@FindBy(id="error-tooltip")
-	public WebItem blankerrormessage;
+	
 }
