@@ -14,7 +14,7 @@ public class MerchantsPage extends WebPageInit {
 		newMerchantButton.exists(5);
 	}
 
-	@FindBy(xpath = "//*[contains(text(),'New merchant')]")
+	@FindBy(id = "new-merchant-btn")
 	public WebItem newMerchantButton;
 
 }

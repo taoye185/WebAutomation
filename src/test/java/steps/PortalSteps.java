@@ -13,7 +13,7 @@ import acquirerportal.pageobjects.login.LoginPage;
 import acquirerportal.pageobjects.portalusers.NewPortalUserRegistrationPage;
 import acquirerportal.pageobjects.portalusers.PortalUserDetailPage;
 import acquirerportal.pageobjects.portalusers.PortalUsersPage;
-import coreutils.AgGridCommon;
+import coreutils.GridCommon;
 import coreutils.Browser;
 import acquirerportal.CleanUp;
 import acquirerportal.CommonUtils;
@@ -42,9 +42,8 @@ public class PortalSteps {
 		Browser.sleep(2000);
 		if (leftNavigation.portalUserLink.exists(2))
 			leftNavigation.portalUserLink.click();
-		Assert.assertTrue("User is logged in ",
-				(leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
-		Browser.sleep(2000);
+		Assert.assertTrue("User is not logged in ",
+				(leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(CommonUtils.userName_GBL)));
 	}
 
 	@And("^User validate the portal user details from results$")
@@ -59,7 +58,7 @@ public class PortalSteps {
 
 	@And("^click on details of the portal user from results table$")
 	public void click_on_details_of_the_portal_user_from_results_table() throws Throwable {
-		AgGridCommon.selectAndGetSiblingElementBySearchText(portalUsersPage.portalUserListGrid, portalUserEmail,
+		GridCommon.selectAndGetSiblingElementBySearchText(portalUsersPage.portalUserListGrid, portalUserEmail,
 				"Details");
 		// portalUsersPage.selectElementintheResultsTabel2(portalUserEmail, "Details");
 	}
@@ -107,7 +106,7 @@ public class PortalSteps {
 		portalUsersPage.emailFilterOptions.selectDropDownItem(portalUserEmail);
 		portalUsersPage.OkFilterButton.click();
 		Browser.sleep(3000);
-		Assert.assertTrue("Portal user email is not listed", (AgGridCommon
+		Assert.assertTrue("Portal user email is not listed", (GridCommon
 				.selectAndGetElementInTheGrid(portalUsersPage.portalUserListGrid, portalUserEmail).isDisplayed()));
 	}
 
@@ -118,9 +117,9 @@ public class PortalSteps {
 		Log.info("Creating new portal user");
 		if (user.contentEquals("support")) {
 			String userName = testDataGenerator.getCharacterNumericString("newsupport");
-			newPortalUserRegistrationPage.portalNameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_NAME);
 			newPortalUserRegistrationPage.portalUsernameTxtBox.clearAndSendKeys(userName);
 			newPortalUserRegistrationPage.portalEmailTxtBox.clearAndSendKeys(BackgroundSteps.tempEmail);
+			newPortalUserRegistrationPage.portalNameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_NEWASUPPORT_NAME);
 			// newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem(CommonUtils.supportGroup);
 			newPortalUserRegistrationPage.filterGroupByName();
 			// newPortalUserRegistrationPage.portalGroupDropdown.selectDropDownItem("000");

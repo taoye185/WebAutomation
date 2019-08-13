@@ -1,6 +1,7 @@
 package steps;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,7 +13,7 @@ import acquirerportal.pageobjects.groups.GroupDetailPage;
 import acquirerportal.pageobjects.groups.GroupPermissionsPage;
 import acquirerportal.pageobjects.groups.GroupsSummaryPage;
 import acquirerportal.pageobjects.groups.NewGroupPage;
-import coreutils.AgGridCommon;
+import coreutils.GridCommon;
 import coreutils.Browser;
 import acquirerportal.CommonUtils;
 import coreutils.Log;
@@ -61,13 +62,13 @@ public class GroupSteps {
 	public void verify_group_is_listed_down_in_the_results_table() throws Throwable {
 		Browser.sleep(1000);
 		Assert.assertTrue("Group is not listed",
-				(AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName)).isDisplayed());
+				GridCommon.getElementOfRowInTheGrid(groupsSummaryPage.groupsListGrid, groupName).isDisplayed());
 	}
 
 	@When("^click on details of the Group$")
 	public void click_on_details_of_the_group() throws Throwable {
 		Browser.sleep(1000);
-		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
+		GridCommon.getElementOfRowInTheGrid(groupsSummaryPage.groupsListGrid, groupName).click();
 	}
 
 	@Then("^edit group permissions from group details$")
@@ -124,7 +125,7 @@ public class GroupSteps {
 		newGroupPage.groupCreateButton.click();
 		CommonUtils.Group_GBL.add(groupName); // adding to array list for clean up
 		Log.info(groupName + ":is created ");
-		Browser.sleep(3000);
+		Browser.sleep(1000);
 	}
 
 	/**
@@ -139,7 +140,7 @@ public class GroupSteps {
 		newGroupPage.groupCreateButton.click();
 		CommonUtils.Group_GBL.add(groupName);
 		Log.info(groupName + "is created ");
-		Browser.sleep(3000);
+		Browser.sleep(1000);
 	}
 
 	/**
@@ -148,26 +149,21 @@ public class GroupSteps {
 	public static void filterGroupByName() {
 		Log.info("Filter new Group");
 		// Clearing the filter if already selected a value
-		if (groupsSummaryPage.clearFilterButton.exists(1)) {
+		if (groupsSummaryPage.clearFilterButton.isClickable(3)) {
 			groupsSummaryPage.clearFilterButton.click();
 		}
-		groupsSummaryPage.filterButton.click();
-		groupsSummaryPage.nameFilterDropdown.click();
 		groupsSummaryPage.nameTextField.clearAndSendKeys(groupName);
-		Browser.sleep(3000);
-		groupsSummaryPage.nameTextField.sendKeys(Keys.TAB);
 		Browser.sleep(1000);
-		groupsSummaryPage.OkFilterButton.click();
-		Browser.sleep(1000);
+		groupsSummaryPage.nameTextField.sendKeys(Keys.ENTER);
 		Assert.assertTrue("Group is not listed",
-				AgGridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName).isDisplayed());
+				GridCommon.selectAndGetElementInTheGrid(groupsSummaryPage.groupsListGrid, groupName).isDisplayed());
 	}
 
 	/**
 	 * Just assign few permission to create a support group
 	 */
 	public static void selectGroupandassignSupportGroupPermisisons() {
-		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
+		GridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
 		groupPermissionsPage.portalUserPermisionLabel.exists(2);
@@ -184,7 +180,7 @@ public class GroupSteps {
 	 * @throws Throwable
 	 */
 	public static void selectGroupandassignAdminGroupPermisisons() throws Throwable {
-		AgGridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
+		GridCommon.selectAndGetSiblingElementBySearchText(groupsSummaryPage.groupsListGrid, groupName, "Details");
 		groupDetailPage.groupPermisionEditButton.exists(2);
 		groupDetailPage.groupPermisionEditButton.click();
 		Assert.assertTrue("Portal user permissions link not appears",

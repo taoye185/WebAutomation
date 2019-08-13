@@ -11,6 +11,6 @@ Feature: verify user is able do all the actions on login page
 		Examples:
 			| userName  |
 			| RootAdmin |
-			| GPAdmin   |
+			| Madura    |
 
 

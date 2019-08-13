@@ -18,13 +18,4 @@ public class NewGroupPage extends WebPageInit {
     public WebItem groupDescriptionTxtBox;
     @FindBy(xpath = "//button[contains(text(),'Create group')]")
     public WebItem groupCreateButton;
-
-    //below code can be removed
-
-    public String groupOptionsXpath = "//label[contains(text(),'Division')]//following::div[contains(text(),'Global Payments')]";
-
-    public void selectGroupOption(String groupName) {
-        divisionDropdown.getSiblingElement(groupOptionsXpath, groupName);
-    }
-
 }

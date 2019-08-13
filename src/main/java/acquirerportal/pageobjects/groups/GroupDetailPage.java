@@ -6,7 +6,6 @@ import coreutils.WebItem;
 import coreutils.WebPageInit;
 
 public class GroupDetailPage extends WebPageInit {
-	GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
 
 	@FindBy(xpath = "//*[contains(text(),'Delete group')]")
 	public WebItem deleteGroupButton;

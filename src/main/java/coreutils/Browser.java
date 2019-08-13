@@ -60,7 +60,7 @@ public class Browser {
 
 		switch (browserType) {
 		case Global.CHROME: {
-			WebDriverManager.chromedriver().setup();
+			WebDriverManager.chromedriver().version("75.0.3770.90").setup();
 			this.setDriver(new ChromeDriver());
 		}
 			break;

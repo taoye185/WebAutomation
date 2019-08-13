@@ -1,7 +1,31 @@
 package acquirerportal;
 
 public class AcquirerPortalGlobal {
-	public static final String URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/";
+
+	// Configurations
+	public static final String ENVIRONMENT_TYPE = System.getProperty("ENVIRONMENT") != null
+			? System.getProperty("ENVIRONMENT")
+			: "INTEGRATION";
+
+	/*
+	 *
+	 * Return the url to run the tests against different environments
+	 */
+	public static String getUrl() {
+		String result = null;
+		switch (ENVIRONMENT_TYPE.toUpperCase()) {
+		case "INTEGRATION":
+			result = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/";
+			break;
+
+		case "NVSTAGING":
+			result = "https://virginia-pre-prod-hiveaqp.mobeewave-hive.com/";
+			break;
+		}
+		return result;
+	}
+
+	public static final String URL = getUrl();
 	public static final String LOGIN_URL = "" + URL + "login";
 	public static final String PORTALUSER_URL = "" + URL + "portalusers";
 	public static final String MERCHANTS_URL = "" + URL + "merchants";

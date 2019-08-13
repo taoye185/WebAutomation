@@ -318,8 +318,8 @@ public class WebItem implements WebElement {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public WebElement getSiblingElementforDynamicallyGeneratedData(String dynamicalyGeneratedName) {
-		String xpath = "//*[.='" + dynamicalyGeneratedName + "']";
+	public WebElement getSiblingElementforDynamicallyGeneratedData(String dynamicallyGeneratedName) {
+		String xpath = "//*[.='" + dynamicallyGeneratedName + "']";
 		WebElement tempElement = findElement(By.xpath(xpath));
 		Log.info("element " + tempElement.getText() + tempElement.getLocation());
 		tempElement.click();

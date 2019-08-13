@@ -43,7 +43,7 @@ public class NewPortalUserRegistrationPage extends WebPageInit {
 	 * Filtering Group by Name
 	 */
 	public void filterGroupByName() {
-		Log.info("Filter new Group in Portal USers");
+		Log.info("Filter "+ groupName+" Group in Portal User creation");
 		groupNameTextField.clearAndSendKeys(groupName);
 		Browser.sleep(2000);
 		groupNameTextField.sendKeys(Keys.TAB);

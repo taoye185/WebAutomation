@@ -15,7 +15,6 @@ import acquirerportal.pageobjects.portalusers.PortalUsersPage;
 import coreutils.Browser;
 import acquirerportal.CommonUtils;
 import coreutils.Log;
-import coreutils.TestDataGenerator;
 
 public class BackgroundSteps {
 
@@ -27,7 +26,6 @@ public class BackgroundSteps {
 	public static NewGroupPage newGroupPage = new NewGroupPage();
 	public static GroupDetailPage groupDetailPage = new GroupDetailPage();
 	public static GroupPermissionsPage groupPermissionsPage = new GroupPermissionsPage();
-	static TestDataGenerator testDataGenerator = new TestDataGenerator();
 	public static PortalUsersPage portalUsersPage = new PortalUsersPage();
 	public static EmailPage emailPage = new EmailPage();
 	public static String tempEmail = "";
@@ -39,7 +37,7 @@ public class BackgroundSteps {
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				if (!(leftNavigation.loggedInUserLink.getText())
-						.equalsIgnoreCase(AcquirerPortalGlobal.GP_ADMIN_LABEL)) {
+						.equalsIgnoreCase(AcquirerPortalGlobal.GP_ADMIN_USER_NAME)) {
 					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
 					// navigate_to_home();
@@ -58,7 +56,7 @@ public class BackgroundSteps {
 		try {
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				if (!(leftNavigation.loggedInUserLink.getText())
-						.equalsIgnoreCase(AcquirerPortalGlobal.ROOT_ADMIN_LABEL)) {
+						.equalsIgnoreCase(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME)) {
 					Log.info(" Log out and re-login as Root Admin user ");
 					Browser.sleep(3000);
 					leftNavigation.logoutLabel.click();
@@ -138,27 +136,27 @@ public class BackgroundSteps {
 	 * login as GP Admin
 	 */
 	public static void loginAsGlobalPaymentsAdministrator() {
-		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_LABEL);
+		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		// Browser.open(AcquirerPortalGlobal.URL);
 		loginPage.navigateToLoginPage();
 		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
 		leftNavigation.merchantsLink.exists(5);
-		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.GP_ADMIN_LABEL;
+		CommonUtils.userName_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
 	}
 
 	/**
 	 * login as root admin
 	 */
 	public static void loginAsRootAdministrator() {
-		Log.info("logging in as: " + AcquirerPortalGlobal.ROOT_ADMIN_LABEL);
+		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		Browser.open(AcquirerPortalGlobal.URL);
 		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
 		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
 		loginPage.signInBtn.click();
 		leftNavigation.portalUserLink.exists(5);
-		CommonUtils.userLabel_GBL = AcquirerPortalGlobal.ROOT_ADMIN_LABEL;
+		CommonUtils.userName_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
 	}
 
 	/**

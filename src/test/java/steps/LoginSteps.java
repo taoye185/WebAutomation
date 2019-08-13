@@ -95,7 +95,7 @@ public class LoginSteps {
 			loginPage.signInBtn.click();
 			break;
 
-		case "GPADMIN":
+		case "MADURA":
 			loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 			loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 			loginPage.signInBtn.click();
