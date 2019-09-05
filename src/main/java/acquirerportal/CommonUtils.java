@@ -14,5 +14,8 @@ public class CommonUtils {
 	public static String supportUserName = "";
 	public static String adminUserEmail = "";
 	public static String adminUserName = "";
-
+	public static String merchantBusinessUserName = "";
+	public static String merchantID = "";
+	public static String merchantTempPassword = "";
+	public static String merchantEmailAddress = "";
 }

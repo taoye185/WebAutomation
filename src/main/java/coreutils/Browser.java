@@ -3,6 +3,7 @@ package coreutils;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -88,10 +90,10 @@ public class Browser {
 	}
 
 	/**
-	 * Open the browser with page load time
+	 * Open the browser page with default implicit wait
 	 * 
-	 * @param url                     - the url you want to get
-	 * @param currentPageLoadWaitTime
+	 * @param url- the url you want to get
+	 * 
 	 */
 	public static void open(String url) {
 		try {
@@ -100,6 +102,21 @@ public class Browser {
 		} catch (TimeoutException ignored) {
 		}
 		setPageLoadTime(Global.DEFAULT_IMPLICIT_WAIT);
+	}
+
+	/**
+	 * Open the browser with page load time
+	 * 
+	 * @param url-                    the url you want to get
+	 * @param currentPageLoadWaitTime
+	 */
+	public static void open(String url, int currentPageLoadWaitTime) {
+		try {
+			Log.info(String.format("Opening %s url", url));
+			getDriver().get(url);
+		} catch (TimeoutException ignored) {
+		}
+		setPageLoadTime(currentPageLoadWaitTime);
 	}
 
 	/**
@@ -163,5 +180,32 @@ public class Browser {
 	public static boolean textExists(String text, int seconds) {
 		Log.info(String.format("Checking if '%s' text exists on the page withing %s seconds", text, seconds));
 		return dynamicElementExists(By.xpath("//*[contains(text(),'" + text + "')]"), seconds);
+	}
+
+	// ToDo
+	/**
+	 * Waits until jQuery and javascript to finish loading
+	 * 
+	 * @return
+	 */
+	public static boolean waitForJavaScriptAndJQueryToLoad() {
+		WebDriverWait wait = new WebDriverWait(getDriver(), Global.DEFAULT_JS_AND_JQUERY_WAIT);
+		// wait for jQuery to load
+		ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getDriver();
+				return (Boolean) javascriptExecutor
+						.executeScript("return !!window.jQuery?window.jQuery.active == 0:true");
+			}
+		};
+
+		// wait for Javascript to load
+		ExpectedCondition<Boolean> javaScriptLoad = new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				return ((JavascriptExecutor) getDriver()).executeScript("return document.readyState").toString()
+						.equals("complete");
+			}
+		};
+		return wait.until(jQueryLoad) && wait.until(javaScriptLoad);
 	}
 }

@@ -7,71 +7,95 @@ import coreutils.WebPageInit;
 
 public class GroupPermissionsPage extends WebPageInit {
 
+	// portal user permissions
 	final String PORTALUSERPERMISSIONLABELXPATH = "//h2[contains(text(),'" + GroupPermissions.PORTALUSER_PERMISSION
 			+ "')]";
 
 	@FindBy(xpath = PORTALUSERPERMISSIONLABELXPATH)
-	public WebItem portalUserPermisionLabel;
-	@FindBy(xpath = "//div[contains(text(),'Allows user to get the public details of all Portal users')]")
-	public WebItem portalUserSubPermision1;
+	public WebItem portalUserPermissionLabel;
 
-	// public String portalUserSubPermisionsXpath2 = "//div[contains(text(),'Allows
-	// user to get the public details of all Portal users')]/.././/*";
-	public String portalUserSubPermisionsXpath = "//div[contains(text(),'Allows user to get the public details of all Portal users')]//following::div[contains(text(),'Allows')]";
+	@FindBy(xpath = "//span[contains(text(),'Allows user to get the public details of all Portal users')]")
+	public WebItem portalUserPermissionListFirstElement;
+
+	public String portalUserFirstElementXpath = "//span[contains(text(),'Allows user to get the public details of all Portal users')]//following::span[contains(text(),'Allows')]";
+
+	// portal user group permissions
 	@FindBy(xpath = "//h2[contains(text(),'Portal group permissions')]")
 	public WebItem PortalGroupPermissionsLabel;
 
-	public String portalUserGroupSubPermisionsXpath = "//div[contains(text(),'Allows user to get the public details of all Portal group')]/../*";
+	@FindBy(xpath = "//span[contains(text(),'Allows user to get the public details of all Portal group')]")
+	public WebItem portalUserGroupPermisionListFirstElement;
 
+	public String portalUserGroupFirstElementXpath = "//span[contains(text(),'Allows user to get the public details of all Portal group')]//following::span[contains(text(),'Allows')]";
+
+	// merchant permissions
 	@FindBy(xpath = "//h2[contains(text(),'Merchant permissions')]")
-	public WebItem mrchantPermisionLabel;
+	public WebItem merchantPermissionLabel;
 
-	public String merchantsSubPermisionsXpath = "//div[contains(text(),'Allows user to get the public details of all merchants')]/../*";
+	@FindBy(xpath = "//span[contains(text(),'Allows user to get the public details of all merchants')]")
+	public WebItem merchantPermissionListFirstElement;
 
+	public String merchantsFirstElementXpath = "//span[contains(text(),'Allows user to get the public details of all merchants')]//following::span[contains(text(),'Allows')]";
+
+	// transaction permissions
 	@FindBy(xpath = "//h2[contains(text(),'Transaction permissions')]")
-	public WebItem transactionPermisionLabel;
+	public WebItem transactionPermissionLabel;
 
-	public String transactionSubPermisionsXpath = "//div[contains(text(),'Allows user to view transactions.')]/../*";
+	@FindBy(xpath = "//*[contains(text(),'Allows user to view transactions.')]")
+	public WebItem transactionPermissionListFirstElement;
 
+	public String transactionFirstElementXpath = "//span[contains(text(),'Allows user to view transactions.')]//following::span[contains(text(),'Allows')]";
+
+	// onboarding permissions
 	@FindBy(xpath = "//h2[contains(text(),'Onboarding file permissions')]")
-	public WebItem onboardingFilePermisionLabel;
-	public String onboardingSubPermisionsXpath = "//div[contains(text(),'Allows user to upload a onboarding file for merchant registration')]/../*";
+	public WebItem onboardingFilePermissionLabel;
 
+	@FindBy(xpath = "//span[contains(text(),'Allows user to upload a onboarding file for merchant registration')]")
+	public WebItem onboardingFilePermissionListFirstElement;
+
+	public String onboardingFirstElementXpath = "//span[contains(text(),'Allows user to upload a onboarding file for merchant registration')]//following::span[contains(text(),'Allows')]";
+
+	// audit log permissions
 	@FindBy(xpath = "//h2[contains(text(),'Audit log permissions')]")
-	public WebItem auditLogPermisionLabel;
-	public String auditLogSubPermisionsXpath = "//div[contains(text(),'Allows user to view the audit logs')]/../*";
+	public WebItem auditLogPermissionLabel;
 
+	@FindBy(xpath = "//span[contains(text(),'Allows user to view the audit logs')]")
+	public WebItem auditLogPermissionListFirstElement;
+
+	public String auditLogFirstElementXpath = "//span[contains(text(),'Allows user to view the audit logs')]//following::span[contains(text(),'Allows')]";
+
+	// Done Button
 	@FindBy(xpath = "//button[contains(text(),'Done')]")
 	public WebItem DoneBtn;
 
-	public void selectPortalUserPermisisons(String permission) {
-		portalUserSubPermision1.getSiblingElement(portalUserSubPermisionsXpath, permission);
-
-	}
-
 	public void selectAllPortalUserPermissions() {
-		portalUserSubPermision1.click();
-		portalUserPermisionLabel.clickAllSiblingElements(portalUserSubPermisionsXpath);
+		portalUserPermissionListFirstElement.click();
+		portalUserPermissionLabel.clickAllSiblingElements(portalUserFirstElementXpath);
 	}
 
 	public void selectAllPortalGroupPermissions() {
-		PortalGroupPermissionsLabel.clickAllSiblingElements(portalUserGroupSubPermisionsXpath);
+		portalUserGroupPermisionListFirstElement.click();
+		PortalGroupPermissionsLabel.clickAllSiblingElements(portalUserGroupFirstElementXpath);
 	}
 
 	public void selectAllMerchantPermissions() {
-		mrchantPermisionLabel.clickAllSiblingElements(merchantsSubPermisionsXpath);
+		merchantPermissionListFirstElement.click();
+		merchantPermissionLabel.clickAllSiblingElements(merchantsFirstElementXpath);
 	}
 
 	public void selectAllTransactionPermissions() {
-		transactionPermisionLabel.clickAllSiblingElements(transactionSubPermisionsXpath);
+		transactionPermissionListFirstElement.click();
+		transactionPermissionLabel.clickAllSiblingElements(transactionFirstElementXpath);
 	}
 
 	public void selectAllOnboardingFilePermissions() {
-		onboardingFilePermisionLabel.clickAllSiblingElements(onboardingSubPermisionsXpath);
+		onboardingFilePermissionListFirstElement.click();
+		onboardingFilePermissionLabel.clickAllSiblingElements(onboardingFirstElementXpath);
 	}
 
 	public void selectAllAuditLogPermissions() {
-		transactionPermisionLabel.clickAllSiblingElements(auditLogSubPermisionsXpath);
+		auditLogPermissionListFirstElement.click();
+		transactionPermissionLabel.clickAllSiblingElements(auditLogFirstElementXpath);
 	}
 
 }

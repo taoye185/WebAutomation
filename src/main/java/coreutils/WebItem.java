@@ -8,6 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
@@ -23,7 +24,6 @@ public class WebItem implements WebElement {
 
 	public By locator;
 	private WebElement element;
-	private WebItem item;
 
 	@Override
 	public <X> X getScreenshotAs(OutputType<X> target) throws WebDriverException {
@@ -202,7 +202,7 @@ public class WebItem implements WebElement {
 
 	public void selectDropDownItem(String text) {
 		Log.info("Selecting value -'" + text + "' in the '" + this.locator.toString() + "' drop down list");
-		String valueOfXpath = "//*[contains(@id,'option') and text()='" + text + "']";
+		String valueOfXpath = "//*[contains(@id,'select-menu-item')]/span[text()='" + text + "']";
 		getActiveItem().click();// drop down list.
 		WebElement element = getItem(Global.DEFAULT_EXPLICIT_WAIT,
 				ExpectedConditions.presenceOfElementLocated(By.xpath(valueOfXpath)));
@@ -265,9 +265,8 @@ public class WebItem implements WebElement {
 		((JavascriptExecutor) Browser.getDriver()).executeScript("arguments[0].click();", getActiveItem());
 	}
 
-	@SuppressWarnings("rawtypes")
-	public static List getDropdownOptions(Select dropdown) {
-		List<WebElement> options = new ArrayList();
+	public static List<WebElement> getDropdownOptions(Select dropdown) {
+		List<WebElement> options = new ArrayList<WebElement>();
 		options = dropdown.getOptions();
 		for (int i = 0; i < options.size(); i++) {
 			WebElement a = (WebElement) options.get(i);
@@ -276,10 +275,14 @@ public class WebItem implements WebElement {
 		return options;
 	}
 
-	@SuppressWarnings("rawtypes")
-	public List getSiblingElementsintoList(String xpath) {
-		List<WebElement> parentElementList = new ArrayList();
-		parentElementList = findElements(By.xpath(xpath));
+	/**
+	 * 
+	 * @param xpath of the first element in the list
+	 * @return sibling elements with related to the given element
+	 */
+	public List<WebElement> getAllTheElementsOfTheList(String firstElementXPath) {
+		List<WebElement> parentElementList = new ArrayList<WebElement>();
+		parentElementList = findElements(By.xpath(firstElementXPath));
 		for (int i = 0; i < parentElementList.size(); i++) {
 			WebElement a = (WebElement) parentElementList.get(i);
 			Log.info("element " + i + a.getText() + a.getLocation());
@@ -287,9 +290,8 @@ public class WebItem implements WebElement {
 		return parentElementList;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void getSiblingElement(String siblingXpath, String elementText) {
-		List<WebElement> parentElementList = new ArrayList();
+		List<WebElement> parentElementList = new ArrayList<WebElement>();
 		parentElementList = findElements(By.xpath(siblingXpath));
 		for (int i = 0; i < parentElementList.size(); i++) {
 			WebElement tempElement = (WebElement) parentElementList.get(i);
@@ -305,25 +307,24 @@ public class WebItem implements WebElement {
 	}
 
 	public void clickAllSiblingElements(String parentElementXpath) {
-		List<WebElement> parentElementList = new ArrayList();
+		List<WebElement> parentElementList = new ArrayList<WebElement>();
 		parentElementList = findElements(By.xpath(parentElementXpath));
 		for (int i = 0; i < parentElementList.size(); i++) {
 			WebElement tempElement = (WebElement) parentElementList.get(i);
-			Log.info(" tempElement " + tempElement.getText());
+			Log.info(" TempElement text: " + tempElement.getText());
 			if (tempElement.getText() != null) {
 				tempElement.click();
 			}
-			Browser.sleep(500);
+			Browser.sleep(1000);
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public WebElement getSiblingElementforDynamicallyGeneratedData(String dynamicallyGeneratedName) {
+		Browser.sleep(1000);
 		String xpath = "//*[.='" + dynamicallyGeneratedName + "']";
 		WebElement tempElement = findElement(By.xpath(xpath));
 		Log.info("element " + tempElement.getText() + tempElement.getLocation());
 		tempElement.click();
-		Browser.sleep(2000);
 		return tempElement;
 	}
 
@@ -354,11 +355,35 @@ public class WebItem implements WebElement {
 	 * 
 	 * @para value- value to be passed to text field
 	 **/
-	public void clearAndSendKeys(String value) {
-		Log.info("Clearing and sending '" + value + "' to the '" + locator.toString() + "' text box");
+	public void clearAndSendKeys(CharSequence... value) {
+		Log.info(String.format("Clearing Sending %s to the %s", value.toString(), locator.toString()));
 		WebElement element = getActiveItem();
 		element.clear();
 		element.sendKeys(value);
+	}
+
+	/**
+	 * This method has been implemented as a workaround to the mobeewave filtering
+	 * control issues. method is clearing text and sending values to filtering
+	 * textbox then wait and hit enter
+	 * 
+	 * @param keysToSend - key to send
+	 */
+	public void sendKeysToFilter(CharSequence... keysToSend) {
+		Log.info(String.format("Sending %s to the %s", keysToSend.toString(), locator.toString()));
+		WebElement element = getActiveItem();
+		element.clear();
+		element.sendKeys(keysToSend);
+		Browser.sleep(3000);
+		element.sendKeys(Keys.ENTER);
+		Browser.sleep(1000);
+	}
+
+	public void refreshWhenPagecontentNotLoaded(WebItem item) {
+		if (!item.exists(5)) {
+			Browser.refresh();
+		}
+		item.exists(5);
 	}
 
 }

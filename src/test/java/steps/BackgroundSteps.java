@@ -1,6 +1,8 @@
 package steps;
 
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
+
 import cucumber.api.java.Before;
 import acquirerportal.pageobjects.email.EmailPage;
 import acquirerportal.AcquirerPortalGlobal;
@@ -31,17 +33,16 @@ public class BackgroundSteps {
 	public static String tempEmail = "";
 	public static String tempPassword = "";
 
-	@Before(value = "@loginAsGPAdmin", order = 0)
+	@Before(value = "@loginAsGPAdmin", order = 1)
 	public static void login_As_GP_Admin() {
 		Log.info("Logging In as a GP Admin");
 		try {
+			Browser.open(AcquirerPortalGlobal.URL);
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				if (!(leftNavigation.loggedInUserLink.getText())
 						.equalsIgnoreCase(AcquirerPortalGlobal.GP_ADMIN_USER_NAME)) {
+					leftNavigation.logoutLabel.clickByJavaScript();
 					Browser.sleep(3000);
-					leftNavigation.logoutLabel.click();
-					// navigate_to_home();
-					// Browser.open(AcquirerPortalGlobal.URL);
 					loginAsGlobalPaymentsAdministrator(); /* login back as GP Admin */
 				}
 				return;
@@ -51,16 +52,16 @@ public class BackgroundSteps {
 		}
 	}
 
-	@Before("@loginAsRootAdmin")
+	@Before(value = "@loginAsRootAdmin", order = 2)
 	public static void login_As_Root_Admin() {
 		try {
+			Browser.open(AcquirerPortalGlobal.URL);
 			if (leftNavigation.logoutLabel.isDisplayed()) {
 				if (!(leftNavigation.loggedInUserLink.getText())
 						.equalsIgnoreCase(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME)) {
 					Log.info(" Log out and re-login as Root Admin user ");
+					leftNavigation.logoutLabel.clickByJavaScript();
 					Browser.sleep(3000);
-					leftNavigation.logoutLabel.click();
-					// navigate_to_home();
 					loginAsRootAdministrator(); /* login back as Root admin */
 				}
 				return;
@@ -75,44 +76,49 @@ public class BackgroundSteps {
 	 * 
 	 *
 	 */
-	@Before(value = "@CreateAdminGroup", order = 1)
+	@Before(value = "@CreateAdminGroup", order = 3)
 	public void create_AdminGroup() throws Throwable {
 		if (CommonUtils.adminGroup.isEmpty()) {
 			Log.info("Admin Group is not created yet");
 			leftNavigation.groupsLink.click();
 			groupsSummaryPage.newGroupButton.exists(2);
 			groupsSummaryPage.newGroupButton.click();
-			GroupSteps.CreateAdminGroup();
+			GroupSteps.createAdminGroup();
 			GroupSteps.filterGroupByName();
-			GroupSteps.selectGroupandassignAdminGroupPermisisons();
+			GroupSteps.selectGroupAndAssignAdminGroupPermisisons();
 		}
 	}
 
-	@Before(value = "@CreateSupportGroup", order = 2)
+	@Before(value = "@CreateSupportGroup", order = 4)
 	public void create_SupportGroup() throws Throwable {
 		if (CommonUtils.supportGroup.isEmpty()) {
 			Log.info("Support Group is not created yet");
-			leftNavigation.groupsLink.click();
-			groupsSummaryPage.newGroupButton.exists(2);
+			Browser.open(AcquirerPortalGlobal.GROUP_URL);
+			groupsSummaryPage.newGroupButton.exists(5); /* we need have explicit wait */
 			groupsSummaryPage.newGroupButton.click();
 			GroupSteps.createSupportGroup();
 			GroupSteps.filterGroupByName();
-			GroupSteps.selectGroupandassignSupportGroupPermisisons();
+			GroupSteps.selectGroupAndAssignSupportGroupPermisisons();
 		}
 	}
 
-	@Before(value = "@create10MinuteEmail", order = 3)
+	@Before(value = "@create10MinuteEmail", order = 0)
 	public void create_10MinuteEmail() throws Throwable {
-		Browser.sleep(5000);
-		Browser.open(AcquirerPortalGlobal.EMAIL_URL);
-		Browser.sleep(1000);
-		emailPage.mailAddress.scrollIntoView();
-		tempEmail = emailPage.mailAddress.getAttribute("value");
-		Log.info("tempEmail " + tempEmail);
-		// tempPassword= emailPage.
-		Browser.sleep(1000);
-		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL);
-
+		try {
+			Browser.open(AcquirerPortalGlobal.EMAIL_URL, 20);
+			emailPage.mailAddress.scrollIntoView();
+			tempEmail = emailPage.mailAddress.getAttribute("value");
+			Log.info("getting random email from 10minutes email site" + tempEmail);
+			Browser.sleep(1000);
+		} catch (WebDriverException e) {
+			Log.info(" refreshing browser ");
+			Browser.refresh();
+			Log.info("retry getting random email from 10minutes email site" + tempEmail);
+			Browser.open(AcquirerPortalGlobal.EMAIL_URL, 20);
+			emailPage.mailAddress.scrollIntoView();
+			tempEmail = emailPage.mailAddress.getAttribute("value");
+			Browser.sleep(1000);
+		}
 	}
 
 	@Before("@logout")
@@ -139,9 +145,7 @@ public class BackgroundSteps {
 		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		// Browser.open(AcquirerPortalGlobal.URL);
 		loginPage.navigateToLoginPage();
-		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
-		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
-		loginPage.signInBtn.click();
+		login(AcquirerPortalGlobal.GP_ADMIN_USER_NAME, AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 		leftNavigation.merchantsLink.exists(5);
 		CommonUtils.userName_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
 	}
@@ -152,14 +156,14 @@ public class BackgroundSteps {
 	public static void loginAsRootAdministrator() {
 		Log.info("logging in as: " + AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 		Browser.open(AcquirerPortalGlobal.URL);
-		loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME);
-		loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
-		loginPage.signInBtn.click();
+		login(AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME, AcquirerPortalGlobal.ROOT_ADMIN_PASSWORD);
 		leftNavigation.portalUserLink.exists(5);
-		CommonUtils.userName_GBL = AcquirerPortalGlobal.GP_ADMIN_USER_NAME;
+		CommonUtils.userName_GBL = AcquirerPortalGlobal.ROOT_ADMIN_USER_NAME;
 	}
 
 	/**
+	 * Login to Acquirer portal
+	 * 
 	 * @param userName - userName of the login user
 	 * @param password - password of the login user
 	 */

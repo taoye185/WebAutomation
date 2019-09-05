@@ -11,6 +11,7 @@ public class LoginPage extends WebPageInit {
 	public void navigateToLoginPage() {
 		Browser.open(AcquirerPortalGlobal.URL);
 		usernameTxtBox.exists(7);
+		passwordTxtBox.exists(10);
 	}
 
 	@FindBy(name = "username")

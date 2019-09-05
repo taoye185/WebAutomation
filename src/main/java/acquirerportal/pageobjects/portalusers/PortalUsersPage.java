@@ -9,7 +9,7 @@ import coreutils.WebPageInit;
 public class PortalUsersPage extends WebPageInit {
 
 	public void navigatePortalUserPage() {
-		Browser.open(AcquirerPortalGlobal.PORTALUSER_URL);
+		Browser.open(AcquirerPortalGlobal.PORTAL_USER_URL);
 		newPortalUserButton.exists(5);
 	}
 
@@ -25,11 +25,17 @@ public class PortalUsersPage extends WebPageInit {
 	@FindBy(xpath = "//label[contains(text(),'Names')]")
 	public WebItem nameLabel;
 
-	@FindBy(id = "Names")
-	public WebItem nameFilterOptions;
+	@FindBy(id = "name")
+	public WebItem portalUserFilterNamesTextField;
+		
+	@FindBy(id = "username")
+	public WebItem portalUserFilterUserNamesTextField;
 
 	@FindBy(id = "Emails")
-	public WebItem emailFilterOptions;
+	public WebItem portalUserFilterEmailFilterOptions;
+	
+	@FindBy(id = "group")
+	public WebItem portalUserFiltergroupFilterOptions;
 
 	@FindBy(xpath = "//button[contains(text(),'Ok')]")
 	public WebItem OkFilterButton;
@@ -41,19 +47,5 @@ public class PortalUsersPage extends WebPageInit {
 	public WebItem emailHeaderinResults;
 
 	public String portalUserDetailsRowXpath = "";
-
-	/*
-	 * public WebElement selectElementintheResultsTabel(String text) { return
-	 * nameHeaderinResults.getSiblingElementforDynamicallyGeneratedData(text); }
-	 * 
-	 * public void selectElementintheResultsTabel2(String siblingName, String
-	 * elementText) { portalUserDetailsRowXpath = "//*[.='" + siblingName +
-	 * "']/following-sibling::*"; System.out.println(" groupDetailsRowXpath " +
-	 * portalUserDetailsRowXpath);
-	 * emailHeaderinResults.getSiblingElement(portalUserDetailsRowXpath,
-	 * elementText);
-	 * 
-	 * }
-	 */
 
 }

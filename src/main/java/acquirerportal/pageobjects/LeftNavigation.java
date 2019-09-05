@@ -4,7 +4,6 @@ import org.openqa.selenium.support.FindBy;
 import coreutils.WebItem;
 import coreutils.WebPageInit;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LeftNavigation.
  *
@@ -21,7 +20,7 @@ public class LeftNavigation extends WebPageInit {
 	@FindBy(id = "portal-users-link")
 	public WebItem portalUserLink;
 
-	@FindBy(id = "groups-link")
+	@FindBy(id = "groups-link") //groups-link
 	public WebItem groupsLink;
 
 	@FindBy(xpath = "//*[@id='logout-link']/span/div/svg/path")
@@ -44,5 +43,10 @@ public class LeftNavigation extends WebPageInit {
 
 	@FindBy(xpath = "//a[contains(@tabindex,'0')]")
 	public WebItem leftNavLink;
-
+	
+	@FindBy(xpath = "//nav[@role='menu']")
+	public WebItem leftNavMenu;
+	
+	
+	
 }

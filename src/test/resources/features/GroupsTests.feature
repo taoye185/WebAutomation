@@ -3,25 +3,24 @@ Feature: Groups_Tests
 	Background:
 		Given User successfully navigated to Groups summary Page
 
-	@sanity @loginAsGPAdmin 
+	@sanity @loginAsGPAdmin
 	Scenario: Create a Support Group
 		When user click on New Group button
 		And provide details to create a new Group
 		And filter created Group
-		And verify group is listed down in the results table
+		Then verify group is listed down in the results table
 		And click on details of the Group
 		And edit group permissions from group details
-		And assign and revoke screen appears
-		Then set permissions to create support user group
+		Then assign and revoke screen appears
+		And set permissions to create support user group
 
 	@sanity
-	Scenario: Create a Admin Group
+	Scenario: Create an Admin Group
 		When user click on New Group button
 		And provide details to create a new Admin Group
 		And filter created Group
-		And verify group is listed down in the results table
+		Then verify group is listed down in the results table
 		And click on details of the Group
 		And edit group permissions from group details
 		And assign and revoke screen appears
-		Then set permissions to create admin user group
-
+		And set permissions to create admin user group

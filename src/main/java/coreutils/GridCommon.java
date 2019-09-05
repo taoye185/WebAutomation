@@ -25,7 +25,8 @@ public class GridCommon {
 	 * @param text - the text of the element to be found
 	 * @return
 	 */
-	public static WebElement getElementOfRowInTheGrid(WebItem grid, String elementText) {
+	public static WebElement getGridRowElement(WebItem grid, String elementText) {
+		Browser.sleep(2000);
 		return grid.findElement(By.xpath(".//*[contains(text(),'" + elementText + "')]"));
 	}
 

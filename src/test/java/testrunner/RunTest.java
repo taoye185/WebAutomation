@@ -1,7 +1,6 @@
 package testrunner;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import org.junit.AfterClass;
 import org.junit.runner.JUnitCore;
@@ -14,7 +13,6 @@ import coreutils.Log;
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumber;
 import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RunTest.
  */
@@ -34,7 +32,7 @@ public class RunTest {
 	public static void teardown() {
 		try {
 			Log.info(" Clean up started ");
-			Log.info("Deleting the created groups " + Arrays.toString(CommonUtils.Group_GBL.toArray()));
+			Log.info("Deleting the created groups: " + Arrays.toString(CommonUtils.Group_GBL.toArray()));
 			CleanUp.deleteAllGroups();
 
 		} catch (Exception ex) {

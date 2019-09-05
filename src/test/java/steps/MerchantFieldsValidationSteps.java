@@ -35,8 +35,9 @@ public class MerchantFieldsValidationSteps
 	@When("^User select the division from dropdown$")
 	public void User_select_the_division_from_dropdown(DataTable division) {
 		List<Map<String, String>> list = division.asMaps(String.class, String.class);
-		MerchantRegistrationPage.newMerchantRegistrationDivisionDropDown
-				.selectDropDownItem(list.get(0).get("division"));
+		MerchantRegistrationPage.merchantRegistrationDivisionFilterTexbox.sendKeys(list.get(0).get("division"));
+		Browser.sleep(1000);
+		MerchantRegistrationPage.merchantRegistrationDivisionFilterTexbox.sendKeys(Keys.ENTER);
 	}
 
 	@When("^User leave the \"([^\"]*)\" empty$")
@@ -44,37 +45,31 @@ public class MerchantFieldsValidationSteps
 		switch (FieldName.toUpperCase()) {
 		case "BUSINESSNAME": {
 
-			MerchantRegistrationPage.businessNameTextbox.sendKeys("");
-			MerchantRegistrationPage.businessNameTextbox.sendKeys(Keys.TAB);
+			MerchantRegistrationPage.businessNameTextbox.clearAndSendKeys("", Keys.TAB);
 			break;
 		}
 		case "ADDRESS": {
-			MerchantRegistrationPage.addressTextbox.sendKeys("");
-			MerchantRegistrationPage.addressTextbox.sendKeys(Keys.TAB);
+			MerchantRegistrationPage.addressTextbox.clearAndSendKeys("", Keys.TAB);
 			break;
 		}
 		case "CITY": {
 			MerchantRegistrationPage.cityTextbox.scrollIntoView();
-			MerchantRegistrationPage.cityTextbox.sendKeys("");
-			MerchantRegistrationPage.cityTextbox.sendKeys(Keys.TAB);
+			MerchantRegistrationPage.cityTextbox.clearAndSendKeys("", Keys.TAB);
 			break;
 		}
 		case "ZIPCODE": {
 			MerchantRegistrationPage.zipCodeTextbox.scrollIntoView();
-			MerchantRegistrationPage.zipCodeTextbox.sendKeys("");
-			MerchantRegistrationPage.zipCodeTextbox.sendKeys(Keys.TAB);
+			MerchantRegistrationPage.zipCodeTextbox.clearAndSendKeys("", Keys.TAB);
 			break;
 		}
 		case "MPOSUSERNAME": {
 			MerchantRegistrationPage.mposUserNameTextbox.scrollIntoView();
-			MerchantRegistrationPage.mposUserNameTextbox.sendKeys("");
-			MerchantRegistrationPage.mposUserNameTextbox.sendKeys(Keys.TAB);
+			MerchantRegistrationPage.mposUserNameTextbox.clearAndSendKeys("", Keys.TAB);
 			break;
 		}
 		case "MPOSUSEREMAIL": {
 			MerchantRegistrationPage.userEmailTextbox.scrollIntoView();
-			MerchantRegistrationPage.userEmailTextbox.sendKeys("");
-			MerchantRegistrationPage.userEmailTextbox.sendKeys(Keys.TAB);
+			MerchantRegistrationPage.userEmailTextbox.clearAndSendKeys("", Keys.TAB);
 			break;
 		}
 		}
@@ -83,7 +78,7 @@ public class MerchantFieldsValidationSteps
 	@Then("^An error message \"([^\"]*)\" shall be displayed under the missing \"([^\"]*)\" field$")
 	public void An_error_message_shall_be_displayed_under_the_missing_field(String expectedErrorMessage,
 			String fieldName) {
-		String actualErrorMessage = MerchantRegistrationPage.errortooltiptext.getText();
+		String actualErrorMessage = MerchantRegistrationPage.errorTooltipLabel.getText();
 		Log.info(actualErrorMessage);
 		switch (fieldName.toUpperCase()) {
 		case "BUSINESSNAME": {
@@ -124,8 +119,8 @@ public class MerchantFieldsValidationSteps
 
 	@Then("^Create Merchant button is not active$")
 	public void Create_Merchant_button_is_not_active$() {
-		MerchantRegistrationPage.MerchantCreateButton.scrollIntoView();
-		Assert.assertTrue(!(MerchantRegistrationPage.MerchantCreateButton.isEnabled()));
+		MerchantRegistrationPage.createMerchant.scrollIntoView();
+		Assert.assertTrue(!(MerchantRegistrationPage.createMerchant.isEnabled()));
 
 	}
 }
