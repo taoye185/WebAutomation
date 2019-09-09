@@ -14,7 +14,7 @@ Feature: Groups_Tests
 		Then assign and revoke screen appears
 		And set permissions to create support user group
 
-	@sanity
+	@sanity @loginAsGPAdmin
 	Scenario: Create an Admin Group
 		When user click on New Group button
 		And provide details to create a new Admin Group

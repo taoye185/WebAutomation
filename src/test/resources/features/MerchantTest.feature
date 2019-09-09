@@ -9,8 +9,8 @@ Feature: Merchant_Tests
 		When user click on New Merchant button and navigates to merchants Registration Page
 		And provide details to create a new Merchant
 		Then new merchant record in the Merchant Summary Page is displayed
-			
-	@regression  
+
+	@regression  @loginAsGPAdmin
 	Scenario Outline: To Verify that an error message should be displayed when the Field values are missing
 		Given User successfully navigated to New Merchant Page
 		When User click on New merchant button
