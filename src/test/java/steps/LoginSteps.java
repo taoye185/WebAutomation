@@ -83,8 +83,8 @@ public class LoginSteps {
 	@When("^user leaves Username and Password empty$")
 	public void user_leaves_Username_and_Password_empty(DataTable args) throws Throwable {
 		List<String> list = args.asList(String.class);
-		loginPage.usernameTxtBox.sendKeys(list.get(0));
-		loginPage.passwordTxtBox.sendKeys(list.get(1));
+		loginPage.usernameTxtBox.clearAndSendKeys(list.get(0));
+		loginPage.passwordTxtBox.clearAndSendKeys(list.get(1));
 		loginPage.passwordTxtBox.sendKeys(Keys.TAB);
 		Browser.sleep(20000);
 		// loginPage.signInBtn.click();
@@ -93,9 +93,6 @@ public class LoginSteps {
 	@Then("^error message is displayed for blank Username$")
 	public void Validate_error_message_displayed_for_blank_Username(DataTable args) throws Throwable {
 		List<String> list = args.asList(String.class);
-		// String expectedErrorMessage = list.get(0);
-		// String actualErrorMessage = loginPage.blankerrormessage.getText();
-		// System.out.println(actualErrorMessage);
 		Assert.assertTrue("user name error message is not displayed", Browser.textExists(list.get(0), 2));
 	}
 

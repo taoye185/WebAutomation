@@ -11,9 +11,9 @@ Feature: verify user is able do all the actions on login page
     Examples:
       | userName  |
       | RootAdmin |
-      | GPAdmin   |
+      | Madura    |
 
-  @sanity @loginAsGPAdmin @logout
+  @sanity  @logout
   Scenario: Verify that error message is displayed when logged in with empty fields.
     When user leaves Username and Password empty
       |  |  |
@@ -22,16 +22,15 @@ Feature: verify user is able do all the actions on login page
     And error message is displayed for blank Password
       | Please enter a password |
 
-  @sanity @loginAsGPAdmin @logout
+  @sanity  @logout
   Scenario Outline: Verify that error message  is displayed when logged in with different username and password criterias
     When User enters invalid combination of "<Username>" and "<Password>"
     Then "<Error_message>" is displayed
     Examples:
-      | Username   | Password       | Error_message                                               |
-      | gpadmin    | Mobeeewave2019 | The information you entered is incorrect, please try again. |
-      | gpadmin1   | Mobeewave2015  | The information you entered is incorrect, please try again. |
-      | gpadmin123 | Mobeewave123   | Invalid Login.                                              |
-
+      | Username   | Password       | Error_message                 |
+      | gpadmin    | Mobeeewave2019 | Invalid username or password. |
+      | gpadmin1   | Mobeewave2015  | Invalid username or password. |
+      | gpadmin123 | Mobeewave123   | Invalid username or password. |
 
 
 
