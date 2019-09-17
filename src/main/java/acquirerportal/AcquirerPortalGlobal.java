@@ -1,9 +1,40 @@
 package acquirerportal;
 
+import java.util.Random;
+
+import coreutils.Log;
+
 public class AcquirerPortalGlobal {
-	public static final String URL = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/";
+
+	// Configurations
+	public static final String ENVIRONMENT_TYPE = System.getProperty("ENVIRONMENT") != null
+			? System.getProperty("ENVIRONMENT")
+			: "INTEGRATION";
+
+	/*
+	 *
+	 * Return the url to run the tests against different environments
+	 */
+	public static String getUrl() {
+		String result = null;
+		switch (ENVIRONMENT_TYPE.toUpperCase()) {
+		case "INTEGRATION":
+			result = "http://virginia-integration-hiveaqp.s3-website-us-east-1.amazonaws.com/";
+			break;
+		case "STAGING":
+			result = "https://virginia-pre-prod-hiveaqp.mobeewave-hive.com/";
+			break;
+		default:
+			Log.info(String.format("Environment Specified is not valid %S", ENVIRONMENT_TYPE));
+			break;
+		}
+
+		return result;
+	}
+
+	public static final String URL = getUrl();
 	public static final String LOGIN_URL = "" + URL + "login";
-	public static final String PORTALUSER_URL = "" + URL + "portalusers";
+	public static final String PORTAL_USER_URL = "" + URL + "portalusers";
 	public static final String MERCHANTS_URL = "" + URL + "merchants";
 	public static final String GROUP_URL = "" + URL + "groups";
 	public static final String TRANSACTIONS_URL = "" + URL + "transactions";
@@ -29,14 +60,10 @@ public class AcquirerPortalGlobal {
 	public static final String GP_NEWADMIN_USER_NAME = "GPNewAdmin";
 	public static final String GP_NEWADMIN_NAME = "GP New Admin";
 	public static final String GP_NEWADMIN_PASSWORD = "Test123$";
-	// public static final String GP_NEWADMIN_EMAIL = "AetMWTest@gmail.com";
-	// public static final String GP_NEWADMIN_LABEL = "GPNewAdmin";
 
 	public static final String GP_NEWASUPPORT_NAME = "GP New Support";
 	public static final String GP_NEWASUPPORT_USER_NAME = "GPNewSupport";
 	public static final String GP_NEWSUPPORT_PASSWORD = "Test123$";
-	// public static final String GP_NEWSUPPORT_EMAIL = "AetMWTest2@gmail.com";
-	// public static final String GP_NEWSUPPORT_LABEL = "GPNewSupport";
 
 	public static final String MERCHNAT_REGISTRATION_TITLE = "New merchant registration";
 
@@ -46,4 +73,15 @@ public class AcquirerPortalGlobal {
 	public static String PORTALUSER_PERMISSION_2 = "Allows user to create new users";
 	public static String PORTALUSER_PERMISSION_3 = "Allows user to modify the accounts of other users";
 	public static String PORTALUSER_PERMISSION_4 = "Allows user to delete the accounts of other users";
+
+	// Merchant creation
+	static Random rndNum = new Random();
+	public static final String MERCHANT_BUSINESS_NAME = "MWTest" + rndNum.nextInt();
+	public static final String MERCHANT_ID = "AET" + rndNum.nextInt();
+	public static final String MERCHANT_CATEGORY_CODE = "1234";
+	public static final String MERCHANT_TERMINAL = "AAAA-0000";
+
+	// Group Creation
+	public static final String GROUP_DIVISION_GOBAL_PAYMENT = "Global Payments";
+
 }

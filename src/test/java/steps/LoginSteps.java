@@ -36,24 +36,6 @@ public class LoginSteps {
 				(leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(userName)));
 	}
 
-	/*
-	 * @When("^User enter valid \"([^\"]*)\" and \"([^\"]*)\" and hit Login button$"
-	 * ) public void user_enter_valid_and_and_hit_Login_button(String username,
-	 * String password) throws Throwable { CommonUtils.userLabel_GBL = username;
-	 * CommonUtils.password_GBL = password;
-	 * loginPage.usernameTxtBox.clearAndSendKeys(CommonUtils.username_GBL);
-	 * loginPage.passwordTxtBox.clearAndSendKeys(CommonUtils.password_GBL);
-	 * loginPage.signInBtn.click(); }
-	 */
-
-	/*
-	 * @Then("^User navigates to portal user page$") public void
-	 * user_navigates_to_portal_user_page() throws Throwable { Browser.sleep(1000);
-	 * Assert.assertEquals("User is navigated to Portal User Page",
-	 * Browser.getDriver().getCurrentUrl(), AcquirerPortalGlobal.PORTALUSER_URL);
-	 * 
-	 * }
-	 */
 
 	@Then("^User navigates to merchants summary page$")
 	public void User_navigates_to_merchants_summary_page() throws Throwable {
@@ -62,19 +44,6 @@ public class LoginSteps {
 				Browser.getDriver().getCurrentUrl().equalsIgnoreCase(AcquirerPortalGlobal.MERCHANTS_URL));
 
 	}
-
-	// @Then("^Validate user name label from the left navigation is successful$")
-	// public void Validate_username_label_from_leftNav() throws Throwable {
-	// Browser.sleep(1000);
-	// leftNavigation.loggedInUserLink.exists(2);
-	// Log.info(" leftNavigation userLink " +
-	// leftNavigation.loggedInUserLink.getText());
-	// String assertError ="User is not logged in left navigation label " +
-	// leftNavigation.loggedInUserLink.getText() + "user expected to logged in " +
-	// CommonUtils.userLabel_GBL;
-	// Assert.assertTrue(assertError,
-	// (leftNavigation.loggedInUserLink.getText().equalsIgnoreCase(CommonUtils.userLabel_GBL)));
-	// }
 
 	@When("^User enter valid username and password and hit Login button$")
 	public void user_enter_valid_username_and_password() throws Throwable {
@@ -100,7 +69,7 @@ public class LoginSteps {
 			loginPage.signInBtn.click();
 			break;
 
-		case "GPADMIN":
+		case "MADURA":
 			loginPage.usernameTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_USER_NAME);
 			loginPage.passwordTxtBox.clearAndSendKeys(AcquirerPortalGlobal.GP_ADMIN_PASSWORD);
 			loginPage.signInBtn.click();

@@ -15,24 +15,34 @@ public class EmailSteps {
 	public static String tempEmailPassword = "";
 	public static String tempUserID = "";
 
-	public static void clickMessage(String subject) {
-		Log.info("Looking for the email " + subject + " waiting 30 seconds ");
+	/**
+	 * Getting the credentials from user activation email 
+	 */
+	public static void getPortalUserCredentials() {
+		Log.info("Looking for the User Activation - waiting 30 seconds ");
 		Browser.sleep(30000);
 		emailPage.emailSubject.scrollIntoView();
 		emailPage.emailSubject.click();
 		Browser.sleep(1000);
-		emailPage.userNameText.scrollIntoView();
-		tempUserID = emailPage.userNameText.getText();
-		tempEmailPassword = emailPage.passwordText.getText();
+		emailPage.portalUserNameText.scrollIntoView();
+		tempUserID = emailPage.portalUserNameText.getText();
+		tempEmailPassword = emailPage.portalUserPasswordText.getText();
+		if(tempEmailPassword.equalsIgnoreCase("")) { // retry capturing password due to 10minutes mail issue 
+			Log.info(" retry password capturing ");
+			emailPage.portalUserNameText.scrollIntoView();
+			tempUserID = emailPage.portalUserNameText.getText();
+			tempEmailPassword = emailPage.portalUserPasswordText.getText();
+		}
 		Log.info(" password is " + tempEmailPassword);
 	}
+	
 
 	@Given("^Find email by \"([^\"]*)\"$")
 	public static void find_email_by(String subject) throws Throwable {
 		Log.info("Please send a mail");
 		Browser.sleep(40000);
 		Log.info("Checking for mails to " + CommonUtils.tempEmail);
-		List<WebElement> elements = emailPage.messageList.getSiblingElementsintoList("//h3");
+		List<WebElement> elements = emailPage.messageList.getAllTheElementsOfTheList("//h3");
 		for (int i = 0; i < elements.size(); i++) {
 			Log.info("Subject = " + elements.get(i).findElement(By.xpath("//span[@class='inc-mail-subject']")));
 		}

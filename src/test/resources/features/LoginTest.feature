@@ -13,7 +13,7 @@ Feature: verify user is able do all the actions on login page
       | RootAdmin |
       | GPAdmin   |
 
-   @sanity @logout
+  @sanity @loginAsGPAdmin @logout
   Scenario: Verify that error message is displayed when logged in with empty fields.
     When user leaves Username and Password empty
       |  |  |
@@ -22,7 +22,7 @@ Feature: verify user is able do all the actions on login page
     And error message is displayed for blank Password
       | Please enter a password |
 
-   @sanity @logout
+  @sanity @loginAsGPAdmin @logout
   Scenario Outline: Verify that error message  is displayed when logged in with different username and password criterias
     When User enters invalid combination of "<Username>" and "<Password>"
     Then "<Error_message>" is displayed

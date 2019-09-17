@@ -12,6 +12,11 @@ public class GroupsSummaryPage extends WebPageInit {
 	String[] groupSummaryPageGridHeaders = { "Name", "User name", "Email", "Group", "Division", "Status",
 			"View details" };
 
+	public static String GROUP_NAME_COL_ID = "name";
+	public static String GROUP_DIVISION_COL_ID = "division";
+	public static String GROUP_DESCRIPTION_COL_ID = "description";
+	public static String GROUP_USERS_COL_ID = "users";
+
 	public void navigateToGroupSummaryPage() {
 		Browser.open(AcquirerPortalGlobal.GROUP_URL);
 		newGroupButton.exists(5);
@@ -20,37 +25,19 @@ public class GroupsSummaryPage extends WebPageInit {
 	@FindBy(id = "hive-groups-list")
 	public WebItem groupsListGrid;
 
-	@FindBy(id = "add-group-btn")
+	@FindBy(id = "add-group-btn") 
 	public WebItem newGroupButton;
 
-	@FindBy(xpath = "//*[contains(text(),'Filters')]")
-	public WebItem filterButton;
-
-	@FindBy(xpath = "//label[contains(text(),'Names')]")
-	public WebItem nameLabel;
-
-	@FindBy(id = "Names")
-	public WebItem nameFilterDropdown;
-
-	@FindBy(xpath = "//*[@id='Names']//input[contains(@tabindex,'0')]")
+	@FindBy(id = "name")
 	public WebItem nameTextField;
-
-	@FindBy(xpath = "//*[@id='Names']/div[1]/div[2]/div")
-	public WebItem nameFilterDropdownArrow;
-
-	@FindBy(xpath = "//*[@id='Descriptions']/div[1]/div[2]/div/")
-	public WebItem descriptionFilterDropdownArrow;
-
-	@FindBy(xpath = "//div[@id='Descriptions']//*[contains(text(),'Select...')]")
-	public WebItem descriptionsFilterDropdown;
 
 	@FindBy(xpath = "//button[contains(text(),'Ok')]")
 	public WebItem OkFilterButton;
 
-	@FindBy(xpath = "//button[contains(text(),'Clear filters')]")
+	@FindBy(xpath = "//button[contains(text(),'Clear Filters')]")
 	public WebItem clearFilterButton;
 
-	@FindBy(xpath = "//div[contains(text(),'Name')]")
-	public WebItem nameHeaderinResults;
+	@FindBy(xpath = "//span[contains(text(),'Showing results')]")
+	public WebItem numberOfResultsLabel;
 
 }

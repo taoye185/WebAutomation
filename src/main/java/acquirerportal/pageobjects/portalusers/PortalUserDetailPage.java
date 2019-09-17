@@ -15,5 +15,5 @@ public class PortalUserDetailPage extends WebPageInit {
 
 	@FindBy(xpath = "//button[contains(text(),'Cancel')]")
 	public WebItem deleteCancelButton;
-
+	
 }

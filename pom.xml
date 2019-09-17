@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>mobeewave</groupId>
     <artifactId>AcquirerPortal</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>SNAPSHOT-3.0.11.${v}</version>
     <packaging>jar</packaging>
     <name>AcquirerPortal</name>
     <properties>
@@ -13,6 +13,43 @@
     <build>
         <sourceDirectory> src/main/java</sourceDirectory>
         <testSourceDirectory> src/test/java</testSourceDirectory>
+        <plugins>
+            <!-- force sure fire to use junit instead of testng -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>3.0.0-M3</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <archive>
+                        <manifest>
+                            <mainClass>testrunner.RunTest</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptor>src/main/assembly.xml</descriptor>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
     <dependencies>
         <dependency>
@@ -35,7 +72,8 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-        </dependency> <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
         <!-- Test Comment -->
         <dependency>
             <groupId>log4j</groupId>

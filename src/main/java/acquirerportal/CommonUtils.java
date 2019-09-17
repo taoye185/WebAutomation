@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CommonUtils {
 
-	public static String userLabel_GBL = "";
+	public static String userName_GBL = "";
 	public static List<String> Group_GBL = new ArrayList<String>();
 	public static String supportGroup = "";
 	public static String adminGroup = "";
@@ -14,5 +14,8 @@ public class CommonUtils {
 	public static String supportUserName = "";
 	public static String adminUserEmail = "";
 	public static String adminUserName = "";
-
+	public static String merchantBusinessUserName = "";
+	public static String merchantID = "";
+	public static String merchantTempPassword = "";
+	public static String merchantEmailAddress = "";
 }
