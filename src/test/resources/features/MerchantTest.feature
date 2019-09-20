@@ -1,11 +1,11 @@
 @merchantPage
 Feature: Merchant_Tests
 
-	Background:
-		Given User successfully navigated to merchant Summary Page
+		
 
 	@sanity @loginAsGPAdmin  @create10MinuteEmail
 	Scenario: Verify new merchant account can be created
+	    Given User successfully navigated to merchant Summary Page
 		When user click on New Merchant button and navigates to merchants Registration Page
 		And provide details to create a new Merchant
 		Then new merchant record in the Merchant Summary Page is displayed
@@ -20,7 +20,6 @@ Feature: Merchant_Tests
 		And User leave the "<fieldName>" empty
 		Then An error message "<expectedErrorMessage>" shall be displayed under the missing "<fieldName>" field
 		And Create Merchant button is not active
-
 		Examples:
 			| fieldName     | expectedErrorMessage               |
 			| businessName  | Please enter a business name       |

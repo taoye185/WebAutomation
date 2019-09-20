@@ -1,7 +1,12 @@
 package steps;
 
-import org.junit.Assert;
+import java.util.List;
 
+import org.junit.Assert;
+import org.openqa.selenium.Keys;
+
+import cucumber.api.DataTable;
+//import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -17,8 +22,8 @@ public class LoginSteps {
 	public static LeftNavigation leftNavigation = new LeftNavigation();
 	public static Browser browser;
 
-	@Given("^User is successfully navigated to Home Page$")
-	public void user_is_successfully_navigated_to_Home_Page() throws Exception {
+	@Given("^User is successfully navigated to home Page$")
+	public void user_is_successfully_navigated_to_login_Page() throws Exception {
 		loginPage.navigateToLoginPage();
 		Assert.assertTrue("User is unable to land on home page ", loginPage.passwordTxtBox.isDisplayed());
 	}
@@ -73,6 +78,40 @@ public class LoginSteps {
 		default:
 			Log.info(userName + " doesn't exists ");
 		}
+	}
+
+	@When("^user leaves Username and Password empty$")
+	public void user_leaves_Username_and_Password_empty(DataTable args) throws Throwable {
+		List<String> list = args.asList(String.class);
+		loginPage.usernameTxtBox.clearAndSendKeys(list.get(0));
+		loginPage.passwordTxtBox.clearAndSendKeys(list.get(1));
+		loginPage.passwordTxtBox.sendKeys(Keys.TAB);
+		Browser.sleep(1000);
+	}
+
+	@Then("^error message is displayed for blank Username$")
+	public void Validate_error_message_displayed_for_blank_Username(DataTable args) throws Throwable {
+		List<String> list = args.asList(String.class);
+		Assert.assertTrue("user name error message is not displayed", Browser.textExists(list.get(0), 2));
+	}
+
+	@Then("^error message is displayed for blank Password$")
+	public void Validate_error_message_displayed_for_blank_Password(DataTable args) throws Throwable {
+		List<String> list = args.asList(String.class);
+		Assert.assertTrue("Password error message is not displayed", Browser.textExists(list.get(0), 2));
+	}
+
+	@When("^User enters invalid combination of \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void user_enters_invalid_combination_of_Username_and_Password(String Username, String Password)
+			throws Throwable {
+		loginPage.usernameTxtBox.clearAndSendKeys(Username);
+		loginPage.passwordTxtBox.clearAndSendKeys(Password);
+		loginPage.signInBtn.click();
+	}
+
+	@Then("^\"([^\"]*)\" is displayed$")
+	public void error_message_invalid_combination_of_Username_and_Password(String expectedErrorMessage) throws Throwable {
+		Assert.assertTrue("error message is not displayed: "+expectedErrorMessage, Browser.textExists(expectedErrorMessage,5));
 	}
 
 }

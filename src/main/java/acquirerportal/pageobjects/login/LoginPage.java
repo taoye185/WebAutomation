@@ -12,6 +12,7 @@ public class LoginPage extends WebPageInit {
 		Browser.open(AcquirerPortalGlobal.URL);
 		usernameTxtBox.exists(7);
 		passwordTxtBox.exists(10);
+		Browser.sleep(1000);
 	}
 
 	@FindBy(name = "username")
@@ -25,5 +26,6 @@ public class LoginPage extends WebPageInit {
 
 	@FindBy(id = "forgotpw")
 	public WebItem forgetPasswordLink;
-
+	
+	
 }
