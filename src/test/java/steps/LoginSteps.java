@@ -86,8 +86,7 @@ public class LoginSteps {
 		loginPage.usernameTxtBox.clearAndSendKeys(list.get(0));
 		loginPage.passwordTxtBox.clearAndSendKeys(list.get(1));
 		loginPage.passwordTxtBox.sendKeys(Keys.TAB);
-		Browser.sleep(20000);
-		// loginPage.signInBtn.click();
+		Browser.sleep(1000);
 	}
 
 	@Then("^error message is displayed for blank Username$")
@@ -112,7 +111,7 @@ public class LoginSteps {
 
 	@Then("^\"([^\"]*)\" is displayed$")
 	public void error_message_invalid_combination_of_Username_and_Password(String expectedErrorMessage) throws Throwable {
-		Assert.assertTrue("error message is not displayed: "+expectedErrorMessage, Browser.textExists(expectedErrorMessage,2));
+		Assert.assertTrue("error message is not displayed: "+expectedErrorMessage, Browser.textExists(expectedErrorMessage,5));
 	}
 
 }
